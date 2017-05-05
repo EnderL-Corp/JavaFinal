@@ -11,5 +11,6 @@ public class Main {
 		j.add(p);
 		j.setSize(300, 400);
 		j.setVisible(true);
+		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
