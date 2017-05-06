@@ -17,10 +17,10 @@ public class RMIClient {
 	public boolean connectToServer() {
 		try {
 			reg = LocateRegistry.getRegistry(null, 1098);
-			RMI rmi = (RMI) reg.lookup("server");
+			RMI remoteServer = (RMI) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
-			String[] text = rmi.getData(new String[]{"Hello ", "my name is ", "Srihari"});
+			String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
 			String texticle = text[0] + text[1];
 			System.out.println(texticle);
 		} catch(Exception e) {
