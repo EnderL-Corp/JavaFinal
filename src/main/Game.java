@@ -1,6 +1,6 @@
 package main;
 
-public class Game extends RMIClient{
+public class Game extends GameClient{
 	public void run(String[] args) {
 		connectToServer();
 	}

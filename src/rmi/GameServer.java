@@ -5,14 +5,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIServer extends UnicastRemoteObject implements GameServerInterface{
+public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name;
 	
-	public RMIServer() throws RemoteException {
+	public GameServer() throws RemoteException {
 		
 	}
 	
-	public RMIServer(String serverName) throws RemoteException{
+	public GameServer(String serverName) throws RemoteException{
 		name = serverName;
 	}
 	
@@ -26,10 +26,10 @@ public class RMIServer extends UnicastRemoteObject implements GameServerInterfac
 	public static void main(String[] args) {
 		try {
 			Registry reg = LocateRegistry.createRegistry(1099);
-			reg.rebind("server", new RMIServer());
+			reg.rebind("server", new GameServer());
 			System.out.println("Server has started.");
 		} catch(Exception e) {
-			System.out.println("RMIServer.main(String[] args) : " + e);
+			System.out.println("GameServer.main(String[] args) : " + e);
 		}
 	}
 	
@@ -38,7 +38,7 @@ public class RMIServer extends UnicastRemoteObject implements GameServerInterfac
 			reg.unbind("server");
 		}
 		catch (Exception e) {
-			System.out.println("this RMIServer.unbind() : " + e);
+			System.out.println("this GameServer.unbind() : " + e);
 		}
 	}*/
 }

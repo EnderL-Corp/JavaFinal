@@ -5,11 +5,11 @@ import java.rmi.registry.Registry;
 
 import rmi.GameServerInterface;
 
-public class RMIClient {
+public class GameClient {
 	boolean connected = false;
 	
 	public static void main(String[] args) {
-		RMIClient client = new RMIClient();
+		GameClient client = new GameClient();
 		client.connectToServer();
 	}
 	
