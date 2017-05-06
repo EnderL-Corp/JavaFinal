@@ -3,7 +3,7 @@ package main;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import rmi.RMI;
+import rmi.GameServerInterface;
 
 public class RMIClient {
 	boolean connected = false;
@@ -16,7 +16,7 @@ public class RMIClient {
 	public boolean connectToServer() {
 		try {
 			Registry reg = LocateRegistry.getRegistry(null, 1099);
-			RMI remoteServer = (RMI) reg.lookup("server");
+			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
 			String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});

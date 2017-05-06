@@ -5,7 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RMIServer extends UnicastRemoteObject implements RMI{
+public class RMIServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name;
 	
 	public RMIServer() throws RemoteException {
