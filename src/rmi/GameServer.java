@@ -25,7 +25,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	public static void main(String[] args) {
 		try {
-			Registry reg = LocateRegistry.createRegistry(1099);
+			Registry reg = LocateRegistry.getRegistry(1099);
 			reg.rebind("server", new GameServer());
 			System.out.println("Server has started.");
 		} catch(Exception e) {
