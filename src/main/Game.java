@@ -1,7 +1,7 @@
 package main;
 
-public class Game {
-	public static void main(String[] args) {
-		
+public class Game extends RMIClient{
+	public void run(String[] args) {
+		connectToServer();
 	}
 }
