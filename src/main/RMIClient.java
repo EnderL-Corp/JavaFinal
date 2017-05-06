@@ -7,6 +7,7 @@ import rmi.RMI;
 
 public class RMIClient {
 	boolean connected = false;
+	Registry reg;
 	
 	public static void main(String[] args) {
 		RMIClient client = new RMIClient();
@@ -15,7 +16,7 @@ public class RMIClient {
 	
 	public boolean connectToServer() {
 		try {
-			Registry reg = LocateRegistry.getRegistry(null, 1098);
+			reg = LocateRegistry.getRegistry(null, 1098);
 			RMI rmi = (RMI) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
@@ -31,4 +32,8 @@ public class RMIClient {
 	public boolean isConnected() {
 		return connected;
 	}
+	
+	/*public void unbind() {
+		reg.rebind(name, obj);
+	}*/
 }

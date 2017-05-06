@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIServer extends UnicastRemoteObject implements RMI{
 	private static String name;
+	private static Registry reg;
 	
 	public RMIServer() throws RemoteException {
 		
@@ -25,11 +26,15 @@ public class RMIServer extends UnicastRemoteObject implements RMI{
 	
 	public static void main(String[] args) {
 		try {
-			Registry reg = LocateRegistry.createRegistry(1098);
+			reg = LocateRegistry.createRegistry(1098);
 			reg.rebind("server", new RMIServer());
 			System.out.println("Server has started.");
 		} catch(Exception e) {
 			System.out.println(e);
 		}
 	}
+	
+	/*public void unbind() {
+		reg.unbind("server");
+	}*/
 }
