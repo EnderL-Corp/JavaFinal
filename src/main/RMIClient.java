@@ -15,7 +15,7 @@ public class RMIClient {
 	
 	public boolean connectToServer() {
 		try {
-			Registry reg = LocateRegistry.getRegistry(null, 1098);
+			Registry reg = LocateRegistry.getRegistry(null, 1099);
 			RMI remoteServer = (RMI) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
