@@ -7,7 +7,6 @@ import rmi.RMI;
 
 public class RMIClient {
 	boolean connected = false;
-	Registry reg;
 	
 	public static void main(String[] args) {
 		RMIClient client = new RMIClient();
@@ -16,7 +15,7 @@ public class RMIClient {
 	
 	public boolean connectToServer() {
 		try {
-			reg = LocateRegistry.getRegistry(null, 1098);
+			Registry reg = LocateRegistry.getRegistry(null, 1098);
 			RMI remoteServer = (RMI) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
@@ -24,7 +23,7 @@ public class RMIClient {
 			String texticle = text[0] + text[1];
 			System.out.println(texticle);
 		} catch(Exception e) {
-			System.out.println(e);
+			System.out.println("connectToServer() : " + e);
 		}
 		return isConnected();
 	}
@@ -33,7 +32,11 @@ public class RMIClient {
 		return connected;
 	}
 	
-	/*public void unbind() {
-		reg.rebind(name, obj);
+	/*public static void unbind() {
+		try {
+			reg.unbind("server");
+		} catch(Exception e) {
+			System.out.println(e);
+		}
 	}*/
 }
