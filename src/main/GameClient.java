@@ -6,7 +6,7 @@ import java.rmi.registry.Registry;
 import rmi.GameServerInterface;
 
 public class GameClient {
-	boolean connected = false;
+	private boolean connected = false;
 	
 	public static void main(String[] args) {
 		GameClient client = new GameClient();
@@ -25,7 +25,7 @@ public class GameClient {
 		} catch(Exception e) {
 			System.out.println("connectToServer() : " + e);
 		}
-		return isConnected();
+		return true;
 	}
 	
 	public boolean isConnected() {
