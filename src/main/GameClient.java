@@ -15,7 +15,7 @@ public class GameClient {
 	
 	public boolean connectToServer() {
 		try {
-			Registry reg = LocateRegistry.getRegistry(null, 1099);
+			Registry reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			System.out.println("Connected to server.");
 			connected = true;
