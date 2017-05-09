@@ -21,9 +21,18 @@ public class Game extends GameClient{
 		
 		JFrame j = new JFrame();
 		JPanel p = new JPanel();
-		JButton butt = new JButton();
+		JButton right = new JButton("Move Right");
+		JButton left = new JButton("Move Left");
+		JButton up = new JButton("Move Up");
+		JButton down = new JButton("Move Down");
 		
-		j.add(p.add(butt));
+		p.add(right);
+		p.add(left);
+		p.add(up);
+		p.add(down);
+		
+		j.add(p);
+		
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(300, 400);
 		j.setVisible(true);
@@ -37,14 +46,42 @@ public class Game extends GameClient{
 
 		frame.setVisible(true);
 		
-		butt.addActionListener(new ActionListener() {
+		right.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander!");
+				System.out.println("Moving commander right!");
 				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
 				frame.setVisible(false);
 				frame.setVisible(true);
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
+		left.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving commander left!");
+				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
+				frame.setVisible(false);
+				frame.setVisible(true);
+				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
+			}
+		});
+		up.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving commander up!");
+				b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
+				frame.setVisible(false);
+				frame.setVisible(true);
+				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
+			}
+		});
+		down.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving commander down!");
+				b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
+				frame.setVisible(false);
+				frame.setVisible(true);
+				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
+			}
+		});
+		
 	}
 }
