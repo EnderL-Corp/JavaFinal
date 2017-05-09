@@ -22,12 +22,6 @@ public class Game extends GameClient{
 		JPanel p = new JPanel();
 		JButton butt = new JButton();
 		
-		butt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander!");
-				b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
-			}
-		});
 		j.add(p.add(butt));
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setSize(300, 400);
@@ -36,10 +30,18 @@ public class Game extends GameClient{
 		
 		JFrame frame = new JFrame();
 		
+		butt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Moving commander!");
+				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
+				frame.setVisible(true);
+				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
+			}
+		});
+		
 		frame.setSize(1000,1000);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(b);
-		frame.setVisible(true);		
-		
+		frame.setVisible(true);
 	}
 }
