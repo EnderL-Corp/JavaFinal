@@ -13,10 +13,11 @@ import javax.swing.WindowConstants;
 import graphics.BoardPanel;
 
 public class Game extends GameClient{
+	BoardPanel b;
 	public void startup(String[] args) {
 		if(connectToServer())
 			System.out.println("Connected!!");
-		BoardPanel b = new BoardPanel();
+		b = new BoardPanel();
 		
 		JFrame j = new JFrame();
 		JPanel p = new JPanel();
@@ -30,6 +31,12 @@ public class Game extends GameClient{
 		
 		JFrame frame = new JFrame();
 		
+		frame.setSize(1000,1000);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.add(b);
+
+		frame.setVisible(true);
+		
 		butt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander!");
@@ -38,10 +45,5 @@ public class Game extends GameClient{
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
-		
-		frame.setSize(1000,1000);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(b);
-		frame.setVisible(true);
 	}
 }
