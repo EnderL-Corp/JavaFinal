@@ -70,6 +70,20 @@ public class BoardPanel extends JPanel
 		  commanderPosY = y;
 	  }
 	  
+	  /**
+	   * @return commander x position
+	   */
+	  public int getCommanderX() {
+		  return commanderPosX;
+	  }
+	  
+	  /**
+	   * @return commander y position
+	   */
+	  public int getCommanderY() {
+		  return commanderPosY;
+	  }
+	  
 	  public void changeMapSize(String size)
 	  {
 		  switch(size)

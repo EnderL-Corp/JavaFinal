@@ -26,12 +26,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public static void main(String[] args) {
 		try {
 			Registry reg;
-			try {
+			/*try {
 				reg = LocateRegistry.getRegistry(1099);
-			} catch(Exception e) {
+			} catch(Exception e) {*/
 				reg = LocateRegistry.createRegistry(1099);
-				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created. \n" + e);
-			}
+				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created. \n"/* + e*/);
+			//}
 			reg.rebind("server", new GameServer());
 			System.out.println("Server has started.");
 		} catch(Exception e) {
