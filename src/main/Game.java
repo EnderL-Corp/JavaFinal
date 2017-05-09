@@ -41,6 +41,7 @@ public class Game extends GameClient{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander!");
 				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
+				frame.setVisible(false);
 				frame.setVisible(true);
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
