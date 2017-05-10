@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Please enter host ip: ");
-		String ip = s.next();
+		String ip = s.nextLine();
 		Game g = new Game(0, ip);
 		g.startup(null);
 	}

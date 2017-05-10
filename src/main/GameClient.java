@@ -16,7 +16,7 @@ public class GameClient implements ActionListener {
 	private final int PORT;
 	
 	public static void main(String[] args) {
-		GameClient client = new GameClient(0, null);
+		GameClient client = new GameClient(0, "127.0.0.1");
 		client.connectToServer();
 	}
 	
