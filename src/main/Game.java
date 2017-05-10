@@ -11,6 +11,10 @@ import javax.swing.WindowConstants;
 import graphics.BoardPanel;
 
 public class Game extends GameClient{
+	public Game(int tag) {
+		super(tag);
+	}
+	
 	BoardPanel b;
 	public void startup(String[] args) {
 		if(connectToServer())

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import rmi.ClientCommand;
 import rmi.GameServerInterface;
 
 public class GameClient implements ActionListener {
@@ -56,12 +57,10 @@ public class GameClient implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if() {
-			unpackCommands();
+		if(e.getSource() instanceof GameClient && (((GameClient)e.getSource()).getTag() != tag)) {
+			for(ClientCommand c : ((GameServerInterface) reg).getCommands()) {
+				c.performAction();
+			}
 		}
-	}
-	
-	private void unpackCommands() {
-		
 	}
 }

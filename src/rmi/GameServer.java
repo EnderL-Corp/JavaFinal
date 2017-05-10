@@ -7,13 +7,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.List;
 
 import main.GameClient;
 
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name;
-	private List<ActionListener> clients;
+	private ArrayList<ActionListener> clients;
+	private ArrayList<ClientCommand> currentMoves;
 	
 	public GameServer() throws RemoteException {
 		
@@ -30,9 +30,16 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return new String[] {args[0] + args[1], "No position 2"};
 	}
 	
-	public ArrayList<ClientCommand> getCommmands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
-		ActionEvent e = new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null);
-		return commandList;
+	/**
+	 * @return the list of commands for the one that did not fire commandList
+	 */
+	public void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
+		currentMoves = commandList;
+		fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
+	}
+	
+	public ArrayList<ClientCommand> getCommands() {
+		return currentMoves;
 	}
 	
 	public static void main(String[] args) {
@@ -53,5 +60,11 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	public void connect(ActionListener l) {
 		clients.add(l);
+	}
+	
+	private void fireActionPerformed(ActionEvent e) {
+		for(ActionListener l : clients) {
+			l.actionPerformed(e);
+		}
 	}
 }

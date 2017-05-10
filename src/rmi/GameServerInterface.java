@@ -10,5 +10,6 @@ import main.GameClient;
 public interface GameServerInterface extends Remote {
 	void connect(ActionListener l);
 	String[] getData(String[] args) throws RemoteException;
-	ArrayList<ClientCommand> getCommmands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException;
+	void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException;
+	ArrayList<ClientCommand> getCommands();
 }
