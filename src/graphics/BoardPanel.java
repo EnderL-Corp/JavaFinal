@@ -66,6 +66,8 @@ public class BoardPanel extends JPanel
 	  
 	  public void changeCommanderPos(int x, int y)
 	  {
+		  if(x < 0 || y < 0 || x > numTiles - 1 || y > numTiles - 1)
+			  return;
 		  commanderPosX = x;
 		  commanderPosY = y;
 	  }
