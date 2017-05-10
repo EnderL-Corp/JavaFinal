@@ -10,4 +10,8 @@ public class ClientCommand {
 	public CommandEnum getCommand() {
 		return command;
 	}
+	
+	public void performAction() {
+		//Basically a switch case for every enum type
+	}
 }

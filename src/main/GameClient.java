@@ -1,32 +1,36 @@
 package main;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import rmi.GameServerInterface;
 
-public class GameClient extends ActionEvent{
+public class GameClient implements ActionListener {
 	private boolean connected = false;
+	private static Registry reg = getRegistry("127.0.0.1", 1099);
+	private int tag;
 	
 	public static void main(String[] args) {
-		GameClient client = new GameClient();
+		GameClient client = new GameClient(0);
 		client.connectToServer();
 	}
 	
-	public GameClient() {
-		super(LocateRegistry.getRegistry("127.0.0.1", 1099), ActionEvent.ACTION_PERFORMED, null);
+	public GameClient(int tag) {
+		this.tag = tag;
 	}
 	
 	public boolean connectToServer() {
 		try {
-			Registry reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
+			//reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
+			remoteServer.connect(this);
 			System.out.println("Connected to server.");
 			connected = true;
-			String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
-			String text2 = text[0] + text[1];
-			System.out.println(text2);
+			//String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
+			//String text2 = text[0] + text[1];
+			//System.out.println(text2);
 		} catch(Exception e) {
 			System.out.println("connectToServer() : " + e);
 		}
@@ -37,11 +41,27 @@ public class GameClient extends ActionEvent{
 		return connected;
 	}
 	
-	/*public static void unbind() {
+	private static Registry getRegistry(String address, int port) {
+		Registry reg = null;
 		try {
-			reg.unbind("server");
+			reg = LocateRegistry.getRegistry(address, port);
 		} catch(Exception e) {
-			System.out.println(e);
+			System.out.println("connectToServer() : " + e);
 		}
-	}*/
+		return reg;
+	}
+	
+	public int getTag() {
+		return tag;
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if() {
+			unpackCommands();
+		}
+	}
+	
+	private void unpackCommands() {
+		
+	}
 }

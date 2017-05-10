@@ -1,13 +1,19 @@
 package rmi;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
+
+import main.GameClient;
 
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name;
+	private List<ActionListener> clients;
 	
 	public GameServer() throws RemoteException {
 		
@@ -24,7 +30,8 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return new String[] {args[0] + args[1], "No position 2"};
 	}
 	
-	public ArrayList<ClientCommand> getCommmands(ArrayList<ClientCommand> commandList) throws RemoteException {
+	public ArrayList<ClientCommand> getCommmands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
+		ActionEvent e = new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null);
 		return commandList;
 	}
 	
@@ -44,12 +51,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	/*private static void unbind() {
-		try {
-			reg.unbind("server");
-		}
-		catch (Exception e) {
-			System.out.println("this GameServer.unbind() : " + e);
-		}
-	}*/
+	public void connect(ActionListener l) {
+		clients.add(l);
+	}
 }
