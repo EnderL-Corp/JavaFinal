@@ -1,16 +1,21 @@
 package main;
 
+import java.awt.event.ActionEvent;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import rmi.GameServerInterface;
 
-public class GameClient {
+public class GameClient extends ActionEvent{
 	private boolean connected = false;
 	
 	public static void main(String[] args) {
 		GameClient client = new GameClient();
 		client.connectToServer();
+	}
+	
+	public GameClient() {
+		super(LocateRegistry.getRegistry("127.0.0.1", 1099), ActionEvent.ACTION_PERFORMED, null);
 	}
 	
 	public boolean connectToServer() {
@@ -20,8 +25,8 @@ public class GameClient {
 			System.out.println("Connected to server.");
 			connected = true;
 			String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
-			String texticle = text[0] + text[1];
-			System.out.println(texticle);
+			String text2 = text[0] + text[1];
+			System.out.println(text2);
 		} catch(Exception e) {
 			System.out.println("connectToServer() : " + e);
 		}

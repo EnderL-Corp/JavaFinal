@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name;
@@ -21,6 +22,10 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return new String[] {args[0] + args[1], args[1] + args[2]};
 		else
 			return new String[] {args[0] + args[1], "No position 2"};
+	}
+	
+	public ArrayList<ClientCommand> getCommmands(ArrayList<ClientCommand> commandList) throws RemoteException {
+		return commandList;
 	}
 	
 	public static void main(String[] args) {
