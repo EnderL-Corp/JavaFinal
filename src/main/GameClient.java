@@ -10,7 +10,7 @@ import rmi.GameServerInterface;
 
 public class GameClient implements ActionListener {
 	private boolean connected = false;
-	private static Registry reg = getRegistry("127.0.0.1", 1099);
+	private Registry reg;
 	private int tag;
 	
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class GameClient implements ActionListener {
 	
 	public boolean connectToServer() {
 		try {
-			//reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
+			reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			remoteServer.connect(this);
 			System.out.println("Connected to server.");
@@ -42,7 +42,7 @@ public class GameClient implements ActionListener {
 		return connected;
 	}
 	
-	private static Registry getRegistry(String address, int port) {
+	/*private static Registry getRegistry(String address, int port) {
 		Registry reg = null;
 		try {
 			reg = LocateRegistry.getRegistry(address, port);
@@ -50,7 +50,7 @@ public class GameClient implements ActionListener {
 			System.out.println("connectToServer() : " + e);
 		}
 		return reg;
-	}
+	}*/
 	
 	public int getTag() {
 		return tag;
