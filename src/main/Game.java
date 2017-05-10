@@ -11,8 +11,8 @@ import javax.swing.WindowConstants;
 import graphics.BoardPanel;
 
 public class Game extends GameClient{
-	public Game(int tag) {
-		super(tag);
+	public Game(int tag, String ip) {
+		super(tag, ip);
 	}
 	
 	BoardPanel b;

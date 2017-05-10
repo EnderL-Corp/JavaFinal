@@ -12,19 +12,23 @@ public class GameClient implements ActionListener {
 	private boolean connected = false;
 	private Registry reg;
 	private int tag;
+	private String ip;
+	private final int PORT;
 	
 	public static void main(String[] args) {
-		GameClient client = new GameClient(0);
+		GameClient client = new GameClient(0, null);
 		client.connectToServer();
 	}
 	
-	public GameClient(int tag) {
+	public GameClient(int tag, String ip) {
 		this.tag = tag;
+		this.ip = ip;
+		PORT = 1099;
 	}
 	
 	public boolean connectToServer() {
 		try {
-			reg = LocateRegistry.getRegistry("127.0.0.1", 1099);
+			reg = LocateRegistry.getRegistry(ip, PORT);
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			remoteServer.connect(this);
 			System.out.println("Connected to server.");
