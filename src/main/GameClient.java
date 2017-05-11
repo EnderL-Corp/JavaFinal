@@ -31,20 +31,20 @@ public class GameClient implements ActionListener {
 		int line = 0;
 		try {
 			reg = LocateRegistry.getRegistry(ip, PORT);
-			line++;
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			line++;
-			remoteServer.connect(this);
+			remoteServer.connect((ActionListener)this);
 			line++;
 			System.out.println("Connected to server.");
 			line++;
 			connected = true;
 			line++;
-			//String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
-			//String text2 = text[0] + text[1];
-			//System.out.println(text2);
+			String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
+			String text2 = text[0] + text[1];
+			System.out.println(text2);
 		} catch(Exception e) {
-			System.out.println("connectToServer() " + line + ": " + e);
+			System.out.println("connectToServer() " + line+ ":");
+			e.printStackTrace();
 		}
 		return true;
 	}

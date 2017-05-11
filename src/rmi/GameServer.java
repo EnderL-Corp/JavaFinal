@@ -2,6 +2,7 @@ package rmi;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 import main.GameClient;
 
-public class GameServer extends UnicastRemoteObject implements GameServerInterface{
+public class GameServer extends UnicastRemoteObject implements GameServerInterface, Serializable{
 	private static String name;
 	private ArrayList<ActionListener> clients;
 	private ArrayList<ClientCommand> currentMoves;
@@ -48,7 +49,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			/*try {
 				reg = LocateRegistry.getRegistry(1099);
 			} catch(Exception e) {*/
-				reg = LocateRegistry.createRegistry(1099);
+				reg = LocateRegistry.getRegistry(1099);
 				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created. \n"/* + e*/);
 			//}
 			reg.rebind("server", new GameServer());
@@ -58,8 +59,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	public void connect(ActionListener l) {
-		clients.add(l);
+	public void connect(ActionListener l) throws RemoteException {
+		try {
+			clients.add(l);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void fireActionPerformed(ActionEvent e) {
