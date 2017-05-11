@@ -8,20 +8,24 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import main.GameClient;
 
 public class GameServer extends UnicastRemoteObject implements GameServerInterface, Serializable{
-	private static String name;
+	private static String name, lhIP;
+	private int port;
 	private ArrayList<ActionListener> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	public GameServer() throws RemoteException {
 		
-	}
+	}	
 	
-	public GameServer(String serverName) throws RemoteException{
+	public GameServer(String serverName, String lhIP, int port) throws RemoteException{
 		name = serverName;
+		this.port = port;
+		this.lhIP = lhIP;
 	}
 	
 	public String[] getData(String[] args) {
@@ -44,27 +48,41 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 	
 	public static void main(String[] args) {
+		String IP;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Please enter the IP of the system to connect to: ");
+		IP = s.nextLine();
+		GameServer gs = null;
+		
+		try {
+			gs = new GameServer("server", IP, 1099);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		gs.createRegistry();
+	}
+	
+	public void createRegistry() {
 		try {
 			Registry reg;
-			/*try {
+			try {
 				reg = LocateRegistry.getRegistry(1099);
-			} catch(Exception e) {*/
-				reg = LocateRegistry.getRegistry(1099);
-				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created. \n"/* + e*/);
-			//}
-			reg.rebind("server", new GameServer());
+				System.out.println("Server has started properly.");
+			} catch(Exception e) {
+				reg = LocateRegistry.createRegistry(/*lhIP,*/ 1099);
+				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
+				e.printStackTrace();
+			}
+			reg.rebind(name, this);
 			System.out.println("Server has started.");
 		} catch(Exception e) {
-			System.out.println("GameServer.main(String[] args) : " + e);
+			e.printStackTrace();
 		}
 	}
 	
 	public void connect(ActionListener l) throws RemoteException {
-		try {
-			clients.add(l);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		clients.add(l);
 	}
 	
 	private void fireActionPerformed(ActionEvent e) {

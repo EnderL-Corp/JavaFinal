@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -9,30 +10,33 @@ import java.rmi.registry.Registry;
 import rmi.ClientCommand;
 import rmi.GameServerInterface;
 
-public class GameClient implements ActionListener {
+public class GameClient implements ActionListener, Serializable {
 	private boolean connected = false;
 	private Registry reg;
 	private int tag;
 	private String ip;
-	private final int PORT;
+	private final int PORT = 1099;
 	
 	public static void main(String[] args) {
 		GameClient client = new GameClient(0, "127.0.0.1");
 		client.connectToServer();
 	}
 	
+	public GameClient() {}
+	
 	public GameClient(int tag, String ip) {
 		this.tag = tag;
 		this.ip = ip;
-		PORT = 1099;
 	}
 	
 	public boolean connectToServer() {
 		int line = 0;
 		try {
-			reg = LocateRegistry.getRegistry(ip, PORT);
-			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			line++;
+			reg = LocateRegistry.getRegistry(ip, PORT);
+			line++;
+			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
+			line++;			
 			remoteServer.connect((ActionListener)this);
 			line++;
 			System.out.println("Connected to server.");

@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,7 +11,7 @@ import javax.swing.WindowConstants;
 
 import graphics.BoardPanel;
 
-public class Game extends GameClient{
+public class Game extends GameClient implements Serializable{
 	public Game(int tag, String ip) {
 		super(tag, ip);
 	}
