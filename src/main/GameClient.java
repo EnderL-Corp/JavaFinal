@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -27,17 +28,23 @@ public class GameClient implements ActionListener {
 	}
 	
 	public boolean connectToServer() {
+		int line = 0;
 		try {
 			reg = LocateRegistry.getRegistry(ip, PORT);
+			line++;
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
+			line++;
 			remoteServer.connect(this);
+			line++;
 			System.out.println("Connected to server.");
+			line++;
 			connected = true;
+			line++;
 			//String[] text = remoteServer.getData(new String[]{"Hello ", "my name is ", "Srihari"});
 			//String text2 = text[0] + text[1];
 			//System.out.println(text2);
 		} catch(Exception e) {
-			System.out.println("connectToServer() : " + e);
+			System.out.println("connectToServer() " + line + ": " + e);
 		}
 		return true;
 	}
@@ -62,8 +69,12 @@ public class GameClient implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof GameClient && (((GameClient)e.getSource()).getTag() != tag)) {
-			for(ClientCommand c : ((GameServerInterface) reg).getCommands()) {
-				c.performAction();
+			try {
+				for(ClientCommand c : ((GameServerInterface) reg).getCommands()) {
+					c.performAction();
+				}
+			} catch (RemoteException e1) {
+				System.out.println("actionPerformed() : " + e);
 			}
 		}
 	}

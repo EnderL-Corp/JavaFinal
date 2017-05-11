@@ -52,8 +52,7 @@ public class Game extends GameClient{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander right!");
 				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
-				frame.setVisible(false);
-				frame.setVisible(true);
+				frame.repaint();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
@@ -61,8 +60,7 @@ public class Game extends GameClient{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander left!");
 				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
-				frame.setVisible(false);
-				frame.setVisible(true);
+				frame.repaint();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
@@ -70,8 +68,7 @@ public class Game extends GameClient{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander up!");
 				b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
-				frame.setVisible(false);
-				frame.setVisible(true);
+				frame.repaint();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
@@ -79,8 +76,7 @@ public class Game extends GameClient{
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander down!");
 				b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
-				frame.setVisible(false);
-				frame.setVisible(true);
+				frame.repaint();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
