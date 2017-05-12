@@ -11,12 +11,12 @@ import javax.swing.WindowConstants;
 
 import graphics.BoardPanel;
 
-public class Game extends GameClient implements Serializable{
+public class Game extends GameClient implements Serializable {
 	public Game(int tag, String ip) {
 		super(tag, ip);
 	}
 	
-	BoardPanel b;
+	private BoardPanel b;
 	public void startup(String[] args) {
 		if(connectToServer())
 			System.out.println("Connected!!");

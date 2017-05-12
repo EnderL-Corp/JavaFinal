@@ -12,14 +12,14 @@ import java.util.Scanner;
 
 import main.GameClient;
 
-public class GameServer extends UnicastRemoteObject implements GameServerInterface, Serializable{
+public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static String name, lhIP;
 	private int port;
 	private ArrayList<ActionListener> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	public GameServer() throws RemoteException {
-		
+		super();
 	}	
 	
 	public GameServer(String serverName, String lhIP, int port) throws RemoteException{
@@ -66,14 +66,14 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public void createRegistry() {
 		try {
 			Registry reg;
-			try {
-				reg = LocateRegistry.getRegistry(1099);
+			/*try {
+				reg = LocateRegistry.getRegistry(lhIP, 1099);
 				System.out.println("Server has started properly.");
-			} catch(Exception e) {
-				reg = LocateRegistry.createRegistry(/*lhIP,*/ 1099);
+			} catch(Exception e) {*/
+				reg = LocateRegistry.createRegistry(1099);
 				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
-				e.printStackTrace();
-			}
+				//e.printStackTrace();
+			//}
 			reg.rebind(name, this);
 			System.out.println("Server has started.");
 		} catch(Exception e) {

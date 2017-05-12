@@ -37,7 +37,7 @@ public class GameClient implements ActionListener, Serializable {
 			line++;
 			GameServerInterface remoteServer = (GameServerInterface) reg.lookup("server");
 			line++;			
-			remoteServer.connect((ActionListener)this);
+			remoteServer.connect(this);
 			line++;
 			System.out.println("Connected to server.");
 			line++;
