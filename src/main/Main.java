@@ -2,6 +2,8 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -9,12 +11,27 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Main implements Serializable{
+public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		System.out.print("Please enter host ip: ");
-		String ip = s.nextLine();
-		Game g = new Game(0, ip);
-		g.startup(null);
+		System.out.print("Please other client ip: ");
+		String otherIP = s.nextLine();
+		Game g1 = null, g2 = null;
+		
+		try {
+			g1 = new Game(0, otherIP, 1099, "1", "2");
+			g2 = new Game(0, otherIP, 1098, "2", "1");		//temporary port to test on same device
+			
+			g1.createMyRegistry(1098);
+			g2.createMyRegistry(1099);
+			
+			g1.connectToOther();
+			g2.connectToOther();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//g.startup(null);
+		
 	}
 }

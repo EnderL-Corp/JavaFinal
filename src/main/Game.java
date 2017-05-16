@@ -3,6 +3,7 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,13 +13,23 @@ import javax.swing.WindowConstants;
 import graphics.BoardPanel;
 
 public class Game extends GameClient implements Serializable {
-	public Game(int tag, String ip) {
-		super(tag, ip);
+	
+	/**
+	 * 
+	 * @param tag
+	 * @param otherIP IP of other client
+	 * @param port Port to connect to on other device
+	 * @param refTag Only has to be filled out if testing is carried out on same device. Make note of the refTag when using it. 
+	 * 			Null if multiple devices
+	 * @throws RemoteException
+	 */
+	public Game(int tag, String otherIP, int port, String refTag, String otherRefTag) throws RemoteException {
+		super(tag, otherIP, port, refTag, otherRefTag);
 	}
 	
 	private BoardPanel b;
 	public void startup(String[] args) {
-		if(connectToServer())
+		if(super.connectToOther())
 			System.out.println("Connected!!");
 		b = new BoardPanel();
 		

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import main.GameClient;
 
-public interface GameServerInterface extends Remote{
-	void connect(ActionListener l) throws RemoteException;
+public interface GameClientInterface extends Remote{
+	void connect(GameClient l) throws RemoteException;
 	String[] getData(String[] args) throws RemoteException;
 	void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException;
 	ArrayList<ClientCommand> getCommands() throws RemoteException;

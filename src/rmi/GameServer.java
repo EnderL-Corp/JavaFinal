@@ -12,7 +12,9 @@ import java.util.Scanner;
 
 import main.GameClient;
 
-public class GameServer extends UnicastRemoteObject implements GameServerInterface{
+public class GameServer extends UnicastRemoteObject implements GameClientInterface{
+	private static final long serialVersionUID = 1L;
+	
 	private static String name, lhIP;
 	private int port;
 	private ArrayList<ActionListener> clients;
@@ -70,7 +72,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 				reg = LocateRegistry.getRegistry(lhIP, 1099);
 				System.out.println("Server has started properly.");
 			} catch(Exception e) {*/
-				reg = LocateRegistry.createRegistry(1099);
+				reg = LocateRegistry.getRegistry(1099);
 				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
 				//e.printStackTrace();
 			//}
@@ -81,8 +83,8 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	public void connect(ActionListener l) throws RemoteException {
-		clients.add(l);
+	public void connect(GameClient l) throws RemoteException {
+		clients.add((ActionListener)l);
 	}
 	
 	private void fireActionPerformed(ActionEvent e) {
