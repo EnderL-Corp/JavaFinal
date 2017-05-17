@@ -131,10 +131,23 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			line++;
 			connected = true;
 			line++;
+			
+			String a = remoteClient.getName(new String("5"));
+			System.out.println(a);
+			
 			String[] text = remoteClient.getData(new String[]{"Hello ", "my name is ", "Srihari"});
 			String text2 = text[0] + text[1];
 			System.out.println(text2);
-			System.out.println(remoteClient.getName(new String("5")));
+			
+			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
+			System.out.println(t[0] + t[1]);
+			
+			
+			
+			
+			
+			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
+			System.out.println(b[0] + b[1]);
 		} catch(Exception e) {
 			System.out.println("connectToServer() " + line+ ":");
 			e.printStackTrace();
@@ -195,14 +208,14 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			return new String[] {args[0] + args[1], "No position 2"};
 	}
 	
-	public void connect(GameClient l) throws RemoteException {
+	public void connect(GameClient l) {
 		clients.add((ActionListener)l);
 	}
 	
 	/**
 	 * @return the list of commands for the one that did not fire commandList
 	 */
-	public void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
+	public void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) {
 		currentMoves = commandList;
 		fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}
