@@ -113,7 +113,7 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			GameClientInterface remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
 			line++;
 			System.out.println(otherName);
-			remoteClient.connect((GameClient)this);
+			remoteClient.connect(this);
 			line++;
 			System.out.println("Connected to server.");
 			line++;
@@ -136,14 +136,14 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	public void createMyRegistry(int port) {
 		try {
 			Registry reg;
-			/*try {
+			try {
 				reg = LocateRegistry.createRegistry(1099);
 				System.out.println("Server has started properly.");
-			} catch(Exception e) {*/
+			} catch(Exception e) {
 				reg = LocateRegistry.getRegistry(myIP, port);
 				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
-				//e.printStackTrace();
-			//}
+				return;
+			}
 			reg.rebind(name, this);
 			System.out.println("Server has started.");
 		} catch(Exception e) {
