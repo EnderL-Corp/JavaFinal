@@ -10,8 +10,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.GameClient;
-
 public class GameServer extends UnicastRemoteObject implements GameClientInterface{
 	private static final long serialVersionUID = 1L;
 	
@@ -64,6 +62,8 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 		
 		gs.createRegistry();
 	}
+	
+	public String getName(String mod){return null;}
 	
 	public void createRegistry() {
 		try {

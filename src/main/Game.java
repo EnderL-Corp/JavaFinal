@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import graphics.BoardPanel;
+import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
 	

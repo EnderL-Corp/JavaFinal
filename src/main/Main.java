@@ -27,6 +27,7 @@ public class Main {
 			
 			g1.connectToOther();
 			g2.connectToOther();
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

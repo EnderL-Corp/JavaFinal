@@ -1,4 +1,4 @@
-package main;
+package rmi;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +10,6 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import rmi.ClientCommand;
-import rmi.GameClientInterface;
-
 public class GameClient extends UnicastRemoteObject implements ActionListener, Serializable, GameClientInterface {//, Runnable {
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +18,8 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	protected int tag;
 	protected String myIP = "127.0.0.1";
 	protected int otherPort;
+	
+	private GameClientInterface remoteClient;
 	
 	private String name, otherIP, otherName;
 	private ArrayList<ActionListener> clients;
@@ -83,6 +82,19 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	}
 	
 	/**
+	 * Use this constructor for multiple computer connection
+	 * @param tag Tag of this client
+	 * @param otherIP IP of other client
+	 * @param otherPort Port of other client
+	 * @throws RemoteException
+	 */
+	public GameClient(int tag, String otherIP, int otherPort) throws RemoteException {
+		this.otherPort = otherPort;
+		this.tag = tag;
+		this.otherIP = otherIP;
+	}
+	
+	/**
 	 * 
 	 * @param tag
 	 * @param otherIP IP of other client
@@ -110,10 +122,10 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			line++;
 			clientRegistry = LocateRegistry.getRegistry(otherIP, otherPort);
 			line++;
-			GameClientInterface remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
+			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
 			line++;
 			System.out.println(otherName);
-			remoteClient.connect(this);
+			//remoteClient.connect((GameClient)this);
 			line++;
 			System.out.println("Connected to server.");
 			line++;
@@ -122,6 +134,7 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			String[] text = remoteClient.getData(new String[]{"Hello ", "my name is ", "Srihari"});
 			String text2 = text[0] + text[1];
 			System.out.println(text2);
+			System.out.println(remoteClient.getName(new String("5")));
 		} catch(Exception e) {
 			System.out.println("connectToServer() " + line+ ":");
 			e.printStackTrace();
@@ -137,12 +150,11 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 		try {
 			Registry reg;
 			try {
-				reg = LocateRegistry.createRegistry(1099);
-				System.out.println("Server has started properly.");
+				reg = LocateRegistry.getRegistry(myIP, 1099);
+				//System.out.println("Server has started properly.");
 			} catch(Exception e) {
-				reg = LocateRegistry.getRegistry(myIP, port);
-				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
-				return;
+				reg = LocateRegistry.createRegistry(port);
+				System.out.println("Not working");
 			}
 			reg.rebind(name, this);
 			System.out.println("Server has started.");
@@ -158,8 +170,10 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	public int getTag() {
 		return tag;
 	}
-	public String getName() {
-		return name;
+	public String getName(String modifier) {
+		if(modifier != null)
+			return new String(name + modifier);
+		return "getName() did not work";
 	}
 	
 	public void actionPerformed(ActionEvent e) {
