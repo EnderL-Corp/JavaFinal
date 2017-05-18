@@ -13,7 +13,21 @@ public class ClientCommand implements Serializable{
 	
 	public void performAction(Game game) {
 		//Basically a switch case for every enum type
-		System.out.println(this);
+		System.out.println(this + " for Commander.");
+		switch(command) {
+		case MOVE_DOWN:
+			game.moveCommDown();
+			break;
+		case MOVE_UP:
+			game.moveCommUp();
+			break;
+		case MOVE_LEFT:
+			game.moveCommLeft();
+			break;
+		case MOVE_RIGHT:
+			game.moveCommRight();
+			break;
+		}
 	}
 	
 	public CommandEnum getCommandEnum() {

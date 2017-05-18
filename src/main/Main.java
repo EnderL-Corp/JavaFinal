@@ -21,20 +21,23 @@ public class Main {
 		Game g1 = null, g2 = null;
 		
 		try {
-			g1 = new Game(1, otherIP, 1098, "1", "2");
-			g2 = new Game(2, otherIP, 1099, "2", "1");		//temporary port to test on same device
+			g1 = new Game(0, otherIP, 1098, "1", "2");
+			g2 = new Game(3, otherIP, 1099, "2", "1");		//temporary port to test on same device
 			
 			g1.createMyRegistry(1099);
 			g2.createMyRegistry(1098);
+
+			g1.startup(null);
+			g2.startup(null);
 			
 			g1.connectToOther();
 			g2.connectToOther();
+			
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//g.startup(null);
 		
 	}
 }

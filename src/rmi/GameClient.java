@@ -29,7 +29,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	
 	private GameClientInterface remoteClient;
 	
-	private String name, otherIP, otherName;
+	protected String name, otherIP, otherName;
 	private ArrayList<GameClientInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
@@ -131,7 +131,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
 			System.out.println("Connected to peer.");
 			connected = true;
-			test(CommandEnum.MOVE_RIGHT);
+			test();
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -139,7 +139,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 		return connected;
 	}
 	
-	public void test(CommandEnum e) {
+	public void test() {
 		String a;
 		try {
 			a = remoteClient.getName(new String("5"));
@@ -153,9 +153,9 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			
 			
 			ArrayList<ClientCommand> cc = new ArrayList<ClientCommand>();
-			cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
+			/*cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
 			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
-			cc.add(new ClientCommand(e));
+			cc.add(new ClientCommand(e));*/
 			cc.add(new ClientCommand(CommandEnum.values()[tag]));
 			
 			remoteClient.receiveRecentCommands(cc);

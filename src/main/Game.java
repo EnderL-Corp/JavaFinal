@@ -29,9 +29,8 @@ public class Game extends GameClient implements Serializable {
 	}
 	
 	private BoardPanel b;
+	private JFrame frame;
 	public void startup(String[] args) {
-		if(super.connectToOther())
-			System.out.println("Connected!!");
 		b = new BoardPanel();
 		
 		JFrame j = new JFrame();
@@ -53,8 +52,9 @@ public class Game extends GameClient implements Serializable {
 		j.setVisible(true);
 		
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		
+		frame.setTitle(name);
 		frame.setSize(1000,1000);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(b);
@@ -64,35 +64,53 @@ public class Game extends GameClient implements Serializable {
 		right.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander right!");
-				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
-				frame.repaint();
+				moveCommRight();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
 		left.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander left!");
-				b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
-				frame.repaint();
+				moveCommLeft();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
 		up.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander up!");
-				b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
-				frame.repaint();
+				moveCommUp();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
 		down.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Moving commander down!");
-				b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
-				frame.repaint();
+				moveCommDown();
 				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
 			}
 		});
 		
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	// The following are tester classes for RMI
+	public void moveCommRight() {
+		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
+		frame.repaint();
+	}
+	public void moveCommLeft() {
+		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
+		frame.repaint();
+	}
+	public void moveCommUp() {
+		b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
+		frame.repaint();
+	}
+	public void moveCommDown() {
+		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
+		frame.repaint();
 	}
 }
