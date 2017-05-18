@@ -4,13 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.net.UnknownHostException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class GameClient extends UnicastRemoteObject implements ActionListener, Serializable, GameClientInterface {//, Runnable {
+public class GameClient extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameClientInterface {
+	//, Remote {//, Runnable {
+	
+	//TODO implement ActionListener for when the new set of commands is received.
+	
 	private static final long serialVersionUID = 1L;
 	
 	protected boolean connected = false;
@@ -23,7 +28,7 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	private GameClientInterface remoteClient;
 	
 	private String name, otherIP, otherName;
-	private ArrayList<ActionListener> clients;
+	private ArrayList<GameClientInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	/*protected Thread thread;
@@ -185,6 +190,34 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 		return "getName() did not work";
 	}
 	
+	
+	
+	public String[] getData(String[] args) {
+		if(args.length >= 3)
+			return new String[] {args[0] + args[1], args[1] + args[2]};
+		else
+			return new String[] {args[0] + args[1], "No position 2"};
+	}
+	
+	
+	
+	/**
+	 * @return the list of commands for the one that did not fire commandList
+	 */
+	public void receiveRecentCommands(GameClient gc, ArrayList<ClientCommand> commandList) {
+		currentMoves = commandList;
+		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
+	}
+	
+	public ArrayList<ClientCommand> getCommands() {
+		return currentMoves;
+	}
+	
+	/*public void connect(GameClientInterface l) {
+		clients.add(l);
+		System.out.println("connect() : connected");
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof GameClient && (((GameClient)e.getSource()).getTag() != tag)) {
 			try {
@@ -197,32 +230,9 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 		}
 	}
 	
-	public String[] getData(String[] args) {
-		if(args.length >= 3)
-			return new String[] {args[0] + args[1], args[1] + args[2]};
-		else
-			return new String[] {args[0] + args[1], "No position 2"};
-	}
-	
-	public void connect(GameClient l) {
-		clients.add((ActionListener)l);
-	}
-	
-	/**
-	 * @return the list of commands for the one that did not fire commandList
-	 */
-	public void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) {
-		currentMoves = commandList;
-		fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
-	}
-	
-	public ArrayList<ClientCommand> getCommands() {
-		return currentMoves;
-	}
-	
 	private void fireActionPerformed(ActionEvent e) {
 		for(ActionListener l : clients) {
 			l.actionPerformed(e);
 		}
-	}
+	}*/
 }

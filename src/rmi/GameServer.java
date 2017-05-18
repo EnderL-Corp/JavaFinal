@@ -15,7 +15,7 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 	
 	private static String name, lhIP;
 	private int port;
-	private ArrayList<ActionListener> clients;
+	private ArrayList<GameClientInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	public GameServer() throws RemoteException {
@@ -38,9 +38,9 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 	/**
 	 * @return the list of commands for the one that did not fire commandList
 	 */
-	public void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
+	public void receiveRecentCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
 		currentMoves = commandList;
-		fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
+		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}
 	
 	public ArrayList<ClientCommand> getCommands() {
@@ -83,13 +83,14 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 		}
 	}
 	
-	public void connect(GameClient l) throws RemoteException {
-		clients.add((ActionListener)l);
+	public void connect(GameClientInterface l) throws RemoteException {
+		clients.add(l);
 	}
-	
+	/*
 	private void fireActionPerformed(ActionEvent e) {
 		for(ActionListener l : clients) {
 			l.actionPerformed(e);
 		}
 	}
+	public void actionPerformed(ActionEvent e) {}*/
 }
