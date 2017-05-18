@@ -2,6 +2,8 @@ package rmi;
 
 import java.io.Serializable;
 
+import main.Game;
+
 public class ClientCommand implements Serializable{
 	private CommandEnum command;
 	
@@ -9,11 +11,16 @@ public class ClientCommand implements Serializable{
 		command = c;
 	}
 	
-	public CommandEnum getCommand() {
+	public void performAction(Game game) {
+		//Basically a switch case for every enum type
+		System.out.println(this);
+	}
+	
+	public CommandEnum getCommandEnum() {
 		return command;
 	}
 	
-	public void performAction() {
-		//Basically a switch case for every enum type
+	public String toString() {
+		return command.name() + ", Commander!";
 	}
 }

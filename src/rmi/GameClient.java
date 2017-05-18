@@ -11,6 +11,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import main.Game;
+
 public class GameClient extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameClientInterface {
 	//, Remote {//, Runnable {
 	
@@ -137,8 +139,19 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			line++;
 			connected = true;
 			line++;
+			test(CommandEnum.MOVE_RIGHT);
 			
-			String a = remoteClient.getName(new String("5"));
+		} catch(Exception e) {
+			System.out.println("connectToOther() " + line+ ":");
+			e.printStackTrace();
+		}
+		return connected;
+	}
+	
+	public void test(CommandEnum e) {
+		String a;
+		try {
+			a = remoteClient.getName(new String("5"));
 			System.out.println(a);
 			
 			String[] text = remoteClient.getData(new String[]{"Hello ", "my name is ", "Srihari"});
@@ -150,11 +163,21 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			
 			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
-		} catch(Exception e) {
-			System.out.println("connectToOther() " + line+ ":");
-			e.printStackTrace();
+			
+			
+			ArrayList<ClientCommand> cc = new ArrayList<ClientCommand>();
+			cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
+			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
+			cc.add(new ClientCommand(e));
+			cc.add(new ClientCommand(CommandEnum.values()[tag]));
+			
+			remoteClient.receiveRecentCommands(cc);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
 		}
-		return connected;
+		
+		
+		
 	}
 	
 	/**
@@ -206,6 +229,12 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	 */
 	public void receiveRecentCommands(ArrayList<ClientCommand> commandList) {
 		currentMoves = commandList;
+		for(int i = 0; i < commandList.size(); i++) {
+			if(this instanceof Game) {
+				commandList.get(i).performAction((Game)this);
+			}
+		}			
+		
 		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}
 	
