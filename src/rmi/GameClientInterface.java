@@ -6,7 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface GameClientInterface extends Remote{
+public interface GameClientInterface extends Remote, Serializable{
 	void connect(GameClient l) throws RemoteException;
 	String[] getData(String[] args) throws RemoteException;
 	void postCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException;

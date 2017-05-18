@@ -11,19 +11,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import rmi.GameClient;
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Please other client ip: ");
 		String otherIP = s.nextLine();
-		Game g1 = null, g2 = null;
+		GameClient g1 = null, g2 = null;
 		
 		try {
-			g1 = new Game(0, otherIP, 1099, "1", "2");
-			g2 = new Game(0, otherIP, 1098, "2", "1");		//temporary port to test on same device
+			g1 = new GameClient(0, otherIP, 1098, "1", "2");
+			g2 = new GameClient(0, otherIP, 1099, "2", "1");		//temporary port to test on same device
 			
-			g1.createMyRegistry(1098);
-			g2.createMyRegistry(1099);
+			g1.createMyRegistry(1099);
+			g2.createMyRegistry(1098);
 			
 			g1.connectToOther();
 			g2.connectToOther();

@@ -14,7 +14,8 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	private static final long serialVersionUID = 1L;
 	
 	protected boolean connected = false;
-	protected Registry clientRegistry;
+	protected static Registry clientRegistry;
+	protected static Registry myRegistry;
 	protected int tag;
 	protected String myIP = "127.0.0.1";
 	protected int otherPort;
@@ -127,7 +128,7 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			System.out.println(otherName);
 			//remoteClient.connect((GameClient)this);
 			line++;
-			System.out.println("Connected to server.");
+			System.out.println("Connected to peer.");
 			line++;
 			connected = true;
 			line++;
@@ -142,14 +143,10 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
 			System.out.println(t[0] + t[1]);
 			
-			
-			
-			
-			
 			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
 		} catch(Exception e) {
-			System.out.println("connectToServer() " + line+ ":");
+			System.out.println("connectToOther() " + line+ ":");
 			e.printStackTrace();
 		}
 		return connected;
@@ -161,16 +158,15 @@ public class GameClient extends UnicastRemoteObject implements ActionListener, S
 	 */
 	public void createMyRegistry(int port) {
 		try {
-			Registry reg;
 			try {
-				reg = LocateRegistry.getRegistry(myIP, 1099);
-				//System.out.println("Server has started properly.");
+				myRegistry = LocateRegistry.getRegistry(myIP, port);
+				System.out.println("Registry present, connected.");
 			} catch(Exception e) {
-				reg = LocateRegistry.createRegistry(port);
-				System.out.println("Not working");
+				myRegistry = LocateRegistry.createRegistry(port);
+				System.out.println("Registry created, connected.");
 			}
-			reg.rebind(name, this);
-			System.out.println("Server has started.");
+			myRegistry.rebind(name, this);
+			System.out.println(name + " has started.");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
