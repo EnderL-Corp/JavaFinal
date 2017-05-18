@@ -125,25 +125,16 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	}
 	
 	public boolean connectToOther() {
-		int line = 0;
 		try {
-			line++;
 			clientRegistry = LocateRegistry.getRegistry(otherIP, otherPort);
-			line++;
+			System.out.println("Looking for " + otherName);
 			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
-			line++;
-			System.out.println(otherName);
-			//remoteClient.connect((GameClient)this);
-			line++;
 			System.out.println("Connected to peer.");
-			line++;
 			connected = true;
-			line++;
 			test(CommandEnum.MOVE_RIGHT);
-			
 		} catch(Exception e) {
-			System.out.println("connectToOther() " + line+ ":");
 			e.printStackTrace();
+			return false;
 		}
 		return connected;
 	}
@@ -153,10 +144,6 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 		try {
 			a = remoteClient.getName(new String("5"));
 			System.out.println(a);
-			
-			String[] text = remoteClient.getData(new String[]{"Hello ", "my name is ", "Srihari"});
-			String text2 = text[0] + text[1];
-			System.out.println(text2);
 			
 			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
 			System.out.println(t[0] + t[1]);
@@ -229,6 +216,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	 */
 	public void receiveRecentCommands(ArrayList<ClientCommand> commandList) {
 		currentMoves = commandList;
+		System.out.println("In " + name + ":");
 		for(int i = 0; i < commandList.size(); i++) {
 			if(this instanceof Game) {
 				commandList.get(i).performAction((Game)this);
