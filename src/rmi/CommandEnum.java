@@ -1,6 +1,8 @@
 package rmi;
 
-public enum CommandEnum {
+import java.io.Serializable;
+
+public enum CommandEnum implements Serializable{
 	MOVE_RIGHT,
 	MOVE_LEFT,
 	MOVE_UP,

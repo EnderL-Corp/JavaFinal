@@ -38,7 +38,7 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 	/**
 	 * @return the list of commands for the one that did not fire commandList
 	 */
-	public void receiveRecentCommands(GameClient gc, ArrayList<ClientCommand> commandList) throws RemoteException {
+	public void receiveRecentCommands(ArrayList<ClientCommand> commandList) throws RemoteException {
 		currentMoves = commandList;
 		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}

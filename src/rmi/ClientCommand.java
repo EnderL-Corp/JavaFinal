@@ -1,6 +1,8 @@
 package rmi;
 
-public class ClientCommand {
+import java.io.Serializable;
+
+public class ClientCommand implements Serializable{
 	private CommandEnum command;
 	
 	public ClientCommand(CommandEnum c) {
