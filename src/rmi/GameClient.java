@@ -176,12 +176,15 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			try {
 				myRegistry = LocateRegistry.getRegistry(myIP, port);
 				System.out.println("Registry present, connected.");
+				myRegistry.rebind(name, this);
+				System.out.println(name + " has started.");
 			} catch(Exception e) {
 				myRegistry = LocateRegistry.createRegistry(port);
 				System.out.println("Registry created, connected.");
+				myRegistry.rebind(name, this);
+				System.out.println(name + " has started.");
+				return;
 			}
-			myRegistry.rebind(name, this);
-			System.out.println(name + " has started.");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
