@@ -34,6 +34,8 @@ public class Game extends GameClient implements Serializable {
 		b = new BoardPanel();
 		
 		JFrame j = new JFrame();
+		j.setTitle(name);
+		
 		JPanel p = new JPanel();
 		JButton right = new JButton("Move Right");
 		JButton left = new JButton("Move Left");
