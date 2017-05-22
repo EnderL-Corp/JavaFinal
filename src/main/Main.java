@@ -15,6 +15,10 @@ import rmi.GameClient;
 
 public class Main {
 	public static void main(String[] args) {
+		//connectSameComp();
+		connectDiffComp();
+	}
+	public static void connectSameComp() {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Please other client ip: ");
 		String otherIP = s.nextLine();
@@ -26,7 +30,6 @@ public class Main {
 			
 			g1.createMyRegistry(1099);
 			g2.createMyRegistry(1098);
-
 			g1.startup(null);
 			g2.startup(null);
 			
@@ -38,6 +41,24 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public static void connectDiffComp() {
+		Scanner s = new Scanner(System.in);
+		System.out.print("Please other client ip: ");
+		String otherIP = s.nextLine();
+		Game g1 = null;
 		
+		try {
+			g1 = new Game(0, otherIP, 1099);
+			
+			g1.createMyRegistry(1099);
+			g1.startup(null);
+			
+			g1.connectToOther();
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -28,6 +28,10 @@ public class Game extends GameClient implements Serializable {
 		super(tag, otherIP, port, refTag, otherRefTag);
 	}
 	
+	public Game(int i, String otherIP, int j) throws RemoteException {
+		super(i, otherIP, j);
+	}
+
 	private BoardPanel b;
 	private JFrame frame;
 	public void startup(String[] args) {
