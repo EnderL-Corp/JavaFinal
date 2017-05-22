@@ -44,9 +44,19 @@ public class Main {
 	}
 	public static void connectDiffComp() {
 		Scanner s = new Scanner(System.in);
-		System.out.print("Please other client ip: ");
+		try {
+			System.out.println("Here is your IP: " + java.net.InetAddress.getLocalHost().getHostAddress() + ".");
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println("Please give this address to your opponent to enter for gameplay.\n");
+		System.out.print("Please enter your opponent's ip: ");
 		String otherIP = s.nextLine();
 		Game g1 = null;
+		
+		System.out.println("Please type a letter and click \"enter\" when your opponent has also entered your IP.");
+		s.next();
 		
 		try {
 			g1 = new Game(0, otherIP, 1099);

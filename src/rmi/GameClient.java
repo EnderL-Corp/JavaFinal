@@ -126,6 +126,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	
 	public boolean connectToOther() {
 		try {
+			System.out.println("Other: " + otherName);
 			clientRegistry = LocateRegistry.getRegistry(otherIP, otherPort);
 			System.out.println("Looking for " + otherName);
 			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
