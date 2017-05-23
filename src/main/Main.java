@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import rmi.GameClient;
 
+//This is a poorly named class hierarcchy
 public class Main {
 	public static void main(String[] args) {
 		//connectSameComp();
