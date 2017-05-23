@@ -169,6 +169,7 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	}
 	
 	/**
+	 * REFER TO http://docs.oracle.com/javase/7/docs/technotes/guides/rmi/hello/hello-world.html
 	 * 
 	 * @param port the port that I want to bind MY registry to
 	 */
