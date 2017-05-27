@@ -190,6 +190,27 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		/*
+		 try {
+			GameClientInterface stub;
+			try {
+				myRegistry = LocateRegistry.getRegistry(myIP, port);
+				System.out.println("Registry present, connected.");
+				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
+				myRegistry.rebind(name, stub);
+				System.out.println(name + " has started.");
+			} catch(Exception e) {
+				myRegistry = LocateRegistry.createRegistry(port);
+				System.out.println("Registry created, connected.");
+				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
+				myRegistry.rebind(name, stub);
+				System.out.println(name + " has started.");
+				return;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		 */
 	}
 	
 	public boolean isConnected() {

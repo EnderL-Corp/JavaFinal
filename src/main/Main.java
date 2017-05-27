@@ -17,7 +17,7 @@ import rmi.GameClient;
 public class Main {
 	public static void main(String[] args) {
 		//connectSameComp();
-		connectDiffComp();
+		connectSameComp();
 	}
 	public static void connectSameComp() {
 		Scanner s = new Scanner(System.in);
