@@ -12,13 +12,18 @@ public class GraphicsTest
 		JFrame frame = new JFrame();
 		Scanner kb = new Scanner(System.in);
 		
-		frame.setSize(1000,1000);
+		frame.setSize(1280,720);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-			
+		frame.setResizable(false);
+		
 		BoardPanel panel = new BoardPanel();
 		frame.add(panel);
 		frame.setVisible(true);		
 		
+		
+		
+		
+		/*
 		boolean close = false;
 		
 		while(close == false)
@@ -69,5 +74,6 @@ public class GraphicsTest
 			
 			frame.setVisible(true);
 		}
+		*/
 	}
 }
