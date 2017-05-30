@@ -13,19 +13,24 @@ import java.util.Scanner;
 public class GameServer extends UnicastRemoteObject implements GameClientInterface{
 	private static final long serialVersionUID = 1L;
 	
-	private static String name, lhIP;
 	private int port;
 	private ArrayList<GameClientInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
+	
+	protected static Registry myRegistry;
+	
+	protected String myIP = "127.0.0.1";
+	
+	protected String name, otherIP, otherName;
 	
 	public GameServer() throws RemoteException {
 		super();
 	}	
 	
-	public GameServer(String serverName, String lhIP, int port) throws RemoteException{
+	public GameServer(String serverName, int port, String ip) throws RemoteException{
 		name = serverName;
 		this.port = port;
-		this.lhIP = lhIP;
+		this.myIP = ip;
 	}
 	
 	public String[] getData(String[] args) {
@@ -55,29 +60,30 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 		GameServer gs = null;
 		
 		try {
-			gs = new GameServer("server", IP, 1099);
+			gs = new GameServer("server", 1099, java.net.InetAddress.getLocalHost().getHostAddress());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		gs.createRegistry();
+		gs.createMyRegistry(1099);
 	}
 	
 	public String getName(String mod){return null;}
 	
-	public void createRegistry() {
+	public void createMyRegistry(int port) {
 		try {
-			Registry reg;
-			/*try {
-				reg = LocateRegistry.getRegistry(lhIP, 1099);
-				System.out.println("Server has started properly.");
-			} catch(Exception e) {*/
-				reg = LocateRegistry.getRegistry(1099);
-				System.out.println("GameServer.main(String[] args) : Nothing currently running at port, registry created.");
-				//e.printStackTrace();
-			//}
-			reg.rebind(name, this);
-			System.out.println("Server has started.");
+			try {
+				myRegistry = LocateRegistry.getRegistry(myIP, port);
+				System.out.println("Registry present, connected.");
+				myRegistry.rebind(name, this);
+				System.out.println(name + " has started.");
+			} catch(Exception e) {
+				myRegistry = LocateRegistry.createRegistry(port);
+				System.out.println("Registry created, connected.");
+				myRegistry.rebind(name, this);
+				System.out.println(name + " has started.");
+				return;
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
