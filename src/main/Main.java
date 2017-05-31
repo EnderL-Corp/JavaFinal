@@ -11,16 +11,46 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import rmi.GameClientPeerToPeer;
+import rmi.GameServer;
 import rmi.GameClient;
 
 //This is a poorly named class hierarcchy
 public class Main {
 	public static void main(String[] args) {
 		//connectSameComp();
-		connectSameComp();
+		//connectSameComp();
+		connectSingleCS();
 	}
-	public static void connectSameComp() {
+	
+	public static void connectSingleCS() {
 		Scanner s = new Scanner(System.in);
+		System.out.print("Please enter server IP: ");
+		String serverIP = s.nextLine();
+		GameServer gs = null;
+		Game gc = null;
+		
+		try {
+			gs = new GameServer();
+			gc = new Game(0, serverIP, "3");
+			
+			gs.createMyRegistry(1099);
+			gc.startup(null);
+			
+			gc.connectToServer();
+			
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * DONT USE THIS
+	 */
+	public static void connectSameComp() {
+		/*Scanner s = new Scanner(System.in);
 		System.out.print("Please other client ip: ");
 		String otherIP = s.nextLine();
 		Game g1 = null, g2 = null;
@@ -41,8 +71,11 @@ public class Main {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
+	/**
+	 * DONT USE THIS!!!
+	 */
 	public static void connectDiffComp() {
 		Scanner s = new Scanner(System.in);
 		try {
@@ -59,7 +92,7 @@ public class Main {
 		System.out.println("Please type a letter and click \"enter\" when your opponent has also entered your IP.");
 		s.next();
 		
-		try {
+		/*try {
 			g1 = new Game(0, otherIP, 1099);
 			
 			g1.createMyRegistry(1099);
@@ -70,6 +103,6 @@ public class Main {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }

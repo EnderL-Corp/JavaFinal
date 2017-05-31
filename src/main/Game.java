@@ -24,8 +24,8 @@ public class Game extends GameClient implements Serializable {
 	 * 			Null if multiple devices
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String otherIP, int port, String refTag, String otherRefTag) throws RemoteException {
-		super(tag, otherIP, port, refTag, otherRefTag);
+	public Game(int tag, String serverIP, String refTag) throws RemoteException {
+		super(tag, serverIP, refTag);
 	}
 	
 	public Game(int i, String otherIP, int j) throws RemoteException {

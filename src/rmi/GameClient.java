@@ -4,16 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 import main.Game;
 
-public class GameClient extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameClientInterface {
+public class GameClient /*extends UnicastRemoteObject */implements Serializable, ActionListener {
 	//, Remote {//, Runnable {
 	
 	//TODO implement ActionListener for when the new set of commands is received.
@@ -21,17 +22,17 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	private static final long serialVersionUID = 1L;
 	
 	protected boolean connected = false;
-	protected static Registry clientRegistry;
-	protected static Registry myRegistry;
-	protected int tag;
-	protected String myIP = "127.0.0.1";
-	protected int otherPort;
 	
-	private GameClientInterface remoteClient;
+	private int tag = 2, serverPort = 1099;
 	
-	protected String name, otherIP, otherName;
+	private GameClientInterface remoteServer;
+	
+	protected String name, serverIP, serverName;
 	private ArrayList<GameClientInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
+	protected static Registry serverRegistry;
+	
+	public Timer timer;
 	
 	/*protected Thread thread;
 	
@@ -58,78 +59,77 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 	 * DO NOT USE
 	 */
 	public static void main(String[] args) {
-		try {
+		/*try {
 			GameClient client = new GameClient(0, "127.0.0.1", 1099, null, null);
-			client.connectToOther();
+			client.connectToServer();
 		} catch(Exception e) {
 			e.printStackTrace();	
-		}
+		}*/
 	}
 	
 	public GameClient() throws RemoteException {
-		otherPort = 1099;
+		
 	}
 	
-	public GameClient(int port, String refTag) throws RemoteException {
-		otherPort = port;
-		String clientIP;
+	public GameClient(String refTag) throws RemoteException {
 		try {
 			if(refTag == null)
-				clientIP = java.net.InetAddress.getLocalHost().getHostAddress(); 
+				serverIP = java.net.InetAddress.getLocalHost().getHostAddress(); 
 			else {
-				clientIP = "127.0.0.1";
-				name = "Client @" + clientIP + "," + refTag;
+				serverIP = "127.0.0.1";
+				name = "Client @" + serverIP + "," + refTag;
 				return;
 			}
 		} catch (UnknownHostException e) {
-			clientIP = null;
+			serverIP = null;
 			e.printStackTrace();
 			return;
 		}
-		name = "Client @" + clientIP;
+		name = "Client @" + serverIP;
 	}
 	
 	/**
 	 * Use this constructor for multiple computer connection
 	 * @param tag Tag of this client
-	 * @param otherIP IP of other client
+	 * @param serverIP IP of other client
 	 * @param otherPort Port of other client
 	 * @throws RemoteException
 	 */
-	public GameClient(int tag, String otherIP, int otherPort) throws RemoteException {
-		this.otherPort = otherPort;
+	public GameClient(int tag, String serverIP, int serverPort) throws RemoteException {
+		this.serverPort = serverPort;
 		this.tag = tag;
-		this.otherIP = otherIP;
+		this.serverIP = serverIP;
+			serverName = "Server @" + serverIP;
 	}
 	
 	/**
 	 * 
 	 * @param tag
-	 * @param otherIP IP of other client
+	 * @param serverIP IP of other client
 	 * @param port Port to connect to on other device
 	 * @param refTag Only has to be filled out if testing is carried out on same device. Make note of the refTag when using it. 
 	 * 			Null if multiple devices
 	 * @throws RemoteException
 	 */
-	public GameClient(int tag, String otherIP, int otherPort, String refTag, String otherRefTag) throws RemoteException{
-		this(otherPort, refTag);
+	public GameClient(int tag, String serverIP, String refTag) throws RemoteException{
+		this(refTag);
 		this.tag = tag;
-		this.otherIP = otherIP;
-		if(otherRefTag != null) {
-			otherName = "Client @" + otherIP + "," + otherRefTag;
+		this.serverIP = serverIP;
+		if(refTag != null) {
+			serverName = "Server @" + serverIP + "," + refTag;
 		}
 		else {
-			otherName = "Client @" + otherIP;
+			serverName = "Server @" + serverIP;
 		}
-		System.out.println("Name:" + name + "   OtherName:" + otherName);
+		System.out.println("Name:" + name + "   ServerName:" + serverName);
 	}
 	
-	public boolean connectToOther() {
+	public boolean connectToServer() {
 		try {
-			System.out.println("Other: " + otherName);
-			clientRegistry = LocateRegistry.getRegistry(otherIP, otherPort);
-			System.out.println("Looking for " + otherName);
-			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
+			System.out.println("Server: " + serverName);
+			serverRegistry = LocateRegistry.getRegistry(serverIP, serverPort);
+			System.out.println("Looking for " + serverName);
+			remoteServer = (GameClientInterface) serverRegistry.lookup(serverName);
 			System.out.println("Connected to peer.");
 			connected = true;
 			test();
@@ -137,19 +137,25 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			e.printStackTrace();
 			return false;
 		}
+		
+		if(connected) {
+			timer = new Timer(1000, this);
+			timer.start();
+		}
+		
 		return connected;
 	}
 	
 	public void test() {
 		String a;
 		try {
-			a = remoteClient.getName(new String("5"));
+			a = remoteServer.getName(new String("5"));
 			System.out.println(a);
 			
-			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
+			String[] t = remoteServer.getData(new String[]{"Test1", "Test2"});
 			System.out.println(t[0] + t[1]);
 			
-			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
+			String[] b = remoteServer.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
 			
 			
@@ -159,123 +165,27 @@ public class GameClient extends UnicastRemoteObject implements /*ActionListener,
 			cc.add(new ClientCommand(e));*/
 			cc.add(new ClientCommand(CommandEnum.values()[tag]));
 			
-			remoteClient.receiveRecentCommands(cc);
+			remoteServer.receiveRecentCommands(this.name, cc);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
-		}
-		
-		
-		
-	}
-	
-	/**
-	 * REFER TO http://docs.oracle.com/javase/7/docs/technotes/guides/rmi/hello/hello-world.html
-	 * 
-	 * @param port the port that I want to bind MY registry to
-	 */
-	public void createMyRegistry(int port) {
-		try {
-			try {
-				myRegistry = LocateRegistry.getRegistry(myIP, port);
-				System.out.println("Registry present, connected.");
-				myRegistry.rebind(name, this);
-				System.out.println(name + " has started.");
-			} catch(Exception e) {
-				myRegistry = LocateRegistry.createRegistry(port);
-				System.out.println("Registry created, connected.");
-				myRegistry.rebind(name, this);
-				System.out.println(name + " has started.");
-				return;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		/*
-		 try {
-			GameClientInterface stub;
-			try {
-				myRegistry = LocateRegistry.getRegistry(myIP, port);
-				System.out.println("Registry present, connected.");
-				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
-				myRegistry.rebind(name, stub);
-				System.out.println(name + " has started.");
-			} catch(Exception e) {
-				myRegistry = LocateRegistry.createRegistry(port);
-				System.out.println("Registry created, connected.");
-				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
-				myRegistry.rebind(name, stub);
-				System.out.println(name + " has started.");
-				return;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		 */
+		}	
 	}
 	
 	public boolean isConnected() {
 		return connected;
 	}
-	
-	public int getTag() {
-		return tag;
-	}
-	public String getName(String modifier) {
-		if(modifier != null)
-			return new String(name + modifier);
-		return "getName() did not work";
-	}
-	
-	
-	
-	public String[] getData(String[] args) {
-		if(args.length >= 3)
-			return new String[] {args[0] + args[1], args[1] + args[2]};
-		else
-			return new String[] {args[0] + args[1], "No position 2"};
-	}
-	
-	
-	
-	/**
-	 * @return the list of commands for the one that did not fire commandList
-	 */
-	public void receiveRecentCommands(ArrayList<ClientCommand> commandList) {
-		currentMoves = commandList;
-		System.out.println("In " + name + ":");
-		for(int i = 0; i < commandList.size(); i++) {
-			if(this instanceof Game) {
-				commandList.get(i).performAction((Game)this);
-			}
-		}			
-		
-		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
-	}
-	
-	public ArrayList<ClientCommand> getCommands() {
-		return currentMoves;
-	}
-	
-	/*public void connect(GameClientInterface l) {
-		clients.add(l);
-		System.out.println("connect() : connected");
-	}
-	
+
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() instanceof GameClient && (((GameClient)e.getSource()).getTag() != tag)) {
-			try {
-				for(ClientCommand c : ((GameClientInterface) clientRegistry).getCommands()) {
-					c.performAction();
+		try {
+			if(connected && remoteServer.getRecentClientName() != this.name) {
+				ArrayList<ClientCommand> commandsToRun = remoteServer.getCommands();
+				for(ClientCommand c : commandsToRun) {
+					c.performAction((Game)this);	
 				}
-			} catch (RemoteException e1) {
-				System.out.println("actionPerformed() : " + e);
 			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
-	
-	private void fireActionPerformed(ActionEvent e) {
-		for(ActionListener l : clients) {
-			l.actionPerformed(e);
-		}
-	}*/
 }

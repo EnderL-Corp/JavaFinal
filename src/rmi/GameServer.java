@@ -21,7 +21,7 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 	
 	protected String myIP = "127.0.0.1";
 	
-	protected String name, otherIP, otherName;
+	protected String name, otherIP, otherName, recentClientName;
 	
 	public GameServer() throws RemoteException {
 		super();
@@ -43,9 +43,13 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 	/**
 	 * @return the list of commands for the one that did not fire commandList
 	 */
-	public void receiveRecentCommands(ArrayList<ClientCommand> commandList) throws RemoteException {
+	public void receiveRecentCommands(String clientName, ArrayList<ClientCommand> commandList) throws RemoteException {
 		currentMoves = commandList;
-		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
+		recentClientName = clientName;
+	}
+	
+	public String getRecentClientName() {
+		return recentClientName;
 	}
 	
 	public ArrayList<ClientCommand> getCommands() {
