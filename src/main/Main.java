@@ -15,7 +15,7 @@ import rmi.GameClientPeerToPeer;
 import rmi.GameServer;
 import rmi.GameClient;
 
-//This is a poorly named class hierarcchy
+//This is a poorly named class hierarchy
 public class Main {
 	public static void main(String[] args) {
 		//connectSameComp();
