@@ -46,9 +46,9 @@ public class Game extends GameClient implements Serializable {
 		JButton up = new JButton("Move Up");
 		JButton down = new JButton("Move Down");
 		
-		p.add(right);
 		p.add(left);
 		p.add(up);
+		p.add(right);
 		p.add(down);
 		
 		j.add(p);

@@ -115,12 +115,12 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 		this(refTag);
 		this.tag = tag;
 		this.serverIP = serverIP;
-		if(refTag != null) {
+		/*if(refTag != null) {
 			serverName = "Server @" + serverIP + "," + refTag;
 		}
-		else {
+		else {*/
 			serverName = "Server @" + serverIP;
-		}
+		//}
 		System.out.println("Name:" + name + "   ServerName:" + serverName);
 	}
 	

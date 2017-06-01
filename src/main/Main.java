@@ -31,7 +31,7 @@ public class Main {
 		Game gc = null;
 		
 		try {
-			gs = new GameServer();
+			gs = new GameServer("server", 1099, serverIP);
 			gc = new Game(0, serverIP, "3");
 			
 			gs.createMyRegistry(1099);
