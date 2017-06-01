@@ -1,79 +1,76 @@
 package graphics;
-import java.util.Scanner;  
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 
-public class GraphicsTest 
-{
-	public static void main(String[] args)
-	{
-		JFrame frame = new JFrame();
-		Scanner kb = new Scanner(System.in);
-		
-		frame.setSize(1280,720);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		
-		BoardPanel panel = new BoardPanel();
-		frame.add(panel);
-		frame.setVisible(true);		
-		
-		
-		
-		
-		/*
-		boolean close = false;
-		
-		while(close == false)
-		{
+public class GraphicsTest extends JFrame implements ActionListener {
 
-			System.out.println("Enter a command:");  
-			String command = kb.next();
-			
-			switch(command)
-			{
-				case "CngComPos":
-					System.out.println("Enter X cordinate:");  
-					int x = kb.nextInt(); //obviously check preconditions
-					System.out.println("Enter Y cordinate:");  
-					int y = kb.nextInt(); //same for this one
-					panel.changeCommanderPos(x,y);
-					break;
-					
-				case "CngMapSize":
-					System.out.println("Enter map Type"); 
-					String type = kb.next(); //precondition check
-					panel.changeMapSize(type);
-					break;
-					
-				case "GetComX":
-					System.out.println(panel.getCommanderX());
-					break;
-					
-				case "GetComY":
-					System.out.println(panel.getCommanderY());
-					break;
-					
-				case "Help":
-					System.out.println("To change commander position, type \"CngComPos\"");
-					System.out.println("To change map size, type \"CngMapSize\"");
-					System.out.println("To get commander coordinates, type \"GetComX\" and \"GetComY\" for their respective values");
-					System.out.println("To end this loop, type \"Close\"");
-					break;
-					
-				case "Close":
-					close = true;
-					break;
-					
-				default:
-					System.out.println("Invalid command, type \"Help\" for list of valid commands");
-					break;
-			}
-			
-			frame.setVisible(true);
-		}
-		*/
+	private static final long serialVersionUID = 1L;
+	JTextField  ip;
+	JButton host;
+	JButton join;
+	JButton quit;
+	public static void main(String[] args) {
+		new GraphicsTest().setVisible(true);			
 	}
+	
+	private GraphicsTest() {
+		super("Testing");
+			
+		setSize(1280,720);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
+		setLayout(new FlowLayout());
+		
+		ip = new JTextField("Enter IP", 30);
+		ip.setActionCommand("ip");
+		ip.addActionListener(this);
+		host = new JButton("Host Game");
+		host.setActionCommand("host");
+		host.addActionListener(this);
+		join = new JButton("Join Game");
+		join.setActionCommand("join");
+		join.addActionListener(this);
+		join.setEnabled(false);
+		quit = new JButton("Quit Game");
+		quit.setActionCommand("quit");
+		quit.addActionListener(this);
+		
+		add(host);
+		add(join);
+		add(ip);
+		add(quit);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		 String a = e.getActionCommand();
+		 if(a.equals("host"))
+			System.out.println("game hosting");
+		 //launch server
+		 //launch game connecting to server via PC ip
+		 
+		 else if(a.equals("ip")){
+			 System.out.println("typing ip");
+			 join.setEnabled(true); 
+			 System.out.println(ip.getText());
+		 }
+		 else if(a.equals("join")){
+			 System.out.println("searching for host");
+			 //launch game searching for specified ip
+		 }
+		 else if(a.equals("quit")){
+			 System.out.println("am quiting");
+		     setVisible(false);
+		     dispose();
+	     }
+	}
+		
 }
