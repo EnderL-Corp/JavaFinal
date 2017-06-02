@@ -6,7 +6,7 @@ public abstract class Entity extends Card
 	protected int cpCost;
 	protected int attack;
 	protected int health;
-	protected final int MAX_HEALTH;
+	protected int maxHealth;
 	
 	public Entity(String nm, String desc, int ap, int cp, int atk, int hp)
 	{
@@ -15,12 +15,12 @@ public abstract class Entity extends Card
 		cpCost = cp;
 		attack = atk;
 		health = hp;
-		MAX_HEALTH = hp;
+		maxHealth = hp;
 	}
 	
 	public abstract void kill();
 
-	public abstract void modifyHealth(int val);
+	public abstract void modifyHealth(int val, Card originator);
 	
 	public int dealDamage()
 	{

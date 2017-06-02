@@ -13,11 +13,11 @@ public class Commander extends Entity
 		//end game
 	}
 	
-	public void modifyHealth(int val)
+	public void modifyHealth(int val, Card originator)
 	{
-			/*health += val;
-		 	if (health > MAX_HEALTH)
-		 		health = MAX_HEALTH;*/		
-		 health = health + val > MAX_HEALTH ? MAX_HEALTH : health + val;
+		/*health += val;
+	 	if (health > MAX_HEALTH)
+	 		health = MAX_HEALTH;*/		
+		health = health + val > maxHealth ? maxHealth : health + val;
 	}
 }
