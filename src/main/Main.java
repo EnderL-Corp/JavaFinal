@@ -32,7 +32,7 @@ public class Main {
 		
 		try {
 			gs = new GameServer("server", 1099, serverIP);
-			gc = new Game(0, serverIP, "3");
+			gc = new Game(0, serverIP, 1099);
 			
 			gs.createMyRegistry(1099);
 			gc.startup(null);
