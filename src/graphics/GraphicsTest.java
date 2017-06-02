@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import main.Game;
+
 
 public class GraphicsTest extends JFrame implements ActionListener {
 

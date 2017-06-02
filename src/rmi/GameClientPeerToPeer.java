@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import main.Game;
 
-public class GameClientPeerToPeer extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameClientInterface {
+public class GameClientPeerToPeer extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameServerInterface {
 	//, Remote {//, Runnable {
 	
 	//TODO implement ActionListener for when the new set of commands is received.
@@ -27,10 +27,10 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 	protected String myIP = "127.0.0.1";
 	protected int otherPort;
 	
-	private GameClientInterface remoteClient;
+	private GameServerInterface remoteClient;
 	
 	protected String name, otherIP, otherName;
-	private ArrayList<GameClientInterface> clients;
+	private ArrayList<GameServerInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	/*protected Thread thread;
@@ -129,7 +129,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 			System.out.println("Other: " + otherName);
 			clientRegistry = LocateRegistry.getRegistry(otherIP, otherPort);
 			System.out.println("Looking for " + otherName);
-			remoteClient = (GameClientInterface) clientRegistry.lookup(otherName);
+			remoteClient = (GameServerInterface) clientRegistry.lookup(otherName);
 			System.out.println("Connected to peer.");
 			connected = true;
 			test();
@@ -143,7 +143,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 	public void test() {
 		String a;
 		try {
-			a = remoteClient.getName(new String("5"));
+			a = remoteClient.getName();
 			System.out.println(a);
 			
 			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
@@ -192,17 +192,17 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 		}
 		/*
 		 try {
-			GameClientInterface stub;
+			GameServerInterface stub;
 			try {
 				myRegistry = LocateRegistry.getRegistry(myIP, port);
 				System.out.println("Registry present, connected.");
-				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
+				stub = (GameServerInterface)UnicastRemoteObject.exportObject(this, port);
 				myRegistry.rebind(name, stub);
 				System.out.println(name + " has started.");
 			} catch(Exception e) {
 				myRegistry = LocateRegistry.createRegistry(port);
 				System.out.println("Registry created, connected.");
-				stub = (GameClientInterface)UnicastRemoteObject.exportObject(this, port);
+				stub = (GameServerInterface)UnicastRemoteObject.exportObject(this, port);
 				myRegistry.rebind(name, stub);
 				System.out.println(name + " has started.");
 				return;
@@ -220,10 +220,8 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 	public int getTag() {
 		return tag;
 	}
-	public String getName(String modifier) {
-		if(modifier != null)
-			return new String(name + modifier);
-		return "getName() did not work";
+	public String getName() {
+		return new String(name);
 	}
 	
 	
@@ -262,7 +260,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 		return null;
 	}
 	
-	/*public void connect(GameClientInterface l) {
+	/*public void connect(GameServerInterface l) {
 		clients.add(l);
 		System.out.println("connect() : connected");
 	}
@@ -270,7 +268,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof GameClientPeerToPeer && (((GameClientPeerToPeer)e.getSource()).getTag() != tag)) {
 			try {
-				for(ClientCommand c : ((GameClientInterface) clientRegistry).getCommands()) {
+				for(ClientCommand c : ((GameServerInterface) clientRegistry).getCommands()) {
 					c.performAction();
 				}
 			} catch (RemoteException e1) {

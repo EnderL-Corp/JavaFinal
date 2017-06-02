@@ -10,11 +10,11 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GameServer extends UnicastRemoteObject implements GameClientInterface{
+public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static final long serialVersionUID = 1L;
 	
 	private int port;
-	private ArrayList<GameClientInterface> clients;
+	private ArrayList<GameServerInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	
 	protected static Registry myRegistry;
@@ -72,7 +72,9 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 		gs.createMyRegistry(1099);
 	}
 	
-	public String getName(String mod){return null;}
+	public String getName() {
+		return name;
+	}
 	
 	public void createMyRegistry(int port) {
 		try {
@@ -93,7 +95,7 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 		}
 	}
 	
-	public void connect(GameClientInterface l) throws RemoteException {
+	public void connect(GameServerInterface l) throws RemoteException {
 		clients.add(l);
 	}
 	/*

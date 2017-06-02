@@ -25,10 +25,10 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 	
 	private int tag = 2, serverPort = 1099;
 	
-	private GameClientInterface remoteServer;
+	private GameServerInterface remoteServer;
 	
 	protected String name, serverIP, serverName;
-	private ArrayList<GameClientInterface> clients;
+	private ArrayList<GameServerInterface> clients;
 	private ArrayList<ClientCommand> currentMoves;
 	protected static Registry serverRegistry;
 	
@@ -129,8 +129,8 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 			System.out.println("Server: " + serverName);
 			serverRegistry = LocateRegistry.getRegistry(serverIP, serverPort);
 			System.out.println("Looking for " + serverName);
-			remoteServer = (GameClientInterface) serverRegistry.lookup(serverName);
-			System.out.println("Connected to peer.");
+			remoteServer = (GameServerInterface) serverRegistry.lookup(serverName);
+			System.out.println("Connected to server.");
 			connected = true;
 			test();
 		} catch(Exception e) {
@@ -149,7 +149,7 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 	public void test() {
 		String a;
 		try {
-			a = remoteServer.getName(new String("5"));
+			a = remoteServer.getName();
 			System.out.println(a);
 			
 			String[] t = remoteServer.getData(new String[]{"Test1", "Test2"});
