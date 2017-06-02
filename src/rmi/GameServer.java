@@ -82,11 +82,11 @@ public class GameServer extends UnicastRemoteObject implements GameClientInterfa
 				myRegistry.rebind(name, this);
 				System.out.println(name + " has started.");
 			} catch(Exception e) {
-				/*myRegistry = LocateRegistry.createRegistry(port);
+				myRegistry = LocateRegistry.createRegistry(port);
 				System.out.println("Registry created, connected.");
 				myRegistry.rebind(name, this);
 				System.out.println(name + " has started.");
-				return;*/
+				return;
 				
 				e.printStackTrace();
 			}
