@@ -1,6 +1,7 @@
 package cards;
 
-public enum TroopEnum {
+public enum TroopEnum 
+{
 	RANGER,
 	DEFLECTOR,
 	DUMMY,
