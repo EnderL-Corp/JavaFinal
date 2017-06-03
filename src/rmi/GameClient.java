@@ -199,9 +199,11 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 			e1.printStackTrace();
 		}*/
 		try {
-			ArrayList<Card> commandsToRun = remoteServer.getRecentCardsList();
+			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
 			if(this instanceof Game) {
-				
+				for(Card c : cardsList) {
+					
+				}
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();

@@ -17,7 +17,7 @@ import graphics.BoardPanel;
 import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
-	w
+	
 	/**
 	 * 
 	 * @param tag
@@ -122,6 +122,4 @@ public class Game extends GameClient implements Serializable {
 		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
 		frame.repaint();
 	}
-	
-	public 
 }
