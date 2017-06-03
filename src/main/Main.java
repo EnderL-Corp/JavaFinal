@@ -15,15 +15,26 @@ import rmi.GameClientPeerToPeer;
 import rmi.GameServer;
 import rmi.GameClient;
 
-//This is a poorly named class hierarchy
+//This is a poorly named class
 public class Main {
 	public static void main(String[] args) {
-		//connectSameComp();
-		//connectSameComp();
-		connectSingleCS();
+		Scanner s = new Scanner(System.in);
+		System.out.print("A for create host; B for create connection");
+		String modifier = s.nextLine();
+		switch(modifier) {
+		case "A":
+			createHost();
+			break;
+		case "B":
+			createClient();
+			break;
+		case "C":
+			System.out.println("You did something wrong.");
+			return;
+		}
 	}
 	
-	public static void connectSingleCS() {
+	public static void createHost() {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Please enter server IP: ");
 		String serverIP = s.nextLine();
@@ -35,6 +46,26 @@ public class Main {
 			gc = new Game(0, serverIP, 1099);
 			
 			gs.createMyRegistry(1099);
+			gc.startup(null);
+			
+			gc.connectToServer();
+			
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createClient() {
+		Scanner s = new Scanner(System.in);
+		System.out.print("Please enter server IP: ");
+		String serverIP = s.nextLine();
+		Game gc = null;
+		
+		try {
+			gc = new Game(1, serverIP, 1099);
+			
 			gc.startup(null);
 			
 			gc.connectToServer();

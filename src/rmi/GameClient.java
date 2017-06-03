@@ -7,9 +7,9 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import cards.Card;
 import javax.swing.Timer;
 
 import main.Game;
@@ -163,7 +163,8 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 			/*cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
 			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
 			cc.add(new ClientCommand(e));*/
-			cc.add(new ClientCommand(CommandEnum.values()[tag]));
+			cc.add(new ClientCommand(CommandEnum.values()[tag], new Card("r", "p") {
+			}));
 			
 			remoteServer.receiveRecentCommands(this.name, cc);
 		} catch (RemoteException e1) {

@@ -11,6 +11,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import cards.Card;
 import main.Game;
 
 public class GameClientPeerToPeer extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameServerInterface {
@@ -157,7 +158,8 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 			/*cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
 			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
 			cc.add(new ClientCommand(e));*/
-			cc.add(new ClientCommand(CommandEnum.values()[tag]));
+			cc.add(new ClientCommand(CommandEnum.values()[tag], new Card("r", "p") {
+			}));
 			
 			remoteClient.receiveRecentCommands(null, cc);
 		} catch (RemoteException e1) {
