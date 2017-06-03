@@ -2,14 +2,7 @@ package cards;
 
 public abstract class Entity extends Card
 {
-	protected int apCost;
-	protected int cpCost;
-	protected int attack;
-	protected int health;
-	protected int currentAttack;
-	protected int currentHealth;
-	protected int xCoordinate;
-	protected int yCoordinate;
+	protected int apCost, cpCost, attack, health, currentAttack, currentHealth, xCoordinate, yCoordinate;
 	protected final int TAG;
 	
 	public Entity(String nm, String desc, int ap, int cp, int atk, int hp, int startPosX, int startPosY, int tag)

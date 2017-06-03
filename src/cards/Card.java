@@ -2,8 +2,7 @@ package cards;
 
 public abstract class Card 
 {
-	protected String name;
-	protected String description;
+	protected String name, description;
 	
 	public Card(String nm, String desc)
 	{
