@@ -11,7 +11,8 @@ public class Commander extends Entity
 
 	public void attack()
 	{
-		//were going to have to make a position or something
+		//checks everything around
+		//dealDamage(defender)
 	}
 	
 	public boolean canDeflect()

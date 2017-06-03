@@ -10,4 +10,9 @@ public class Gear extends Structure
 		ability = ab;
 	}
 	
+	public void effect(Entity effected)
+	{
+		//does effect to effected
+		//goes to graveyard
+	}
 }
