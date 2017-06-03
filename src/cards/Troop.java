@@ -2,13 +2,13 @@ package cards;
 
 public class Troop extends Entity
 {
-	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void, X}
+	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void}
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 
-	public Troop(String nm, String desc, int ap, int cp, int atk, int hp, int posX, int posY, int tag, boolean[] abs) 
+	public Troop(String troopType, TroopEnum enumName, int startPosX, int startPosY, int tag, boolean[] abs) 
 	{
-		super(nm, desc, ap, cp, atk, hp, posX, posY, tag);
+		super(troopType, enumName, startPosX, startPosY, tag);
 		abilities = abs;
 		if(abilities[1] == true)
 			deflectTime = true;
