@@ -1,57 +1,74 @@
 package cards;
 
-import java.util.List;
-
 public class Troop extends Entity
 {
-	protected List<String> abilities;
+	protected boolean[] abilities; //{provoke, deflect, blast, range, mirror, void}
+	protected boolean deflectTime = false;
+	protected boolean mirrorTime = false;
 
-	public Troop(String nm, String desc, int ap, int cp, int atk, int hp, List<String> abs) 
+	public Troop(String nm, String desc, int ap, int cp, int atk, int hp, boolean[] abs) 
 	{
 		super(nm, desc, ap, cp, atk, hp);
 		abilities = abs;
+		if(abilities[1] == true)
+			deflectTime = true;
+		if(abilities[4] == true)
+			mirrorTime = true;
 	}
-	
-	public List<String> getAbilities()
+
+	public boolean[] getAbilities()
 	{
 		return abilities;
 	}
 	
 	/**
-	 * @param name - The ability to add
+	 * @param abs - the index of the ability i.e. 1 for deflect, or 5 for void
 	 * @return boolean - whether or not the ability was added
 	 */
-	public boolean addAbilities(String name)
+	public boolean addAbilities(int abs)
 	{
-		for(String s : abilities)
+		if(abs == 1)
+			deflectTime = true;
+		if(abs == 4)
+			mirrorTime = true;
+		
+		if(abilities[abs] == false)
 		{
-			if(s.equals(name))
-			{
+			if((abilities[2] == true || abilities[3] == true) && (abs == 2 || abs == 3))
 				return false;
-			}
+			abilities[abs] = true;
+			return true;
 		}
-		abilities.add(name);
-		return true;
+		return false;
 	}
 
+	public boolean canDeflect()
+	{
+		if(deflectTime == true)
+		{
+			deflectTime = false;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean canMirror()
+	{
+		if(mirrorTime == true)
+		{
+			mirrorTime = false;
+			return true;
+		}
+		return false;
+	}
+		
+	public void attack()
+	{
+		//were going to have to make a position or something
+	}
+	
 	public void kill() 
 	{
 		//Send to discard pile
-	}
-
-	public void modifyHealth(int val, Card originator) 
-	{
-		if(val < 0 && originator instanceof Entity)
-		{
-			for(String s : abilities)
-			{
-				if(s.equals("Mirror"))
-				{
-					((Entity) originator).modifyHealth(val / 2, null);
-				}
-			}
-		}
-		
-		health = health + val > maxHealth ? maxHealth : health + val;
 	}
 }
