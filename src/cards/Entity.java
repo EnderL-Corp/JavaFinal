@@ -253,22 +253,33 @@ public abstract class Entity extends Card
 	
 	public abstract void attack();
 	
-	public int getCurrentAttack()
-	{ return currentAttack;	}
+	public int getCurrentAttack() {
+		return currentAttack;
+	}
 	
-	public int getCurrentHealth()
-	{ return currentHealth;	}
 	
-	public int getAttack()
-	{ return attack; }
+	public int getCurrentHealth() {
+		return currentHealth;
+	}
 	
-	public int getHealth()
-	{ return health; }
+	public int getAttack() {
+		return attack; 
+	}
 	
-	public int getCpCost()
-	{ return cpCost; }
+	public int getHealth() {
+		return health;
+	}
 	
-	public int getApCost()
-	{ return apCost; }
+	public int getCpCost() {
+		return cpCost;
+	}
+	
+	public int getApCost() {
+		return apCost;
+	}
+	
+	public int getTag() {
+		return TAG;
+	}
 
 }

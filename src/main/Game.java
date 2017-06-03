@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 
 import cards.Card;
 import cards.ClassType;
+import cards.Entity;
 import graphics.BoardPanel;
 import rmi.GameClient;
 
@@ -45,6 +46,41 @@ public class Game extends GameClient implements Serializable {
 
 	private BoardPanel b;
 	private JFrame frame;
+	
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	// The following are tester classes for RMI
+	public void moveCommRight() {
+		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
+		frame.repaint();
+	}
+	public void moveCommLeft() {
+		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
+		frame.repaint();
+	}
+	public void moveCommUp() {
+		b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
+		frame.repaint();
+	}
+	public void moveCommDown() {
+		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
+		frame.repaint();
+	}
+	
+	public boolean updateCard(Card cardToChange, int tag) {
+		for(Card c : cardsArray) {
+			if(c instanceof Entity && ((Entity)c).getTag() == ((Entity)cardToChange).getTag()) {
+				c = cardToChange;
+				frame.repaint();
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void startup(String[] args) {
 		b = new BoardPanel();
 		
@@ -107,27 +143,5 @@ public class Game extends GameClient implements Serializable {
 			}
 		});
 		
-	}
-	
-	public JFrame getFrame() {
-		return frame;
-	}
-	
-	// The following are tester classes for RMI
-	public void moveCommRight() {
-		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
-		frame.repaint();
-	}
-	public void moveCommLeft() {
-		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
-		frame.repaint();
-	}
-	public void moveCommUp() {
-		b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
-		frame.repaint();
-	}
-	public void moveCommDown() {
-		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
-		frame.repaint();
 	}
 }

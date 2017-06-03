@@ -72,11 +72,13 @@ public class Troop extends Entity
 		//Send to discard pile
 	}
 	
-	public int getCurrentApCost()
-	{ return currentApCost;	}
+	public int getCurrentApCost() {
+		return currentApCost;
+	}
 	
 
-	public boolean[] getAbilities()
-	{ return abilities;	}
+	public boolean[] getAbilities() {
+		return abilities;
+	}
 	
 }
