@@ -15,4 +15,5 @@ public interface GameServerInterface extends Remote, Serializable{
 	ArrayList<ClientCommand> getCommands() throws RemoteException;
 	String getName() throws RemoteException;
 	void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException;
+	ArrayList<Card> getRecentCardsList() throws RemoteException;
 }

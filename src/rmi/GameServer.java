@@ -118,4 +118,9 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException {
 		recentChanges = cardList;
 	}
+
+	@Override
+	public ArrayList<Card> getRecentCardsList() throws RemoteException {
+		return recentChanges;
+	}
 }

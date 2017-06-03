@@ -32,7 +32,7 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 	private ArrayList<ClientCommand> currentMoves;
 	protected static Registry serverRegistry;
 	
-	public Timer timer;
+	protected Timer timer;
 	
 	/*protected Thread thread;
 	
@@ -137,12 +137,11 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		if(connected) {
 			timer = new Timer(1000, this);
 			timer.start();
 		}
-		
 		return connected;
 	}
 	
@@ -189,12 +188,20 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
+		/*try {
 			if(connected && remoteServer.getRecentClientName() != this.name) {
 				ArrayList<ClientCommand> commandsToRun = remoteServer.getCommands();
 				for(ClientCommand c : commandsToRun) {
 					c.performAction((Game)this);	
 				}
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}*/
+		try {
+			ArrayList<Card> commandsToRun = remoteServer.getRecentCardsList();
+			if(this instanceof Game) {
+				
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
