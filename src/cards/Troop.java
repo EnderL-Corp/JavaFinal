@@ -6,9 +6,9 @@ public class Troop extends Entity
 	protected boolean deflectTime = false;
 	protected boolean mirrorTime = false;
 
-	public Troop(String nm, String desc, int ap, int cp, int atk, int hp, boolean[] abs) 
+	public Troop(String nm, String desc, int ap, int cp, int atk, int hp, int posX, int posY, int tag, boolean[] abs) 
 	{
-		super(nm, desc, ap, cp, atk, hp);
+		super(nm, desc, ap, cp, atk, hp, posX, posY, tag);
 		abilities = abs;
 		if(abilities[1] == true)
 			deflectTime = true;
