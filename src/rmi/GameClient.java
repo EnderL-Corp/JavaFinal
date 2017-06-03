@@ -146,6 +146,17 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 		return connected;
 	}
 	
+	public void sendOverNetwork(Card cardChanged) {
+		ArrayList<Card> al = new ArrayList<Card>();
+		al.add(cardChanged);
+		
+		try {
+			remoteServer.receiveRecentCardChanges(name, al);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void test() {
 		String a;
 		try {

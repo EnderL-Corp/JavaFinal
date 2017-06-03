@@ -19,7 +19,7 @@ import rmi.GameClient;
 public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		System.out.print("A for create host; B for create connection");
+		System.out.println("A for create host; B for create connection:");
 		String modifier = s.nextLine();
 		switch(modifier) {
 		case "A":
@@ -28,7 +28,7 @@ public class Main {
 		case "B":
 			createClient();
 			break;
-		case "C":
+		default:
 			System.out.println("You did something wrong.");
 			return;
 		}

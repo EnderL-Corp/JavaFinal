@@ -10,12 +10,14 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import cards.Card;
+
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static final long serialVersionUID = 1L;
 	
 	private int port;
 	private ArrayList<GameServerInterface> clients;
-	private ArrayList<ClientCommand> currentMoves;
+	private ArrayList<Card> recentChanges;
 	
 	protected static Registry myRegistry;
 	
@@ -44,8 +46,10 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	 * @return the list of commands for the one that did not fire commandList
 	 */
 	public void receiveRecentCommands(String clientName, ArrayList<ClientCommand> commandList) throws RemoteException {
-		currentMoves = commandList;
-		recentClientName = clientName;
+		/*currentMoves = commandList;
+		recentClientName = clientName;*/
+		
+		//TODO remove this unneeded method
 	}
 	
 	public String getRecentClientName() {
@@ -53,7 +57,11 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 	
 	public ArrayList<ClientCommand> getCommands() {
-		return currentMoves;
+		/*return currentMoves;*/
+		
+		//TODO remove this unneeded method
+		
+		return null;
 	}
 	
 	public static void main(String[] args) {
@@ -105,4 +113,9 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	public void actionPerformed(ActionEvent e) {}*/
+
+	@Override
+	public void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException {
+		recentChanges = cardList;
+	}
 }

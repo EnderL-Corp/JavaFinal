@@ -261,6 +261,12 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/*public void connect(GameServerInterface l) {
 		clients.add(l);
