@@ -13,10 +13,13 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import cards.Card;
+import cards.ClassType;
 import graphics.BoardPanel;
 import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
+	
+	private ArrayList<Card> cardsArray;
 	
 	/**
 	 * 
@@ -33,6 +36,11 @@ public class Game extends GameClient implements Serializable {
 	
 	public Game(int i, String otherIP, int j) throws RemoteException {
 		super(i, otherIP, j);
+	}
+	
+	public Game(int tag, String serverIP, int serverPort, ClassType ct) throws RemoteException {
+		this(tag, serverIP, serverPort);
+		//cardsArray = Decks.get(ct); //TODO make Decks class with preset decks
 	}
 
 	private BoardPanel b;
