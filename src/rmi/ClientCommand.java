@@ -2,13 +2,16 @@ package rmi;
 
 import java.io.Serializable;
 
+import cards.Card;
 import main.Game;
 
 public class ClientCommand implements Serializable{
 	private CommandEnum command;
+	private Card cardToChange;
 	
-	public ClientCommand(CommandEnum c) {
+	public ClientCommand(CommandEnum c, Card card) {
 		command = c;
+		cardToChange = card;
 	}
 	
 	public void performAction(Game game) {
