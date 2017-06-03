@@ -3,9 +3,8 @@ package cards;
 public class Technique extends Card
 {
 	protected String effect;
-	protected int tpCost;
-	protected int numberOfTargets; // 0 if doesnt target anything i.e. draw two cards; -1 if targets all enemy troops
-	protected int remainingTargets;
+	protected int tpCost, numberOfTargets/* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/, remainingTargets;
+
 	
 	public Technique(String nm, String desc, int tp, int numTargets, String eff) 
 	{
