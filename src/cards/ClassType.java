@@ -1,6 +1,7 @@
 package cards;
 
-public enum ClassType {
+public enum ClassType 
+{
 	RAVAGER,
 	SWARM,
 	DJ;

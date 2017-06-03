@@ -2,7 +2,7 @@ package cards;
 
 public class Troop extends Entity
 {
-	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void}
+	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void, X}
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 

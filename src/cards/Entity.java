@@ -18,7 +18,7 @@ public abstract class Entity extends Card
 		yCoordinate = startPosY;
 		TAG = tag;
 	}
-	
+
 	public abstract boolean[] getAbilities();
 	
 	public abstract boolean canDeflect();

@@ -5,5 +5,6 @@ public enum TroopEnum
 	RANGER,
 	DEFLECTOR,
 	DUMMY,
-	BLASTER;
+	BLASTER,
+	X;
 }
