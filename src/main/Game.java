@@ -23,6 +23,10 @@ public class Game extends GameClient implements Serializable {
 	
 	private ArrayList<Card> myCards;
 	
+	public Game() throws RemoteException{
+		
+	}
+	
 	/**
 	 * 
 	 * @param tag
@@ -159,7 +163,7 @@ public class Game extends GameClient implements Serializable {
 	}
 	
 	public static void main(String[] args) {
-		Scanner s = new Scanner(System.in);
+		/*Scanner s = new Scanner(System.in);
 		System.out.print("Please enter server IP: ");
 		String serverIP = s.nextLine();
 		Game gc = null;
@@ -175,6 +179,11 @@ public class Game extends GameClient implements Serializable {
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		try {
+			new Game().startup(null);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		};
 	}
 }
