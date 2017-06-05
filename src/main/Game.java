@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import cards.Card;
-import cards.ClassType;
 import cards.Deck;
 import cards.Deck.Decks;
 import cards.Entity;
@@ -150,9 +149,10 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e)  {
 		try {
 			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-			for(Card c : cardsList) {
-				updateCard(c);
-			}
+			if(cardsList != null && cardsList.size() > 0)
+				for(Card c : cardsList) {
+					updateCard(c);
+				}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -165,7 +165,7 @@ public class Game extends GameClient implements Serializable {
 		Game gc = null;
 		
 		try {
-			gc = new Game(1, serverIP, 1099);
+			gc = new Game(1, serverIP, 1099, Decks.RAVAGER);
 			
 			gc.startup(null);
 			

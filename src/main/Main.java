@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cards.Deck.Decks;
 import rmi.GameClientPeerToPeer;
 import rmi.GameServer;
 import rmi.GameClient;
@@ -43,7 +44,7 @@ public class Main {
 		
 		try {
 			gs = new GameServer("server", 1099, serverIP);
-			gc = new Game(0, serverIP, 1099);
+			gc = new Game(0, serverIP, 1099, Decks.RAVAGER);
 			
 			gs.createMyRegistry(1099);
 			gc.startup(null);
@@ -64,7 +65,7 @@ public class Main {
 		Game gc = null;
 		
 		try {
-			gc = new Game(1, serverIP, 1099);
+			gc = new Game(1, serverIP, 1099, Decks.DJ);
 			
 			gc.startup(null);
 			

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel
 {
 	  private int numTiles = 15;
-	
+	  private int commanderPosX = 0, commanderPosY = 0;
       
 	  public void paintComponent(Graphics g)
 	  {
