@@ -10,6 +10,24 @@ public class Troop extends Entity
 	{
 		super(troopType, enumName, startPosX, startPosY, tag);
 		abilities = abs;
+		
+		if(enumName == TroopEnum.BLASTER)
+		{
+			abs[2] = true;
+		}
+		else if(enumName == TroopEnum.DEFLECTOR)
+		{
+			abs[1] = true;
+		}
+		else if(enumName == TroopEnum.DUMMY)
+		{
+			abs[0] = true;
+		}
+		else if(enumName == TroopEnum.RANGER)
+		{
+			abs[3] = true;
+		}
+
 		if(abilities[1] == true)
 			deflectTime = true;
 		if(abilities[4] == true)
