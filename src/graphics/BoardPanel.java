@@ -30,7 +30,12 @@ public class BoardPanel extends JPanel
 					//Graphics2D g2 = (Graphics2D) g;
 		    		g.setColor(Color.black);   
 		    		
-		    		if( ( (i == 0 || i == numTiles - 1) && (j == 0 || j == 1|| j == numTiles - 2 || j == numTiles - 1) ) || ( (i == 1 || i == numTiles - 2) && (j == 0 || j == numTiles - 1) ) )
+		    		if((i == 0 || i == numTiles - 1 || j == 0 || j == numTiles - 1) //border
+		    				|| ((i == 1 || i == numTiles - 2) && (j == 1 || j == 2 || j == 3 || j == 4 || j  == numTiles - 2 || j == numTiles - 3 || j == numTiles - 4 || j == numTiles - 5 )) // next col in
+		    				|| ((i == 2 || i == numTiles - 3) && (j == 1 || j == 2 || j  == numTiles - 2 || j == numTiles - 3)) // next col in
+		    				|| ((i == 3 || i == 4 || i == numTiles - 4 || i == numTiles - 5) && (j == 1 || j == numTiles - 2)) // next col in
+		    				|| ((i == 5 || i == numTiles - 6) && (j == 6 || j == 7 || j == numTiles - 7)) //middle out
+		    				|| ((i == 6 || i == 7 || i == numTiles - 7) && (j == 5 || j == 6 || j == 7 || j == numTiles - 7 || j == numTiles - 6))) // middle
 		    		{
 		    			g.fillRect(i*tileWidth, j*tileHeight, tileWidth, tileHeight);
 		    		}
