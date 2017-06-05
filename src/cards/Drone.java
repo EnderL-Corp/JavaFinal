@@ -7,3 +7,4 @@ public class Drone extends Troop
 		super("Drone", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
 	}
 }
+

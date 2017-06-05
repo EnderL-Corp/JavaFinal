@@ -7,3 +7,4 @@ public class Android extends Troop
 		super("Android", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
 	}
 }
+

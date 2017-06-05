@@ -7,3 +7,4 @@ public class Human extends Troop
 		super("Human", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
 	}
 }
+

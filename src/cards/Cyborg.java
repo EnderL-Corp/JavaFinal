@@ -7,3 +7,4 @@ public class Cyborg extends Troop
 		super("Cyborg", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
 	}
 }
+

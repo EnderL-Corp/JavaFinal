@@ -100,3 +100,4 @@ public class Troop extends Entity
 	}
 	
 }
+

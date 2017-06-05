@@ -7,3 +7,4 @@ public class Mech extends Troop
 		super("Mech", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
 	}
 }
+
