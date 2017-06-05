@@ -25,9 +25,9 @@ public class Technique extends Card
 		{
 			if(remainingTargets > 0)
 			{
-			//perform action
-			remainingTargets --;
-			cast(); // yay recursion  (going to have to use an action listener to get targets)
+				//perform action
+				remainingTargets --;
+				cast(); // yay recursion  (going to have to use an action listener to get targets)
 			}
 			remainingTargets = numberOfTargets;
 		} //does stuff n number of times
