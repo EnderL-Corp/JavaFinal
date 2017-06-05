@@ -28,8 +28,6 @@ public abstract class GameClient /*extends UnicastRemoteObject */implements Seri
 	protected GameServerInterface remoteServer;
 	
 	protected String name, serverIP, serverName;
-	private ArrayList<GameServerInterface> clients;
-	private ArrayList<ClientCommand> currentMoves;
 	protected static Registry serverRegistry;
 	
 	protected Timer timer;
@@ -167,16 +165,6 @@ public abstract class GameClient /*extends UnicastRemoteObject */implements Seri
 			
 			String[] b = remoteServer.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
-			
-			
-			ArrayList<ClientCommand> cc = new ArrayList<ClientCommand>();
-			/*cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
-			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
-			cc.add(new ClientCommand(e));*/
-			cc.add(new ClientCommand(CommandEnum.values()[tag], new Card("r", "p") {
-			}));
-			
-			remoteServer.receiveRecentCommands(this.name, cc);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}	

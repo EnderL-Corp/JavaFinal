@@ -152,16 +152,6 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 			
 			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
-			
-			
-			ArrayList<ClientCommand> cc = new ArrayList<ClientCommand>();
-			/*cc.add(new ClientCommand(CommandEnum.MOVE_DOWN));
-			cc.add(new ClientCommand(CommandEnum.MOVE_UP));
-			cc.add(new ClientCommand(e));*/
-			cc.add(new ClientCommand(CommandEnum.values()[tag], new Card("r", "p") {
-			}));
-			
-			remoteClient.receiveRecentCommands(null, cc);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
@@ -252,10 +242,6 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}
 	
-	public ArrayList<ClientCommand> getCommands() {
-		return currentMoves;
-	}
-	
 	@Override
 	public String getRecentClientName() throws RemoteException {
 		// TODO Auto-generated method stub
@@ -273,27 +259,4 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	/*public void connect(GameServerInterface l) {
-		clients.add(l);
-		System.out.println("connect() : connected");
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() instanceof GameClientPeerToPeer && (((GameClientPeerToPeer)e.getSource()).getTag() != tag)) {
-			try {
-				for(ClientCommand c : ((GameServerInterface) clientRegistry).getCommands()) {
-					c.performAction();
-				}
-			} catch (RemoteException e1) {
-				System.out.println("actionPerformed() : " + e);
-			}
-		}
-	}
-	
-	private void fireActionPerformed(ActionEvent e) {
-		for(ActionListener l : clients) {
-			l.actionPerformed(e);
-		}
-	}*/
 }

@@ -149,7 +149,7 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e)  {
 		try {
 			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-			if(cardsList != null && cardsList.size() > 0)
+			if(remoteServer.getRecentClientName() != this.name && cardsList != null && cardsList.size() > 0)
 				for(Card c : cardsList) {
 					updateCard(c);
 				}

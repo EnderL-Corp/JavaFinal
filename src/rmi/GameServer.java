@@ -23,7 +23,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	protected String myIP = "127.0.0.1";
 	
-	protected String name, otherIP, otherName, recentClientName;
+	protected String name = "", otherIP, otherName, recentClientName = "";
 	
 	public GameServer() throws RemoteException {
 		super();
@@ -42,26 +42,8 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return new String[] {args[0] + args[1], "No position 2"};
 	}
 	
-	/**
-	 * @return the list of commands for the one that did not fire commandList
-	 */
-	public void receiveRecentCommands(String clientName, ArrayList<ClientCommand> commandList) throws RemoteException {
-		/*currentMoves = commandList;
-		recentClientName = clientName;*/
-		
-		//TODO remove this unneeded method
-	}
-	
 	public String getRecentClientName() {
 		return recentClientName;
-	}
-	
-	public ArrayList<ClientCommand> getCommands() {
-		/*return currentMoves;*/
-		
-		//TODO remove this unneeded method
-		
-		return null;
 	}
 	
 	public static void main(String[] args) {
@@ -86,20 +68,21 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	public void createMyRegistry(int port) {
 		try {
+			myRegistry = LocateRegistry.getRegistry(myIP, port);
+			System.out.println("Registry present, connected.");
+			myRegistry.rebind(name, this);
+			System.out.println(name + " has started.");
+		} catch(Exception e) {
+			e.printStackTrace();
 			try {
-				myRegistry = LocateRegistry.getRegistry(myIP, port);
-				System.out.println("Registry present, connected.");
-				myRegistry.rebind(name, this);
-				System.out.println(name + " has started.");
-			} catch(Exception e) {
 				myRegistry = LocateRegistry.createRegistry(port);
 				System.out.println("Registry created, connected.");
 				myRegistry.rebind(name, this);
 				System.out.println(name + " has started.");
-				return;				
+			} catch(Exception e1) {
+				e1.printStackTrace();
 			}
-		} catch(Exception e) {
-			e.printStackTrace();
+			return;				
 		}
 	}
 	
