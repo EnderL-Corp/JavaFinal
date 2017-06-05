@@ -10,8 +10,7 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel
 {
 	  private int numTiles = 15;
-	  private int commanderPosX = 0, commanderPosY = 0;
-      
+
 	  public void paintComponent(Graphics g)
 	  {
 			Rectangle r = this.getBounds();
@@ -66,46 +65,5 @@ public class BoardPanel extends JPanel
 		    	} 
 		    }
 	  }
-	  
-	  public void changeCommanderPos(int x, int y)
-	  {
-		  if(x < 0 || y < 0 || x > numTiles - 1 || y > numTiles - 1)
-			  return;
-		  commanderPosX = x;
-		  commanderPosY = y;
-	  }
-	  
-	  /**
-	   * @return commander x position
-	   */
-	  public int getCommanderX() {
-		  return commanderPosX;
-	  }
-	  
-	  /**
-	   * @return commander y position
-	   */
-	  public int getCommanderY() {
-		  return commanderPosY;
-	  }
-	  
-	  public void changeMapSize(String size)
-	  {
-		  switch(size)
-		  {
-		  	case "small":
-		  		numTiles = 9;
-		  		break;
-		  	case "medium":
-		  		numTiles = 15;
-		  		break;
-		  	case "large":
-		  		numTiles = 21;
-		  		break;
-		  	default:
-		  		numTiles = 9;
-		  		break;
-		  }
-		  commanderPosX = numTiles / 2;
-	  }
+
 }
