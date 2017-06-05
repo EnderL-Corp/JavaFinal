@@ -144,4 +144,15 @@ public class Game extends GameClient implements Serializable {
 		});
 		
 	}
+	
+	public void actionPerformed(ActionEvent e)  {
+		try {
+			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
+			for(Card c : cardsList) {
+				
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
 }

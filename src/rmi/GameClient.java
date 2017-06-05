@@ -14,7 +14,7 @@ import javax.swing.Timer;
 
 import main.Game;
 
-public class GameClient /*extends UnicastRemoteObject */implements Serializable, ActionListener {
+public abstract class GameClient /*extends UnicastRemoteObject */implements Serializable, ActionListener {
 	//, Remote {//, Runnable {
 	
 	//TODO implement ActionListener for when the new set of commands is received.
@@ -25,7 +25,7 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 	
 	private int tag = 2, serverPort = 1099;
 	
-	private GameServerInterface remoteServer;
+	protected GameServerInterface remoteServer;
 	
 	protected String name, serverIP, serverName;
 	private ArrayList<GameServerInterface> clients;
@@ -184,29 +184,5 @@ public class GameClient /*extends UnicastRemoteObject */implements Serializable,
 	
 	public boolean isConnected() {
 		return connected;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		/*try {
-			if(connected && remoteServer.getRecentClientName() != this.name) {
-				ArrayList<ClientCommand> commandsToRun = remoteServer.getCommands();
-				for(ClientCommand c : commandsToRun) {
-					c.performAction((Game)this);	
-				}
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}*/
-		try {
-			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-			if(this instanceof Game) {
-				for(Card c : cardsList) {
-					
-				}
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 	}
 }
