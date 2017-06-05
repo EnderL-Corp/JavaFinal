@@ -1,6 +1,8 @@
 package cards;
 
-public abstract class Card 
+import java.io.Serializable;
+
+public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABLE. THIS IS NEEDED FOR SENDING OVER NETWORK
 {
 	protected String name, description;
 	
