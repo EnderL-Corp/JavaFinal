@@ -9,10 +9,8 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel
 {
-	  private int numTiles = 9;
-	  private int commanderPosX = numTiles / 2;
-      private int commanderPosY = 0;
-
+	  private int numTiles = 15;
+	
       
 	  public void paintComponent(Graphics g)
 	  {
