@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 import cards.Card;
@@ -20,7 +20,7 @@ import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
 	
-	private ArrayList<Card> cardsArray;
+	private ArrayList<Card> myCards;
 	
 	/**
 	 * 
@@ -41,7 +41,7 @@ public class Game extends GameClient implements Serializable {
 	
 	public Game(int tag, String serverIP, int serverPort, ClassType ct) throws RemoteException {
 		this(tag, serverIP, serverPort);
-		//cardsArray = Decks.get(ct); //TODO make Decks class with preset decks
+		//myCards = Decks.get(ct); //TODO make Decks class with preset decks
 	}
 
 	private BoardPanel b;
@@ -52,7 +52,7 @@ public class Game extends GameClient implements Serializable {
 		return frame;
 	}
 	
-	// The following are tester classes for RMI
+	// The following are tester methods for RMI
 	public void moveCommRight() {
 		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
 		frame.repaint();
@@ -68,17 +68,6 @@ public class Game extends GameClient implements Serializable {
 	public void moveCommDown() {
 		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
 		frame.repaint();
-	}
-	
-	public boolean updateCard(Card cardToChange, int tag) {
-		for(Card c : cardsArray) {
-			if(c instanceof Entity && ((Entity)c).getTag() == ((Entity)cardToChange).getTag()) {
-				c = cardToChange;
-				frame.repaint();
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public void startup(String[] args) {
@@ -145,14 +134,45 @@ public class Game extends GameClient implements Serializable {
 		
 	}
 	
+	public boolean updateCard(Card cardToChange) {
+		for(Card c : myCards) {
+			if(c instanceof Entity && ((Entity)c).getTag() == ((Entity)cardToChange).getTag()) {
+				c = cardToChange;
+				frame.repaint();
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void actionPerformed(ActionEvent e)  {
 		try {
 			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
 			for(Card c : cardsList) {
-				
+				updateCard(c);
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		System.out.print("Please enter server IP: ");
+		String serverIP = s.nextLine();
+		Game gc = null;
+		
+		try {
+			gc = new Game(1, serverIP, 1099);
+			
+			gc.startup(null);
+			
+			gc.connectToServer();
+			
+			
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
