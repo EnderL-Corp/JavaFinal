@@ -7,3 +7,4 @@ public class Dragon extends Troop
 		super("Dragon", enumName, posX, posY, tag, new boolean[]{false, false, true, false, false, false});
 	}
 }
+
