@@ -12,7 +12,7 @@ import cards.Card;
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static final long serialVersionUID = 1L;
 	
-	private int port;
+	private int port, numConnections = 0;
 	private ArrayList<ClientInfo> clients;
 	private ArrayList<Card> recentChanges;
 	
@@ -85,6 +85,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	public void connect(ClientInfo l) throws RemoteException {
 		clients.add(l);
+		numConnections++;
 	}
 	/*
 	private void fireActionPerformed(ActionEvent e) {
@@ -107,5 +108,9 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	@Override
 	public ArrayList<ClientInfo> getGameClients() throws RemoteException {
 		return clients;
+	}
+	
+	public int getConnections() {
+		return numConnections;
 	}
 }

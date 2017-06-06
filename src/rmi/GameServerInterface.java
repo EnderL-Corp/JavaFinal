@@ -15,4 +15,5 @@ public interface GameServerInterface extends Remote, Serializable{
 	void connect(ClientInfo gc) throws RemoteException;
 	ArrayList<Card> getRecentCardsList() throws RemoteException;
 	ArrayList<ClientInfo> getGameClients() throws RemoteException;
+	int getConnections() throws RemoteException;
 }

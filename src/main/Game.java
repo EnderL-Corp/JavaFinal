@@ -16,6 +16,7 @@ import cards.Deck;
 import cards.Deck.Decks;
 import cards.Entity;
 import graphics.BoardPanel;
+import rmi.ClientInfo;
 import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
@@ -152,10 +153,18 @@ public class Game extends GameClient implements Serializable {
 	
 	public void actionPerformed(ActionEvent e)  {
 		try {
-			ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-			if(remoteServer.getRecentClientName() != this.name && cardsList != null && cardsList.size() > 0)
-				for(Card c : cardsList) {
-					updateCard(c);
+			if(connected) {
+				ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
+				if(remoteServer.getRecentClientName() != name && cardsList != null && cardsList.size() > 0)
+					for(Card c : cardsList) {
+						updateCard(c);
+					}
+			}
+			if(remoteServer.getConnections() > 1)
+				for(ClientInfo ci : remoteServer.getGameClients()) {
+					if(ci.getTag() != getTag()) {
+						System.out.println(ci.getTag());
+					}
 				}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -163,23 +172,6 @@ public class Game extends GameClient implements Serializable {
 	}
 	
 	public static void main(String[] args) {
-		/*Scanner s = new Scanner(System.in);
-		System.out.print("Please enter server IP: ");
-		String serverIP = s.nextLine();
-		Game gc = null;
-		
-		try {
-			gc = new Game(1, serverIP, 1099, Decks.RAVAGER);
-			
-			gc.startup(null);
-			
-			gc.connectToServer();
-			
-			
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		try {
 			new Game().startup(null);
 		} catch (RemoteException e) {

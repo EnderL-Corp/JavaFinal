@@ -19,51 +19,35 @@ public abstract class GameClient implements Serializable, ActionListener {
 	
 	private int tag = 2, serverPort = 1099;
 	
+	/**
+	 * Please do not change the value of remoteServer or  
+	 * set to null. It is protected for ease of access.
+	 */
 	protected GameServerInterface remoteServer;
 	
+	/**
+	 * Please access through clientInfo.
+	 */
 	protected String name, serverIP, serverName;
+	
+	/**
+	 * Please do not change the value of serverRegistry or  
+	 * set to null. It is protected for ease of access.
+	 */
 	protected static Registry serverRegistry;
 	
 	protected Timer timer;
-	protected ClientInfo clientInfo;
-	
-	/*protected Thread thread;
-	
-	private boolean running;
-	
-	private void startThread() {
-		if(running){
-			return;
-		}
-		else {
-			running = true;
-			thread = new Thread(this);
-			thread.start();
-		}
-	}
-	
-	public void run() {
-		while(running) {
-			
-		}
-	}*/
-	
-	/**
-	 * DO NOT USE
-	 */
-	public static void main(String[] args) {
-		/*try {
-			GameClient client = new GameClient(0, "127.0.0.1", 1099, null, null);
-			client.connectToServer();
-		} catch(Exception e) {
-			e.printStackTrace();	
-		}*/
-	}
+	protected ClientInfo myClient;
 	
 	public GameClient() throws RemoteException {
 		
 	}
 	
+	/**
+	 * Constructor for testing purposes.
+	 * @param refTag reference for this client
+	 * @throws RemoteException
+	 */
 	public GameClient(String refTag) throws RemoteException {
 		try {
 			if(refTag == null)
@@ -93,11 +77,11 @@ public abstract class GameClient implements Serializable, ActionListener {
 		this.tag = tag;
 		this.serverIP = serverIP;
 		serverName = "Server @" + serverIP;
-		clientInfo = new ClientInfo(tag, serverIP, serverPort);
+		myClient = new ClientInfo(tag, serverIP, serverPort, serverName);
 	}
 	
 	/**
-	 * 
+	 * Constructor for testing purposes
 	 * @param tag
 	 * @param serverIP IP of other client
 	 * @param port Port to connect to on other device
@@ -152,7 +136,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	
 	public void connectClientInfo() {
 		try {
-			remoteServer.connect(clientInfo);
+			remoteServer.connect(myClient);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -169,12 +153,13 @@ public abstract class GameClient implements Serializable, ActionListener {
 			
 			String[] b = remoteServer.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
-			
+			/*
 			ArrayList<ClientInfo> gcs = remoteServer.getGameClients();
 			if(gcs.get(0).getTag() == this.tag)
 				System.out.println("Other client: " + gcs.get(0).getTag());
 			else
 				System.out.println("Other client: " + gcs.get(1).getTag());
+			*/
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}	
@@ -186,5 +171,8 @@ public abstract class GameClient implements Serializable, ActionListener {
 	
 	public boolean isConnected() {
 		return connected;
+	}
+	public ClientInfo getClientInfo() {
+		return myClient;
 	}
 }
