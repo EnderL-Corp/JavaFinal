@@ -20,7 +20,7 @@ public class GameMenu extends JFrame implements ActionListener {
 	private GameMenu() {
 		super("Twisted Remix");
 			
-		setSize(1280,720);
+		setSize(1920,1080);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new FlowLayout());
