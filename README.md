@@ -18,3 +18,6 @@ For future:
      JoinGame.main() and enter the Host's LAN IP.
 The former is for testing. The latter is for the final.
 -Srihari Subramanian
+
+6/6/17
+Now it is all part of Main, and will soon be moved to Game with a host/join enum.
