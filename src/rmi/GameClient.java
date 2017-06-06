@@ -25,6 +25,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected static Registry serverRegistry;
 	
 	protected Timer timer;
+	protected ClientInfo clientInfo;
 	
 	/*protected Thread thread;
 	
@@ -91,7 +92,8 @@ public abstract class GameClient implements Serializable, ActionListener {
 		this.serverPort = serverPort;
 		this.tag = tag;
 		this.serverIP = serverIP;
-			serverName = "Server @" + serverIP;
+		serverName = "Server @" + serverIP;
+		clientInfo = new ClientInfo(tag, serverIP, serverPort);
 	}
 	
 	/**

@@ -25,7 +25,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements Seriali
 	
 	protected String name, otherIP, otherName;
 	private ArrayList<GameServerInterface> clients;
-	private ArrayList<ClientCommand> currentMoves;
+	//private ArrayList<ClientCommand> currentMoves;
 	
 	/*protected Thread thread;
 	
@@ -223,18 +223,18 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements Seriali
 	/**
 	 * @return the list of commands for the one that did not fire commandList
 	 */
-	public void receiveRecentCommands(String clientName, ArrayList<ClientCommand> commandList) {
-		currentMoves = commandList;
+	/*public void receiveRecentCommands(String clientName, ArrayList<ClientCommand> commandList) {
+		//currentMoves = commandList;
 		System.out.println("In " + name + ":");
 		for(int i = 0; i < commandList.size(); i++) {
-			/*if(this instanceof Game) {
+			if(this instanceof Game) {
 				commandList.get(i).performAction((Game)this);			//TODO return to this if doing p2p connection
-			}*/
+			}
 		}			
 		
 		//fireActionPerformed(new ActionEvent(gc, ActionEvent.ACTION_PERFORMED, null));
 	}
-	
+*/	
 	@Override
 	public String getRecentClientName() throws RemoteException {
 		// TODO Auto-generated method stub
