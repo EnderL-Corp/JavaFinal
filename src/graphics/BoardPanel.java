@@ -14,10 +14,11 @@ public class BoardPanel extends JPanel
       
 	  public void paintComponent(Graphics g)
 	  {
-			int height = 750;
-			int width = 750;
+			int height = 650;
+			int width = 650;
 		    int tileHeight = height / numTiles;
 		    int tileWidth = width / numTiles;
+		   
 		    
 		    boolean fill = false;
 		    	    
