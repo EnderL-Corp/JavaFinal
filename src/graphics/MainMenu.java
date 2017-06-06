@@ -52,7 +52,8 @@ public class MainMenu extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 String a = e.getActionCommand();
+		String writtenIP = ""; 
+		String a = e.getActionCommand();
 		 if(a.equals("host"))
 			System.out.println("game hosting");
 		 //launch server
@@ -61,7 +62,8 @@ public class MainMenu extends JFrame implements ActionListener {
 		 else if(a.equals("ip")){
 			 System.out.println("typing ip");
 			 join.setEnabled(true); 
-			 System.out.println(ip.getText());
+			 writtenIP = ip.getText();
+			 System.out.println(writtenIP);
 		 }
 		 else if(a.equals("join")){
 			 System.out.println("searching for host");
@@ -69,8 +71,7 @@ public class MainMenu extends JFrame implements ActionListener {
 		 }
 		 else if(a.equals("quit")){
 			 System.out.println("am quiting");
-		     setVisible(false);
-		     dispose();
+			  System.exit(0);
 	     }
 	}
 		
