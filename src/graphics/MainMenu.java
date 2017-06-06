@@ -58,18 +58,18 @@ public class MainMenu extends JFrame implements ActionListener {
 		String writtenIP = ""; 
 		String a = e.getActionCommand();
 		 if(a.equals("host")){
-			 System.out.println("game hosting");
-			 console = new JLabel(r +"/t game hosting");
+			 System.out.println("game hosting" + r);
+			 console = new JLabel(r +"\t game hosting");
 			 //launch server
 		     //launch game connecting to server via PC ip
 		 }
 		 else if(a.equals("ip")){
 			 System.out.println("typing ip");
-			 console = new JLabel(r +"/t typing ip"); 
+			 console = new JLabel(r +"\t typing ip"); 
 			 join.setEnabled(true); 
 			 writtenIP = ip.getText();
 			 System.out.println(writtenIP);
-             console = new JLabel(r +"/t writtenIP");
+             console = new JLabel(r +"\t " + writtenIP);
 		 }
 		 else if(a.equals("join")){
 			 System.out.println("searching for host");
@@ -80,6 +80,9 @@ public class MainMenu extends JFrame implements ActionListener {
 			 System.exit(0);
 	     }
 		 add(console);
+		 console.setVisible(false);
+		 console.setVisible(true);
+		 repaint();
 	}
 
 	
