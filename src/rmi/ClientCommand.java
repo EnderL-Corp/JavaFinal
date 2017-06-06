@@ -6,6 +6,7 @@ import cards.Card;
 import main.Game;
 
 public class ClientCommand implements Serializable{
+	private static final long serialVersionUID = -625879757800036729L;
 	private CommandEnum command;
 	private Card cardToChange;
 	

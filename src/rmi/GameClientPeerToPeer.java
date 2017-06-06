@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.net.UnknownHostException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -12,15 +11,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import cards.Card;
-import main.Game;
 
-public class GameClientPeerToPeer extends UnicastRemoteObject implements /*ActionListener,*/ Serializable, GameServerInterface {
-	//, Remote {//, Runnable {
-	
-	//TODO implement ActionListener for when the new set of commands is received.
-	
-	private static final long serialVersionUID = 1L;
-	
+public class GameClientPeerToPeer extends UnicastRemoteObject implements Serializable, GameServerInterface, ActionListener {
+	private static final long serialVersionUID = 2869608632508745852L;
 	protected boolean connected = false;
 	protected static Registry clientRegistry;
 	protected static Registry myRegistry;
@@ -258,5 +251,11 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements /*Actio
 	public ArrayList<Card> getRecentCardsList() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

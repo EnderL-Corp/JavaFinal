@@ -1,20 +1,11 @@
 package main;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serializable;
+
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import cards.Deck.Decks;
-import rmi.GameClientPeerToPeer;
 import rmi.GameServer;
-import rmi.GameClient;
 
 //This is a poorly named class
 public class Main {

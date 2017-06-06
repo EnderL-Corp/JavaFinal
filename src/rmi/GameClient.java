@@ -1,6 +1,5 @@
 package rmi;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.net.UnknownHostException;
@@ -12,15 +11,10 @@ import java.util.ArrayList;
 import cards.Card;
 import javax.swing.Timer;
 
-import main.Game;
+public abstract class GameClient implements Serializable, ActionListener {
+	
+	private static final long serialVersionUID = -6238246696085178736L;
 
-public abstract class GameClient /*extends UnicastRemoteObject */implements Serializable, ActionListener {
-	//, Remote {//, Runnable {
-	
-	//TODO implement ActionListener for when the new set of commands is received.
-	
-	private static final long serialVersionUID = 1L;
-	
 	protected boolean connected = false;
 	
 	private int tag = 2, serverPort = 1099;

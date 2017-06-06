@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +20,7 @@ import rmi.GameClient;
 
 public class Game extends GameClient implements Serializable {
 	
+	private static final long serialVersionUID = -188401400677518168L;
 	private ArrayList<Card> myCards;
 	
 	public Game() throws RemoteException{
