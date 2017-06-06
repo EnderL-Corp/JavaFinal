@@ -102,10 +102,10 @@ public class Game extends GameClient implements Serializable {
 		frame = new JFrame();
 		
 		frame.setTitle(name);
-		frame.setSize(1000,1000);
+		frame.setSize(650,675);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(b);
-
+        frame.setResizable(false);
 		frame.setVisible(true);
 		
 		right.addActionListener(new ActionListener() {
