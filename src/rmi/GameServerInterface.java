@@ -12,7 +12,7 @@ public interface GameServerInterface extends Remote, Serializable{
 	String getRecentClientName() throws RemoteException;
 	String getName() throws RemoteException;															//Tester method.
 	void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException;
-	void connect(GameClient gc) throws RemoteException;
+	void connect(ClientInfo gc) throws RemoteException;
 	ArrayList<Card> getRecentCardsList() throws RemoteException;
-	ArrayList<GameClient> getGameClients() throws RemoteException;
+	ArrayList<ClientInfo> getGameClients() throws RemoteException;
 }
