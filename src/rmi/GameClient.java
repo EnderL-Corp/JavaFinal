@@ -123,6 +123,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 			System.out.println("Looking for " + serverName);
 			remoteServer = (GameServerInterface) serverRegistry.lookup(serverName);
 			System.out.println("Connected to server.");
+			remoteServer.connect(this);
 			connected = true;
 			test();
 		} catch(Exception e) {
@@ -159,9 +160,19 @@ public abstract class GameClient implements Serializable, ActionListener {
 			
 			String[] b = remoteServer.getData(new String[]{"a1", "b2", "c3"});
 			System.out.println(b[0] + b[1]);
+			
+			ArrayList<GameClient> gcs = remoteServer.getGameClients();
+			if(gcs.get(0).getTag() == this.tag)
+				System.out.println("Other client: " + gcs.get(0).getTag());
+			else
+				System.out.println("Other client: " + gcs.get(1).getTag());
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}	
+	}
+	
+	public int getTag() {
+		return tag;
 	}
 	
 	public boolean isConnected() {
