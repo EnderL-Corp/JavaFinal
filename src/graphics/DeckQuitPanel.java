@@ -25,7 +25,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("am quiting");
+	   System.out.println("am quiting");
 	   System.exit(0);
 		
 	}

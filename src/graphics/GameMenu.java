@@ -13,9 +13,10 @@ import javax.swing.WindowConstants;
 
 public class GameMenu extends JFrame implements ActionListener {
 
+	private BoardPanel b;
 	private static final long serialVersionUID = 2L;
 	public static void main(String[] args) {
-		new GameMenu().setVisible(true);			
+		new GameMenu().setVisible(true);
 	}
 	private GameMenu() {
 		super("Twisted Remix");
@@ -24,10 +25,9 @@ public class GameMenu extends JFrame implements ActionListener {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new FlowLayout());
-		
-		
+		b = new BoardPanel();
+		add(b);
 	}
-	
 	
 	
 	
