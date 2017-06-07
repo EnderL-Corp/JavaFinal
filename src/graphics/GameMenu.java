@@ -24,7 +24,7 @@ public class GameMenu extends JFrame implements ActionListener {
 		setSize(1920,1080);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
-		setLayout(new FlowLayout());
+
 		b = new BoardPanel();
 		add(b);
 	}

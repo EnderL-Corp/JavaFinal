@@ -19,8 +19,7 @@ public class MainMenu extends JFrame implements ActionListener {
 	JButton host;
 	JButton join;
 	JButton quit;
-	JLabel console;
-	String r = "";
+
 	public static void main(String[] args) {
 		new MainMenu().setVisible(true);			
 	}
@@ -59,17 +58,14 @@ public class MainMenu extends JFrame implements ActionListener {
 		String a = e.getActionCommand();
 		 if(a.equals("host")){
 			 System.out.println("game hosting" + r);
-			 console = new JLabel(r +"\t game hosting");
 			 //launch server
 		     //launch game connecting to server via PC ip
 		 }
 		 else if(a.equals("ip")){
 			 System.out.println("typing ip");
-			 console = new JLabel(r +"\t typing ip"); 
 			 join.setEnabled(true); 
 			 writtenIP = ip.getText();
 			 System.out.println(writtenIP);
-             console = new JLabel(r +"\t " + writtenIP);
 		 }
 		 else if(a.equals("join")){
 			 System.out.println("searching for host");
@@ -79,10 +75,7 @@ public class MainMenu extends JFrame implements ActionListener {
 			 System.out.println("am quiting");
 			 System.exit(0);
 	     }
-		 add(console);
-		 console.setVisible(false);
-		 console.setVisible(true);
-		 repaint();
+		
 	}
 
 	

@@ -4,14 +4,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class StatsPanel  extends JPanel{
-	private JLabel yourHP;
-	private JLabel otherHP;
-	private JLabel cp;
-	private JLabel tp;
-	private JLabel ap;
+	JLabel yourHP;
+	JLabel otherHP;
+	JLabel cp;
+	JLabel tp;
+	JLabel ap;
 	
 	private StatsPanel() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//add a phat layout
 		yourHP = new JLabel("Your HP :" + commanerHP.get());
 		otherHP = new JLabel("Foe's HP :" + otherCommanerHP.get());
 		cp = new JLabel("Cp :" + commanercp.get());
