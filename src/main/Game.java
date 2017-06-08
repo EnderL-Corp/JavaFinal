@@ -28,6 +28,8 @@ public class Game extends GameClient implements Serializable {
 	
 	private static final long serialVersionUID = -188401400677518168L;
 	private ArrayList<Card> myCards;
+	private ArrayList<Card> graveyard;
+	public static Game game;
 	
 	public Game() throws RemoteException{
 		
@@ -78,7 +80,7 @@ public class Game extends GameClient implements Serializable {
 		return frame;
 	}
 	
-	// The following are tester methods for RMI
+	//TODO The following are tester methods for RMI
 	public void moveCommRight() {
 		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
 		frame.repaint();
@@ -159,6 +161,7 @@ public class Game extends GameClient implements Serializable {
 		});
 		
 	}
+	//TODO End Testing
 	
 	/**
 	 * Will update a card that has been changed in the other client.
@@ -200,7 +203,8 @@ public class Game extends GameClient implements Serializable {
 	
 	public static void main(String[] args) {
 		try {
-			new Game().startup(null);
+			game = new Game();
+			game.startup(null);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		};
