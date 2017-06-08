@@ -80,7 +80,7 @@ public class Game extends GameClient implements Serializable {
 		b = new BoardPanel();
 		
 		JFrame j = new JFrame();
-		j.setTitle(name);
+		j.setTitle(getName());
 		
 		JPanel p = new JPanel();
 		JButton right = new JButton("Move Right");
@@ -102,7 +102,7 @@ public class Game extends GameClient implements Serializable {
 		
 		frame = new JFrame();
 		
-		frame.setTitle(name);
+		frame.setTitle(getName());
 		frame.setSize(650,675);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.add(b);
@@ -155,13 +155,13 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if(connected) {
 				ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-				if(remoteServer.getRecentClientName() != name && cardsList != null && cardsList.size() > 0)
+				if(remoteServer.getRecentClientName() != getName() && cardsList != null && cardsList.size() > 0)
 					for(Card c : cardsList) {
 						updateCard(c);
 					}
 			}
 			if(remoteServer.getConnections() > 1)
-				for(ClientInfo ci : remoteServer.getGameClients()) {
+				for(GameClient ci : remoteServer.getGameClients()) {
 					if(ci.getTag() != getTag()) {
 						System.out.println(ci.getTag());
 					}

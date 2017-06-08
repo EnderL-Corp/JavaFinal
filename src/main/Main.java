@@ -61,7 +61,6 @@ public class Main {
 			gc.startup(null);
 			
 			gc.connectToServer();
-			gc.connectClientInfo();
 			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

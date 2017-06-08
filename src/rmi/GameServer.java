@@ -13,7 +13,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private static final long serialVersionUID = 1L;
 	
 	private int port, numConnections = 0;
-	private ArrayList<ClientInfo> clients;
+	private ArrayList<GameClient> clients = new ArrayList<GameClient>();
 	private ArrayList<Card> recentChanges;
 	
 	protected static Registry myRegistry;
@@ -83,7 +83,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	public void connect(ClientInfo l) throws RemoteException {
+	public void connect(GameClient l) throws RemoteException {
 		clients.add(l);
 		numConnections++;
 	}
@@ -106,7 +106,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public ArrayList<ClientInfo> getGameClients() throws RemoteException {
+	public ArrayList<GameClient> getGameClients() throws RemoteException {
 		return clients;
 	}
 	

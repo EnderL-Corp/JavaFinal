@@ -260,13 +260,7 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements Seriali
 	}
 
 	@Override
-	public void connect(ClientInfo gc) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public ArrayList<ClientInfo> getGameClients() throws RemoteException {
+	public ArrayList<GameClient> getGameClients() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -275,5 +269,11 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements Seriali
 	public int getConnections() throws RemoteException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void connect(GameClient gc) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 }

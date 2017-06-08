@@ -25,10 +25,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	 */
 	protected GameServerInterface remoteServer;
 	
-	/**
-	 * Please access through clientInfo.
-	 */
-	protected String name, serverIP, serverName;
+	private String name, serverIP, serverName;
 	
 	/**
 	 * Please do not change the value of serverRegistry or  
@@ -37,7 +34,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected static Registry serverRegistry;
 	
 	protected Timer timer;
-	protected ClientInfo myClient;
+	//protected ClientInfo myClient;
 	
 	public GameClient() throws RemoteException {
 		
@@ -77,7 +74,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 		this.tag = tag;
 		this.serverIP = serverIP;
 		serverName = "Server @" + serverIP;
-		myClient = new ClientInfo(tag, serverIP, serverPort, serverName);
+		//myClient = new ClientInfo(tag, serverIP, serverPort, serverName);
 	}
 	
 	/**
@@ -108,6 +105,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 			serverRegistry = LocateRegistry.getRegistry(serverIP, serverPort);
 			System.out.println("Looking for " + serverName);
 			remoteServer = (GameServerInterface) serverRegistry.lookup(serverName);
+			remoteServer.connect(this);
 			System.out.println("Connected to server.");
 			connected = true;
 			test();
@@ -130,14 +128,6 @@ public abstract class GameClient implements Serializable, ActionListener {
 		try {
 			remoteServer.receiveRecentCardChanges(name, al);
 		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void connectClientInfo() {
-		try {
-			remoteServer.connect(myClient);
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -172,7 +162,15 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public boolean isConnected() {
 		return connected;
 	}
+	/*
 	public ClientInfo getClientInfo() {
 		return myClient;
+	}
+	*/
+	public String getName() {
+		return name;
+	}
+	public String getIP() {
+		return serverIP;
 	}
 }
