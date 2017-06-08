@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 import cards.Card;
 
+/**
+ * An RMI Server that allows for a connection between multiple GameClients.
+ * @author Srihari Subramanian
+ *
+ */
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static final long serialVersionUID = 1L;
 	
@@ -26,7 +31,14 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		super();
 	}	
 	
-	public GameServer(String serverName, int port, String ip) throws RemoteException{
+	/**
+	 * Common constructor for any GameServer.
+	 * @param serverName The name of this server
+	 * @param port The port that this GameServer is running at
+	 * @param ip The ip of the computer at which this server is running.
+	 * @throws RemoteException
+	 */
+	public GameServer(String serverName, int port, String ip) throws RemoteException {	//TODO serverName must be deleted.
 		name = "Server @" + ip;
 		this.port = port;
 		this.myIP = ip;
@@ -56,14 +68,17 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			e.printStackTrace();
 		}
 		
-		gs.createMyRegistry(1099);
+		gs.createMyRegistry();
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public void createMyRegistry(int port) {
+	/**
+	 * Will create or use the registry at which the GameServer is running.
+	 */
+	public void createMyRegistry() {
 		try {
 			myRegistry = LocateRegistry.getRegistry(myIP, port);
 			System.out.println("Registry present, connected.");

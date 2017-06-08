@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import cards.Card;
 import javax.swing.Timer;
 
+/**
+ * Abstract class representing any GameClient to a GameServer.
+ * @author Srihari Subramanian
+ *
+ */
 public abstract class GameClient implements Serializable, ActionListener {
 	
 	private static final long serialVersionUID = -6238246696085178736L;
@@ -99,6 +104,10 @@ public abstract class GameClient implements Serializable, ActionListener {
 		System.out.println("Name:" + name + "   ServerName:" + serverName);
 	}
 	
+	/**
+	 * Method used to connect this GameClient to a host GameServer.  
+	 * @return whether there was a successful connection or not.
+	 */
 	public boolean connectToServer() {
 		try {
 			System.out.println("Server: " + serverName);
@@ -121,6 +130,10 @@ public abstract class GameClient implements Serializable, ActionListener {
 		return connected;
 	}
 	
+	/**
+	 * Will provide the GameServer with the card that is changed.
+	 * @param cardChanged The card to send over the network
+	 */
 	public void sendOverNetwork(Card cardChanged) {
 		ArrayList<Card> al = new ArrayList<Card>();
 		al.add(cardChanged);
@@ -132,6 +145,9 @@ public abstract class GameClient implements Serializable, ActionListener {
 		}
 	}
 	
+	/**
+	 * Temporary method used to test the connection, as the name suggests.
+	 */
 	public void test() {
 		String a;
 		try {

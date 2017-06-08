@@ -37,7 +37,7 @@ public class Main {
 			gs = new GameServer("server", 1099, serverIP);
 			gc = new Game(0, serverIP, 1099, Decks.RAVAGER);
 			
-			gs.createMyRegistry(1099);
+			gs.createMyRegistry();
 			gc.startup(null);
 			
 			gc.connectToServer();

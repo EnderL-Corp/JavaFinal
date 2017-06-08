@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 import cards.Card;
 
+/**
+ * Class for peer to peer connection. Must be deleted.
+ * @author Srihari Subramanian
+ *
+ */
 public class GameClientPeerToPeer extends UnicastRemoteObject implements Serializable, GameServerInterface, ActionListener {
 	private static final long serialVersionUID = 2869608632508745852L;
 	protected boolean connected = false;

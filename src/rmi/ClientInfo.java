@@ -2,6 +2,7 @@ package rmi;
 
 import java.io.Serializable;
 
+//TODO Delete unused class (may be used, but truly unneeded).
 public class ClientInfo implements Serializable{
 	private static final long serialVersionUID = 675766158362600535L;
 	private int tag, port;

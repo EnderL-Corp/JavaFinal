@@ -19,6 +19,11 @@ import graphics.BoardPanel;
 import rmi.ClientInfo;
 import rmi.GameClient;
 
+/**
+ * Class representing the physical card game. It is a GameClient.
+ * @author Srihari Subramanian
+ *
+ */
 public class Game extends GameClient implements Serializable {
 	
 	private static final long serialVersionUID = -188401400677518168L;
@@ -41,10 +46,25 @@ public class Game extends GameClient implements Serializable {
 		super(tag, serverIP, refTag);
 	}
 	
-	public Game(int i, String otherIP, int j) throws RemoteException {
-		super(i, otherIP, j);
+	/**
+	 * Constructor for a simple connection (supporting multiple computers)
+	 * @param tag Tag of this GameClient
+	 * @param serverIP IP of the server
+	 * @param serverPort Port at which the server is running
+	 * @throws RemoteException
+	 */
+	public Game(int tag, String serverIP, int serverPort) throws RemoteException {
+		super(tag, serverIP, serverPort);
 	}
 	
+	/**
+	 * Constructor to be used for actual gameplay, involving a deckEnum for the player's class.
+	 * @param tag Tag of this GameClient
+	 * @param serverIP IP of the server
+	 * @param serverPort Port at which the server is running
+	 * @param deckEnum The player's class
+	 * @throws RemoteException
+	 */
 	public Game(int tag, String serverIP, int serverPort, Decks deckEnum) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		myCards = new Deck(deckEnum).getDeck();
@@ -140,6 +160,13 @@ public class Game extends GameClient implements Serializable {
 		
 	}
 	
+	/**
+	 * Will update a card that has been changed in the other client.
+	 * Only the actionPerformed() method will ever have to interact with this.
+	 * @param cardToChange The card that has been changed and must be updated
+	 * @return true if the card has been successfully updated (it is in the list of cards
+	 * 		   myCards, and is changed appropriately).
+	 */
 	public boolean updateCard(Card cardToChange) {
 		for(Card c : myCards) {
 			if(c instanceof Entity && ((Entity)c).getTag() == ((Entity)cardToChange).getTag()) {
