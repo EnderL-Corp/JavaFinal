@@ -15,7 +15,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	private DeckQuitPanel(){
 		setLayout(new FlowLayout());
 		
-		deckSize = new JLabel(24 + " / 26");
+		deckSize = new JLabel(deck.getSize() + " / 26");
 		add(deckSize);
 				
 		quit = new JButton("Quit Game");
@@ -25,8 +25,13 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("am quiting");
+	   System.out.println("am quiting");
 	   System.exit(0);
-		
 	}
+	 public void deckRefresh(){
+		 deckSize.setText(deck.getSize() + " / 26");
+		 deckSize.setVisible (false);
+		 deckSize.setVisible (true);
+	 }
+	
 }
