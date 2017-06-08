@@ -1,5 +1,7 @@
 package cards;
 
+import main.Game;
+
 public class Commander extends Entity
 {
 	private int classType;
@@ -17,17 +19,23 @@ public class Commander extends Entity
 	}
 	
 	public boolean canDeflect()
-	{ return false; }
+	{ 
+		return false; 
+	}
 	
 	public boolean canMirror()
-	{ return false; }
+	{ 
+		return false; 
+	}
 	
 	public boolean[] getAbilities()
-	{ return null; }
+	{ 
+		return null; 
+	}
 	
 	public void kill()
 	{
-		//end game
+		Game.game.endGame(this);
 	}
 	
 }

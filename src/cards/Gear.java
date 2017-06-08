@@ -1,5 +1,7 @@
 package cards;
 
+import main.Game;
+
 public class Gear extends Structure
 {
 	protected String ability;
@@ -12,7 +14,7 @@ public class Gear extends Structure
 	
 	public void effect(Entity effected)
 	{
-		//does effect to effected
-		//goes to graveyard
+		//effect
+		Game.game.addToGraveyard(this);
 	}
 }

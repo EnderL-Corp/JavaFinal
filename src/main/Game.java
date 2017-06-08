@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import cards.Card;
+import cards.Commander;
 import cards.Deck;
 import cards.Deck.Decks;
 import cards.Entity;
@@ -28,7 +29,7 @@ public class Game extends GameClient implements Serializable {
 	
 	private static final long serialVersionUID = -188401400677518168L;
 	private ArrayList<Card> myCards;
-	private ArrayList<Card> graveyard;
+	private static ArrayList<Card> graveyard;
 	public static Game game;
 	
 	public Game() throws RemoteException{
@@ -200,6 +201,17 @@ public class Game extends GameClient implements Serializable {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void addToGraveyard(Card card)
+	{
+		graveyard.add(card);
+	}
+	
+	public void endGame(Commander loser)
+	{
+		//end the game
+	}
+
 	
 	public static void main(String[] args) {
 		try {
