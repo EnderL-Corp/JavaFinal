@@ -13,6 +13,7 @@ public class AmpPanel extends JPanel implements ActionListener {
 	private JButton Amp4;
 	private JButton Amp5;
 	private JButton Sac;
+	private boolean sacActive = false;
 	
 	private AmpPanel(){
 	//add a phat layout
@@ -65,11 +66,39 @@ public class AmpPanel extends JPanel implements ActionListener {
 			 Amp5.setText(ampSlot.name5);
 			 Amp5.setEnabled(false);
 		 }
+		 else if(sacActive && a.equals("Amp1") ){
+			//removes amp from amp array and places it in graveyard
+			 Amp1.setText("open");
+			 sacActive = false;
+		 }
+		 else if(sacActive && a.equals("Amp2")){
+			//removes amp from amp array and places it in graveyard
+			 Amp2.setText("open");
+			 sacActive = false;
+		 }
+		 else if(sacActive && a.equals("Amp3")){
+			//removes amp from amp array and places it in graveyard
+			 Amp3.setText("open");
+			 sacActive = false;
+		 }
+		 else if(sacActive && a.equals("Amp4")){
+			//removes amp from amp array and places it in graveyard
+			 Amp4.setText("open");
+			 sacActive = false;
+		 }
+		 else if(sacActive && a.equals("Amp5")){
+			//removes amp from amp array and places it in graveyard
+			 Amp5.setText("open");
+			 sacActive = false;
+		 }
 		 else if(a.equals("Sac")){}
 	if((Amp1.getText() != "Amp1") && (Amp2.getText() != "Amp2") && (Amp3.getText() != "Amp3") && (Amp5.getText() != "Amp5") && (Amp4.getText() != "Amp4")){
-		//amp arry slots 0 and 1 are empied
 		 Amp1.setEnabled(true);
 		 Amp2.setEnabled(true);
+		 Amp3.setEnabled(true);
+		 Amp4.setEnabled(true);
+		 Amp5.setEnabled(true);
+		 sacActive = true;
 		
 	}
 		
