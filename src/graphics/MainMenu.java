@@ -1,4 +1,5 @@
 package graphics;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,27 +12,26 @@ import javax.swing.WindowConstants;
 
 import main.Game;
 
-
 public class MainMenu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	JTextField  ip;
+	JTextField ip;
 	JButton host;
 	JButton join;
 	JButton quit;
 
 	public static void main(String[] args) {
-		new MainMenu().setVisible(true);			
+		new MainMenu().setVisible(true);
 	}
-	
+
 	private MainMenu() {
 		super("Main Menu");
-			
-		setSize(1920,1080);
+
+		setSize(1920, 1080);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new FlowLayout());
-		
+
 		ip = new JTextField("Enter IP", 30);
 		ip.setActionCommand("ip");
 		ip.addActionListener(this);
@@ -45,39 +45,34 @@ public class MainMenu extends JFrame implements ActionListener {
 		quit = new JButton("Quit Game");
 		quit.setActionCommand("quit");
 		quit.addActionListener(this);
-			
+
 		add(host);
 		add(join);
 		add(ip);
 		add(quit);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String writtenIP = ""; 
+		String writtenIP = "";
 		String a = e.getActionCommand();
-		 if(a.equals("host")){
-			 System.out.println("game hosting" + r);
-			 //launch server
-		     //launch game connecting to server via PC ip
-		 }
-		 else if(a.equals("ip")){
-			 System.out.println("typing ip");
-			 join.setEnabled(true); 
-			 writtenIP = ip.getText();
-			 System.out.println(writtenIP);
-		 }
-		 else if(a.equals("join")){
-			 System.out.println("searching for host");
-			 //launch game searching for specified ip
-		 }
-		 else if(a.equals("quit")){
-			 System.out.println("am quiting");
-			 System.exit(0);
-	     }
-		
+		if (a.equals("host")) {
+			System.out.println("game hosting" + r);
+			// launch server
+			// launch game connecting to server via PC ip
+		} else if (a.equals("ip")) {
+			System.out.println("typing ip");
+			join.setEnabled(true);
+			writtenIP = ip.getText();
+			System.out.println(writtenIP);
+		} else if (a.equals("join")) {
+			System.out.println("searching for host");
+			// launch game searching for specified ip
+		} else if (a.equals("quit")) {
+			System.out.println("am quiting");
+			System.exit(0);
+		}
+
 	}
 
-	
-		
 }
