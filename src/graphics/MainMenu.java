@@ -57,7 +57,7 @@ public class MainMenu extends JFrame implements ActionListener {
 		String writtenIP = "";
 		String a = e.getActionCommand();
 		if (a.equals("host")) {
-			System.out.println("game hosting" + r);
+			System.out.println("game hosting");
 			// launch server
 			// launch game connecting to server via PC ip
 		} else if (a.equals("ip")) {

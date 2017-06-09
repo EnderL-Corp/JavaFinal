@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import graphics.AmpPanel;
+import graphics.BoardPanel;
 import graphics.CommandLog;
 
 public class GameMenu {
@@ -46,5 +48,13 @@ public class GameMenu {
 		CommandLog log = new CommandLog();
 		log.setBounds(25, 966, 1829, 66);
 		frame.getContentPane().add(log);
+		
+		BoardPanel board = new BoardPanel();
+		board.setBounds(593, 32, 646, 646);
+		frame.getContentPane().add(board);
+		
+		AmpPanel amps = new AmpPanel();
+		amps.setBounds(40, 803, 400, 150);
+		frame.getContentPane().add(amps);
 	}
 }
