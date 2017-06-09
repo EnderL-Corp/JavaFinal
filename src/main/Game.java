@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import cards.Card;
+import cards.Commander;
 import cards.Deck;
 import cards.Deck.Decks;
 import cards.Entity;
@@ -28,6 +29,8 @@ public class Game extends GameClient implements Serializable {
 	
 	private static final long serialVersionUID = -188401400677518168L;
 	private ArrayList<Card> myCards;
+	private static ArrayList<Card> graveyard;
+	public static Game game;
 	
 	public Game() throws RemoteException{
 		
@@ -78,7 +81,7 @@ public class Game extends GameClient implements Serializable {
 		return frame;
 	}
 	
-	// The following are tester methods for RMI
+	//TODO The following are tester methods for RMI
 	public void moveCommRight() {
 		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
 		frame.repaint();
@@ -159,6 +162,7 @@ public class Game extends GameClient implements Serializable {
 		});
 		
 	}
+	//TODO End Testing
 	
 	/**
 	 * Will update a card that has been changed in the other client.
@@ -198,9 +202,21 @@ public class Game extends GameClient implements Serializable {
 		}
 	}
 	
+	public void addToGraveyard(Card card)
+	{
+		graveyard.add(card);
+	}
+	
+	public void endGame(Commander loser)
+	{
+		//end the game
+	}
+
+	
 	public static void main(String[] args) {
 		try {
-			new Game().startup(null);
+			game = new Game();
+			game.startup(null);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		};

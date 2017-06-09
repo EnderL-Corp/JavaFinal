@@ -12,26 +12,29 @@ import javax.swing.JTextField;
 public class DeckQuitPanel extends JPanel implements ActionListener {
 	JButton quit;
 	JLabel deckSize;
-	private DeckQuitPanel(){
+
+	private DeckQuitPanel() {
 		setLayout(new FlowLayout());
-		
+
 		deckSize = new JLabel(deck.getSize() + " / 26");
 		add(deckSize);
-				
+
 		quit = new JButton("Quit Game");
 		quit.setActionCommand("quit");
 		quit.addActionListener(this);
 		add(quit);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	   System.out.println("am quiting");
-	   System.exit(0);
+		System.out.println("am quiting");
+		System.exit(0);
 	}
-	 public void deckRefresh(){
-		 deckSize.setText(deck.getSize() + " / 26");
-		 deckSize.setVisible (false);
-		 deckSize.setVisible (true);
-	 }
-	
+
+	public void deckRefresh() {
+		deckSize.setText(deck.getSize() + " / 26");
+		deckSize.setVisible(false);
+		deckSize.setVisible(true);
+	}
+
 }
