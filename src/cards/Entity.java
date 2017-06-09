@@ -225,6 +225,8 @@ public abstract class Entity extends Card
 	
 	public abstract boolean[] getAbilities();
 	
+	public abstract boolean hasAbility(int num);
+	
 	public abstract boolean canDeflect();
 	
 	public abstract boolean canMirror();
@@ -251,12 +253,11 @@ public abstract class Entity extends Card
 		defender.modify(0, -attack);
 	}
 	
-	public abstract void attack();
+	public abstract void attack(Entity defender);
 	
 	public int getCurrentAttack() {
 		return currentAttack;
 	}
-	
 	
 	public int getCurrentHealth() {
 		return currentHealth;
@@ -281,5 +282,12 @@ public abstract class Entity extends Card
 	public int getTag() {
 		return TAG;
 	}
-
+	
+	public int getPosX() {
+		return xCoordinate;
+	}
+	
+	public int getPosY() {
+		return yCoordinate;
+	}
 }

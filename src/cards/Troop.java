@@ -77,8 +77,13 @@ public class Troop extends Entity
 		}
 		return false;
 	}
-		
-	public void attack()
+	
+	public boolean hasAbility(int num)
+	{
+		return abilities[num];
+	}
+	
+	public void attack(Entity defender)
 	{
 		//checks everything around
 		//checks own abilites
@@ -93,7 +98,6 @@ public class Troop extends Entity
 	public int getCurrentApCost() {
 		return currentApCost;
 	}
-	
 
 	public boolean[] getAbilities() {
 		return abilities;
