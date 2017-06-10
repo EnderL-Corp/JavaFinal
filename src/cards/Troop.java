@@ -1,5 +1,7 @@
 package cards;
 
+import main.Game;
+
 public class Troop extends Entity
 {
 	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void}
@@ -67,14 +69,36 @@ public class Troop extends Entity
 	
 	public void attack(Entity defender)
 	{
-		//checks everything around
-		//checks own abilites
-		//dealDamage(defender) to correct num of entities
+		boolean canAttack = true;
+		for(int i = xCoordinate - 1; i < 2; i++)
+		{
+			for(int j = yCoordinate - 1; j < 2; j++)
+			{
+				if((i != xCoordinate && j != yCoordinate) && Game.board[xCoordinate][yCoordinate].hasAbility(0) == true)
+				{				
+					canAttack = false;
+				}
+			}
+		}
+		
+		//has to check own abilities first
+		
+		if(canAttack = false)
+		{
+			if(defender.hasAbility(0))
+			{
+				dealDamage(defender);
+			}
+		}
+		else
+		{
+			dealDamage(defender);
+		}
 	}
 	
 	public void kill() 
 	{
-		//Send to discard pile
+		Game.game.addToGraveyard(this);
 	}
 	
 	public int getCurrentApCost() {
