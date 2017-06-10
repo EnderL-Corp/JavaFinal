@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
 	private int numTiles = 15;
-	private int commanderPosX, commanderPosY;
+	private int commanderPosX = 7, commanderPosY = 2;
 	private BoardButton[][] buttons = {
 			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
 					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
@@ -217,7 +217,8 @@ public class BoardPanel extends JPanel {
 	}
 
 	public void changeCommanderPos(int x, int y) {
-		if (x < 0 || y < 0 || x > numTiles - 1 || y > numTiles - 1)
+		if ((x < 0 || y < 0 || x > numTiles - 1 || y > numTiles - 1) //if out of bounds
+				|| (buttons[x][y]).getBackground() == Color.BLACK) // if "void"
 			return;
 		commanderPosX = x;
 		commanderPosY = y;
