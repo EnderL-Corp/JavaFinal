@@ -33,14 +33,12 @@ public abstract class Entity extends Card
 	
 	public abstract boolean canMirror();
 	
-	public abstract void kill();
+	public abstract void kill(Entity killed);
 
 	public void modify(int hp, int atk)
 	{
+		currentHealth += hp;
 		currentAttack += atk;
-		currentHealth += hp;	
-		if(getCurrentHealth() <= 0)
-			kill();
 	}
 	
 	public void dealDamage(Entity defender)
@@ -52,7 +50,9 @@ public abstract class Entity extends Card
 			if(defender.canDeflect())
 				return;
 		}
-		defender.modify(0, -attack);
+		defender.currentHealth -= this.currentAttack;
+		if(defender.currentHealth <= 0)
+			kill(defender);
 	}
 	
 	public abstract void attack(Entity defender);

@@ -4,7 +4,7 @@ import main.Game;
 
 public class Troop extends Entity
 {
-	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void}
+	protected boolean[] abilities = new boolean[6]; //in this order: {provoke, deflect, blast, range, mirror, void}
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 
@@ -14,8 +14,13 @@ public class Troop extends Entity
 		
 		if(abilities[1] == true)
 			deflectTime = true;
+		else
+			deflectTime = false;
+		
 		if(abilities[4] == true)
 			mirrorTime = true;
+		else
+			mirrorTime = false;
 		
 		currentApCost = apCost;
 	}
@@ -74,7 +79,7 @@ public class Troop extends Entity
 		{
 			for(int j = yCoordinate - 1; j < 2; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.board[xCoordinate][yCoordinate].hasAbility(0) == true)
+				if((i != xCoordinate && j != yCoordinate) && Game.board[i][j].hasAbility(0) == true)
 				{				
 					canAttack = false;
 				}
@@ -83,7 +88,7 @@ public class Troop extends Entity
 		
 		//has to check own abilities first
 		
-		if(canAttack = false)
+		if(canAttack == false)
 		{
 			if(defender.hasAbility(0))
 			{
@@ -96,9 +101,10 @@ public class Troop extends Entity
 		}
 	}
 	
-	public void kill() 
+	public void kill(Entity killed) 
 	{
-		Game.game.addToGraveyard(this);
+		Game.game.addToGraveyard(killed);
+		Game.board[killed.xCoordinate][killed.yCoordinate] = null;
 	}
 	
 	public int getCurrentApCost() {

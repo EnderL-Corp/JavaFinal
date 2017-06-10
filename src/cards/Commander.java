@@ -59,9 +59,9 @@ public class Commander extends Entity
 		return false;
 	}
 	
-	public void kill()
+	public void kill(Entity killed)
 	{
-		Game.game.endGame(this);
+		Game.game.endGame((Commander)killed);
 	}
 	
 }

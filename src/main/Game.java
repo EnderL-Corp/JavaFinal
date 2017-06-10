@@ -30,9 +30,9 @@ public class Game extends GameClient implements Serializable {
 
 	private static final long serialVersionUID = -188401400677518168L;
 	private ArrayList<Card> myCards;
-	private static ArrayList<Card> graveyard;
+	private static ArrayList<Card> graveyard = new ArrayList<Card>();
 	public static Game game;
-	public static Entity[][] board;
+	public static Entity[][] board = new Entity[15][15];
 	
 	public Game() throws RemoteException {
 

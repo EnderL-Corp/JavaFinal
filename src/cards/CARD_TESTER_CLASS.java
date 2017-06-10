@@ -11,20 +11,22 @@ public class CARD_TESTER_CLASS
 			tagNum++;
 			Entity troop2 = new Dragon(3, 4, tagNum, null);
 			tagNum++;
-			Entity troop3 = new Mech(3, 3, tagNum, TroopEnum.DUMMY);
+			Entity troop3 = new Android(3, 3, tagNum, TroopEnum.DUMMY);
 			
 			Game.board[troop1.getPosX()][troop1.getPosY()] = troop1;
 			Game.board[troop2.getPosX()][troop2.getPosY()] = troop2;
 			Game.board[troop3.getPosX()][troop3.getPosY()] = troop3;
 			
-			System.out.println(troop1.getCurrentHealth() + " " + troop3.getCurrentHealth());
+			System.out.println(troop1.getCurrentHealth());
 
 			troop2.attack(troop1);
 			
-			System.out.println(troop1.getCurrentHealth() + " " + troop3.getCurrentHealth());
+			System.out.println(troop1.getCurrentHealth());
+			
+			System.out.println(troop3.getCurrentHealth());
 			
 			troop2.attack(troop3);
 			
-			System.out.println(troop1.getCurrentHealth() + " " + troop3.getCurrentHealth());
+			System.out.println(troop3.getCurrentHealth());
 		}
 }
