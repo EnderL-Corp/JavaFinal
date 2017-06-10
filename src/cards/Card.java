@@ -13,6 +13,11 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 		description = desc;
 	}
 	
+	public Card()
+	{
+		return;
+	}
+	
 	public String getName()
 	{
 		return name;

@@ -6,28 +6,10 @@ public class Troop extends Entity
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 
-	public Troop(String troopType, TroopEnum enumName, int startPosX, int startPosY, int tag, boolean[] abs) 
+	public Troop(int tag) 
 	{
-		super(troopType, enumName, startPosX, startPosY, tag);
-		abilities = abs;
+		super(tag);
 		
-		if(enumName == TroopEnum.BLASTER)
-		{
-			abs[2] = true;
-		}
-		else if(enumName == TroopEnum.DEFLECTOR)
-		{
-			abs[1] = true;
-		}
-		else if(enumName == TroopEnum.DUMMY)
-		{
-			abs[0] = true;
-		}
-		else if(enumName == TroopEnum.RANGER)
-		{
-			abs[3] = true;
-		}
-
 		if(abilities[1] == true)
 			deflectTime = true;
 		if(abilities[4] == true)

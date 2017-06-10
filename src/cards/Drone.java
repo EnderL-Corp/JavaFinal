@@ -4,7 +4,35 @@ public class Drone extends Troop
 {
 	public Drone(int posX, int posY, int tag, TroopEnum enumName)
 	{
-		super("Drone", enumName, posX, posY, tag, new boolean[]{false, false, false, false, false, false});
+		super(tag);
+		if(enumName == TroopEnum.X)
+		{
+			apCost = 1;
+			cpCost = 1;
+			attack = 1;
+			health = 2;
+			currentAttack = attack;
+			currentHealth = health;
+			xCoordinate = posX;
+			yCoordinate = posY;
+			abilities = new boolean[]{false, false, false, false, false, false};
+			name = "Drone<>";
+			description = "Santi has to do this later";
+		}
+		else
+		{
+			apCost = 1;
+			cpCost = 1;
+			attack = 1;
+			health = 1;
+			currentAttack = attack;
+			currentHealth = health;
+			xCoordinate = posX;
+			yCoordinate = posY;
+			abilities = new boolean[]{false, false, false, false, false, false};
+			name = "Drone";
+			description = "Santi has to do this later";
+		}
 	}
 }
 
