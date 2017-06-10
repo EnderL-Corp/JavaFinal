@@ -244,4 +244,21 @@ public class Game extends GameClient implements Serializable {
 		}
 		;
 	}
+	
+	public static String toStringMethod()
+			{
+				String string = "";
+				for(int i = 0; i < board.length; i++)
+				{
+					for(int j = 0; j < board.length; j++)
+					{
+						if(board[i][j] != null)
+							string += board[i][j].getName() + "   "; 
+						else
+							string += "null\t\t";
+ 					}
+					string += "\n";
+				}
+				return string;
+			}
 }

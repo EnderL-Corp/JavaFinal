@@ -14,7 +14,7 @@ public class Dragon extends Troop
 		currentHealth = health;
 		xCoordinate = posX;
 		yCoordinate = posY;
-		abilities = new boolean[]{false, false, true, false, false, false};
+		abilities[2] = true;
 		name = "Dragon";
 		description = "Santi has to do this later";
 	}

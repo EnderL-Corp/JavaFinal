@@ -16,7 +16,7 @@ public class Android extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, true, false, false, false};
+			abilities[2] = true;
 			name = "Blaster Android";
 			description = "Santi has to do this later";
 		}
@@ -30,7 +30,7 @@ public class Android extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, true, false, false, false, false};
+			abilities[1] = true;
 			name = "Deflector Android";
 			description = "Santi has to do this later";
 		}
@@ -44,7 +44,7 @@ public class Android extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{true, false, false, false, false, false};
+			abilities[0] = true;
 			name = "Dummy Android";
 			description = "Santi has to do this later";
 		}
@@ -58,7 +58,6 @@ public class Android extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, false, false, false, false};
 			name = "Android";
 			description = "Santi has to do this later";
 		}

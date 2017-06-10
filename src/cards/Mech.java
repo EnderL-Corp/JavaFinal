@@ -16,7 +16,7 @@ public class Mech extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, true, false, false, false};
+			abilities[2] = true; 
 			name = "Blaster Mech";
 			description = "Santi has to do this later";
 		}
@@ -30,7 +30,7 @@ public class Mech extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, false, true, false, false};
+			abilities[3] = true; 
 			name = "Ranger Mech";
 			description = "Santi has to do this later";
 		}
@@ -44,7 +44,7 @@ public class Mech extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{true, false, false, false, false, false};
+			abilities[0] = true;
 			name = "Dummy Mech";
 			description = "Santi has to do this later";
 		}
@@ -58,7 +58,6 @@ public class Mech extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, false, false, false, false};
 			name = "Mech";
 			description = "Santi has to do this later";
 		}

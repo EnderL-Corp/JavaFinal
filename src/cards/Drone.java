@@ -15,7 +15,6 @@ public class Drone extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, false, false, false, false};
 			name = "Drone<>";
 			description = "Santi has to do this later";
 		}
@@ -29,7 +28,6 @@ public class Drone extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			abilities = new boolean[]{false, false, false, false, false, false};
 			name = "Drone";
 			description = "Santi has to do this later";
 		}

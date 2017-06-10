@@ -28,5 +28,11 @@ public class CARD_TESTER_CLASS
 			troop2.attack(troop3);
 			
 			System.out.println(troop3.getCurrentHealth());
+			
+			System.out.println(troop2.getCurrentHealth());
+			
+			troop3.attack(troop2);
+			
+			System.out.println(troop3.getCurrentHealth());
 		}
 }
