@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
@@ -108,10 +109,10 @@ public class BoardPanel extends JPanel {
 
 	public BoardPanel() {
 		setLayout(new GridLayout());
-		start();
+		init();
 	}
 
-	public void start() {
+	public void init() {
 		int height = 650;
 		int width = 650;
 		int tileHeight = height / numTiles;
@@ -195,16 +196,19 @@ public class BoardPanel extends JPanel {
 								&& (j == 5 || j == 6 || j == 7 || j == numTiles - 7 || j == numTiles - 6))) {
 					BoardButton bb = buttons[i][j];
 					bb.setBackground(Color.BLACK);
+					bb.setIcon(null);
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				} else {
 					BoardButton bb = buttons[i][j];
 					bb.setBackground(Color.WHITE);
+					bb.setIcon(null);
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 
 				if (j == commanderPosX && i == commanderPosY) {
 					BoardButton bb = buttons[i][j];
 					bb.setBackground(Color.RED);
+					bb.setIcon(new ImageIcon("Sprites/TestSprite.png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}
