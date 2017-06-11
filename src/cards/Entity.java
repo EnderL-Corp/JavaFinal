@@ -1,5 +1,7 @@
 package cards;
 
+import main.Game;
+
 public abstract class Entity extends Card
 {
 	protected int apCost, cpCost, attack, health, currentAttack, currentHealth, xCoordinate, yCoordinate;
@@ -91,5 +93,16 @@ public abstract class Entity extends Card
 	
 	public int getPosY() {
 		return yCoordinate;
+	}
+
+	public static int move(Entity placed, int ap, int posX, int posY) 
+	{
+		if(ap >= placed.getApCost() && Math.abs(posX - placed.getPosX()) <= 1 && Math.abs(posY - placed.getPosY()) <= 1 && Game.board[posX][posY] == null)
+		{
+			Game.board[placed.getPosX()][placed.getPosY()] = null;
+			Game.board[posX][posY] = placed;
+			return ap - placed.getApCost();
+		}
+		return ap;
 	}
 }

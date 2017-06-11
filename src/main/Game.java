@@ -35,8 +35,13 @@ public class Game extends GameClient implements Serializable {
 	public static Game game;
 	public static Entity[][] board = new Entity[15][15];
 
-	public Commander commander = new Commander("Jimmy", "He was a good boy", 1, 7, 2, -1);
-	public Deck deck = new Deck(commander.getClassType());
+	public Commander commander = new Commander("Jimmy", "He was a good boy", 1, 7, 2, -1);      // -\
+	public Deck deck = new Deck(commander.getClassType());										//   \
+																								//   /
+	public int ap; 																				//   > WE need a constructor for this stuff
+	public int cp;																				//   \
+	public int tp;																				//   /
+	public int territory; 																		// -/
 	
 	public Game() throws RemoteException {
 
