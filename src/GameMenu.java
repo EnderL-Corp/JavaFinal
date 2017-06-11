@@ -1,12 +1,14 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import graphics.AmpPanel;
 import graphics.BoardPanel;
 import graphics.CommandLog;
+import javax.swing.JLabel;
 
 public class GameMenu {
 
@@ -46,15 +48,22 @@ public class GameMenu {
 		frame.setResizable(false);
 		
 		CommandLog log = new CommandLog();
-		log.setBounds(25, 966, 1829, 66);
+		log.setBounds(38, 977, 402, 55);
 		frame.getContentPane().add(log);
 		
 		BoardPanel board = new BoardPanel();
-		board.setBounds(593, 32, 646, 646);
+		board.setBounds(575, 13, 842, 841);
 		frame.getContentPane().add(board);
 		
 		AmpPanel amps = new AmpPanel();
-		amps.setBounds(40, 803, 400, 150);
+		amps.setBounds(38, 879, 402, 66);
 		frame.getContentPane().add(amps);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(1424, 861, 460, 171);
+		frame.getContentPane().add(panel);
+		
+		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
+		panel.add(wallpaper);
 	}
 }

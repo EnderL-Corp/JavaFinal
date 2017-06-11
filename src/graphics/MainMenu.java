@@ -51,6 +51,9 @@ public class MainMenu extends JFrame implements ActionListener {
 		add(join);
 		add(ip);
 		add(quit);
+		
+		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
+		add(wallpaper);
 	}
 
 	@Override

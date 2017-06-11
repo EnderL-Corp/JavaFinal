@@ -48,28 +48,27 @@ public class AmpPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
-		 if(a.equals("Amp1")){
+		 if(!sacActive && a.equals("Amp1")){
 			 //amp in hand that was selected with p is placed in the arry slot 0
 			 Amp1.setText("ampSlot.name1");
 			 Amp1.setEnabled(false);
-			 System.out.println("gay");
 		 }
-		 else if(a.equals("Amp2")){
+		 else if(!sacActive && a.equals("Amp2")){
 			//amp in hand that was selected with p is placed in the arry slot 1
 			 Amp2.setText("ampSlot.name2");
 			 Amp2.setEnabled(false);
 		 }
-		 else if(a.equals("Amp3")){
+		 else if(!sacActive && a.equals("Amp3")){
 			//amp in hand that was selected with p is placed in the arry slot 2
 			 Amp3.setText("ampSlot.name3");
 			 Amp3.setEnabled(false);
 		 }
-		 else if(a.equals("Amp4")){
+		 else if(!sacActive && a.equals("Amp4")){
 			//amp in hand that was selected with p is placed in the arry slot 3
 			 Amp4.setText("ampSlot.name4");
 			 Amp4.setEnabled(false);
 		 }
-		 else if(a.equals("Amp5")){
+		 else if(!sacActive && a.equals("Amp5")){
 			//amp in hand that was selected with p is placed in the arry slot 4
 			 Amp5.setText("ampSlot.name5");
 			 Amp5.setEnabled(false);

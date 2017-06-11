@@ -10,7 +10,7 @@ public CommandLog(){
 	log = new JTextArea ("command.logImplemented");
     JScrollPane scroll = new JScrollPane (log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     add(scroll);
-    setVisible (true);	
+    setVisible (true);
 }
 public void logRefresh(){
 	log.setText(log.getText() + "\n" + "command.logImplemented");

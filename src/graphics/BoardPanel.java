@@ -81,8 +81,8 @@ public class BoardPanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		int height = 650;
-		int width = 650;
+		int height = 850;
+		int width = 850;
 		int tileHeight = height / numTiles;
 		int tileWidth = width / numTiles;
 
@@ -114,7 +114,7 @@ public class BoardPanel extends JPanel {
 				if (j == commanderPosX && i == commanderPosY) {
 					BoardButton bb = buttons[i][j];
 					//bb.setBackground(Color.RED);
-					bb.setIcon(new ImageIcon("Sprites/HumanRange.png"));
+					bb.setIcon(new ImageIcon("Sprites/DJ.png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}
