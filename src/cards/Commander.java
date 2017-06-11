@@ -1,10 +1,12 @@
 package cards;
 
+import cards.Deck.DeckEnum;
 import main.Game;
 
 public class Commander extends Entity
 {
 	private int classType;
+	//class order : {Ravager, swarm, DJ}
 	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}
 	
 	public Commander(String nm, String desc, int ct, int posX, int posY, int tag)
@@ -26,7 +28,7 @@ public class Commander extends Entity
 				}
 			}
 		}
-		if(canAttack = false)
+		if(canAttack == false)
 		{
 			if(defender.hasAbility(0))
 			{
@@ -64,4 +66,13 @@ public class Commander extends Entity
 		Game.game.endGame((Commander)killed);
 	}
 	
+	public DeckEnum getClassType()
+	{
+		if(classType == 0)
+			return DeckEnum.RAVAGER;
+		else if(classType == 1)
+			return DeckEnum.SWARM;
+		else
+			return DeckEnum.DJ;				
+	}
 }

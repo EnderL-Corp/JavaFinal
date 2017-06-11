@@ -115,5 +115,12 @@ public class Troop extends Entity
 		return abilities;
 	}
 	
+	public static int placeOnBoard(Troop placed, int cp)
+	{
+		if(cp < placed.getCpCost() || Game.board[placed.getPosX()][placed.getPosY()] != null)
+			return cp;
+		Game.board[placed.getPosX()][placed.getPosY()] = placed;
+		return cp - placed.getCpCost();
+	}
 }
 
