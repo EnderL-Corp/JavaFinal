@@ -4,7 +4,7 @@ import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
-import cards.Deck.Decks;
+import cards.Deck.DeckEnum;
 import rmi.GameServer;
 
 //This is a poorly named class
@@ -35,7 +35,7 @@ public class Main {
 		
 		try {
 			gs = new GameServer("server", 1099, serverIP);
-			gc = new Game(0, serverIP, 1099, Decks.RAVAGER);
+			gc = new Game(0, serverIP, 1099, DeckEnum.RAVAGER);
 			
 			gs.createMyRegistry();
 			gc.startup(null);
@@ -56,7 +56,7 @@ public class Main {
 		Game gc = null;
 		
 		try {
-			gc = new Game(1, serverIP, 1099, Decks.DJ);
+			gc = new Game(1, serverIP, 1099, DeckEnum.DJ);
 			
 			gc.startup(null);
 			

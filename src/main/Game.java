@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
-import cards.Deck.Decks;
+import cards.Deck.DeckEnum;
 import cards.Entity;
 import graphics.BoardPanel;
 import rmi.ClientInfo;
@@ -93,7 +93,7 @@ public class Game extends GameClient implements Serializable {
 	 *            The player's class
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String serverIP, int serverPort, Decks deckEnum) throws RemoteException {
+	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		myCards = new Deck(deckEnum).getDeck();
 	}
