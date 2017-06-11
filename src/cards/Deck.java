@@ -28,13 +28,13 @@ public class Deck {
 	
 	private int cp, ap, tp, territory;
 	
-	public enum Decks {
+	public enum DeckEnum {
 		RAVAGER,
 		SWARM,
 		DJ;
 	}
 	
-	public Deck(Decks deckEnum) {
+	public Deck(DeckEnum deckEnum) {
 		switch(deckEnum) {
 		case RAVAGER:
 			deck = new ArrayList<Card>();
