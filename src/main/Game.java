@@ -33,7 +33,7 @@ public class Game extends GameClient implements Serializable {
 	private static ArrayList<Card> graveyard = new ArrayList<Card>();
 	public static Game game;
 	public static Entity[][] board = new Entity[15][15];
-	
+
 	public Game() throws RemoteException {
 
 	}
@@ -66,8 +66,7 @@ public class Game extends GameClient implements Serializable {
 	 *            Port at which the server is running
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String serverIP, int serverPort)
-			throws RemoteException {
+	public Game(int tag, String serverIP, int serverPort) throws RemoteException {
 		super(tag, serverIP, serverPort);
 	}
 
@@ -85,8 +84,7 @@ public class Game extends GameClient implements Serializable {
 	 *            The player's class
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String serverIP, int serverPort, Decks deckEnum)
-			throws RemoteException {
+	public Game(int tag, String serverIP, int serverPort, Decks deckEnum) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		myCards = new Deck(deckEnum).getDeck();
 	}
@@ -195,9 +193,7 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public boolean updateCard(Card cardToChange) {
 		for (Card c : myCards) {
-			if (c instanceof Entity
-					&& ((Entity) c).getTag() == ((Entity) cardToChange)
-							.getTag()) {
+			if (c instanceof Entity && ((Entity) c).getTag() == ((Entity) cardToChange).getTag()) {
 				c = cardToChange;
 				frame.repaint();
 				return true;
@@ -210,8 +206,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if (connected) {
 				ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-				if (remoteServer.getRecentClientName() != getName()
-						&& cardsList != null && cardsList.size() > 0)
+				if (remoteServer.getRecentClientName() != getName() && cardsList != null && cardsList.size() > 0)
 					for (Card c : cardsList) {
 						updateCard(c);
 					}
@@ -244,21 +239,18 @@ public class Game extends GameClient implements Serializable {
 		}
 		;
 	}
-	
-	public static String toStringMethod()
-			{
-				String string = "";
-				for(int i = 0; i < board.length; i++)
-				{
-					for(int j = 0; j < board.length; j++)
-					{
-						if(board[i][j] != null)
-							string += board[i][j].getName() + "   "; 
-						else
-							string += "null\t\t";
- 					}
-					string += "\n";
-				}
-				return string;
+
+	public String toString() {
+		String string = "";
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] != null)
+					string += board[i][j].getName() + "   ";
+				else
+					string += "null\t\t";
 			}
+			string += "\n";
+		}
+		return string;
+	}
 }
