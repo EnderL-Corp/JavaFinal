@@ -113,8 +113,8 @@ public class BoardPanel extends JPanel {
 
 				if (j == commanderPosX && i == commanderPosY) {
 					BoardButton bb = buttons[i][j];
-					bb.setBackground(Color.RED);
-					bb.setIcon(new ImageIcon("Sprites/TestSprite.png"));
+					//bb.setBackground(Color.RED);
+					bb.setIcon(new ImageIcon("Sprites/HumanRange.png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}

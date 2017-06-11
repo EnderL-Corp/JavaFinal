@@ -21,7 +21,7 @@ public class SpriteTester {
 		JFrame f = new JFrame();
 		JPanel p = new JPanel();/*
 		Graphics g = (Graphics) p.getGraphics();*/
-		ImageIcon myImage = new ImageIcon("Sprites/TestSprite.png");
+		ImageIcon myImage = new ImageIcon("Sprites/Swarm.png");
 		BoardButton b = new BoardButton("Hello", myImage);
 		b.setBackground(Color.BLACK);
 		//b.setIcon(myImage);
