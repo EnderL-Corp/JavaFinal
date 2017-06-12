@@ -82,7 +82,7 @@ public class CARD_TESTER_CLASS
 	public void remainingTp(int TP)
 	{
 		tp = TP;
-	}
+	} 
 	
 	public int getCp()
 	{

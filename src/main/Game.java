@@ -106,7 +106,7 @@ public class Game extends GameClient implements Serializable {
 	}
 
 	// TODO The following are tester methods for RMI
-	public void moveCommRight() {
+	/*public void moveCommRight() {
 		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
 		frame.repaint();
 	}
@@ -187,7 +187,7 @@ public class Game extends GameClient implements Serializable {
 			}
 		});
 
-	}
+	}*/
 
 	// TODO End Testing
 
@@ -242,7 +242,6 @@ public class Game extends GameClient implements Serializable {
 	public static void main(String[] args) {
 		try {
 			game = new Game();
-			game.startup(null);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

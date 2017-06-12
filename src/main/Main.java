@@ -38,7 +38,7 @@ public class Main {
 			gc = new Game(0, serverIP, 1099, DeckEnum.RAVAGER);
 			
 			gs.createMyRegistry();
-			gc.startup(null);
+			//gc.startup(null);
 			
 			gc.connectToServer();
 			
@@ -58,7 +58,7 @@ public class Main {
 		try {
 			gc = new Game(1, serverIP, 1099, DeckEnum.DJ);
 			
-			gc.startup(null);
+			//gc.startup(null);
 			
 			gc.connectToServer();
 			
