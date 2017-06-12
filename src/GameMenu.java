@@ -42,21 +42,21 @@ public class GameMenu {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1920, 1080);
+		frame.setBounds(100, 100, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		
 		CommandLog log = new CommandLog();
-		log.setBounds(38, 977, 402, 55);
+		log.setBounds(38, 881, 402, 55);
 		frame.getContentPane().add(log);
 		
 		BoardPanel board = new BoardPanel();
-		board.setBounds(575, 13, 842, 841);
+		board.setBounds(59, -24, 648, 641);
 		frame.getContentPane().add(board);
 		
 		AmpPanel amps = new AmpPanel();
-		amps.setBounds(38, 879, 402, 66);
+		amps.setBounds(38, 788, 402, 66);
 		frame.getContentPane().add(amps);
 		
 		JPanel panel = new JPanel();

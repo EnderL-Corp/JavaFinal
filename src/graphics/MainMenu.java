@@ -28,7 +28,7 @@ public class MainMenu extends JFrame implements ActionListener {
 	private MainMenu() {
 		super("Main Menu");
 
-		setSize(1920, 1080);
+		setSize(1280, 1024);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLayout(new FlowLayout());
