@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,8 +19,10 @@ import cards.Deck;
 import cards.Deck.DeckEnum;
 import cards.Entity;
 import graphics.BoardPanel;
+import graphics.MainMenu;
 import rmi.ClientInfo;
 import rmi.GameClient;
+import rmi.GameServer;
 
 /**
  * Class representing the physical card game. It is a GameClient.
@@ -136,14 +139,6 @@ public class Game extends GameClient implements Serializable {
 	public void endGame(Commander loser) {
 		// end the game
 	}
-
-	public static void main(String[] args) {
-		try {
-			game = new Game();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public int getDeckSize() {
 		return myCards.size();
@@ -161,6 +156,33 @@ public class Game extends GameClient implements Serializable {
 			string += "\n";
 		}
 		return string;
+	}
+	
+	public static void createHost(String serverIP) {
+		GameServer gs = null;		
+		try {
+			gs = new GameServer("server", 1099, serverIP);
+			gs.createMyRegistry();
+			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER);
+			game.connectToServer();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createClient(String serverIP) {		
+		try {
+			game = new Game(1, serverIP, 1099, DeckEnum.DJ);
+			game.connectToServer();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		new MainMenu();
 	}
 	
 	public int getCP() {

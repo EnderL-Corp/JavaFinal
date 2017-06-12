@@ -3,6 +3,7 @@ package graphics;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,12 +21,14 @@ public class MainMenu extends JFrame implements ActionListener {
 	JButton host;
 	JButton join;
 	JButton quit;
+	
+	String writtenIP = "";
 
 	public static void main(String[] args) {
-		new MainMenu().setVisible(true);
+		new MainMenu();
 	}
 
-	private MainMenu() {
+	public MainMenu() {
 		super("Main Menu");
 
 		setSize(1280, 1024);
@@ -54,16 +57,19 @@ public class MainMenu extends JFrame implements ActionListener {
 		
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
 		add(wallpaper);
+		this.setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String writtenIP = "";
 		String a = e.getActionCommand();
 		if (a.equals("host")) {
 			System.out.println("game hosting");
-			// launch server
-			// launch game connecting to server via PC ip
+			try {
+				Game.createHost(java.net.InetAddress.getLocalHost().getHostAddress());
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+			}
 		} else if (a.equals("ip")) {
 			System.out.println("typing ip");
 			join.setEnabled(true);
@@ -71,7 +77,7 @@ public class MainMenu extends JFrame implements ActionListener {
 			System.out.println(writtenIP);
 		} else if (a.equals("join")) {
 			System.out.println("searching for host");
-			// launch game searching for specified ip
+			Game.createClient(writtenIP);
 		} else if (a.equals("quit")) {
 			System.out.println("am quiting");
 			System.exit(0);
