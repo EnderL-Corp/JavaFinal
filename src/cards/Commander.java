@@ -5,11 +5,11 @@ import main.Game;
 
 public class Commander extends Entity
 {
-	private int classType;
+	private DeckEnum classType;
 	//class order : {Ravager, swarm, DJ}
 	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}
 	
-	public Commander(String nm, String desc, int ct, int posX, int posY, int tag)
+	public Commander(String nm, String desc, DeckEnum ct, int posX, int posY, int tag)
 	{
 		super(nm, desc, 2, 0, 1, 25, posX, posY, tag); //Check these values
 		classType = ct;
@@ -68,11 +68,6 @@ public class Commander extends Entity
 	
 	public DeckEnum getClassType()
 	{
-		if(classType == 0)
-			return DeckEnum.RAVAGER;
-		else if(classType == 1)
-			return DeckEnum.SWARM;
-		else
-			return DeckEnum.DJ;				
+		return classType;			
 	}
 }
