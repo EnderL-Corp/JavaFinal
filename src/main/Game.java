@@ -35,8 +35,8 @@ public class Game extends GameClient implements Serializable {
 	public static Game game;
 	public static Entity[][] board = new Entity[15][15];
 
-	public Commander commander = new Commander("Jimmy", "He was a good boy", 1, 7, 2, -1);      // -\
-	public Deck deck = new Deck(commander.getClassType());										//   \
+	public Commander commander;      // -\
+	public Deck deck;										//   \
 																								//   /
 	public int ap; 																				//   > WE need a constructor for this stuff
 	public int cp;																				//   \
@@ -95,7 +95,9 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum) throws RemoteException {
 		this(tag, serverIP, serverPort);
-		myCards = new Deck(deckEnum).getDeck();
+		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
+		deck = new Deck(commander.getClassType());
+		myCards = deck.getDeck();
 	}
 
 	private BoardPanel b;
@@ -245,7 +247,10 @@ public class Game extends GameClient implements Serializable {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		;
+	}
+	
+	public int getDeckSize() {
+		return myCards.size();
 	}
 
 	public String toString() {
@@ -260,5 +265,21 @@ public class Game extends GameClient implements Serializable {
 			string += "\n";
 		}
 		return string;
+	}
+	
+	public int getCP() {
+		return cp;
+	}
+	public int getAP() {
+		return ap;
+	}
+	public int getTP() {
+		return tp;
+	}
+	public int getHP() {
+		return 0;
+	}
+	public int getOpponentHP() {
+		return 0;
 	}
 }
