@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -27,41 +28,25 @@ import rmi.GameClient;
  *
  */
 public class Game extends GameClient implements Serializable {
-
 	private static final long serialVersionUID = -188401400677518168L;
 	
 	private ArrayList<Card> myCards;
 	private static ArrayList<Card> graveyard = new ArrayList<Card>();
 	public static Game game;
-	public static Entity[][] board = new Entity[15][15];
+	private static Card[][] board = new Card[15][15];
 
-	public Commander commander;      // -\
-	public Deck deck;										//   \
-																								//   /
-	public int ap; 																				//   > WE need a constructor for this stuff
-	public int cp;																				//   \
-	public int tp;																				//   /
-	public int territory; 																		// -/
+	private Commander commander;
+	private Deck deck;
+	private Color playerColor;
+	private JFrame frame;
+
+	private int ap;
+	private int cp;
+	private int tp;
+	private int territory;
 	
 	public Game() throws RemoteException {
 
-	}
-
-	/**
-	 * 
-	 * @param tag
-	 * @param otherIP
-	 *            IP of other client
-	 * @param port
-	 *            Port to connect to on other device
-	 * @param refTag
-	 *            Only has to be filled out if testing is carried out on same
-	 *            device. Make note of the refTag when using it. Null if
-	 *            multiple devices
-	 * @throws RemoteException
-	 */
-	public Game(int tag, String serverIP, String refTag) throws RemoteException {
-		super(tag, serverIP, refTag);
 	}
 
 	/**
@@ -98,100 +83,11 @@ public class Game extends GameClient implements Serializable {
 		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
 		deck = new Deck(commander.getClassType());
 		myCards = deck.getDeck();
+		cp = deck.getCP();
+		ap = deck.getAP();
+		tp = deck.getTP();
+		territory = deck.getTerritory();
 	}
-
-	private BoardPanel b;
-	private JFrame frame;
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	// TODO The following are tester methods for RMI
-	/*public void moveCommRight() {
-		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() + 1);
-		frame.repaint();
-	}
-
-	public void moveCommLeft() {
-		b.changeCommanderPos(b.getCommanderX(), b.getCommanderY() - 1);
-		frame.repaint();
-	}
-
-	public void moveCommUp() {
-		b.changeCommanderPos(b.getCommanderX() - 1, b.getCommanderY());
-		frame.repaint();
-	}
-
-	public void moveCommDown() {
-		b.changeCommanderPos(b.getCommanderX() + 1, b.getCommanderY());
-		frame.repaint();
-	}
-
-	public void startup(String[] args) {
-		b = new BoardPanel();
-
-		JFrame j = new JFrame();
-		j.setTitle(getName());
-
-		JPanel p = new JPanel();
-		JButton right = new JButton("Move Right");
-		JButton left = new JButton("Move Left");
-		JButton up = new JButton("Move Up");
-		JButton down = new JButton("Move Down");
-
-		p.add(left);
-		p.add(up);
-		p.add(right);
-		p.add(down);
-
-		j.add(p);
-
-		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		j.setSize(300, 400);
-		j.setVisible(true);
-
-		frame = new JFrame();
-
-		frame.setTitle(getName());
-		frame.setSize(650, 675);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.add(b);
-		frame.setResizable(false);
-		frame.setVisible(true);
-
-		right.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander right!");
-				moveCommRight();
-				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
-			}
-		});
-		left.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander left!");
-				moveCommLeft();
-				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
-			}
-		});
-		up.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander up!");
-				moveCommUp();
-				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
-			}
-		});
-		down.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Moving commander down!");
-				moveCommDown();
-				System.out.println(b.getCommanderX() + ", " + b.getCommanderY());
-			}
-		});
-
-	}*/
-
-	// TODO End Testing
 
 	/**
 	 * Will update a card that has been changed in the other client. Only the
