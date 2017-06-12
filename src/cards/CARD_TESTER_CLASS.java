@@ -1,5 +1,6 @@
 package cards;
 
+import cards.Deck.DeckEnum;
 import main.Game;
 
 public class CARD_TESTER_CLASS
@@ -14,7 +15,7 @@ public class CARD_TESTER_CLASS
 	
 	CARD_TESTER_CLASS()
 	{
-		commander =  new Commander("Jimmy", "He was a good boy", 1, 7, 2, -1);    
+		commander =  new Commander("Jimmy", "He was a good boy", DeckEnum.RAVAGER, 7, 2, -1);    
 		deck = new Deck(commander.getClassType());
 		ap = 12;
 		cp = 12;

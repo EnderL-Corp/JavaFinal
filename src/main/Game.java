@@ -31,9 +31,9 @@ public class Game extends GameClient implements Serializable {
 	private static final long serialVersionUID = -188401400677518168L;
 	
 	private ArrayList<Card> myCards;
-	private static ArrayList<Card> graveyard = new ArrayList<Card>();
+	public static ArrayList<Card> graveyard = new ArrayList<Card>();
 	public static Game game;
-	private static Card[][] board = new Card[15][15];
+	public static Entity[][] board = new Entity[15][15];
 
 	private Commander commander;
 	private Deck deck;
@@ -177,5 +177,8 @@ public class Game extends GameClient implements Serializable {
 	}
 	public int getOpponentHP() {
 		return 0;
+	}
+	public Card[][] getBoard() {
+		return board;
 	}
 }
