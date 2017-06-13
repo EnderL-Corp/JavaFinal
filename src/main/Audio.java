@@ -38,6 +38,7 @@ public class Audio extends Thread
 	{
 		threadName = name;
 		System.out.println("Created an audio process with name " + name);
+		start();
 	}
 
 	public void run() 
@@ -71,7 +72,7 @@ public class Audio extends Thread
 		if (t == null) 
 		{
 	         t = new Thread(this, threadName);
-	         t.start (); 
+	         t.start(); 
 	    }
 	}
 	
@@ -115,33 +116,29 @@ public class Audio extends Thread
 			long startTime;
 			Clip clip = AudioSystem.getClip();
 			File[] songs = shuffleMusic("MenuMusic");
-			for(File f : songs)
+			while(true)
 			{
-				System.out.println(f.getName());
-			}
-			for(int i = 0; i < songs.length; i++)
-			{
-				for(File f : songs)
+				for(int i = 0; i < songs.length; i++)
 				{
-					System.out.println(f.getName());
-				}
-				System.out.println("Currently Playing " + songs[i].getName());
-				File file = new File("Audio/MenuMusic/" + songs[i].getName());
-			    clip.open(AudioSystem.getAudioInputStream(file));
-			    clip.start();
-			    startTime = System.currentTimeMillis();
-				while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
-				{
-					if (onMenu)
+					System.out.println("Currently Playing " + songs[i].getName());
+					File file = new File("Audio/MenuMusic/" + songs[i].getName());
+				    clip.open(AudioSystem.getAudioInputStream(file));
+				    clip.start();
+				    startTime = System.currentTimeMillis();
+					while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
 					{
-						Thread.sleep(1);
+						if (onMenu)
+						{
+							Thread.sleep(1);
+						}
+						else
+						{
+							clip.stop();
+							clip.close();
+							return;
+						}
 					}
-					else
-					{
-						clip.stop();
-						clip.flush();
-						return;
-					}
+					clip.close();
 				}
 			}
 		} 
@@ -157,27 +154,31 @@ public class Audio extends Thread
 		try
 		{
 			long startTime;
+			Clip clip = AudioSystem.getClip();
 			File[] songs = shuffleMusic("GameMusic");
-			for(int i = 0; i < songs.length; i++)
+			while(true)
 			{
-				System.out.println("Currently Playing" + songs[i].getName());
-				File file = new File("Audio/GameMusic/" + songs[i].getName());
-			    Clip clip = AudioSystem.getClip();
-				clip.open(AudioSystem.getAudioInputStream(file));
-				clip.start();
-				startTime = System.currentTimeMillis();
-				while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
+				for(int i = 0; i < songs.length; i++)
 				{
-					if (!onMenu)
+					System.out.println("Currently Playing" + songs[i].getName());
+					File file = new File("Audio/GameMusic/" + songs[i].getName());
+					clip.open(AudioSystem.getAudioInputStream(file));
+					clip.start();
+					startTime = System.currentTimeMillis();
+					while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
 					{
-						Thread.sleep(1);
+						if (!onMenu)
+						{
+							Thread.sleep(1);
+						}
+						else
+						{
+							clip.stop();
+							clip.close();
+							return;
+						}
 					}
-					else
-					{
-						clip.stop();
-						clip.flush();
-						return;
-					}
+					clip.close();
 				}
 			}
 		}
