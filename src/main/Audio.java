@@ -17,20 +17,18 @@ public class Audio extends Thread
 {
 	private Thread t;
 	private String threadName;
-	private boolean onMenu;
-	
-	private List<String> menuMusic;
+	private static boolean onMenu;
 	   
 	public static void main(String[] args)
 	{
-		//Audio main = new Audio("MainMenu");
-		//main.start();
+		Audio main = new Audio("MainMenu");
+		main.start();
 		
 		//Audio game = new Audio("InGame");
 		//game.start();
 		
-		Audio r = new Audio("RangeHit");
-		r.start();
+		//Audio r = new Audio("RangeHit");
+		//r.start();
 		
 		//Audio m = new Audio("MeleeHit");
 		//m.start();
@@ -73,7 +71,7 @@ public class Audio extends Thread
 		if (t == null) 
 		{
 	         t = new Thread(this, threadName);
-	         t.start ();
+	         t.start (); 
 	    }
 	}
 	
@@ -114,15 +112,37 @@ public class Audio extends Thread
 	{
 		try 
 		{
+			long startTime;
 			Clip clip = AudioSystem.getClip();
 			File[] songs = shuffleMusic("MenuMusic");
+			for(File f : songs)
+			{
+				System.out.println(f.getName());
+			}
 			for(int i = 0; i < songs.length; i++)
 			{
+				for(File f : songs)
+				{
+					System.out.println(f.getName());
+				}
 				System.out.println("Currently Playing " + songs[i].getName());
 				File file = new File("Audio/MenuMusic/" + songs[i].getName());
 			    clip.open(AudioSystem.getAudioInputStream(file));
 			    clip.start();
-				Thread.sleep(clip.getMicrosecondLength());
+			    startTime = System.currentTimeMillis();
+				while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
+				{
+					if (onMenu)
+					{
+						Thread.sleep(1);
+					}
+					else
+					{
+						clip.stop();
+						clip.flush();
+						return;
+					}
+				}
 			}
 		} 
 		catch (Exception e) 
@@ -136,6 +156,7 @@ public class Audio extends Thread
 	{
 		try
 		{
+			long startTime;
 			File[] songs = shuffleMusic("GameMusic");
 			for(int i = 0; i < songs.length; i++)
 			{
@@ -144,7 +165,20 @@ public class Audio extends Thread
 			    Clip clip = AudioSystem.getClip();
 				clip.open(AudioSystem.getAudioInputStream(file));
 				clip.start();
-				Thread.sleep(clip.getMicrosecondLength());
+				startTime = System.currentTimeMillis();
+				while(System.currentTimeMillis() < startTime + (long)((double)clip.getMicrosecondLength() / 1000))
+				{
+					if (!onMenu)
+					{
+						Thread.sleep(1);
+					}
+					else
+					{
+						clip.stop();
+						clip.flush();
+						return;
+					}
+				}
 			}
 		}
 		catch (Exception e) 
