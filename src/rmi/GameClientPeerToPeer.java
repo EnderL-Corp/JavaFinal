@@ -142,16 +142,9 @@ public class GameClientPeerToPeer extends UnicastRemoteObject implements Seriali
 	public void test() {
 		String a;
 		try {
-			a = remoteClient.getName();
-			System.out.println(a);
 			
-			String[] t = remoteClient.getData(new String[]{"Test1", "Test2"});
-			System.out.println(t[0] + t[1]);
-			
-			String[] b = remoteClient.getData(new String[]{"a1", "b2", "c3"});
-			System.out.println(b[0] + b[1]);
-		} catch (RemoteException e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		

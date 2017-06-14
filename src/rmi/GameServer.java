@@ -19,7 +19,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	private int port, numConnections = 0;
 	private ArrayList<GameClient> clients = new ArrayList<GameClient>();
-	private ArrayList<Card> recentChanges;
+	private Card recentChange;
 	
 	protected static Registry myRegistry;
 	
@@ -111,13 +111,13 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public void actionPerformed(ActionEvent e) {}*/
 
 	@Override
-	public void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException {
-		recentChanges = cardList;
+	public void receiveRecentCardChange(String clientName, Card card) throws RemoteException {
+		recentChange = card;
 	}
 
 	@Override
-	public ArrayList<Card> getRecentCardsList() throws RemoteException {
-		return recentChanges;
+	public Card getRecentCard() throws RemoteException {
+		return recentChange;
 	}
 
 	@Override

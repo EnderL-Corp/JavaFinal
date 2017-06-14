@@ -151,23 +151,9 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public void test() {
 		String a;
 		try {
-			a = remoteServer.getName();
-			System.out.println(a);
 			
-			String[] t = remoteServer.getData(new String[]{"Test1", "Test2"});
-			System.out.println(t[0] + t[1]);
-			
-			String[] b = remoteServer.getData(new String[]{"a1", "b2", "c3"});
-			System.out.println(b[0] + b[1]);
-			/*
-			ArrayList<ClientInfo> gcs = remoteServer.getGameClients();
-			if(gcs.get(0).getTag() == this.tag)
-				System.out.println("Other client: " + gcs.get(0).getTag());
-			else
-				System.out.println("Other client: " + gcs.get(1).getTag());
-			*/
-		} catch (RemoteException e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}	
 	}
 	

@@ -8,12 +8,10 @@ import java.util.ArrayList;
 import cards.Card;
 
 public interface GameServerInterface extends Remote, Serializable{
-	String[] getData(String[] args) throws RemoteException;												//Tester method.
 	String getRecentClientName() throws RemoteException;
-	String getName() throws RemoteException;															//Tester method.
-	void receiveRecentCardChanges(String clientName, ArrayList<Card> cardList) throws RemoteException;
+	void receiveRecentCardChange(String clientName, Card card) throws RemoteException;
 	void connect(GameClient gc) throws RemoteException;
-	ArrayList<Card> getRecentCardsList() throws RemoteException;
+	Card getRecentCard() throws RemoteException;
 	ArrayList<GameClient> getGameClients() throws RemoteException;
 	int getConnections() throws RemoteException;
 }

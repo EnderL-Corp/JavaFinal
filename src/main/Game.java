@@ -81,7 +81,7 @@ public class Game extends GameClient implements Serializable {
 	 *            The player's class
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum) throws RemoteException {
+	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum, Color playerColor) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
 		deck = new Deck(commander.getClassType());
@@ -90,6 +90,7 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
+		this.playerColor = playerColor;
 	}
 
 	/**
@@ -115,11 +116,9 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (connected) {
-				ArrayList<Card> cardsList = remoteServer.getRecentCardsList();
-				if (remoteServer.getRecentClientName() != getName() && cardsList != null && cardsList.size() > 0)
-					for (Card c : cardsList) {
-						updateCard(c);
-					}
+				Card card = remoteServer.getRecentCard();
+				if (remoteServer.getRecentClientName() != getName() && card != null)
+					updateCard(card);
 			}
 			if (remoteServer.getConnections() > 1)
 				for (GameClient ci : remoteServer.getGameClients()) {
@@ -163,7 +162,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			gs = new GameServer("server", 1099, serverIP);
 			gs.createMyRegistry();
-			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER);
+			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER, Color.BLUE);
 			game.connectToServer();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -173,7 +172,7 @@ public class Game extends GameClient implements Serializable {
 	
 	public static void createClient(String serverIP) {		
 		try {
-			game = new Game(1, serverIP, 1099, DeckEnum.DJ);
+			game = new Game(1, serverIP, 1099, DeckEnum.DJ, Color.RED);
 			game.connectToServer();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -202,5 +201,8 @@ public class Game extends GameClient implements Serializable {
 	}
 	public Card[][] getBoard() {
 		return board;
+	}
+	public Color getColor() {
+		return playerColor;
 	}
 }
