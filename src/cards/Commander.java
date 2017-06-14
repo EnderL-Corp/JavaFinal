@@ -22,7 +22,7 @@ public class Commander extends Entity
 		{
 			for(int j = yCoordinate - 1; j < 2; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.board[xCoordinate][yCoordinate].hasAbility(0) == true)
+				if((i != xCoordinate && j != yCoordinate) && Game.game.getBoard()[xCoordinate][yCoordinate].hasAbility(0) == true)
 				{				
 					canAttack = false;
 				}

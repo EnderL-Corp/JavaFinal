@@ -1,35 +1,91 @@
 package cards;
 
+import main.Game;
+
 public class Technique extends Card
 {
-	protected String effect;
+	protected String eff;
 	protected int tpCost, numberOfTargets/* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/, remainingTargets;
 
 	
 	public Technique(String nm, String desc, int tp, int numTargets, String eff) 
 	{
 		super(nm, desc);
-		effect = eff;
 		tpCost = tp;
 		numberOfTargets = numTargets;
 		remainingTargets = numTargets;
 	}
 	
-	public void cast()
+	public void cast(Entity target)
 	{
 		if(numberOfTargets == -1)
-		{} // effect everything
+		{
+			for(Entity[] row : Game.game.getBoard())
+			{
+				for(Entity e : row)
+				{
+					effect(e, name);
+				}
+			}
+		}
 		else if(numberOfTargets == 0)
-		{} //just do whatever its suppose to do
+		{
+			effect(null, name);
+		}
 		else
 		{
 			if(remainingTargets > 0)
 			{
-				//perform action
-				remainingTargets --;
-				cast(); // yay recursion  (going to have to use an action listener to get targets)
+				effect(target, name);
 			}
 			remainingTargets = numberOfTargets;
-		} //does stuff n number of times
+		} //Only this case still needs work
+	}
+
+	private void effect(Entity e, String eff) 
+	{
+		switch(eff)
+		{
+			case "GrapeShot":
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-1, 0);
+				}
+				break;
+				
+			case "ChainShot":
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-2, 0);
+					remainingTargets--;
+				}
+				break;
+				
+			case "Cannon":
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-6, 0);
+					remainingTargets--;
+				}
+				break;
+				
+			case "Booster":
+				if(e.teamColor == Game.game.getColor())
+				{
+					e.modify(1, 1);
+					remainingTargets--;
+				}
+				break;
+				
+			case "Drain":
+				e.modify(-4, 0);
+				Game.game.getCommander().modify(4, 0);
+				break;
+				
+			case "Call":
+				Game.game.drawCard();
+				Game.game.drawCard();
+				break;
+		}
 	}
 }
