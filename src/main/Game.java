@@ -199,7 +199,7 @@ public class Game extends GameClient implements Serializable {
 	public Commander getCommander() {
 		return commander;
 	}
-	public Card[][] getBoard() {
+	public Entity[][] getBoard() {
 		return board;
 	}
 	public Color getColor() {
