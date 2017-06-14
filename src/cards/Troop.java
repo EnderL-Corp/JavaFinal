@@ -79,7 +79,7 @@ public class Troop extends Entity
 		{
 			for(int j = yCoordinate - 1; j < yCoordinate + 1; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.board[i][j] != null && Game.board[i][j].hasAbility(0) == true)
+				if((i != xCoordinate && j != yCoordinate) && Game.game.getBoard()[i][j] != null && Game.game.getBoard()[i][j].hasAbility(0) == true)
 				{				
 					canAttack = false;
 				}
@@ -103,8 +103,8 @@ public class Troop extends Entity
 	
 	public void kill(Entity killed) 
 	{
-		//Game.game.addToGraveyard(killed);
-		Game.board[killed.xCoordinate][killed.yCoordinate] = null;
+		Game.game.addToGraveyard(killed);
+		Game.game.getBoard()[killed.xCoordinate][killed.yCoordinate] = null;
 	}
 	
 	public int getCurrentApCost() {
@@ -117,9 +117,9 @@ public class Troop extends Entity
 	
 	public static int placeOnBoard(Troop placed, int cp)
 	{
-		if(cp < placed.getCpCost() || Game.board[placed.getPosX()][placed.getPosY()] != null)
+		if(cp < placed.getCpCost() || Game.game.getBoard()[placed.getPosX()][placed.getPosY()] != null)
 			return cp;
-		Game.board[placed.getPosX()][placed.getPosY()] = placed;
+		Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = placed;
 		return cp - placed.getCpCost();
 	}
 }
