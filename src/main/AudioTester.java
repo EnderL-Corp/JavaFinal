@@ -61,18 +61,14 @@ public class AudioTester extends JFrame implements ActionListener
 		String a = e.getActionCommand();
 		if (a.equals("r")) {
 			au = new Audio("RangeHit");
-			au.start();
 		} else if (a.equals("mmm")) {
 			au = new Audio("MainMenu");
-			au.start();
 			au = null;
 		} else if (a.equals("m")) {
 			au = new Audio("MeleeHit");
-			au.start();
 			au = null;
 		} else if (a.equals("gm")){
 			au = new Audio("InGame");
-			au.start();
 			au = null;
 		}
 
