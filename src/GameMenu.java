@@ -1,3 +1,5 @@
+
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import graphics.AmpPanel;
 import graphics.BoardPanel;
 import graphics.CommandLog;
+
 import javax.swing.JLabel;
 
 public class GameMenu {

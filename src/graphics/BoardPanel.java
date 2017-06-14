@@ -12,54 +12,14 @@ import javax.swing.JPanel;
 public class BoardPanel extends JPanel {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
-	private BoardButton[][] buttons = {
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() },
-			{ new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(),
-					new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton(), new BoardButton() } };
+	private BoardButton[][] buttons = new BoardButton[15][15];
 
 	public BoardPanel() {
+		for(int i = 0; i < buttons.length; i++) {
+			for(int j = 0; j < buttons[0].length; j++) {
+				buttons[i][j] = new BoardButton();
+			}
+		}
 		setLayout(new GridLayout());
 		init();
 	}

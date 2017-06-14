@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import GameMenu;
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
@@ -106,14 +107,22 @@ public class Game extends GameClient implements Serializable {
 	 *         of cards myCards, and is changed appropriately).
 	 */
 	public boolean updateCard(Card cardToChange) {
-		for (Card c : myCards) {
+		for (Entity (Entity)c : board) {
 			if (c instanceof Entity && ((Entity) c).getTag() == ((Entity) cardToChange).getTag()) {
 				c = cardToChange;
+				refreshBoard();
 				frame.repaint();
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public void refreshBoard() {
+		Entity[][] changedBoard = new Entity[15][15];
+		for(Entity e : board) {
+			
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -185,6 +194,11 @@ public class Game extends GameClient implements Serializable {
 	
 	public static void main(String[] args) {
 		new MainMenu();
+	}
+	
+	public void drawCard()
+	{
+	    getHand().add(getDeck().remove(0));
 	}
 	
 	public int getCP() {
