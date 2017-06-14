@@ -135,11 +135,8 @@ public abstract class GameClient implements Serializable, ActionListener {
 	 * @param cardChanged The card to send over the network
 	 */
 	public void sendOverNetwork(Card cardChanged) {
-		ArrayList<Card> al = new ArrayList<Card>();
-		al.add(cardChanged);
-		
 		try {
-			remoteServer.receiveRecentCardChanges(name, al);
+			remoteServer.receiveRecentCardChange(name, cardChanged);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

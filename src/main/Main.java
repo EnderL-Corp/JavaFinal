@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class Main {
 		
 		try {
 			gs = new GameServer("server", 1099, serverIP);
-			gc = new Game(0, serverIP, 1099, DeckEnum.RAVAGER);
+			gc = new Game(0, serverIP, 1099, DeckEnum.RAVAGER, Color.BLUE);
 			
 			gs.createMyRegistry();
 			//gc.startup(null);
@@ -56,7 +57,7 @@ public class Main {
 		Game gc = null;
 		
 		try {
-			gc = new Game(1, serverIP, 1099, DeckEnum.DJ);
+			gc = new Game(1, serverIP, 1099, DeckEnum.DJ, Color.RED);
 			
 			//gc.startup(null);
 			

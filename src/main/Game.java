@@ -34,9 +34,10 @@ public class Game extends GameClient implements Serializable {
 	private static final long serialVersionUID = -188401400677518168L;
 	
 	private ArrayList<Card> myCards;
-	public static ArrayList<Card> graveyard = new ArrayList<Card>();
+	private ArrayList<Card> graveyard;
+	private ArrayList<Card> myHand;
 	public static Game game;
-	public static Entity[][] board = new Entity[15][15];
+	private Entity[][] board = new Entity[15][15];
 
 	private Commander commander;
 	private Deck deck;
@@ -86,6 +87,8 @@ public class Game extends GameClient implements Serializable {
 		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
 		deck = new Deck(commander.getClassType());
 		myCards = deck.getDeck();
+		graveyard = new ArrayList<Card>();
+		myHand = new ArrayList<Card>();
 		cp = deck.getCP();
 		ap = deck.getAP();
 		tp = deck.getTP();
@@ -193,16 +196,23 @@ public class Game extends GameClient implements Serializable {
 	public int getTP() {
 		return tp;
 	}
-	public int getHP() {
-		return 0;
-	}
-	public int getOpponentHP() {
-		return 0;
+	public Commander getCommander() {
+		return commander;
 	}
 	public Card[][] getBoard() {
 		return board;
 	}
 	public Color getColor() {
 		return playerColor;
+	}
+	
+	public ArrayList<Card> getDeck() {
+		return myCards;
+	}
+	public ArrayList<Card> getHand() {
+		return myHand;
+	}
+	public ArrayList<Card> getGraveyard() {
+		return graveyard;
 	}
 }
