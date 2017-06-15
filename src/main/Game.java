@@ -222,12 +222,26 @@ public class Game extends GameClient implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+	public void endGame(boolean winOrLose) {
+		try {
+			if(winOrLose) {
+				remoteServer.gameOver(this);
+				System.out.println("Congratulations, you've won!");		//Change to command log
+			}
+			else
+				System.out.println("Oh no, you've lost!");				//Change to command log
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void updateServerInformation() {
 		try {
 			recentBoard = remoteServer.getBoard();
 			myTurn = remoteServer.getTurnTag() == getTag();
+			if(remoteServer.getWinner() != null && remoteServer.getWinner().getTag() == getTag()) {
+				endGame(false);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

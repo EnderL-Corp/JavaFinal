@@ -63,7 +63,7 @@ public class Commander extends Entity
 	
 	public void kill(Entity killed)
 	{
-		Game.game.endGame((Commander)killed);
+		Game.game.endGame(false);
 	}
 	
 	public DeckEnum getClassType()

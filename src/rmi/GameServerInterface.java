@@ -27,4 +27,6 @@ public interface GameServerInterface extends Remote, Serializable{
 	boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException;
 	void endMyTurn() throws RemoteException;
 	int getTurnTag() throws RemoteException;
+	GameClient getWinner() throws RemoteException;
+	void gameOver(GameClient gc) throws RemoteException;
 }

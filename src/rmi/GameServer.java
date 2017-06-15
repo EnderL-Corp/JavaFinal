@@ -31,6 +31,8 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private Entity[][] board = new Entity[15][15];
 	private int turnTag;
 	
+	private GameClient winner = null;
+	
 	public GameServer() throws RemoteException {
 		super();
 	}	
@@ -142,6 +144,18 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public int getTurnTag() throws RemoteException {
 		return turnTag;
 	}
-	
+
+	@Override
+	public void gameOver(GameClient loser) throws RemoteException {
+		if(clients.get(0).getTag() == loser.getTag())
+			winner = clients.get(1);
+		else
+			winner = clients.get(0);
+	}
+
+	@Override
+	public GameClient getWinner() throws RemoteException {
+		return winner;
+	}
 	
 }
