@@ -99,6 +99,9 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
+		
+		gameMenu = new GameMenu();
+		gameMenu.getFrame().setVisible(true);
 	}
 	
 	public void refreshBoard() {
