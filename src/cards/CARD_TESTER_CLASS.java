@@ -1,6 +1,7 @@
 package cards;
 
 import cards.Deck.DeckEnum;
+import cards.Technique.TechEnum;
 import main.Game;
 
 public class CARD_TESTER_CLASS
@@ -27,6 +28,10 @@ public class CARD_TESTER_CLASS
 	{
 		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
 		
+		
+		//CP Testing
+		
+		
 		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
 		Entity troop2 = new Dragon(3, 4, 1, null);
 		
@@ -41,10 +46,15 @@ public class CARD_TESTER_CLASS
 		System.out.println(cardTesterClass.getCp());
 		//a Dragon costs 15 cp, so player's cp would be at -8. Because of this, the dragon should not place, and cp should remain at 7
 		
+		System.out.println("");
+		
+		
+		//AP Testing
+		
+		
 		cardTesterClass.remainingCp(15);
 		Troop.placeOnBoard((Troop)troop2, cardTesterClass.getCp());
 		// have to place Dragon in order to do ap testing
-		System.out.println("");
 		
 		System.out.println(cardTesterClass.getAp());
 		//the ap that the player has should be 12 to start out
@@ -63,7 +73,33 @@ public class CARD_TESTER_CLASS
 		System.out.println(cardTesterClass.getAp());
 		//a Dragon costs 10 ap to move, and i just gave the player 10 cp, so player's cp would be at 0, 
 		//but because the dragon is trying to move into an occupied space the dragon should not move, and ap should remain at 10
+
+		System.out.println("");
+		
+		
+		//TP Testing
+
+		
+		Technique technique1 = new Technique(TechEnum.CALL);
+		//makes a "Call" technique 
+			
+		System.out.println(cardTesterClass.getTp());
+		//the tp that the player has should be 4 to start out
+		
+		boolean techniqueUsed = false;
+		
+		if(technique1.canCast(cardTesterClass.getTp()))
+		{
+			cardTesterClass.remainingTp(cardTesterClass.getTp() - technique1.getTpCost());
+			while(techniqueUsed == false)
+			{
+				techniqueUsed = technique1.cast(null); //this would normally use an actionlistener to fill in the "null" part
+			}
+		}
+		//"Call" costs 4 tp to cast, so player's tp should now be at 0;	
 	}
+	
+	
 	
 	public int getAp()
 	{
