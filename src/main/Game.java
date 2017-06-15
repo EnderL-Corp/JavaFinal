@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import GameMenu;
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
@@ -38,17 +37,20 @@ public class Game extends GameClient implements Serializable {
 	private ArrayList<Card> graveyard;
 	private ArrayList<Card> myHand;
 	public static Game game;
-	private Entity[][] board = new Entity[15][15];
+
+	private Entity[][] recentBoard = new Entity[15][15];
 
 	private Commander commander;
 	private Deck deck;
 	private Color playerColor;
-	private JFrame frame;
+	private JFrame frame;			//TODO MAKE THIS INTO GameMenu
 
 	private int ap;
 	private int cp;
 	private int tp;
 	private int territory;
+	
+	private boolean myTurn;
 	
 	public Game() throws RemoteException {
 
@@ -85,6 +87,7 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum, Color playerColor) throws RemoteException {
 		this(tag, serverIP, serverPort);
+		this.playerColor = playerColor;
 		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
 		deck = new Deck(commander.getClassType());
 		myCards = deck.getDeck();
@@ -94,44 +97,20 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
-		this.playerColor = playerColor;
-	}
-
-	/**
-	 * Will update a card that has been changed in the other client. Only the
-	 * actionPerformed() method will ever have to interact with this.
-	 * 
-	 * @param cardToChange
-	 *            The card that has been changed and must be updated
-	 * @return true if the card has been successfully updated (it is in the list
-	 *         of cards myCards, and is changed appropriately).
-	 */
-	public boolean updateCard(Card cardToChange) {
-		for (Entity (Entity)c : board) {
-			if (c instanceof Entity && ((Entity) c).getTag() == ((Entity) cardToChange).getTag()) {
-				c = cardToChange;
-				refreshBoard();
-				frame.repaint();
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	public void refreshBoard() {
-		Entity[][] changedBoard = new Entity[15][15];
-		for(Entity e : board) {
-			
-		}
+		frame.repaint();
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		updateServerInformation();
 		try {
-			if (connected) {
-				Card card = remoteServer.getRecentCard();
-				if (remoteServer.getRecentClientName() != getName() && card != null)
-					updateCard(card);
-			}
+			if(connected)
+				if (myTurn)
+					sendRecentChanges();
+				else
+					refreshBoard();
 			if (remoteServer.getConnections() > 1)
 				for (GameClient ci : remoteServer.getGameClients()) {
 					if (ci.getTag() != getTag()) {
@@ -147,9 +126,9 @@ public class Game extends GameClient implements Serializable {
 		graveyard.add(card);
 	}
 
-	public void endGame(Commander loser) {
+	/*public void endGame(Commander loser) {		//This is a useless method where the f would it be used
 		// end the game
-	}
+	}*/
 	
 	public int getDeckSize() {
 		return myCards.size();
@@ -157,10 +136,10 @@ public class Game extends GameClient implements Serializable {
 
 	public String toString() {
 		String string = "";
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board.length; j++) {
-				if (board[i][j] != null)
-					string += board[i][j].getName() + "   ";
+		for (int i = 0; i < recentBoard.length; i++) {
+			for (int j = 0; j < recentBoard.length; j++) {
+				if (recentBoard[i][j] != null)
+					string += recentBoard[i][j].getName() + "   ";
 				else
 					string += "null\t\t";
 			}
@@ -177,7 +156,6 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER, Color.BLUE);
 			game.connectToServer();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -187,7 +165,6 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(1, serverIP, 1099, DeckEnum.DJ, Color.RED);
 			game.connectToServer();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -213,13 +190,6 @@ public class Game extends GameClient implements Serializable {
 	public Commander getCommander() {
 		return commander;
 	}
-	public Entity[][] getBoard() {
-		return board;
-	}
-	public Color getColor() {
-		return playerColor;
-	}
-	
 	public ArrayList<Card> getDeck() {
 		return myCards;
 	}
@@ -228,5 +198,35 @@ public class Game extends GameClient implements Serializable {
 	}
 	public ArrayList<Card> getGraveyard() {
 		return graveyard;
+	}
+	public Entity[][] getBoard() {
+		return recentBoard;
+	}
+	public Color getColor() {
+		return playerColor;
+	}
+	public void endTurn() {
+		try {
+			remoteServer.endMyTurn();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	public void updateServerInformation() {
+		try {
+			recentBoard = remoteServer.getBoard();
+			myTurn = remoteServer.getTurnTag() == getTag();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void sendRecentChanges() {
+		try {
+			remoteServer.updateBoard(this, recentBoard);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 }

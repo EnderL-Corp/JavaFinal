@@ -117,7 +117,6 @@ public abstract class GameClient implements Serializable, ActionListener {
 			remoteServer.connect(this);
 			System.out.println("Connected to server.");
 			connected = true;
-			test();
 		} catch(Exception e) {
 			e.printStackTrace();
 			return false;
@@ -128,30 +127,6 @@ public abstract class GameClient implements Serializable, ActionListener {
 			timer.start();
 		}
 		return connected;
-	}
-	
-	/**
-	 * Will provide the GameServer with the card that is changed.
-	 * @param cardChanged The card to send over the network
-	 */
-	public void sendOverNetwork(Card cardChanged) {
-		try {
-			remoteServer.receiveRecentCardChange(name, cardChanged);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Temporary method used to test the connection, as the name suggests.
-	 */
-	public void test() {
-		String a;
-		try {
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
 	}
 	
 	public int getTag() {

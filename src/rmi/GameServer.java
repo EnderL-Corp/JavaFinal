@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import cards.Card;
+import cards.Entity;
 
 /**
  * An RMI Server that allows for a connection between multiple GameClients.
@@ -26,6 +27,9 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	protected String myIP = "127.0.0.1";
 	
 	protected String name = "", otherIP, otherName, recentClientName = "";
+	
+	private Entity[][] board = new Entity[15][15];
+	private int turnTag;
 	
 	public GameServer() throws RemoteException {
 		super();
@@ -102,24 +106,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		clients.add(l);
 		numConnections++;
 	}
-	/*
-	private void fireActionPerformed(ActionEvent e) {
-		for(ActionListener l : clients) {
-			l.actionPerformed(e);
-		}
-	}
-	public void actionPerformed(ActionEvent e) {}*/
-
-	@Override
-	public void receiveRecentCardChange(String clientName, Card card) throws RemoteException {
-		recentChange = card;
-	}
-
-	@Override
-	public Card getRecentCard() throws RemoteException {
-		return recentChange;
-	}
-
+	
 	@Override
 	public ArrayList<GameClient> getGameClients() throws RemoteException {
 		return clients;
@@ -128,4 +115,33 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public int getConnections() {
 		return numConnections;
 	}
+
+	@Override
+	public Entity[][] getBoard() throws RemoteException {
+		return board;
+	}
+
+	@Override
+	public boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException {
+		if(gc.getTag() == turnTag) {
+			board = updated;
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void endMyTurn() throws RemoteException {
+		if(clients.get(0).getTag() == turnTag)
+			turnTag = clients.get(1).getTag();
+		else
+			turnTag = clients.get(0).getTag();
+	}
+
+	@Override
+	public int getTurnTag() throws RemoteException {
+		return turnTag;
+	}
+	
+	
 }
