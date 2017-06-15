@@ -65,4 +65,9 @@ public class GameMenu {
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		panel.add(wallpaper);
 	}
+	
+	public JFrame getFrame()
+	{
+		return frame;
+	}
 }
