@@ -2,25 +2,19 @@ package main;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
 
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
 import cards.Deck.DeckEnum;
 import cards.Entity;
-import graphics.BoardPanel;
+import graphics.GameMenu;
 import graphics.MainMenu;
-import rmi.ClientInfo;
 import rmi.GameClient;
 import rmi.GameServer;
 
@@ -43,7 +37,7 @@ public class Game extends GameClient implements Serializable {
 	private Commander commander;
 	private Deck deck;
 	private Color playerColor;
-	private JFrame frame;			//TODO MAKE THIS INTO GameMenu
+	private GameMenu gameMenu;
 
 	private int ap;
 	private int cp;
@@ -85,11 +79,9 @@ public class Game extends GameClient implements Serializable {
 	 *            The player's class
 	 * @throws RemoteException
 	 */
-	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum, Color playerColor) throws RemoteException {
+	public Game(int tag, String serverIP, int serverPort, Color playerColor) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		this.playerColor = playerColor;
-		deck = new Deck(deckEnum);
-		myCards = deck.getDeck();
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
 	}
@@ -99,8 +91,10 @@ public class Game extends GameClient implements Serializable {
 	 * of these objects need the ability to call methods off of Game, which in the constructor is
 	 * not fully constructed.
 	 */
-	public void init() {
-		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);		
+	public void init(DeckEnum deckEnum) {
+		deck = new Deck(deckEnum);
+		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);
+		myCards = deck.getDeck();
 		cp = deck.getCP();
 		ap = deck.getAP();
 		tp = deck.getTP();
@@ -161,8 +155,8 @@ public class Game extends GameClient implements Serializable {
 		try {
 			gs = new GameServer("server", 1099, serverIP);
 			gs.createMyRegistry();
-			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER, Color.BLUE);
-			game.init();
+			game = new Game(0, serverIP, 1099, Color.BLUE);
+			game.init(DeckEnum.RAVAGER);
 			game.connectToServer();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -171,8 +165,8 @@ public class Game extends GameClient implements Serializable {
 	
 	public static void createClient(String serverIP) {		
 		try {
-			game = new Game(1, serverIP, 1099, DeckEnum.DJ, Color.RED);
-			game.init();
+			game = new Game(1, serverIP, 1099, Color.RED);
+			game.init(DeckEnum.DJ);
 			game.connectToServer();
 		} catch (RemoteException e) {
 			e.printStackTrace();
