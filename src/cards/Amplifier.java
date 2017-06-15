@@ -1,5 +1,7 @@
 package cards;
 
+import main.Game;
+
 public class Amplifier extends Structure
 {
 	protected String effect;
@@ -25,13 +27,14 @@ public class Amplifier extends Structure
 		else
 		{
 			//search other amplifiers for another one with same effect
-			// if its there return true
+			//if its there return true
 		}
 		return false;
 	}
 	
 	public void sacrifice()
 	{
-		//put in graveyard
+		Game.game.addToGraveyard(this);
+		// i cant do anything until snati does something with the ampPanel that actually makes sense
 	}
 }
