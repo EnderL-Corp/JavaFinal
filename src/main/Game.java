@@ -88,11 +88,19 @@ public class Game extends GameClient implements Serializable {
 	public Game(int tag, String serverIP, int serverPort, DeckEnum deckEnum, Color playerColor) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		this.playerColor = playerColor;
-		commander = new Commander("Jimmy", "He was a good boy", deckEnum, 7, 2, -1);
-		deck = new Deck(commander.getClassType());
+		deck = new Deck(deckEnum);
 		myCards = deck.getDeck();
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
+	}
+	
+	/**
+	 * Called after creating Game. Used to avoid Null POinter Exceptions as the constructors for some 
+	 * of these objects need the ability to call methods off of Game, which in the constructor is
+	 * not fully constructed.
+	 */
+	public void init() {
+		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);		
 		cp = deck.getCP();
 		ap = deck.getAP();
 		tp = deck.getTP();
@@ -154,6 +162,7 @@ public class Game extends GameClient implements Serializable {
 			gs = new GameServer("server", 1099, serverIP);
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, DeckEnum.RAVAGER, Color.BLUE);
+			game.init();
 			game.connectToServer();
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -163,6 +172,7 @@ public class Game extends GameClient implements Serializable {
 	public static void createClient(String serverIP) {		
 		try {
 			game = new Game(1, serverIP, 1099, DeckEnum.DJ, Color.RED);
+			game.init();
 			game.connectToServer();
 		} catch (RemoteException e) {
 			e.printStackTrace();
