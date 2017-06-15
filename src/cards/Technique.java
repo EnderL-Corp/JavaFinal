@@ -4,17 +4,62 @@ import main.Game;
 
 public class Technique extends Card
 {
-	protected String eff;
+	protected TechEnum techEnum;
 	protected int tpCost;
 	private int numberOfTargets, remainingTargets; /* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/
 
-	
-	public Technique(String nm, String desc, int tp, int numTargets, String eff) 
+	public enum TechEnum
 	{
-		super(nm, desc);
-		tpCost = tp;
-		numberOfTargets = numTargets;
-		remainingTargets = numTargets;
+		GRAPE_SHOT,
+		CALL,
+		CHAIN_SHOT,
+		DRAIN,
+		BOOSTER,
+		CANNON;
+	}
+	
+	public Technique(TechEnum eff) 
+	{
+		super("" + eff, "Santi has to do this later");
+		
+		switch(eff)
+		{
+			case GRAPE_SHOT:
+				tpCost = 6;
+				numberOfTargets = -1;
+				remainingTargets = numberOfTargets;
+				break;
+			case CHAIN_SHOT:
+				tpCost = 8;
+				numberOfTargets = 4;
+				remainingTargets = numberOfTargets;
+				break;
+			case CANNON:
+				tpCost = 4;
+				numberOfTargets = -1;
+				remainingTargets = numberOfTargets;
+				break;
+			case BOOSTER:
+				tpCost = 3;
+				numberOfTargets = 1;
+				remainingTargets = numberOfTargets;
+				break;
+			case DRAIN:
+				tpCost = 7;
+				numberOfTargets = 1;
+				remainingTargets = numberOfTargets;
+				break;
+			case CALL:
+				tpCost = 4;
+				numberOfTargets = 0;
+				remainingTargets = numberOfTargets;
+				break;
+		}
+	}
+	
+	public boolean canCast(int tp)
+	{
+		return tp > tpCost;
 	}
 	
 	/**
@@ -23,7 +68,7 @@ public class Technique extends Card
 	 * @return - True if the spell is used up, false otherwise
 	 */
 	public boolean cast(Troop target)
-	{
+	{	
 		if(numberOfTargets == -1)
 		{
 			for(Entity[] row : Game.game.getBoard())
@@ -32,7 +77,7 @@ public class Technique extends Card
 				{
 					if(e instanceof Troop)
 					{
-						effect((Troop)e, name);
+						effect((Troop)e, techEnum);
 					}
 				}
 			}
@@ -40,14 +85,14 @@ public class Technique extends Card
 		}
 		else if(numberOfTargets == 0)
 		{
-			effect(null, name);
+			effect(null, techEnum);
 			return true;
 		}
 		else
 		{
 			if(remainingTargets > 0)
 			{
-				effect(target, name);
+				effect(target, techEnum);
 				remainingTargets--;
 				return false;
 			}
@@ -55,18 +100,18 @@ public class Technique extends Card
 		return true;
 	}
 
-	private void effect(Troop e, String eff) 
+	private void effect(Troop e, TechEnum eff) 
 	{
 		switch(eff)
 		{
-			case "GrapeShot":
+			case GRAPE_SHOT:
 				if(e.teamColor != Game.game.getColor())
 				{
 					e.modify(-1, 0);
 				}
 				break;
 				
-			case "ChainShot":
+			case CHAIN_SHOT:
 				if(e.teamColor != Game.game.getColor())
 				{
 					e.modify(-2, 0);
@@ -74,7 +119,7 @@ public class Technique extends Card
 				}
 				break;
 				
-			case "Cannon":
+			case CANNON:
 				if(e.teamColor != Game.game.getColor())
 				{
 					e.modify(-6, 0);
@@ -82,7 +127,7 @@ public class Technique extends Card
 				}
 				break;
 				
-			case "Booster":
+			case BOOSTER:
 				if(e.teamColor == Game.game.getColor())
 				{
 					e.modify(1, 1);
@@ -90,15 +135,20 @@ public class Technique extends Card
 				}
 				break;
 				
-			case "Drain":
+			case DRAIN:
 				e.modify(-4, 0);
 				Game.game.getCommander().modify(4, 0);
 				break;
 				
-			case "Call":
+			case CALL:
 				Game.game.drawCard();
 				Game.game.drawCard();
 				break;
 		}
+	}
+	
+	public int getTpCost()
+	{
+		return tpCost;
 	}
 }
