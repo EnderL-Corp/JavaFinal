@@ -15,7 +15,11 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 	{
 		name = nm;
 		description = desc;
-		teamColor = Game.game.getColor();
+		try {
+			teamColor = Game.game.getColor();
+		} catch(NullPointerException npe) {
+			System.out.println(npe);
+		}
 	}
 	
 	public Card()
