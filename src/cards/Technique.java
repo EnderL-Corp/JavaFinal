@@ -5,7 +5,8 @@ import main.Game;
 public class Technique extends Card
 {
 	protected String eff;
-	protected int tpCost, numberOfTargets/* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/, remainingTargets;
+	protected int tpCost;
+	private int numberOfTargets, remainingTargets; /* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/
 
 	
 	public Technique(String nm, String desc, int tp, int numTargets, String eff) 
@@ -16,7 +17,12 @@ public class Technique extends Card
 		remainingTargets = numTargets;
 	}
 	
-	public void cast(Entity target)
+	/**
+	 * 
+	 * @param target - The troop to target
+	 * @return - True if the spell is used up, false otherwise
+	 */
+	public boolean cast(Troop target)
 	{
 		if(numberOfTargets == -1)
 		{
@@ -24,25 +30,32 @@ public class Technique extends Card
 			{
 				for(Entity e : row)
 				{
-					effect(e, name);
+					if(e instanceof Troop)
+					{
+						effect((Troop)e, name);
+					}
 				}
 			}
+			return true;
 		}
 		else if(numberOfTargets == 0)
 		{
 			effect(null, name);
+			return true;
 		}
 		else
 		{
 			if(remainingTargets > 0)
 			{
 				effect(target, name);
+				remainingTargets--;
+				return false;
 			}
-			remainingTargets = numberOfTargets;
-		} //Only this case still needs work
+		}
+		return true;
 	}
 
-	private void effect(Entity e, String eff) 
+	private void effect(Troop e, String eff) 
 	{
 		switch(eff)
 		{

@@ -11,33 +11,40 @@ import javax.sound.sampled.Clip;
 /**
  * @author Luke
  * Runs audio, based on the name of the thread. Legal names are 
- * "MainMenu", "InGame", "MeleeHit", "RangeHit"
+ * "MenuMusic", "Game Music", "FX"
+ * If running FX, a second String is required, legal arguments are "Blast", "Deflect", "Melee", "Mirror", "Range"
  */
 public class Audio extends Thread
 {
 	private Thread t;
 	private String threadName;
+	private String effect;
+	private String[] queuedEffects;
 	private static boolean onMenu;
 	   
 	public static void main(String[] args)
 	{
-		Audio main = new Audio("MainMenu");
-		main.start();
+		//Audio main = new Audio("MainMenu");
 		
 		//Audio game = new Audio("InGame");
-		//game.start();
 		
-		//Audio r = new Audio("RangeHit");
-		//r.start();
-		
-		//Audio m = new Audio("MeleeHit");
-		//m.start();
+		//Audio fx = new Audio("FX", "Range");
+		//Audio fx2 = new Audio("FX", "Deflect");
+		//Audio fx3 = new Audio("FX", "Mirror");
 	}
 	
 	public Audio(String name)
 	{
 		threadName = name;
 		System.out.println("Created an audio process with name " + name);
+		start();
+	}
+	
+	public Audio(String name, String eff)
+	{
+		threadName = name;
+		System.out.println("Created an audio process with name " + name);
+		effect = eff;
 		start();
 	}
 
@@ -56,12 +63,8 @@ public class Audio extends Thread
 				gameMusic(); //Aww.. No alliteration
 				break;
 				
-			case "MeleeHit":
-				meleeHit();
-				break;
-				
-			case "RangeHit":
-				rangeHit();
+			case "FX":
+				soundFX(effect);
 				break;
 		}
 	}
@@ -75,33 +78,17 @@ public class Audio extends Thread
 	         t.start(); 
 	    }
 	}
-	
-	public void meleeHit()
-	{
-		System.out.print("reached line");
-		try 
-		{
-			Clip clip = AudioSystem.getClip();
-			File file = new File("Audio/SoundFX/Melee.wav/");
-			clip.open(AudioSystem.getAudioInputStream(file));
-			clip.start();
-			Thread.sleep(clip.getMicrosecondLength());
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 
-	}
-	
-	public void rangeHit()
+
+	public void soundFX(String effect)
 	{
 		try 
 		{
 			Clip clip = AudioSystem.getClip();
-			File file = new File("Audio/SoundFX/Range.wav/");
+			File file = new File("Audio/SoundFX/" + effect + ".wav/");
 			clip.open(AudioSystem.getAudioInputStream(file));
 			clip.start();
-			Thread.sleep(clip.getMicrosecondLength());
+			Thread.sleep((long)((double)clip.getMicrosecondLength() / 1000));
+			clip.close();
 		} 
 		catch (Exception e) 
 		{
