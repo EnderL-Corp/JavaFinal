@@ -1,20 +1,69 @@
 package cards;
 
+import java.util.ArrayList;
+
 import main.Game;
 
 public class Gear extends Structure
 {
-	protected String ability;
+	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}
+	protected GearEnum gearEnum;
 	
-	public Gear(String nm, String desc, String ab) 
+	public enum GearEnum
 	{
-		super(nm, desc);
-		ability = ab;
+		MIRROR,
+		LAUNCHER,
+		EXPLOSIVES,
+		ELECTROMAGNET,
+		SHIELD,
+		SPEED_BOOST;
 	}
 	
-	public void effect(Entity effected)
+	public Gear(GearEnum gEnum) 
 	{
-		//effect
-		Game.game.addToGraveyard(this);
+		super("" + gEnum, "Santi can do this");
+		gearEnum = gEnum;
+	}
+	
+	public void effect(Troop effected)
+	{
+		switch(gearEnum) 
+		{
+			case MIRROR:
+			{
+				effected.addAbilities(4);
+				break;
+			}
+			case LAUNCHER:
+			{
+				effected.addAbilities(3);
+				break;
+			}
+			case EXPLOSIVES:			
+			{
+				effected.addAbilities(2);
+				break;
+			}
+			case ELECTROMAGNET:			
+			{
+				effected.addAbilities(0);
+				break;
+			}
+			case SHIELD:			
+			{
+				effected.addAbilities(1);
+				break;
+			}
+			case SPEED_BOOST:			
+			{
+				effected.changeApCost(-2);
+				break;
+			}
+		}
+	}
+	
+	public GearEnum getGearEnum()
+	{
+		return gearEnum;
 	}
 }
