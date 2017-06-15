@@ -3,6 +3,8 @@ package cards;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import cards.Gear.GearEnum;
+
 public class Deck implements Serializable{
 	private static final long serialVersionUID = -3276572470774611765L;
 
@@ -35,13 +37,13 @@ public class Deck implements Serializable{
 			deck.add(new Android(0,0,0,TroopEnum.DUMMY));
 			deck.add(new Android(0,0,0,TroopEnum.DUMMY));
 			deck.add(new Android(0,0,0,TroopEnum.BLASTER));
-			deck.add(new Gear("Speed Boost", null, null));
-			deck.add(new Gear("Launcher", null, null));
-			deck.add(new Gear("Launcher", null, null));
-			deck.add(new Gear("Mirror", null, null));
-			deck.add(new Gear("Mirror", null, null));
-			deck.add(new Gear("Shield", null, null));
-			deck.add(new Gear("Shield", null, null));
+			deck.add(new Gear(GearEnum.SPEED_BOOST));
+			deck.add(new Gear(GearEnum.LAUNCHER));
+			deck.add(new Gear(GearEnum.LAUNCHER));
+			deck.add(new Gear(GearEnum.MIRROR));
+			deck.add(new Gear(GearEnum.MIRROR));
+			deck.add(new Gear(GearEnum.SHIELD));
+			deck.add(new Gear(GearEnum.SHIELD));
 			deck.add(new Technique("Cannon", null, 0, 0, null));
 			deck.add(new Technique("Cannon", null, 0, 0, null));
 			
@@ -63,8 +65,8 @@ public class Deck implements Serializable{
 			deck.add(new Cyborg(0,0,0,TroopEnum.DEFLECTOR));
 			deck.add(new Android(0,0,0,null));
 			deck.add(new Android(0,0,0,null));
-			deck.add(new Gear("Electromagnet", null, null));
-			deck.add(new Gear("Shield", null, null));
+			deck.add(new Gear(GearEnum.ELECTROMAGNET));
+			deck.add(new Gear(GearEnum.SHIELD));
 			deck.add(new Technique("Grape Shot", null, 0, 0, null));
 			deck.add(new Technique("Grape Shot", null, 0, 0, null));
 			deck.add(new Technique("Call", null, 0, 0, null));
@@ -101,10 +103,10 @@ public class Deck implements Serializable{
 			deck.add(new Cyborg(0,0,0,TroopEnum.RANGER));
 			deck.add(new Cyborg(0,0,0,TroopEnum.RANGER));
 			deck.add(new Cyborg(0,0,0,TroopEnum.BLASTER));
-			deck.add(new Gear("Launcher", null, null));
-			deck.add(new Gear("Launcher", null, null));
-			deck.add(new Gear("Electromagnet", null, null));
-			deck.add(new Gear("Mirror", null, null));
+			deck.add(new Gear(GearEnum.LAUNCHER));
+			deck.add(new Gear(GearEnum.LAUNCHER));
+			deck.add(new Gear(GearEnum.ELECTROMAGNET));
+			deck.add(new Gear(GearEnum.MIRROR));
 			deck.add(new Technique("Call", null, 0, 0, null));
 			deck.add(new Amplifier("Dronesday Device", null, null, 0));
 			deck.add(new Amplifier("Dronesday Device", null, null, 0));
