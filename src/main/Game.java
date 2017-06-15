@@ -105,7 +105,7 @@ public class Game extends GameClient implements Serializable {
 	}
 	
 	public void refreshBoard() {
-		frame.repaint();
+		gameMenu.refresh();
 	}
 
 	public void actionPerformed(ActionEvent e) {

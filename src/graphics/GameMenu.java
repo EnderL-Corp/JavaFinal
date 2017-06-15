@@ -9,9 +9,15 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class GameMenu {
-
+public class GameMenu implements java.io.Serializable{
+	private static final long serialVersionUID = -203776595464586989L;
+	
 	private JFrame frame;
+	private CommandLog log;
+	private BoardPanel board;
+	private AmpPanel amps;
+	private JPanel panel;
+	
 
 	/**
 	 * Launch the application.
@@ -46,24 +52,28 @@ public class GameMenu {
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		
-		CommandLog log = new CommandLog();
+		log = new CommandLog();
 		log.setBounds(38, 881, 402, 55);
 		frame.getContentPane().add(log);
 		
-		BoardPanel board = new BoardPanel();
+		board = new BoardPanel();
 		board.setBounds(59, -24, 648, 641);
 		frame.getContentPane().add(board);
 		
-		AmpPanel amps = new AmpPanel();
+		amps = new AmpPanel();
 		amps.setBounds(38, 788, 402, 66);
 		frame.getContentPane().add(amps);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(1424, 861, 460, 171);
 		frame.getContentPane().add(panel);
 		
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		panel.add(wallpaper);
+	}
+	
+	public void refresh() {
+		board.repaint();
 	}
 	
 	public JFrame getFrame()
