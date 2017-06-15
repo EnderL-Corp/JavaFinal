@@ -1,5 +1,7 @@
 package cards;
 
+import java.util.ArrayList;
+
 import main.Game;
 
 public class Troop extends Entity
@@ -7,6 +9,7 @@ public class Troop extends Entity
 	protected boolean[] abilities = new boolean[6]; //in this order: {provoke, deflect, blast, range, mirror, void}
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
+	protected static ArrayList<Gear> gearArray = new ArrayList<Gear>(); 
 
 	public Troop(int tag) 
 	{
@@ -105,12 +108,25 @@ public class Troop extends Entity
 	{
 		Game.game.addToGraveyard(killed);
 		Game.game.getBoard()[killed.xCoordinate][killed.yCoordinate] = null;
+		
+		for(int i = gearArray.size(); i > 0; i --)
+		{
+			if(gearArray.get(i) != null)
+			{
+			Game.game.addToGraveyard(new Gear(gearArray.get(i).getGearEnum()));
+			gearArray.remove(i);
+			}
+		}
 	}
 	
 	public int getCurrentApCost() {
 		return currentApCost;
 	}
 
+	public void changeApCost(int ap) {
+		currentApCost += ap;
+	}
+	
 	public boolean[] getAbilities() {
 		return abilities;
 	}
@@ -121,6 +137,11 @@ public class Troop extends Entity
 			return cp;
 		Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = placed;
 		return cp - placed.getCpCost();
+	}
+	
+	public static void equipGear(Gear gear)
+	{
+		gearArray.add(gear);
 	}
 }
 
