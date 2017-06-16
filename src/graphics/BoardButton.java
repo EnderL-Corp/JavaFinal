@@ -73,5 +73,10 @@ public class BoardButton extends JButton implements Accessible, ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		Entity entity = Game.game.getBoard()[xPos][yPos];
+		if(Game.game.getCurrentPlayerAction() == 'm' || Game.game.getCurrentPlayerAction() == 'a' || Game.game.getCurrentPlayerAction() == 'p')
+		{
+			Game.game.addToPlayerActionQueue(entity);
+			
+		}
 	}
 }

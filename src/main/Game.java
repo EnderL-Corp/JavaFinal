@@ -5,8 +5,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
+import java.util.List;
 
 import cards.Card;
 import cards.Commander;
@@ -40,6 +39,7 @@ public class Game extends GameClient implements Serializable {
 	private GameMenu gameMenu;
 
 	private char currentPlayerAction;
+	private List<Card> queuePlayerAction;
 	
 	private int ap;
 	private int cp;
@@ -224,6 +224,7 @@ public class Game extends GameClient implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
 	public void endGame(boolean winOrLose) {
 		try {
 			if(winOrLose) {
@@ -256,6 +257,11 @@ public class Game extends GameClient implements Serializable {
 		}
 	}
 	
+	public void placeEntity(Entity e, int x, int y)
+	{
+		recentBoard[x][y] = e;
+	}
+	
 	public char getCurrentPlayerAction()
 	{
 		return currentPlayerAction;
@@ -264,5 +270,32 @@ public class Game extends GameClient implements Serializable {
 	public void setCurrentPlayerAction(char a)
 	{
 		currentPlayerAction = a;
+	}
+	
+	public void addToPlayerActionQueue(Card c)
+	{
+		queuePlayerAction.add(c);
+	}
+	
+	public void clearPlayerActionQueue(Card c)
+	{
+		queuePlayerAction.clear();
+	}
+	
+	public void checkPlayerActionQueue()
+	{
+		if(queuePlayerAction.size() == 2)
+		{
+			executePlayerActionQueue();
+		}
+		else if(queuePlayerAction.size() > 2)
+		{
+			
+		}
+	}
+	
+	public void executePlayerActionQueue()
+	{
+		
 	}
 }
