@@ -149,7 +149,7 @@ public class Troop extends Entity
 	
 	public static int placeOnBoard(Troop placed, int cp)
 	{
-		if(cp < placed.getCpCost() || Game.game.getBoard()[placed.getPosX()][placed.getPosY()] != null)
+		if(cp < placed.getCpCost() || Game.game.getEntityAt(placed.getPosX(), placed.getPosY()) != null)
 			return cp;
 		Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = placed;
 		return cp - placed.getCpCost();
