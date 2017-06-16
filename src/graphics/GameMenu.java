@@ -64,12 +64,11 @@ public class GameMenu implements java.io.Serializable{
 		amps.setBounds(38, 788, 402, 66);
 		frame.getContentPane().add(amps);
 		
-		panel = new JPanel();
-		panel.setBounds(1424, 861, 460, 171);
-		frame.getContentPane().add(panel);
-		
-		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
+		/*panel = new JPanel();
+		panel.setBounds(1424, 861, 460, 171);*/
+		/*JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		panel.add(wallpaper);
+		frame.getContentPane().add(panel);*/
 	}
 	
 	public void refresh() {

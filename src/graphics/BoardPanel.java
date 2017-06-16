@@ -1,23 +1,26 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
-	private BoardButton[][] buttons = new BoardButton[15][15];
+	private JButton[][] buttons = new JButton[15][15];
 
 	public BoardPanel() {
-		for(int i = 0; i < buttons.length; i++) {
+		/*for(int i = 0; i < buttons.length; i++) {
 			for(int j = 0; j < buttons[0].length; j++) {
-				buttons[i][j] = new BoardButton(i, j);
+				buttons[i][j] = new BoardButton();
 			}
-		}
+		}*/
 		setLayout(new GridLayout());
 		init();
 	}
@@ -30,7 +33,7 @@ public class BoardPanel extends JPanel {
 
 		for (int i = 0; i < numTiles; i++) {
 			for (int j = 0; j < numTiles; j++) {
-				BoardButton bb = buttons[i][j];
+				JButton bb = buttons[i][j] = new JButton();
 				bb.setBackground(Color.WHITE);
 				bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				this.add(bb);
@@ -58,19 +61,19 @@ public class BoardPanel extends JPanel {
 						|| ((i == 5 || i == numTiles - 6) && (j == 6 || j == 7 || j == numTiles - 7))
 						|| ((i == 6 || i == 7 || i == numTiles - 7)
 								&& (j == 5 || j == 6 || j == 7 || j == numTiles - 7 || j == numTiles - 6))) {
-					BoardButton bb = buttons[i][j];
+					JButton bb = buttons[i][j];
 					bb.setBackground(Color.BLACK);
 					bb.setIcon(null);
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				} else {
-					BoardButton bb = buttons[i][j];
+					JButton bb = buttons[i][j];
 					bb.setBackground(Color.WHITE);
 					bb.setIcon(null);
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 
 				if (j == commanderPosX && i == commanderPosY) {
-					BoardButton bb = buttons[i][j];
+					JButton bb = buttons[i][j];
 					//bb.setBackground(Color.RED);
 					bb.setIcon(new ImageIcon("Sprites/DJ.png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
@@ -118,5 +121,13 @@ public class BoardPanel extends JPanel {
 			break;
 		}
 		commanderPosX = numTiles / 2;
+	}
+	
+	public static void main(String[] args) {
+		JFrame f = new JFrame();
+		f.add(new BoardPanel());
+		f.setSize(700, 700);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
 	}
 }
