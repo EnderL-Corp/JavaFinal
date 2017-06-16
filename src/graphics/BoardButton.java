@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cards.Entity;
+import main.Game;
+
 /**
  * Button of the board
  * @author Srihari Subramanian, Luke Letourneau
@@ -69,6 +72,6 @@ public class BoardButton extends JButton implements Accessible, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		
+		Entity entity = Game.game.getBoard()[xPos][yPos];
 	}
 }

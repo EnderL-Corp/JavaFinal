@@ -39,6 +39,8 @@ public class Game extends GameClient implements Serializable {
 	private Color playerColor;
 	private GameMenu gameMenu;
 
+	private char currentPlayerAction;
+	
 	private int ap;
 	private int cp;
 	private int tp;
@@ -252,5 +254,15 @@ public class Game extends GameClient implements Serializable {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public char getCurrentPlayerAction()
+	{
+		return currentPlayerAction;
+	}
+	
+	public void setCurrentPlayerAction(char a)
+	{
+		currentPlayerAction = a;
 	}
 }
