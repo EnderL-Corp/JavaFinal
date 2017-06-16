@@ -4,9 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import main.Game;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.net.UnknownHostException;
+
 import javax.swing.JLabel;
 
 public class NewMainMenu {
@@ -42,7 +48,7 @@ public class NewMainMenu {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1280, 1024);
+		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -65,7 +71,6 @@ public class NewMainMenu {
 		JButton quit = new JButton("Quit Game");
 		quit.setFont(new Font("Tahoma", Font.BOLD, 20));
 		quit.setBounds(10, 344, 180, 97);
-		
 		frame.getContentPane().add(quit);
 		
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
