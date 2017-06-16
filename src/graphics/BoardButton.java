@@ -21,18 +21,21 @@ import com.sun.prism.Graphics;
 public class BoardButton extends JButton implements Accessible {
 
 	private static final long serialVersionUID = 1L;
+	
+	private int xPos, yPos;
 
-	public BoardButton() {
-		this(null, null);
+	public BoardButton(int x, int y) {
+		this(x, y, null, null);
 	}
 	
-	public BoardButton(String text) {
-		this(text, null);
+	public BoardButton(int x, int y, String text) {
+		this(x, y, text, null);
 	}
 
-	public BoardButton(String text, Icon icon) {
+	public BoardButton(int x, int y, String text, Icon icon) {
 		setModel(new DefaultButtonModel());
-
+		xPos = x;
+		yPos = y;
 		init(text, icon);
 	}
 	
@@ -41,7 +44,7 @@ public class BoardButton extends JButton implements Accessible {
 		JPanel p = new JPanel();/*
 		Graphics g = (Graphics) p.getGraphics();*/
 		ImageIcon myImage = new ImageIcon("Sprites/SpriteTest");
-		BoardButton b = new BoardButton("Test button", myImage);
+		BoardButton b = new BoardButton(0, 0, "Test button", myImage);
 		b.setBackground(Color.CYAN);
 		b.setSize(500, 500);
 		p.add(b);
@@ -52,5 +55,15 @@ public class BoardButton extends JButton implements Accessible {
 		f.setSize(600, 600);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+	}
+	
+	public int getX()
+	{
+		return xPos;
+	}
+	
+	public int getY()
+	{
+		return yPos;
 	}
 }

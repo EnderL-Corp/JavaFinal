@@ -3,8 +3,6 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -17,7 +15,7 @@ public class BoardPanel extends JPanel {
 	public BoardPanel() {
 		for(int i = 0; i < buttons.length; i++) {
 			for(int j = 0; j < buttons[0].length; j++) {
-				buttons[i][j] = new BoardButton();
+				buttons[i][j] = new BoardButton(i, j);
 			}
 		}
 		setLayout(new GridLayout());
