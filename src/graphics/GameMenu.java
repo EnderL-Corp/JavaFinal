@@ -9,6 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+/**
+ * 
+ * @author Santiago Callegari, Srihari Subramanian
+ *
+ */
 public class GameMenu implements java.io.Serializable{
 	private static final long serialVersionUID = -203776595464586989L;
 	

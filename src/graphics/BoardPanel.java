@@ -7,7 +7,13 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Srihari Subramanian, Andre Artaud
+ *
+ */
 public class BoardPanel extends JPanel {
+	private static final long serialVersionUID = -4878656113936274740L;
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
 	private BoardButton[][] buttons = new BoardButton[15][15];

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import cards.Gear.GearEnum;
 import cards.Technique.TechEnum;
 
+/**
+ * Stores the deck of the game
+ * @author Srihari Subramanian
+ *
+ */
 public class Deck implements Serializable{
 	private static final long serialVersionUID = -3276572470774611765L;
 
