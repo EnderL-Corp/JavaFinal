@@ -87,8 +87,8 @@ public class Audio extends Thread
 			File file = new File("Audio/SoundFX/" + effect + ".wav/");
 			clip.open(AudioSystem.getAudioInputStream(file));
 			clip.start();
-			Thread.sleep((long)((double)clip.getMicrosecondLength() / 1000));
-			clip.close();
+			//Thread.sleep((long)((double)clip.getMicrosecondLength() / 1000));
+			//clip.close();
 		} 
 		catch (Exception e) 
 		{
