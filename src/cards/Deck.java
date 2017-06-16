@@ -3,6 +3,7 @@ package cards;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import cards.Amplifier.AmpEnum;
 import cards.Gear.GearEnum;
 import cards.Technique.TechEnum;
 
@@ -81,10 +82,10 @@ public class Deck implements Serializable{
 			deck.add(new Technique(TechEnum.CANNON));
 			deck.add(new Technique(TechEnum.CANNON));
 			deck.add(new Technique(TechEnum.DRAIN));
-			deck.add(new Amplifier("Healing Wave", null, null, 0));
-			deck.add(new Amplifier("Healing Wave", null, null, 0));
-			deck.add(new Amplifier("Short Circuit", null, null, 0));
-			deck.add(new Amplifier("Short Circuit", null, null, 0));
+			deck.add(new Amplifier(AmpEnum.HEALING_WAVE));
+			deck.add(new Amplifier(AmpEnum.HEALING_WAVE));
+			deck.add(new Amplifier(AmpEnum.SHORT_CIRCUIT));
+			deck.add(new Amplifier(AmpEnum.SHORT_CIRCUIT));
 			
 			cp = 8;
 			ap = 16;
@@ -114,12 +115,12 @@ public class Deck implements Serializable{
 			deck.add(new Gear(GearEnum.ELECTROMAGNET));
 			deck.add(new Gear(GearEnum.MIRROR));
 			deck.add(new Technique(TechEnum.CALL));
-			deck.add(new Amplifier("Dronesday Device", null, null, 0));
-			deck.add(new Amplifier("Dronesday Device", null, null, 0));
-			deck.add(new Amplifier("Overdraw", null, null, 0));
-			deck.add(new Amplifier("Overdraw", null, null, 0));
-			deck.add(new Amplifier("Healing Wave", null, null, 0));
-			deck.add(new Amplifier("Healing Wave", null, null, 0));
+			deck.add(new Amplifier(AmpEnum.DRONESDAY_DEVICE));
+			deck.add(new Amplifier(AmpEnum.DRONESDAY_DEVICE));
+			deck.add(new Amplifier(AmpEnum.OVERDRAW));
+			deck.add(new Amplifier(AmpEnum.OVERDRAW));
+			deck.add(new Amplifier(AmpEnum.HEALING_WAVE));
+			deck.add(new Amplifier(AmpEnum.HEALING_WAVE));
 			
 			cp = 12;
 			ap = 12;
