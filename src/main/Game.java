@@ -17,6 +17,7 @@ import cards.Gear;
 import cards.Structure;
 import cards.Technique;
 import cards.Troop;
+import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
 import rmi.GameClient;
@@ -107,6 +108,10 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
+		for(int i = 0; i < 5; i++)
+		{
+			updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
+		}
 		
 		gameMenu = new GameMenu();
 		gameMenu.getFrame().setVisible(true);
@@ -291,9 +296,9 @@ public class Game extends GameClient implements Serializable {
 		{
 			for(int i = 0; i < ampPanel.length; i++)
 			{
-				if(Game.game.getAmpAt(i).getName() == this.getName() && updated == false)
+				if(Game.game.getAmpAt(i).getName() == this.getName() && updated == false) //XXX Replace "this" with "amp"?
 				{
-					ampPanel[i] = null;
+					ampPanel[i] = new Amplifier(AmpEnum.NONE);
 					updated = true;
 				}
 			}
@@ -352,6 +357,7 @@ public class Game extends GameClient implements Serializable {
 					//Get a second position SOMEHOW
 				}
 				break;
+				
 			case 'a':
 				if(first instanceof Entity && second instanceof Entity)
 				{
@@ -361,6 +367,7 @@ public class Game extends GameClient implements Serializable {
 					}
 				}
 				break;
+				
 			case 'p':
 				if(first instanceof Technique && second instanceof Troop)
 				{
@@ -377,10 +384,17 @@ public class Game extends GameClient implements Serializable {
 					((Gear)first).effect((Troop)second);
 				}
 				break;
+				
 			case 's':
-				if(first instanceof Amplifier && second instanceof Structure && ((Structure)second).getName().equals("Open"));
+				if(first instanceof Amplifier && second instanceof Amplifier && ((Amplifier)second).getAmpType().equals(AmpEnum.NONE));
 				{
-					//Need Snati's system
+					for(int i = 0; i < 5; i++)
+					{
+						if(getAmpAt(i) == second)
+						{
+							updateAmpPanel((Amplifier)first, false);
+						}
+					}
 				}
 				break;
 		}

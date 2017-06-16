@@ -12,7 +12,8 @@ public class Amplifier extends Structure
 		DRONESDAY_DEVICE,
 		OVERDRAW,
 		HEALING_WAVE,
-		SHORT_CIRCUIT;
+		SHORT_CIRCUIT,
+		NONE;
 	}
 	
 	public Amplifier(AmpEnum ampEnum) 
@@ -42,6 +43,12 @@ public class Amplifier extends Structure
 			case SHORT_CIRCUIT:		
 			{
 				numberNeededForReq = 2;
+				currentEnum = ampEnum;
+				break;
+			}
+			case NONE:
+			{
+				numberNeededForReq = 0;
 				currentEnum = ampEnum;
 				break;
 			}
@@ -110,5 +117,11 @@ public class Amplifier extends Structure
 	{
 		Game.game.addToGraveyard(this);
 		Game.game.updateAmpPanel(null, true);
+		Game.game.updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
+	}
+	
+	public AmpEnum getAmpType()
+	{
+		return currentEnum;
 	}
 }
