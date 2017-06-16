@@ -25,41 +25,37 @@ public class Gear extends Structure
 		gearEnum = gEnum;
 	}
 	
-	public void effect(Troop effected)
+	public boolean effect(Troop effected)
 	{
 		switch(gearEnum) 
 		{
 			case MIRROR:
 			{
-				effected.addAbilities(4);
-				break;
+				return effected.addAbilities(4);
 			}
 			case LAUNCHER:
 			{
-				effected.addAbilities(3);
-				break;
+				return effected.addAbilities(3);
 			}
 			case EXPLOSIVES:			
 			{
-				effected.addAbilities(2);
-				break;
+				return effected.addAbilities(2);
 			}
 			case ELECTROMAGNET:			
 			{
-				effected.addAbilities(0);
-				break;
+				return effected.addAbilities(0);
 			}
 			case SHIELD:			
 			{
-				effected.addAbilities(1);
-				break;
+				return effected.addAbilities(1);
 			}
 			case SPEED_BOOST:			
 			{
 				effected.changeApCost(-2);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	public GearEnum getGearEnum()

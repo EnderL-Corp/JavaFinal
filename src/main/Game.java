@@ -7,11 +7,16 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cards.Amplifier;
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
 import cards.Deck.DeckEnum;
 import cards.Entity;
+import cards.Gear;
+import cards.Structure;
+import cards.Technique;
+import cards.Troop;
 import graphics.GameMenu;
 import graphics.MainMenu;
 import rmi.GameClient;
@@ -290,12 +295,53 @@ public class Game extends GameClient implements Serializable {
 		}
 		else if(queuedPlayerActions.size() > 2)
 		{
-			
+			//do something
 		}
 	}
 	
 	public void executePlayerActionQueue()
 	{
-		
+		Card first = queuedPlayerActions.get(0);
+		Card second = queuedPlayerActions.get(0);
+		switch(currentPlayerAction)
+		{
+			case 'm':
+				if(first instanceof Entity)
+				{
+					//Get a second position SOMEHOW
+				}
+				break;
+			case 'a':
+				if(first instanceof Entity && second instanceof Entity)
+				{
+					if(!(((Entity)first).hasAbility(3) && second instanceof Commander))
+					{
+						((Entity)first).attack((Entity)second);
+					}
+				}
+				break;
+			case 'p':
+				if(first instanceof Technique && second instanceof Troop)
+				{
+					if(((Technique)first).canCast(tp))
+					{
+						while (((Technique)first).cast((Troop)second))
+						{
+							//select next target
+						} 
+					}
+				}
+				else if(first instanceof Gear && second instanceof Troop)
+				{
+					((Gear)first).effect((Troop)second);
+				}
+				break;
+			case 's':
+				if(first instanceof Amplifier && second instanceof Structure && ((Structure)second).getName().equals("Open"));
+				{
+					//Need Snati's system
+				}
+				break;
+		}
 	}
 }
