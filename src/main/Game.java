@@ -274,21 +274,21 @@ public class Game extends GameClient implements Serializable {
 	
 	public void addToPlayerActionQueue(Card c)
 	{
-		queuePlayerAction.add(c);
+		queuedPlayerActions.add(c);
 	}
 	
 	public void clearPlayerActionQueue(Card c)
 	{
-		queuePlayerAction.clear();
+		queuedPlayerActions.clear();
 	}
 	
 	public void checkPlayerActionQueue()
 	{
-		if(queuePlayerAction.size() == 2)
+		if(queuedPlayerActions.size() == 2)
 		{
 			executePlayerActionQueue();
 		}
-		else if(queuePlayerAction.size() > 2)
+		else if(queuedPlayerActions.size() > 2)
 		{
 			
 		}
