@@ -20,7 +20,10 @@ public class AudioTester extends JFrame implements ActionListener
 	
 	private static final long serialVersionUID = 1L;
 	JButton range;
+	JButton blast;
 	JButton melee;
+	JButton deflect;
+	JButton mirror;
 	JButton mm;
 	JButton gm;
 
@@ -39,6 +42,15 @@ public class AudioTester extends JFrame implements ActionListener
 		range = new JButton("Range");
 		range.setActionCommand("r");
 		range.addActionListener(this);
+		blast = new JButton("Blast");
+		blast.setActionCommand("b");
+		blast.addActionListener(this);
+		deflect = new JButton("Deflect");
+		deflect.setActionCommand("d");
+		deflect.addActionListener(this);
+		mirror = new JButton("Mirror");
+		mirror.setActionCommand("mi");
+		mirror.addActionListener(this);
 		melee = new JButton("Melee");
 		melee.setActionCommand("m");
 		melee.addActionListener(this);
@@ -51,6 +63,9 @@ public class AudioTester extends JFrame implements ActionListener
 
 		add(range);
 		add(melee);
+		add(blast);
+		add(deflect);
+		add(mirror);
 		add(mm);
 		add(gm);
 }
@@ -60,14 +75,20 @@ public class AudioTester extends JFrame implements ActionListener
 		
 		String a = e.getActionCommand();
 		if (a.equals("r")) {
-			au = new Audio("RangeHit");
+			au = new Audio("FX", "Range");
 		} else if (a.equals("mmm")) {
 			au = new Audio("MainMenu");
 		} else if (a.equals("m")) {
-			au = new Audio("MeleeHit");
+			au = new Audio("FX", "Melee");
 		} else if (a.equals("gm")){
 			au = new Audio("InGame");
-		}
+		} else if (a.equals("b")){
+			au = new Audio("FX", "Blast");
+		} else if (a.equals("d")){
+			au = new Audio("FX", "Deflect");
+		} else if (a.equals("mi")){
+			au = new Audio("FX", "Mirror");
+		} 
 
 	}
 
