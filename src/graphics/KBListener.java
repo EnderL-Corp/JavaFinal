@@ -13,18 +13,17 @@ public class KBListener implements KeyListener
 	@Override
 	public void keyTyped(KeyEvent e) 
 	{
-		//Leave Empty
+		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
-		//Leave Empty
+		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) 
 	{
-		//Put code here
 	}
 }
