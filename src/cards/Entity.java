@@ -1,5 +1,6 @@
 package cards;
 
+import main.Audio;
 import main.Game;
 
 public abstract class Entity extends Card
@@ -45,12 +46,38 @@ public abstract class Entity extends Card
 	
 	public void dealDamage(Entity defender)
 	{
+		if(this instanceof Troop)
+		{
+			if(((Troop)this).hasAbility(3))
+			{
+				fx = new Audio("FX", "Range");
+			}
+			else if(((Troop)this).hasAbility(2))
+			{
+				fx = new Audio("FX", "Blast");
+			}
+			else
+			{
+				fx = new Audio("FX", "Melee");
+			}
+		}
+		else
+		{
+			fx = new Audio("FX", "Melee");
+		}
+		
 		if(defender.getAbilities() != null)
 		{
 			if(defender.canMirror())
+			{
+				fx = new Audio("FX", "Mirror");
 				currentHealth -= defender.getCurrentAttack() / 2;
+			}
 			if(defender.canDeflect())
+			{
+				fx = new Audio("FX", "Deflect");
 				return;
+			}
 		}
 		defender.currentHealth -= this.currentAttack;
 		if(defender.currentHealth <= 0)

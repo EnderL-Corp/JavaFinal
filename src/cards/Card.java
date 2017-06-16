@@ -3,6 +3,7 @@ package cards;
 import java.awt.Color;
 import java.io.Serializable;
 
+import main.Audio;
 import main.Game;
 
 public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABLE. THIS IS NEEDED FOR SENDING OVER NETWORK
@@ -10,6 +11,8 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 	private static final long serialVersionUID = 1L;
 	protected Color teamColor;
 	protected String name, description;
+	
+	protected Audio fx;
 	
 	public Card(String nm, String desc)
 	{
