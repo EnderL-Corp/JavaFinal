@@ -2,6 +2,11 @@ package cards;
 
 import main.Game;
 
+/**
+ * 
+ * @author Luke Letourneau, André Artaud
+ *
+ */
 public class Technique extends Card
 {
 	protected TechEnum techEnum;

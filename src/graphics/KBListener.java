@@ -3,6 +3,11 @@ package graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * 
+ * @author Luke Letourneau
+ *
+ */
 public class KBListener implements KeyListener 
 {
 	@Override

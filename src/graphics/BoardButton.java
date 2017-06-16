@@ -1,9 +1,10 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.accessibility.Accessible;
-import javax.swing.AbstractButton;
 import javax.swing.DefaultButtonModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -11,14 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.sun.prism.Graphics;
-
 /**
  * Button of the board
- * @author Srihari Subramanian
+ * @author Srihari Subramanian, Luke Letourneau
  *
  */
-public class BoardButton extends JButton implements Accessible {
+public class BoardButton extends JButton implements Accessible, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -65,5 +64,11 @@ public class BoardButton extends JButton implements Accessible {
 	public int getY()
 	{
 		return yPos;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		
 	}
 }
