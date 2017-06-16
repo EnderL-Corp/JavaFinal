@@ -25,6 +25,10 @@ public class BoardButton extends JButton implements Accessible, ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private int xPos, yPos;
+	
+	public BoardButton() {
+		
+	}
 
 	public BoardButton(int x, int y) {
 		this(x, y, null, null);
