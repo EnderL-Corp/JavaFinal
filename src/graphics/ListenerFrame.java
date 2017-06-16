@@ -7,12 +7,13 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-public class ListenerFrame extends JFrame implements KeyListener, ActionListener
+public class ListenerFrame extends JFrame
 {
-	public ListenerFrame(String name)
+	public ListenerFrame()
 	{
-		super(name);
-		
+		KeyListener listener = new KBListener();
+		addKeyListener(listener);
+		setFocusable(true);
 	}
 
 	public void keyTyped(KeyEvent e) 
@@ -23,19 +24,25 @@ public class ListenerFrame extends JFrame implements KeyListener, ActionListener
 	
 	private void changeAction(KeyEvent e)
 	{
+		
 		int keyID = e.getID();
 		if(keyID == KeyEvent.KEY_TYPED)
 		{
+			System.out.println("Got Here");
 			char c = e.getKeyChar();
 			switch(c)
 			{
 				case 'm':
+					System.out.println("Move");
 					//move
 				case 'a':
+					System.out.println("Attack");
 					//attack
 				case 'p':
+					System.out.println("Play");
 					//play mode (Techniques & gear)
 				case 's':
+					System.out.println("Structure");
 					//structure mode
 			}
 		}
