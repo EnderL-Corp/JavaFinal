@@ -17,12 +17,15 @@ public class Commander extends Entity
 
 	public void attack(Entity defender)
 	{
+		if(Math.abs(defender.getPosX() - xCoordinate) == 1 && Math.abs(defender.getPosY() - yCoordinate) == 1)
+			return; //if not in range, don't attack (also cant attack self)
+		
 		boolean canAttack = true;
-		for(int i = xCoordinate - 1; i < 2; i++)
+		for(int i = xCoordinate - 1; i < xCoordinate + 1; i++)
 		{
-			for(int j = yCoordinate - 1; j < 2; j++)
+			for(int j = yCoordinate - 1; j < yCoordinate + 1; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.game.getBoard()[xCoordinate][yCoordinate].hasAbility(0) == true)
+				if((i != xCoordinate && j != yCoordinate) && Game.game.getEntityAt(i,j) != null && Game.game.getEntityAt(i,j).hasAbility(0) == true)
 				{				
 					canAttack = false;
 				}

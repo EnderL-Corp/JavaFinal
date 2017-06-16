@@ -78,32 +78,48 @@ public class Troop extends Entity
 	public void attack(Entity defender)
 	{
 		boolean canAttack = true;
+		
+		if(abilities[3] == false && Math.abs(defender.getPosX() - xCoordinate) == 1 && Math.abs(defender.getPosY() - yCoordinate) == 1)
+			return; //if not in range, don't attack (also cant attack self)
+		
 		for(int i = xCoordinate - 1; i < xCoordinate + 1; i++)
 		{
 			for(int j = yCoordinate - 1; j < yCoordinate + 1; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.game.getBoard()[i][j] != null && Game.game.getBoard()[i][j].hasAbility(0) == true)
+				if((i != xCoordinate && j != yCoordinate) && Game.game.getEntityAt(i,j)!= null && Game.game.getEntityAt(i,j).hasAbility(0) == true)
 				{				
-					canAttack = false;
+					canAttack = false; //checks to see if there is any provoke troops adjacent to attacker
 				}
 			}
 		}
-		
-		//has to check own abilities first
-		
-		if(canAttack == false)
+
+		if(canAttack == false) // if something had provoke...
 		{
-			if(defender.hasAbility(0))
+			if(Math.abs(defender.getPosX() - xCoordinate) <= 1 && Math.abs(defender.getPosY() - yCoordinate) <= 1 && defender.hasAbility(0))
+			{  //if the defender is in range, and has provoke. attack it
+				if(abilities[2]) //but if it has blast, also attack everything else in row/col up until void troop
+				{
+					blastAttack(defender);	
+				}
+				else if(abilities[0] || abilities[1] || abilities[3] || abilities[4])
+				{
+					dealDamage(defender);
+				}
+			}
+		}
+		else //if there is nothing with provoke, you can just attack 
+		{
+			if(abilities[2])  //if it has blast attack everything else in row/col up until void troop
+			{
+				blastAttack(defender);
+			}
+			else if(abilities[0] || abilities[1] || abilities[3] || abilities[4])
 			{
 				dealDamage(defender);
 			}
 		}
-		else
-		{
-			dealDamage(defender);
-		}
 	}
-	
+
 	public void kill(Entity killed) 
 	{
 		Game.game.addToGraveyard(killed);
@@ -142,6 +158,43 @@ public class Troop extends Entity
 	public static void equipGear(Gear gear)
 	{
 		gearArray.add(gear);
+	}
+	
+	public void blastAttack(Entity defender)
+	{
+		int rowChange = 0;
+		int colChange = 0;
+		if(defender.getPosX() > xCoordinate)
+			rowChange = 1;
+		if(defender.getPosX() < xCoordinate)
+			rowChange = -1;
+		if(defender.getPosY() > yCoordinate)
+			colChange = 1;
+		if(defender.getPosY() < yCoordinate)
+			colChange = -1;
+		//checking to see where in relation the defender is too attacker (direction wise)
+		
+		if(rowChange != 0 && colChange != 0)
+			return; //this means that the defender is diagonal, and you cant attack diagonal, so dont attack
+		
+		for(int row = xCoordinate; row < 15 && row > -1; row += rowChange)
+		{
+			for(int col = yCoordinate; col < 15 && col > -1; col += colChange)
+			{
+				if(Game.game.getEntityAt(row,col)!= null)
+				{
+					if(Game.game.getEntityAt(row,col).hasAbility(5) == false)
+					{
+						dealDamage(defender);
+					}
+					else
+					{
+						row = 15;
+						col = 15;
+					}
+				}
+			}
+		}
 	}
 }
 

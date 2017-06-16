@@ -206,6 +206,9 @@ public class Game extends GameClient implements Serializable {
 	public ArrayList<Card> getGraveyard() {
 		return graveyard;
 	}
+	public Entity getEntityAt(int x, int y){
+		return recentBoard[x][y];
+	}
 	public Entity[][] getBoard() {
 		return recentBoard;
 	}
