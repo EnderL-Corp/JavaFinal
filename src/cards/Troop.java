@@ -151,7 +151,7 @@ public class Troop extends Entity
 	{
 		if(cp < placed.getCpCost() || Game.game.getEntityAt(placed.getPosX(), placed.getPosY()) != null)
 			return cp;
-		Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = placed;
+		Game.game.placeEntity(placed, placed.getPosX(), placed.getPosY());
 		return cp - placed.getCpCost();
 	}
 	
