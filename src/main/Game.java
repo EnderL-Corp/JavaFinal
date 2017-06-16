@@ -39,7 +39,7 @@ public class Game extends GameClient implements Serializable {
 	private GameMenu gameMenu;
 
 	private char currentPlayerAction;
-	private List<Card> queuePlayerAction;
+	private List<Card> queuedPlayerActions;
 	
 	private int ap;
 	private int cp;
