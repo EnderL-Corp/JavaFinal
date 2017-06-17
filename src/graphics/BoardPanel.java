@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 
 import cards.Card;
 import cards.Entity;
+import cards.MovePoint;
+import cards.Troop;
 import main.Game;
 
 public class BoardPanel extends JPanel implements ActionListener {
@@ -169,7 +171,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 					}
 					catch(NullPointerException ex)
 					{
-						Game.game.addToPlayerActionQueue(new Card());
+						Game.game.addToPlayerActionQueue(new MovePoint(j, j));
 					}
 				}
 			}
