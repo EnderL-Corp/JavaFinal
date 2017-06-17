@@ -13,9 +13,10 @@ public class StatsPanel extends JPanel {
 	public StatsPanel() {
 		// add a phat layout
 		stats = new JTextPane();
+		stats.setEditable(false);
 		
-		stats.setText("Your HP :" + 26 + "\nFoe's HP :" + 0 + "\nCP :" + "Game.game.getCP()" + "\nTP :" + "Game.game.getTP()"
-		+ "\nAP :" + "Game.game.getAP()");
+		stats.setText("Your HP :" + 26 + "\nFoe's HP :" + 0 + "\nCP :" + Game.game.getCP() + "\nTP :" + Game.game.getTP()
+		+ "\nAP :" + Game.game.getAP());
 
 		JLabel key1 = new JLabel("A : toggels attack");
 		JLabel key2 = new JLabel("M : toggels move");
@@ -29,8 +30,8 @@ public class StatsPanel extends JPanel {
 	}
 
 	public void statRefresh() {
-		stats.setText("Your HP :" + 26 + "\nFoe's HP :" + 0 + "\nCP :" + "Game.game.getCP()" + "\nTP :" + "Game.game.getTP()"
-				+ "\nAP :" + "Game.game.getAP()");
+		stats.setText("Your HP :" + 26 + "\nFoe's HP :" + 0 + "\nCP :" + Game.game.getCP() + "\nTP :" + Game.game.getTP()
+				+ "\nAP :" + Game.game.getAP());
 	}
 
 }

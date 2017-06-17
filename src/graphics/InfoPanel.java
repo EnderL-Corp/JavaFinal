@@ -21,6 +21,7 @@ public class InfoPanel  extends JPanel {
 
 	public InfoPanel(){
 		stats = new JTextPane();
+		stats.setEditable(false);
 	}
 	public void newDisplay(Card c){
 		if(c instanceof Troop){

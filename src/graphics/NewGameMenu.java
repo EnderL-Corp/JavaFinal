@@ -4,11 +4,13 @@ import java.awt.EventQueue;
 import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cards.Deck.DeckEnum;
 import main.Game;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 
@@ -57,7 +59,7 @@ public class NewGameMenu {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel board = new JPanel();
-		board.setBounds(159, 161, 674, 547);
+		board.setBounds(147, 156, 904, 552);
 		frame.getContentPane().add(board);
 		
 		JPanel hand = new JPanel();
@@ -65,19 +67,15 @@ public class NewGameMenu {
 		frame.getContentPane().add(hand);
 		
 		StatsPanel stats = new StatsPanel();
-		stats.setBounds(1079, 657, 157, 152);
+		stats.setBounds(1079, 631, 157, 178);
 		frame.getContentPane().add(stats);
-		
-		InfoPanel info = new InfoPanel();
-		info.setBounds(1019, 348, 217, 298);
-		frame.getContentPane().add(info);
 		
 		DeckQuitPanel deck = new DeckQuitPanel();
 		deck.setBounds(1079, 883, 157, 59);
 		frame.getContentPane().add(deck);
 		
 		AmpPanel amp = new AmpPanel();
-		amp.setBounds(10, 821, 127, 121);
+		amp.setBounds(10, 741, 127, 201);
 		frame.getContentPane().add(amp);
 		
 		CommandLog log = new CommandLog();
@@ -89,5 +87,11 @@ public class NewGameMenu {
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
 		nxtPhase.setBounds(1079, 821, 157, 49);
 		frame.getContentPane().add(nxtPhase);
+		
+		JPanel wallpaper = new JPanel();
+		wallpaper.setBounds(0, -20, 1280, 1024);
+		JLabel wallpaper2 = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
+		wallpaper.add(wallpaper2);
+		frame.getContentPane().add(wallpaper);
 	}
 }

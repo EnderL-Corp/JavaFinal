@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class AmpPanel extends JPanel implements ActionListener {
+
 	private JButton Amp1;
 	private JButton Amp2;
 	private JButton Amp3;

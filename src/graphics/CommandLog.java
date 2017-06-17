@@ -21,6 +21,7 @@ public class CommandLog extends JPanel {
 	}
 	
 	public void init() {
+		log.setEditable(false);
 		scroll.setBounds(super.getBounds());
 		add(scroll);
 		setVisible(true);
