@@ -12,23 +12,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.sun.prism.Graphics;
+import java.awt.Graphics;
 
 import graphics.BoardButton;
 
 public class SpriteTester {
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
-		JPanel p = new JPanel();/*
-		Graphics g = (Graphics) p.getGraphics();*/
-		ImageIcon myImage = new ImageIcon("Sprites/Swarm.png");
-		BoardButton b = new BoardButton("Hello", myImage);
-		b.setBackground(Color.BLACK);
-		//b.setIcon(myImage);
+		JPanel p = new JPanel();
+		JButton b = new JButton();
+		b.setIcon(Utilities.combineImages("Android.png", "AndroidBlaster.png"));
 		p.add(b);
 		f.add(p);
 		f.setSize(500, 500);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		
+		Graphics g = (Graphics)p.getGraphics();
 	}
 }
