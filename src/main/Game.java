@@ -15,6 +15,7 @@ import cards.Deck.DeckEnum;
 import cards.Dragon;
 import cards.Entity;
 import cards.Gear;
+import cards.MovePoint;
 import cards.Structure;
 import cards.Technique;
 import cards.Troop;
@@ -358,9 +359,9 @@ public class Game extends GameClient implements Serializable {
 		switch(currentPlayerAction)
 		{
 			case 'm':
-				if(first instanceof Entity && second instanceof Entity && second.getName().equals("moveTarget"));
+				if(first instanceof Entity && second instanceof MovePoint);
 				{
-					ap = Entity.move(((Entity)first), ap, ((Entity)second).getPosX(), ((Entity)second).getPosY());
+					ap = Entity.move(((Entity)first), ap, ((MovePoint)second).getX(), ((MovePoint)second).getY());
 				}
 				break;
 				
