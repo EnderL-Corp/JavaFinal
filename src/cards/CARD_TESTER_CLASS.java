@@ -28,6 +28,32 @@ public class CARD_TESTER_CLASS
 	
 	public static void main(String[] args)
 	{
+		mileStone1();
+		mileStone2();
+		mileStone3();
+		mileStone4();
+	}
+
+	public static void mileStone1()
+	{
+		Entity troop2 = new Dragon(3, 4, 1, null);
+		
+		System.out.println("" + troop2.getCurrentHealth() + " " + troop2.getCurrentAttack());
+		//should return 10 10, as a dragon has 10 health and 10 attack
+		
+		troop2.modify(1, 2);
+		
+		System.out.println("" + troop2.getCurrentHealth() + " " + troop2.getCurrentAttack());
+		//should return 11 12, as a dragon has 10 health and 10 attack + 1 health and + 2 attack makes 11 health and 12 attack
+		
+		troop2.modify(3, -4);
+		
+		System.out.println("" + troop2.getCurrentHealth() + " " + troop2.getCurrentAttack());
+		//should return 10 10, as the dragon had 11 health and 12 attack  + 3 health and - 4 attack makes 14 health and 8 attack
+	}
+	
+	public static void mileStone2()
+	{
 		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
 		try {
 			Game.game = new Game();
@@ -35,12 +61,9 @@ public class CARD_TESTER_CLASS
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		//CP Testing
-		
-		
+
 		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
 		Entity troop2 = new Dragon(3, 4, 1, null);
 		
@@ -57,11 +80,7 @@ public class CARD_TESTER_CLASS
 		
 		System.out.println("");
 		
-		
-		
-		
 		//AP Testing
-		
 		
 		cardTesterClass.remainingCp(15);
 		Troop.placeOnBoard((Troop)troop2, cardTesterClass.getCp());
@@ -87,12 +106,8 @@ public class CARD_TESTER_CLASS
 
 		System.out.println("");
 		
-		
-		
-		
 		//TP Testing
 
-		
 		Technique technique1 = new Technique(TechEnum.CANNON);
 		//makes a "Call" technique 
 			
@@ -109,7 +124,15 @@ public class CARD_TESTER_CLASS
 		//"Call" costs 4 tp to cast, so player's tp should now be at 0;	
 	}
 	
+	public static void mileStone3()
+	{
+		
+	}
 	
+	public static void mileStone4()
+	{
+		
+	}
 	
 	public int getAp()
 	{
