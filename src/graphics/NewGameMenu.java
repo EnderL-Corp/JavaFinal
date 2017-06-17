@@ -44,7 +44,8 @@ public class NewGameMenu {
 	 */
 	private void initialize() {
 		try {
-			Game g = new Game();
+			Game.game = new Game();
+			Game.game.init(DeckEnum.DJ);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
