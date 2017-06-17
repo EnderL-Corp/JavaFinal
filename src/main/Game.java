@@ -21,6 +21,7 @@ import cards.Troop;
 import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
+import rmi.ClientInfo;
 import rmi.GameClient;
 import rmi.GameServer;
 
@@ -124,10 +125,10 @@ public class Game extends GameClient implements Serializable {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		gameMenu.refresh();
+		System.out.println(this);
 		try {
 			if(connected)
-				if (myTurn && boardChanged) {
+				if (boardChanged) {
 					sendRecentChanges();
 					boardChanged = false;
 				}
@@ -135,7 +136,7 @@ public class Game extends GameClient implements Serializable {
 					refreshBoard();
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1)
-				for (GameClient ci : remoteServer.getGameClients()) {
+				for (ClientInfo ci : remoteServer.getGameClients()) {
 					if (ci.getTag() != getTag()) {
 						System.out.println(ci.getTag());
 					}
@@ -160,7 +161,7 @@ public class Game extends GameClient implements Serializable {
 				if (recentBoard[i][j] != null)
 					string += recentBoard[i][j].getName() + "   ";
 				else
-					string += "null\t\t";
+					string += "null\t";
 			}
 			string += "\n";
 		}
@@ -175,6 +176,7 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.init(DeckEnum.RAVAGER);
 			game.connectToServer();
+			game.clientInfo = new SpecificClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
 			game.placeEntity(new Dragon(7, 11, 3, null));			//there for a second then goes away
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -186,6 +188,7 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(1, serverIP, 1099, Color.RED);
 			game.init(DeckEnum.DJ);
 			game.connectToServer();
+			game.clientInfo = new SpecificClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -241,7 +244,7 @@ public class Game extends GameClient implements Serializable {
 	public void endGame(boolean winOrLose) {
 		try {
 			if(winOrLose) {
-				remoteServer.gameOver(this);
+				remoteServer.gameOver(clientInfo);
 				GameMenu.log.publish("Congratulations, you won!");
 			}
 			else
@@ -264,7 +267,7 @@ public class Game extends GameClient implements Serializable {
 	}
 	public void sendRecentChanges() {
 		try {
-			remoteServer.updateBoard(this, recentBoard);
+			remoteServer.updateBoard(clientInfo, recentBoard);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

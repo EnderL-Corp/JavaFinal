@@ -19,7 +19,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private static final long serialVersionUID = 1L;
 	
 	private int port, numConnections = 0;
-	private ArrayList<GameClient> clients = new ArrayList<GameClient>();
+	private ArrayList<ClientInfo> clients = new ArrayList<ClientInfo>();
 	
 	protected static Registry myRegistry;
 	
@@ -30,7 +30,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private Entity[][] board = new Entity[15][15];
 	private int turnTag = 0;
 	
-	private GameClient winner = null;
+	private ClientInfo winner = null;
 	
 	public GameServer() throws RemoteException {
 		super();
@@ -92,13 +92,13 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	public synchronized void connect(GameClient l) throws RemoteException {
+	public synchronized void connect(ClientInfo l) throws RemoteException {
 		clients.add(l);
 		numConnections++;
 	}
 	
 	@Override
-	public synchronized ArrayList<GameClient> getGameClients() throws RemoteException {
+	public synchronized ArrayList<ClientInfo> getGameClients() throws RemoteException {
 		return clients;
 	}
 	
@@ -112,7 +112,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public synchronized boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException {
+	public synchronized boolean updateBoard(ClientInfo gc, Entity[][] updated) throws RemoteException {
 		if(gc.getTag() == turnTag) {
 			board = updated;
 			return true;
@@ -134,7 +134,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public synchronized void gameOver(GameClient loser) throws RemoteException {
+	public synchronized void gameOver(ClientInfo loser) throws RemoteException {
 		if(clients.get(0).getTag() == loser.getTag())
 			winner = clients.get(1);
 		else
@@ -142,8 +142,17 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public synchronized GameClient getWinner() throws RemoteException {
+	public synchronized ClientInfo getWinner() throws RemoteException {
 		return winner;
+	}
+
+	@Override
+	public void updateInfo(ClientInfo newInfo) throws RemoteException {
+		for(int i = 0; i < clients.size(); i++) {
+			if(clients.get(i).getTag() == newInfo.getTag()) {
+				clients.set(i, newInfo);
+			}
+		}
 	}
 	
 }

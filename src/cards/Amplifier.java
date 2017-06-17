@@ -2,8 +2,9 @@ package cards;
 
 import main.Game;
 
-public class Amplifier extends Structure
+public class Amplifier extends Structure implements java.io.Serializable
 {
+	private static final long serialVersionUID = 1L;
 	protected AmpEnum currentEnum;
 	protected int numberNeededForReq;
 	

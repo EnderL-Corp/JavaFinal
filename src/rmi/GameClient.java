@@ -9,6 +9,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 import cards.Card;
+
 import javax.swing.Timer;
 
 /**
@@ -41,30 +42,10 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected Timer timer;
 	//protected ClientInfo myClient;
 	
+	protected ClientInfo clientInfo;
+	
 	public GameClient() throws RemoteException {
 		
-	}
-	
-	/**
-	 * Constructor for testing purposes.
-	 * @param refTag reference for this client
-	 * @throws RemoteException
-	 */
-	public GameClient(String refTag) throws RemoteException {
-		try {
-			if(refTag == null)
-				serverIP = java.net.InetAddress.getLocalHost().getHostAddress(); 
-			else {
-				serverIP = "127.0.0.1";
-				name = "Client @" + serverIP + "," + refTag;
-				return;
-			}
-		} catch (UnknownHostException e) {
-			serverIP = null;
-			e.printStackTrace();
-			return;
-		}
-		name = "Client @" + serverIP;
 	}
 	
 	/**
@@ -83,28 +64,6 @@ public abstract class GameClient implements Serializable, ActionListener {
 	}
 	
 	/**
-	 * Constructor for testing purposes
-	 * @param tag
-	 * @param serverIP IP of other client
-	 * @param port Port to connect to on other device
-	 * @param refTag Only has to be filled out if testing is carried out on same device. Make note of the refTag when using it. 
-	 * 			Null if multiple devices
-	 * @throws RemoteException
-	 */
-	public GameClient(int tag, String serverIP, String refTag) throws RemoteException{
-		this(refTag);
-		this.tag = tag;
-		this.serverIP = serverIP;
-		/*if(refTag != null) {
-			serverName = "Server @" + serverIP + "," + refTag;
-		}
-		else {*/
-			serverName = "Server @" + serverIP;
-		//}
-		System.out.println("Name:" + name + "   ServerName:" + serverName);
-	}
-	
-	/**
 	 * Method used to connect this GameClient to a host GameServer.  
 	 * @return whether there was a successful connection or not.
 	 */
@@ -114,7 +73,8 @@ public abstract class GameClient implements Serializable, ActionListener {
 			serverRegistry = LocateRegistry.getRegistry(serverIP, serverPort);
 			System.out.println("Looking for " + serverName);
 			remoteServer = (GameServerInterface) serverRegistry.lookup(serverName);
-			remoteServer.connect(this);
+			clientInfo = new ClientInfo(tag);
+			remoteServer.connect(clientInfo);
 			System.out.println("Connected to server.");
 			connected = true;
 		} catch(Exception e) {

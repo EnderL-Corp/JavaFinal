@@ -22,9 +22,9 @@ public interface GameServerInterface extends Remote, Serializable{
 	 * @param gc the GameClient to be connected
 	 * @throws RemoteException
 	 */
-	void connect(GameClient gc) throws RemoteException;
+	void connect(ClientInfo gc) throws RemoteException;
 	
-	ArrayList<GameClient> getGameClients() throws RemoteException;
+	ArrayList<ClientInfo> getGameClients() throws RemoteException;
 	
 	int getConnections() throws RemoteException;
 	
@@ -43,13 +43,15 @@ public interface GameServerInterface extends Remote, Serializable{
 	 * 			will not successfully update if it is not your GameClient's turn.
 	 * @throws RemoteException
 	 */
-	boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException;
+	boolean updateBoard(ClientInfo gc, Entity[][] updated) throws RemoteException;
 	
 	void endMyTurn() throws RemoteException;
 	
 	int getTurnTag() throws RemoteException;
 	
-	GameClient getWinner() throws RemoteException;
+	ClientInfo getWinner() throws RemoteException;
 	
-	void gameOver(GameClient gc) throws RemoteException;
+	void gameOver(ClientInfo gc) throws RemoteException;
+	
+	void updateInfo(ClientInfo newInfo) throws RemoteException;
 }
