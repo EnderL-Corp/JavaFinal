@@ -63,7 +63,7 @@ public class NewGameMenu {
 		frame.getContentPane().add(board);
 		board.repaint();
 		
-		JPanel hand = new JPanel();
+		HandPanel hand = new HandPanel();
 		hand.setBounds(147, 579, 922, 200);
 		frame.getContentPane().add(hand);
 		
@@ -84,11 +84,20 @@ public class NewGameMenu {
 		log.init();
 		frame.getContentPane().add(log);
 		
+		JPanel info = new JPanel();
+		info.setBounds(1076, 259, 157, 271);
+		frame.getContentPane().add(info);
+		
 		JButton nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
 		nxtPhase.setBounds(1079, 730, 157, 49);
 		frame.getContentPane().add(nxtPhase);
-		
+		/*panel = new JPanel();
+		panel.setBounds(0, 0, 1280, 1024);
+		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
+		panel.add(wallpaper);
+		frame.getContentPane().add(panel);
+		 */
 		
 	}
 }
