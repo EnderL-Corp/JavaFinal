@@ -52,25 +52,25 @@ public class GameMenu implements java.io.Serializable{
 	 */
 	private void initialize() {
 		frame = new ListenerFrame();
-		frame.setBounds(5, 5, 1280, 1024);
+		frame.setBounds(5, 5, 1280, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setResizable(false);
 		
 		log = new CommandLog();
-		log.setBounds(38, 881, 402, 55);
+		log.init();
 		frame.getContentPane().add(log);
 		
 		board = new BoardPanel();
-		board.setBounds(315, 25, 650, 650);
+		board.setBounds(400, 25, 480, 480);
 		frame.getContentPane().add(board);
 		
 		amps = new AmpPanel();
-		amps.setBounds(38, 788, 402, 66);
+		amps.setBounds(25, 760, 400, 66);
 		frame.getContentPane().add(amps);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 1280, 1024);
+		panel.setBounds(0, 0, 1280, 850);
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		panel.add(wallpaper);
 		frame.getContentPane().add(panel);
