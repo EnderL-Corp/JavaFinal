@@ -346,13 +346,13 @@ public class Game extends GameClient implements Serializable {
 	
 	public void checkPlayerActionQueue()
 	{
-		if(queuedPlayerActions.size() == 2)
+		if(queuedPlayerActions.size() == 2 && (currentPlayerAction != '\n' || currentPlayerAction != 't'))
 		{
 			executePlayerActionQueue();
 		}
-		else if(queuedPlayerActions.size() > 2)
+		else if(currentPlayerAction == 't' && queuedPlayerActions.get(0) instanceof Technique && queuedPlayerActions.size() == ((Technique)queuedPlayerActions.get(0)).getNumTargets() + 1)
 		{
-			//do something
+			executePlayerActionQueue();
 		}
 	}
 	
@@ -360,13 +360,16 @@ public class Game extends GameClient implements Serializable {
 	{
 		Card first = queuedPlayerActions.get(0);
 		Card second = queuedPlayerActions.get(1);
-		if(myTurn) {
+		boardChanged = false;
+		if(myTurn) 
+		{
 			switch(currentPlayerAction)
 			{
 				case 'm':
 					if(first instanceof Entity && second instanceof MovePoint);
 					{
 						ap = Entity.move(((Entity)first), ap, ((MovePoint)second).getX(), ((MovePoint)second).getY());
+						boardChanged = true;
 					}
 					break;
 					
@@ -376,29 +379,45 @@ public class Game extends GameClient implements Serializable {
 						if(!(((Entity)first).hasAbility(3) && second instanceof Commander))
 						{
 							((Entity)first).attack((Entity)second);
+							boardChanged = true;
 						}
 					}
 					break;
 					
-				case 'p':
+				case 't':
 					if(first instanceof Technique && second instanceof Troop)
 					{
 						if(((Technique)first).canCast(tp))
 						{
-							while (((Technique)first).cast((Troop)second))
+							for(int i = 1; i < queuedPlayerActions.size(); i++)
 							{
-								//select next target
+								if(queuedPlayerActions.get(i) instanceof Troop)
+								{
+									((Technique)first).cast((Troop)second);
+									boardChanged = true;
+								}
+								else
+								{
+									break;
+								}
 							} 
 						}
 					}
-					else if(first instanceof Gear && second instanceof Troop)
+					
+				case 'g':
+					if(first instanceof Gear && second instanceof Troop)
 					{
 						((Gear)first).effect((Troop)second);
+						boardChanged = true;
 					}
-					else if(first instanceof Troop && second instanceof MovePoint)
+					break;
+					
+				case 'p':
+					if(first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) 
 					{
 						((Troop)first).setCoords((MovePoint)second);
 						placeEntity((Entity)first);
+						boardChanged = true;
 					}
 					break;
 					
@@ -410,6 +429,7 @@ public class Game extends GameClient implements Serializable {
 							if(getAmpAt(i) == second)
 							{
 								updateAmpPanel((Amplifier)first, false);
+								boardChanged = true;
 							}
 						}
 					}
@@ -418,6 +438,5 @@ public class Game extends GameClient implements Serializable {
 		}
 		currentPlayerAction = '\n';
 		clearPlayerActionQueue();
-		boardChanged = true;
 	}
 }

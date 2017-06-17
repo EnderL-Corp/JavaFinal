@@ -158,4 +158,9 @@ public class Technique extends Card
 	{
 		return tpCost;
 	}
+	
+	public int getNumTargets()
+	{
+		return numberOfTargets;
+	}
 }
