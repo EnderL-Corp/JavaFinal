@@ -75,19 +75,19 @@ public class AudioTester extends JFrame implements ActionListener
 		
 		String a = e.getActionCommand();
 		if (a.equals("r")) {
-			au = new Audio("FX", "Range");
+			new Audio("FX", "Range");
 		} else if (a.equals("mmm")) {
-			au = new Audio("MainMenu");
+			new Audio("MainMenu");
 		} else if (a.equals("m")) {
-			au = new Audio("FX", "Melee");
+			new Audio("FX", "Melee");
 		} else if (a.equals("gm")){
-			au = new Audio("InGame");
+			new Audio("InGame");
 		} else if (a.equals("b")){
-			au = new Audio("FX", "Blast");
+			new Audio("FX", "Blast");
 		} else if (a.equals("d")){
-			au = new Audio("FX", "Deflect");
+			new Audio("FX", "Deflect");
 		} else if (a.equals("mi")){
-			au = new Audio("FX", "Mirror");
+			new Audio("FX", "Mirror");
 		} 
 
 	}
