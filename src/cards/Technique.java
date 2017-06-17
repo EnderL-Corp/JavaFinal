@@ -27,6 +27,8 @@ public class Technique extends Card
 	{
 		super("" + eff, "Santi has to do this later");
 		
+		techEnum = eff;
+		
 		switch(eff)
 		{
 			case GRAPE_SHOT:
@@ -64,7 +66,7 @@ public class Technique extends Card
 	
 	public boolean canCast(int tp)
 	{
-		return tp > tpCost;
+		return tp >= tpCost;
 	}
 	
 	/**
@@ -90,7 +92,7 @@ public class Technique extends Card
 		}
 		else if(numberOfTargets == 0)
 		{
-			effect(null, techEnum);
+			effect(target, techEnum);
 			return true;
 		}
 		else

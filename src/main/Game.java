@@ -360,59 +360,61 @@ public class Game extends GameClient implements Serializable {
 	{
 		Card first = queuedPlayerActions.get(0);
 		Card second = queuedPlayerActions.get(1);
-		switch(currentPlayerAction)
-		{
-			case 'm':
-				if(first instanceof Entity && second instanceof MovePoint);
-				{
-					ap = Entity.move(((Entity)first), ap, ((MovePoint)second).getX(), ((MovePoint)second).getY());
-				}
-				break;
-				
-			case 'a':
-				if(first instanceof Entity && second instanceof Entity)
-				{
-					if(!(((Entity)first).hasAbility(3) && second instanceof Commander))
+		if(myTurn) {
+			switch(currentPlayerAction)
+			{
+				case 'm':
+					if(first instanceof Entity && second instanceof MovePoint);
 					{
-						((Entity)first).attack((Entity)second);
+						ap = Entity.move(((Entity)first), ap, ((MovePoint)second).getX(), ((MovePoint)second).getY());
 					}
-				}
-				break;
-				
-			case 'p':
-				if(first instanceof Technique && second instanceof Troop)
-				{
-					if(((Technique)first).canCast(tp))
+					break;
+					
+				case 'a':
+					if(first instanceof Entity && second instanceof Entity)
 					{
-						while (((Technique)first).cast((Troop)second))
+						if(!(((Entity)first).hasAbility(3) && second instanceof Commander))
 						{
-							//select next target
-						} 
-					}
-				}
-				else if(first instanceof Gear && second instanceof Troop)
-				{
-					((Gear)first).effect((Troop)second);
-				}
-				else if(first instanceof Troop && second instanceof MovePoint)
-				{
-					((Troop)first).setCoords((MovePoint)second);
-					placeEntity((Entity)first);
-				}
-				break;
-				
-			case 's':
-				if(first instanceof Amplifier && second instanceof Amplifier && ((Amplifier)second).getAmpType().equals(AmpEnum.NONE));
-				{
-					for(int i = 0; i < 5; i++)
-					{
-						if(getAmpAt(i) == second)
-						{
-							updateAmpPanel((Amplifier)first, false);
+							((Entity)first).attack((Entity)second);
 						}
 					}
-				}
-				break;
+					break;
+					
+				case 'p':
+					if(first instanceof Technique && second instanceof Troop)
+					{
+						if(((Technique)first).canCast(tp))
+						{
+							while (((Technique)first).cast((Troop)second))
+							{
+								//select next target
+							} 
+						}
+					}
+					else if(first instanceof Gear && second instanceof Troop)
+					{
+						((Gear)first).effect((Troop)second);
+					}
+					else if(first instanceof Troop && second instanceof MovePoint)
+					{
+						((Troop)first).setCoords((MovePoint)second);
+						placeEntity((Entity)first);
+					}
+					break;
+					
+				case 's':
+					if(first instanceof Amplifier && second instanceof Amplifier && ((Amplifier)second).getAmpType().equals(AmpEnum.NONE));
+					{
+						for(int i = 0; i < 5; i++)
+						{
+							if(getAmpAt(i) == second)
+							{
+								updateAmpPanel((Amplifier)first, false);
+							}
+						}
+					}
+					break;
+			}
 		}
 		currentPlayerAction = '\n';
 		clearPlayerActionQueue();
