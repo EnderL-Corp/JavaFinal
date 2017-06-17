@@ -151,13 +151,18 @@ public class Troop extends Entity
 	{
 		if(cp < placed.getCpCost() || Game.game.getEntityAt(placed.getPosX(), placed.getPosY()) != null)
 			return cp;
-		Game.game.placeEntity(placed, placed.getPosX(), placed.getPosY());
+		Game.game.placeEntity(placed);
 		return cp - placed.getCpCost();
 	}
 	
 	public static void equipGear(Gear gear)
 	{
 		gearArray.add(gear);
+	}
+	
+	public void setCoords(MovePoint mp) {
+		xCoordinate = mp.getX();
+		yCoordinate = mp.getY();
 	}
 	
 	public void blastAttack(Entity defender)
