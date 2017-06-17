@@ -354,7 +354,7 @@ public class Game extends GameClient implements Serializable {
 	public void executePlayerActionQueue()
 	{
 		Card first = queuedPlayerActions.get(0);
-		Card second = queuedPlayerActions.get(0);
+		Card second = queuedPlayerActions.get(1);
 		switch(currentPlayerAction)
 		{
 			case 'm':
