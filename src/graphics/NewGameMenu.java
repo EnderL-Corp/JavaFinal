@@ -59,39 +59,36 @@ public class NewGameMenu {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel board = new JPanel();
-		board.setBounds(147, 156, 904, 552);
+		board.setBounds(341, 68, 480, 480);
 		frame.getContentPane().add(board);
+		board.repaint();
 		
 		JPanel hand = new JPanel();
-		hand.setBounds(147, 741, 922, 131);
+		hand.setBounds(147, 579, 922, 200);
 		frame.getContentPane().add(hand);
 		
 		StatsPanel stats = new StatsPanel();
-		stats.setBounds(1079, 631, 157, 178);
+		stats.setBounds(1079, 541, 157, 178);
 		frame.getContentPane().add(stats);
 		
 		DeckQuitPanel deck = new DeckQuitPanel();
-		deck.setBounds(1079, 883, 157, 59);
+		deck.setBounds(1079, 790, 157, 59);
 		frame.getContentPane().add(deck);
 		
 		AmpPanel amp = new AmpPanel();
-		amp.setBounds(10, 741, 127, 201);
+		amp.setBounds(10, 648, 127, 201);
 		frame.getContentPane().add(amp);
 		
 		CommandLog log = new CommandLog();
-		log.setBounds(147, 883, 922, 59);
+		log.setBounds(147, 790, 922, 59);
 		log.init();
 		frame.getContentPane().add(log);
 		
 		JButton nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
-		nxtPhase.setBounds(1079, 821, 157, 49);
+		nxtPhase.setBounds(1079, 730, 157, 49);
 		frame.getContentPane().add(nxtPhase);
 		
-		JPanel wallpaper = new JPanel();
-		wallpaper.setBounds(0, -20, 1280, 1024);
-		JLabel wallpaper2 = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
-		wallpaper.add(wallpaper2);
-		frame.getContentPane().add(wallpaper);
+		
 	}
 }
