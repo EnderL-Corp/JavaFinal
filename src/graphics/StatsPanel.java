@@ -17,7 +17,7 @@ public class StatsPanel extends JPanel {
 		stats.setEditable(false);
 
 		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
-				+ ((SpecificClientInfo) Game.game.getOtherClient()).getCommander().getHealth() + "\nCP :"
+				+ "none" + "\nCP :"
 				+ Game.game.getCP() + "\nTP :" + Game.game.getTP() + "\nAP :" + Game.game.getAP());
 
 		JLabel key1 = new JLabel("A : toggles attack");
@@ -35,6 +35,7 @@ public class StatsPanel extends JPanel {
 		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
 				+ ((SpecificClientInfo) Game.game.getOtherClient()).getCommander().getHealth() + "\nCP :"
 				+ Game.game.getCP() + "\nTP :" + Game.game.getTP() + "\nAP :" + Game.game.getAP());
+		repaint();
 	}
 
 }

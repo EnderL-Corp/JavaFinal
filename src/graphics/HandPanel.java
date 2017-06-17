@@ -5,34 +5,60 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class HandPanel extends JPanel implements ActionListener{
 	public HandPanel() {
+		setBackground(Color.BLACK);
 		setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(110, 95, 89, 23);
-		add(btnNewButton);
+		JButton cardSlot1 = new JButton("Open Slot");
+		cardSlot1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot1.setBounds(82, 11, 122, 177);
+		add(cardSlot1);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(209, 95, 89, 23);
-		add(btnNewButton_1);
+		JButton cardSlot2 = new JButton("Open Slot");
+		cardSlot2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot2.setBounds(214, 11, 122, 177);
+		add(cardSlot2);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(308, 95, 89, 23);
-		add(btnNewButton_2);
+		JButton cardSlot3 = new JButton("Open Slot");
+		cardSlot3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot3.setBounds(346, 11, 122, 177);
+		add(cardSlot3);
 		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(407, 95, 89, 23);
-		add(btnNewButton_3);
+		JButton cardSlot4 = new JButton("Open Slot");
+		cardSlot4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot4.setBounds(478, 11, 122, 177);
+		add(cardSlot4);
 		
-		JButton btnNewButton_4 = new JButton("New button");
-		btnNewButton_4.setBounds(10, 95, 89, 23);
-		add(btnNewButton_4);
+		JButton cardSlot5 = new JButton("Open Slot");
+		cardSlot5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot5.setBounds(610, 11, 122, 177);
+		add(cardSlot5);
 		
-		JButton btnNewButton_5 = new JButton("New button");
-		btnNewButton_5.setBounds(504, 95, 89, 23);
-		add(btnNewButton_5);
+		JButton cardSlot6 = new JButton("Open Slot");
+		cardSlot6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		cardSlot6.setBounds(742, 11, 122, 177);
+		add(cardSlot6);
 	}
 
 	@Override
