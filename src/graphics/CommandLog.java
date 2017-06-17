@@ -21,7 +21,6 @@ public class CommandLog extends JPanel {
 	}
 	
 	public void init() {
-		super.setBounds(440, 740, 400, 90);
 		scroll.setBounds(super.getBounds());
 		add(scroll);
 		setVisible(true);

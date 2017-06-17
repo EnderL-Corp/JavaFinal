@@ -17,9 +17,9 @@ import javax.sound.sampled.Clip;
 public class Audio extends Thread
 {
 	private Thread t;
+	private static int ID;
 	private String threadName;
 	private String effect;
-	private String[] queuedEffects;
 	private static boolean onMenu;
 	   
 	public static void main(String[] args)
@@ -36,14 +36,16 @@ public class Audio extends Thread
 	public Audio(String name)
 	{
 		threadName = name;
-		System.out.println("Created an audio process with name " + name);
+		System.out.println("Created an audio process with name " + name + " And with ID: " + ID);
+		ID++;
 		start();
 	}
 	
 	public Audio(String name, String eff)
 	{
 		threadName = name;
-		System.out.println("Created an audio process with name " + name);
+		System.out.println("Created an audio process with name " + name + " And with ID: " + ID);
+		ID++;
 		effect = eff;
 		start();
 	}
@@ -77,9 +79,15 @@ public class Audio extends Thread
 	         t = new Thread(this, threadName);
 	         t.start(); 
 	    }
+		if(!t.isAlive())
+		{
+			ID--;
+		}
+		t = null;
+		
 	}
 
-	public void soundFX(String effect)
+	public synchronized void soundFX(String effect)
 	{
 		try 
 		{
@@ -87,8 +95,8 @@ public class Audio extends Thread
 			File file = new File("Audio/SoundFX/" + effect + ".wav/");
 			clip.open(AudioSystem.getAudioInputStream(file));
 			clip.start();
-			//Thread.sleep((long)((double)clip.getMicrosecondLength() / 1000));
-			//clip.close();
+			Thread.sleep((long)((double)clip.getMicrosecondLength() / 1000));
+			clip.close();
 		} 
 		catch (Exception e) 
 		{

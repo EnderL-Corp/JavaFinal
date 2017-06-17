@@ -241,6 +241,9 @@ public class Game extends GameClient implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	public ClientInfo getOtherClient() {
+		return otherClientInfo;
+	}
 	
 	public void endGame(boolean winOrLose) {
 		try {
@@ -259,6 +262,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			recentBoard = remoteServer.getBoard();
 			myTurn = remoteServer.getTurnTag() == getTag();
+			otherClientInfo = remoteServer.getOtherClient(clientInfo);
 			if(remoteServer.getWinner() != null && remoteServer.getWinner().getTag() == getTag()) {
 				endGame(false);
 			}
