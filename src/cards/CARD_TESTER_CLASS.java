@@ -1,5 +1,7 @@
 package cards;
 
+import java.rmi.RemoteException;
+
 import cards.Deck.DeckEnum;
 import cards.Technique.TechEnum;
 import main.Game;
@@ -27,7 +29,12 @@ public class CARD_TESTER_CLASS
 	public static void main(String[] args)
 	{
 		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
-		
+		try {
+			Game.game = new Game();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//CP Testing
 		
@@ -90,12 +97,15 @@ public class CARD_TESTER_CLASS
 		
 		if(technique1.canCast(cardTesterClass.getTp()))
 		{
+			System.out.println(cardTesterClass.getTp() - technique1.getTpCost());
 			cardTesterClass.remainingTp(cardTesterClass.getTp() - technique1.getTpCost());
 			while(techniqueUsed == false)
 			{
 				techniqueUsed = technique1.cast(null); //this would normally use an actionlistener to fill in the "null" part
 			}
 		}
+		System.out.println( cardTesterClass.getTp());
+		System.out.println( technique1.getTpCost());
 		//"Call" costs 4 tp to cast, so player's tp should now be at 0;	
 	}
 	
