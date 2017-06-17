@@ -87,25 +87,24 @@ public class CARD_TESTER_CLASS
 		//TP Testing
 
 		
-		Technique technique1 = new Technique(TechEnum.CALL);
+		Technique technique1 = new Technique(TechEnum.CANNON);
 		//makes a "Call" technique 
 			
 		System.out.println(cardTesterClass.getTp());
 		//the tp that the player has should be 4 to start out
 		
 		boolean techniqueUsed = false;
-		
+
 		if(technique1.canCast(cardTesterClass.getTp()))
 		{
-			System.out.println(cardTesterClass.getTp() - technique1.getTpCost());
 			cardTesterClass.remainingTp(cardTesterClass.getTp() - technique1.getTpCost());
 			while(techniqueUsed == false)
 			{
-				techniqueUsed = technique1.cast(null); //this would normally use an actionlistener to fill in the "null" part
+				techniqueUsed = technique1.cast((Troop)troop1); //this would normally use an actionlistener to fill in the "null" part
 			}
 		}
 		System.out.println( cardTesterClass.getTp());
-		System.out.println( technique1.getTpCost());
+		System.out.println(troop1.currentHealth);
 		//"Call" costs 4 tp to cast, so player's tp should now be at 0;	
 	}
 	
