@@ -54,4 +54,6 @@ public interface GameServerInterface extends Remote, Serializable{
 	void gameOver(ClientInfo gc) throws RemoteException;
 	
 	void updateInfo(ClientInfo newInfo) throws RemoteException;
+	
+	ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException;
 }

@@ -42,7 +42,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected Timer timer;
 	//protected ClientInfo myClient;
 	
-	protected ClientInfo clientInfo;
+	protected ClientInfo clientInfo, otherClientInfo;
 	
 	public GameClient() throws RemoteException {
 		
