@@ -76,7 +76,7 @@ public class NewGameMenu {
 		frame.getContentPane().add(deck);
 		
 		AmpPanel amp = new AmpPanel();
-		amp.setBounds(395, 217, 183, 209);
+		amp.setBounds(901, 503, 349, 66);
 		frame.getContentPane().add(amp);
 		
 		CommandLog log = new CommandLog();
