@@ -137,11 +137,7 @@ public class Game extends GameClient implements Serializable {
 					refreshBoard();
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1)
-				for (ClientInfo ci : remoteServer.getGameClients()) {
-					if (ci.getTag() != getTag()) {
-						System.out.println(ci.getTag());
-					}
-				}
+				System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

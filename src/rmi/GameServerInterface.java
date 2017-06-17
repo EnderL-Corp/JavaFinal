@@ -15,8 +15,6 @@ import cards.Entity;
  */
 public interface GameServerInterface extends Remote, Serializable{
 	
-	String getRecentClientName() throws RemoteException;
-	
 	/**
 	 * method to add this GameClient to the list of the server's known clients
 	 * @param gc the GameClient to be connected
@@ -24,19 +22,22 @@ public interface GameServerInterface extends Remote, Serializable{
 	 */
 	void connect(ClientInfo gc) throws RemoteException;
 	
-	ArrayList<ClientInfo> getGameClients() throws RemoteException;
-	
+	/**
+	 * Get the number of connections.
+	 * @return the number of connections.
+	 * @throws RemoteException
+	 */
 	int getConnections() throws RemoteException;
 	
 	/**
-	 * method to get the current board
+	 * Method to get the current board
 	 * @return the current version of the board of entities
 	 * @throws RemoteException
 	 */
 	Entity[][] getBoard() throws RemoteException;
 	
 	/**
-	 * method to update the server board.
+	 * Method to update the server board.
 	 * @param gc the invoking GameClient
 	 * @param updated updated 2d array of entities
 	 * @return whether the value has been successfully updated or not.
@@ -45,15 +46,45 @@ public interface GameServerInterface extends Remote, Serializable{
 	 */
 	boolean updateBoard(ClientInfo gc, Entity[][] updated) throws RemoteException;
 	
+	/**
+	 * Ends the invoking client's turn.
+	 * @throws RemoteException
+	 */
 	void endMyTurn() throws RemoteException;
 	
+	/**
+	 * 
+	 * @return The tag of the client whose turn it currently is.
+	 * @throws RemoteException
+	 */
 	int getTurnTag() throws RemoteException;
 	
+	/**
+	 * Get the winner of the game.
+	 * @return The winner of the game
+	 * @throws RemoteException
+	 */
 	ClientInfo getWinner() throws RemoteException;
 	
+	/**
+	 * Will trigger the game to finish by setting a variable to true.
+	 * @param gc the ClientInfo of the losing client
+	 * @throws RemoteException
+	 */
 	void gameOver(ClientInfo gc) throws RemoteException;
 	
+	/**
+	 * Will update the info of the newInfo client.
+	 * @param newInfo the updated version of the clientInfo
+	 * @throws RemoteException
+	 */
 	void updateInfo(ClientInfo newInfo) throws RemoteException;
 	
+	/**
+	 * Will return the information of the other client.
+	 * @param thisClient the client that wants the information
+	 * @return the ClientInfo of the other client 
+	 * @throws RemoteException
+	 */
 	ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException;
 }

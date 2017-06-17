@@ -49,10 +49,6 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		this.myIP = ip;
 	}
 	
-	public synchronized String getRecentClientName() {
-		return recentClientName;
-	}
-	
 	public static void main(String[] args) {
 		String IP;
 		Scanner s = new Scanner(System.in);
@@ -95,11 +91,6 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public synchronized void connect(ClientInfo l) throws RemoteException {
 		clients.add(l);
 		numConnections++;
-	}
-	
-	@Override
-	public synchronized ArrayList<ClientInfo> getGameClients() throws RemoteException {
-		return clients;
 	}
 	
 	public synchronized int getConnections() {
