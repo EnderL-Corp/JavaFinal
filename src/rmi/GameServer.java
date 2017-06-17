@@ -20,7 +20,6 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	
 	private int port, numConnections = 0;
 	private ArrayList<GameClient> clients = new ArrayList<GameClient>();
-	private Card recentChange;
 	
 	protected static Registry myRegistry;
 	
@@ -50,14 +49,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		this.myIP = ip;
 	}
 	
-	public String[] getData(String[] args) {
-		if(args.length >= 3)
-			return new String[] {args[0] + args[1], args[1] + args[2]};
-		else
-			return new String[] {args[0] + args[1], "No position 2"};
-	}
-	
-	public String getRecentClientName() {
+	public synchronized String getRecentClientName() {
 		return recentClientName;
 	}
 	
@@ -75,10 +67,6 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 		
 		gs.createMyRegistry();
-	}
-	
-	public String getName() {
-		return name;
 	}
 	
 	/**
@@ -104,27 +92,27 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
-	public void connect(GameClient l) throws RemoteException {
+	public synchronized void connect(GameClient l) throws RemoteException {
 		clients.add(l);
 		numConnections++;
 	}
 	
 	@Override
-	public ArrayList<GameClient> getGameClients() throws RemoteException {
+	public synchronized ArrayList<GameClient> getGameClients() throws RemoteException {
 		return clients;
 	}
 	
-	public int getConnections() {
+	public synchronized int getConnections() {
 		return numConnections;
 	}
 
 	@Override
-	public Entity[][] getBoard() throws RemoteException {
+	public synchronized Entity[][] getBoard() throws RemoteException {
 		return board;
 	}
 
 	@Override
-	public boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException {
+	public synchronized boolean updateBoard(GameClient gc, Entity[][] updated) throws RemoteException {
 		if(gc.getTag() == turnTag) {
 			board = updated;
 			return true;
@@ -133,7 +121,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public void endMyTurn() throws RemoteException {
+	public synchronized void endMyTurn() throws RemoteException {
 		if(clients.get(0).getTag() == turnTag)
 			turnTag = clients.get(1).getTag();
 		else
@@ -141,12 +129,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public int getTurnTag() throws RemoteException {
+	public synchronized int getTurnTag() throws RemoteException {
 		return turnTag;
 	}
 
 	@Override
-	public void gameOver(GameClient loser) throws RemoteException {
+	public synchronized void gameOver(GameClient loser) throws RemoteException {
 		if(clients.get(0).getTag() == loser.getTag())
 			winner = clients.get(1);
 		else
@@ -154,7 +142,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	@Override
-	public GameClient getWinner() throws RemoteException {
+	public synchronized GameClient getWinner() throws RemoteException {
 		return winner;
 	}
 	
