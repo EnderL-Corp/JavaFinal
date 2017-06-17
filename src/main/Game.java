@@ -54,6 +54,7 @@ public class Game extends GameClient implements Serializable {
 	private int territory;
 	
 	private boolean myTurn;
+	private boolean boardChanged;
 	
 	public Game() throws RemoteException {
 
@@ -125,8 +126,10 @@ public class Game extends GameClient implements Serializable {
 		updateServerInformation();
 		try {
 			if(connected)
-				if (myTurn)
+				if (myTurn && boardChanged) {
 					sendRecentChanges();
+					boardChanged = false;
+				}
 				else
 					refreshBoard();
 			if (remoteServer.getConnections() > 1)
@@ -273,6 +276,7 @@ public class Game extends GameClient implements Serializable {
 		if(recentBoard[x][y] == null)
 		{
 			recentBoard[x][y] = e;
+			boardChanged = true;
 			return true;
 		}
 		return false;
@@ -314,7 +318,7 @@ public class Game extends GameClient implements Serializable {
 				}
 			}
 		}
-		
+		boardChanged = true;
 		return updated;
 	}
 	
@@ -398,5 +402,6 @@ public class Game extends GameClient implements Serializable {
 				}
 				break;
 		}
+		boardChanged = true;
 	}
 }
