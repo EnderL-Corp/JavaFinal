@@ -89,21 +89,34 @@ public abstract class GameClient implements Serializable, ActionListener {
 		return connected;
 	}
 	
+	/**
+	 * Get the tag of this client.
+	 * @return tag of this client
+	 */
 	public int getTag() {
 		return tag;
 	}
 	
+	/**
+	 * Get connectivity status
+	 * @return connectivity
+	 */
 	public boolean isConnected() {
 		return connected;
 	}
-	/*
-	public ClientInfo getClientInfo() {
-		return myClient;
-	}
-	*/
+	
+	/**
+	 * 
+	 * @return the name of this client
+	 */
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * 
+	 * @return the IP of this client
+	 */
 	public String getIP() {
 		return serverIP;
 	}
