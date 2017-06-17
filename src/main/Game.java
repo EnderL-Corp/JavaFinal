@@ -335,7 +335,7 @@ public class Game extends GameClient implements Serializable {
 		queuedPlayerActions.add(c);
 	}
 	
-	public void clearPlayerActionQueue(Card c)
+	public void clearPlayerActionQueue()
 	{
 		queuedPlayerActions.clear();
 	}
@@ -390,6 +390,11 @@ public class Game extends GameClient implements Serializable {
 				{
 					((Gear)first).effect((Troop)second);
 				}
+				else if(first instanceof Troop && second instanceof MovePoint)
+				{
+					((Troop)first).setCoords((MovePoint)second);
+					placeEntity((Entity)first);
+				}
 				break;
 				
 			case 's':
@@ -405,6 +410,8 @@ public class Game extends GameClient implements Serializable {
 				}
 				break;
 		}
+		currentPlayerAction = '\n';
+		clearPlayerActionQueue();
 		boardChanged = true;
 	}
 }

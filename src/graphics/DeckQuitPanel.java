@@ -15,8 +15,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	JButton quit;
 	JLabel deckSize;
 
-	DeckQuitPanel() {
-		setVisible(true);
+	private DeckQuitPanel() {
 		setLayout(new FlowLayout());
 
 		deckSize = new JLabel(Game.game.getDeck().size() + " / 26");

@@ -1,7 +1,7 @@
 package cards;
 
 public class MovePoint extends Card {
-	protected int xPos, yPos;
+	private int xPos, yPos;
 	
 	public MovePoint(int x, int y)
 	{

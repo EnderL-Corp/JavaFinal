@@ -171,7 +171,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 					}
 					catch(NullPointerException ex)
 					{
-						Game.game.addToPlayerActionQueue(new MovePoint(j, j));
+						Game.game.addToPlayerActionQueue(new MovePoint(i, j));
 					}
 				}
 			}
