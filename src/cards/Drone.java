@@ -15,7 +15,7 @@ public class Drone extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Drone<>";
+			name = "Drone";
 			description = "Santi has to do this later";
 		}
 		else

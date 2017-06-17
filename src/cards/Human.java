@@ -17,7 +17,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[3] = true;
-			name = "Ranger Human";
+			name = "HumanRange";
 			description = "Santi has to do this later";
 		}
 		else if(enumName == TroopEnum.DEFLECTOR)
@@ -31,7 +31,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[1] = true; 
-			name = "Deflector Human";
+			name = "HumanDeflect";
 			description = "Santi has to do this later";
 		}
 		else if(enumName == TroopEnum.DUMMY)
@@ -45,7 +45,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[0] = true;
-			name = "Dummy Human";
+			name = "HumanProvoke";
 			description = "Santi has to do this later";
 		}
 		else

@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cards.Entity;
+import main.Game;
+
 public class BoardPanel extends JPanel {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
@@ -69,6 +72,9 @@ public class BoardPanel extends JPanel {
 					JButton bb = buttons[i][j];
 					bb.setBackground(Color.WHITE);
 					bb.setIcon(null);
+					Entity e = Game.game.getEntityAt(i, j);
+					if(e != null)
+						bb.setIcon(new ImageIcon("Sprites/" + e.getName() + ".png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 

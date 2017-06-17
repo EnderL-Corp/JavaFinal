@@ -12,6 +12,7 @@ import cards.Card;
 import cards.Commander;
 import cards.Deck;
 import cards.Deck.DeckEnum;
+import cards.Dragon;
 import cards.Entity;
 import cards.Gear;
 import cards.Structure;
@@ -123,7 +124,7 @@ public class Game extends GameClient implements Serializable {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		updateServerInformation();
+		gameMenu.refresh();
 		try {
 			if(connected)
 				if (myTurn && boardChanged) {
@@ -132,6 +133,7 @@ public class Game extends GameClient implements Serializable {
 				}
 				else
 					refreshBoard();
+			updateServerInformation();
 			if (remoteServer.getConnections() > 1)
 				for (GameClient ci : remoteServer.getGameClients()) {
 					if (ci.getTag() != getTag()) {
@@ -146,10 +148,6 @@ public class Game extends GameClient implements Serializable {
 	public void addToGraveyard(Card card) {
 		graveyard.add(card);
 	}
-
-	/*public void endGame(Commander loser) {		//This is a useless method where the f would it be used
-		// end the game
-	}*/
 	
 	public int getDeckSize() {
 		return myCards.size();
@@ -177,6 +175,7 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.init(DeckEnum.RAVAGER);
 			game.connectToServer();
+			game.placeEntity(new Dragon(7, 11, 3, null));			//there for a second then goes away
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -271,11 +270,11 @@ public class Game extends GameClient implements Serializable {
 		}
 	}
 	
-	public boolean placeEntity(Entity e, int x, int y)
+	public boolean placeEntity(Entity e)
 	{
-		if(recentBoard[x][y] == null)
+		if(recentBoard[e.getPosX()][e.getPosY()] == null)
 		{
-			recentBoard[x][y] = e;
+			recentBoard[e.getPosX()][e.getPosY()] = e;
 			boardChanged = true;
 			return true;
 		}

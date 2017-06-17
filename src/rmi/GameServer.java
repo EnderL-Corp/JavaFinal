@@ -28,7 +28,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	protected String name = "", otherIP, otherName, recentClientName = "";
 	
 	private Entity[][] board = new Entity[15][15];
-	private int turnTag;
+	private int turnTag = 0;
 	
 	private GameClient winner = null;
 	
