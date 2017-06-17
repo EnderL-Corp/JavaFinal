@@ -57,7 +57,7 @@ public class CARD_TESTER_CLASS
 		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
 		try {
 			Game.game = new Game();
-		} catch (RemoteException e) {
+		} catch (RemoteException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
