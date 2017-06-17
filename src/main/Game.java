@@ -95,17 +95,17 @@ public class Game extends GameClient implements Serializable {
 	public Game(int tag, String serverIP, int serverPort, Color playerColor) throws RemoteException {
 		this(tag, serverIP, serverPort);
 		this.playerColor = playerColor;
-		graveyard = new ArrayList<Card>();
-		myHand = new ArrayList<Card>();
 	}
 	
 	/**
-	 * Called after creating Game. Used to avoid Null POinter Exceptions as the constructors for some 
+	 * Called after creating Game. Used to avoid Null Pointer Exceptions as the constructors for some 
 	 * of these objects need the ability to call methods off of Game, which in the constructor is
 	 * not fully constructed.
 	 */
 	public void init(DeckEnum deckEnum) {
 		deck = new Deck(deckEnum);
+		graveyard = new ArrayList<Card>();
+		myHand = new ArrayList<Card>();
 		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);
 		myCards = deck.getDeck();
 		cp = deck.getCP();
