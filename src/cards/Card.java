@@ -39,4 +39,9 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 	{
 		return description;
 	}
+	
+	public Color getTeamColor()
+	{
+		return teamColor;
+	}
 }

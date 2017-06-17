@@ -69,23 +69,41 @@ public class Amplifier extends Structure implements java.io.Serializable
 					boolean placed = false;
 					while(placed == false)
 					{
-						placed = Game.game.placeEntity(new Drone(0, 0, Game.game.getTag(), TroopEnum.X), (int)(Math.random() * 15), (int)(Math.random() * 15));
+						placed = Game.game.placeEntity( (Entity)(new Drone((int)(Math.random() * 15), (int)(Math.random() * 15), Game.game.getTag(), TroopEnum.X)) );
 					}
 					break;
 				}
 				case OVERDRAW:
 				{
-
+					Game.game.drawCard();
 					break;
 				}
 				case HEALING_WAVE:			
 				{
-
+					for(Entity[] row : Game.game.getBoard())
+					{
+						for(Entity e : row)
+						{
+							if(e.getTeamColor() == Game.game.getColor() && !(e instanceof Commander))
+							{
+								e.modify(1, 0);
+							}
+						}
+					}
 					break;
 				}
 				case SHORT_CIRCUIT:		
 				{
-
+					for(Entity[] row : Game.game.getBoard())
+					{
+						for(Entity e : row)
+						{
+							if(e.getTeamColor() != Game.game.getColor() && !(e instanceof Commander)) 
+							{
+								e.modify(-1, 0);
+							}
+						}
+					}					
 					break;
 				}
 			}
