@@ -11,14 +11,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
 
 import javax.swing.JLabel;
 
-public class NewMainMenu {
+public class NewMainMenu implements ActionListener{
 
 	private JFrame frame;
-	private JTextField textField;
+	JTextField ip;
+	JButton host;
+	JButton join;
+	JButton quit;
+	
+	String writtenIP = "";
 
 	/**
 	 * Launch the application.
@@ -52,29 +58,60 @@ public class NewMainMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JTextField ip = new JTextField();
+		ip = new JTextField();
 		ip.setFont(new Font("Tahoma", Font.BOLD, 20));
 		ip.setBounds(10, 174, 180, 52);
 		frame.getContentPane().add(ip);
 		ip.setColumns(10);
+		ip.setActionCommand("ip");
+		ip.addActionListener(this);
 		
-		JButton host = new JButton("Host Game");
+		host = new JButton("Host Game");
 		host.setFont(new Font("Tahoma", Font.BOLD, 20));
 		host.setBounds(10, 66, 180, 97);
 		frame.getContentPane().add(host);
+		host.setActionCommand("host");
+		host.addActionListener(this);
 		
-		JButton join = new JButton("Join Game");
+		join = new JButton("Join Game");
 		join.setFont(new Font("Tahoma", Font.BOLD, 20));
 		join.setBounds(10, 236, 180, 97);
 		frame.getContentPane().add(join);
+		join.setActionCommand("join");
+		join.addActionListener(this);
+		join.setEnabled(false);
 		
-		JButton quit = new JButton("Quit Game");
+		quit = new JButton("Quit Game");
 		quit.setFont(new Font("Tahoma", Font.BOLD, 20));
 		quit.setBounds(10, 344, 180, 97);
 		frame.getContentPane().add(quit);
+		quit.setActionCommand("quit");
+		quit.addActionListener(this);
 		
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
 		wallpaper.setBounds(0, 0, 1264, 985);
 		frame.getContentPane().add(wallpaper);
 	}
-}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String a = e.getActionCommand();
+		if (a.equals("host")) {
+			System.out.println("game hosting");
+			try {
+				Game.createHost(java.net.InetAddress.getLocalHost().getHostAddress());
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+			}
+		} else if (a.equals("ip")) {
+			System.out.println("typing ip");
+			join.setEnabled(true);
+			writtenIP = ip.getText();
+			System.out.println(writtenIP);
+		} else if (a.equals("join")) {
+			System.out.println("searching for host");
+			Game.createClient(writtenIP);
+		} else if (a.equals("quit")) {
+			System.out.println("am quiting");
+			System.exit(0);
+		}
+}}

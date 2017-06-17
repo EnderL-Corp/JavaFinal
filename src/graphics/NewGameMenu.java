@@ -56,37 +56,37 @@ public class NewGameMenu {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel board = new JPanel();
-		board.setBounds(37, 11, 122, 77);
+		board.setBounds(159, 161, 674, 547);
 		frame.getContentPane().add(board);
 		
 		JPanel hand = new JPanel();
-		hand.setBounds(37, 152, 100, 106);
+		hand.setBounds(147, 741, 922, 131);
 		frame.getContentPane().add(hand);
 		
 		StatsPanel stats = new StatsPanel();
-		stats.setBounds(1079, 579, 171, 229);
+		stats.setBounds(1079, 657, 157, 152);
 		frame.getContentPane().add(stats);
 		
 		InfoPanel info = new InfoPanel();
-		info.setBounds(60, 423, 171, 124);
+		info.setBounds(1019, 348, 217, 298);
 		frame.getContentPane().add(info);
 		
 		DeckQuitPanel deck = new DeckQuitPanel();
-		deck.setBounds(1079, 883, 171, 59);
+		deck.setBounds(1079, 883, 157, 59);
 		frame.getContentPane().add(deck);
 		
 		AmpPanel amp = new AmpPanel();
-		amp.setBounds(901, 503, 349, 66);
+		amp.setBounds(10, 777, 127, 165);
 		frame.getContentPane().add(amp);
 		
 		CommandLog log = new CommandLog();
-		log.setBounds(915, 806, 154, 136);
+		log.setBounds(147, 883, 922, 59);
 		log.init();
 		frame.getContentPane().add(log);
 		
 		JButton nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
-		nxtPhase.setBounds(1079, 821, 171, 49);
+		nxtPhase.setBounds(1079, 821, 157, 49);
 		frame.getContentPane().add(nxtPhase);
 	}
 }

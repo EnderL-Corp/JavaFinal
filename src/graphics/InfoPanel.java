@@ -4,6 +4,7 @@ package graphics;
 
 
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 
 import cards.Card;
@@ -15,26 +16,26 @@ import cards.Troop;
 
 
 public class InfoPanel  extends JPanel {
-	private JLabel stats;
+	private JTextPane stats;
 
 
 	public InfoPanel(){
-
+		stats = new JTextPane();
 	}
 	public void newDisplay(Card c){
 		if(c instanceof Troop){
-			stats = new JLabel("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + ((Troop) c).getCurrentApCost() + "\n Health : " + 
+			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + ((Troop) c).getCurrentApCost() + "\n Health : " + 
 		((Entity) c).getCurrentHealth() + "\n Attack : " + ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());
 		}
 		else if(c instanceof Commander){
-			stats = new JLabel("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + 
+			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + 
 					((Entity) c).getCurrentHealth() + "\n Attack : " + ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());			
 		}
 		else if(c instanceof Technique){
-			stats = new JLabel("Name : " + c.getName() + "\n TP : " + ((Technique) c).getTpCost() + "\n Description : " + c.getDescription());
+			stats.setText("Name : " + c.getName() + "\n TP : " + ((Technique) c).getTpCost() + "\n Description : " + c.getDescription());
 	    }
 		else if(c instanceof Structure){
-			stats = new JLabel("Name : " + c.getName() + "\n Description : " + c.getDescription());
+			stats.setText("Name : " + c.getName() + "\n Description : " + c.getDescription());
 	    }
 
 }
