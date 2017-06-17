@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,10 +16,11 @@ import javax.swing.JPanel;
 import cards.Entity;
 import main.Game;
 
-public class BoardPanel extends JPanel {
+public class BoardPanel extends JPanel implements ActionListener {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
 	private JButton[][] buttons = new JButton[15][15];
+	private ArrayList<JButton> activeButton = new ArrayList<JButton>();
 
 	public BoardPanel() {
 		/*for(int i = 0; i < buttons.length; i++) {
@@ -37,6 +41,8 @@ public class BoardPanel extends JPanel {
 		for (int i = 0; i < numTiles; i++) {
 			for (int j = 0; j < numTiles; j++) {
 				JButton bb = buttons[i][j] = new JButton();
+				bb.setActionCommand(i + ", " + j);
+				bb.addActionListener(this);
 				bb.setBackground(Color.WHITE);
 				bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				this.add(bb);
@@ -73,8 +79,15 @@ public class BoardPanel extends JPanel {
 					bb.setBackground(Color.WHITE);
 					bb.setIcon(null);
 					Entity e = Game.game.getEntityAt(i, j);
-					if(e != null)
+					if(e != null) {
 						bb.setIcon(new ImageIcon("Sprites/" + e.getName() + ".png"));
+						if(!isActive(bb))
+							activeButton.add(bb);
+					}
+					else
+						if(isActive(bb))
+							activeButton.remove(bb);
+							
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 
@@ -129,11 +142,29 @@ public class BoardPanel extends JPanel {
 		commanderPosX = numTiles / 2;
 	}
 	
+	private boolean isActive(JButton b) {
+		for(JButton jb : activeButton) {
+			if(jb.equals(b))
+				return true;
+		}
+		return false;
+	}
+	
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
 		f.add(new BoardPanel());
 		f.setSize(700, 700);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		for(int i = 0; i < buttons.length; i++) {
+			for(int j = 0; j < buttons[0].length; j++) {
+				if(e.getSource() == buttons[i][j]) {
+					Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
+				}
+			}
+		}
 	}
 }

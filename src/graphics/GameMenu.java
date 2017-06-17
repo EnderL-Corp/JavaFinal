@@ -18,7 +18,7 @@ public class GameMenu implements java.io.Serializable{
 	private static final long serialVersionUID = -203776595464586989L;
 	
 	private JFrame frame;
-	private CommandLog log;
+	public static CommandLog log;
 	private BoardPanel board;
 	private AmpPanel amps;
 	private JPanel panel;

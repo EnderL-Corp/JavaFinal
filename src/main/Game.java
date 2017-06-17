@@ -242,10 +242,10 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if(winOrLose) {
 				remoteServer.gameOver(this);
-				System.out.println("Congratulations, you've won!");		//Change to command log
+				GameMenu.log.publish("Congratulations, you won!");
 			}
 			else
-				System.out.println("Oh no, you've lost!");				//Change to command log
+				GameMenu.log.publish("Sorry, you lost!");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
