@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cards.Card;
 import cards.Entity;
 import main.Game;
 
@@ -162,7 +163,14 @@ public class BoardPanel extends JPanel implements ActionListener {
 		for(int i = 0; i < buttons.length; i++) {
 			for(int j = 0; j < buttons[0].length; j++) {
 				if(e.getSource() == buttons[i][j]) {
-					Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
+					try
+					{
+						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
+					}
+					catch(NullPointerException ex)
+					{
+						Game.game.addToPlayerActionQueue(new Card());
+					}
 				}
 			}
 		}

@@ -358,9 +358,9 @@ public class Game extends GameClient implements Serializable {
 		switch(currentPlayerAction)
 		{
 			case 'm':
-				if(first instanceof Entity)
+				if(first instanceof Entity && second instanceof Entity && second.getName().equals("moveTarget"));
 				{
-					//Get a second position SOMEHOW
+					ap = Entity.move(((Entity)first), ap, ((Entity)second).getPosX(), ((Entity)second).getPosY());
 				}
 				break;
 				
