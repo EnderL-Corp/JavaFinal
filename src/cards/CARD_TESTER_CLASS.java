@@ -97,6 +97,7 @@ public class CARD_TESTER_CLASS
 		
 		if(technique1.canCast(cardTesterClass.getTp()))
 		{
+			System.out.println(cardTesterClass.getTp() - technique1.getTpCost());
 			cardTesterClass.remainingTp(cardTesterClass.getTp() - technique1.getTpCost());
 			while(techniqueUsed == false)
 			{

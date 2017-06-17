@@ -64,7 +64,7 @@ public class Technique extends Card
 	
 	public boolean canCast(int tp)
 	{
-		return tp > tpCost;
+		return tp >= tpCost;
 	}
 	
 	/**
