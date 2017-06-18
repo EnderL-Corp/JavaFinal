@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * For logging what the other client has done in a panel.
+ * @author Srihari Subramanian
+ *
+ */
 public class CommandLog extends JPanel {
 	private static final long serialVersionUID = -8782011634375723048L;
 	JTextArea log;

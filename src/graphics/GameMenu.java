@@ -14,6 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 
+/**
+ * For interfacing with the player while the game is in progress.
+ * @author Santiago Callegari, Srihari Subramanian
+ *
+ */
 public class GameMenu {
 
 	private JFrame frame;

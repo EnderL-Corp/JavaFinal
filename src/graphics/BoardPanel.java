@@ -19,6 +19,12 @@ import cards.MovePoint;
 import cards.Troop;
 import main.Game;
 
+/**
+ * Panel representing the most recent version of the board. A player whose turn it is can also 
+ * interact with this board to change contents of board in game.
+ * @author Srihari Subramanian
+ *
+ */
 public class BoardPanel extends JPanel implements ActionListener {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
