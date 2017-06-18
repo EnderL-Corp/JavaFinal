@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cards.Card;
+import cards.Commander;
 import cards.Entity;
 import cards.MovePoint;
 import cards.Troop;
@@ -27,7 +28,6 @@ import main.Game;
  */
 public class BoardPanel extends JPanel implements ActionListener {
 	private int numTiles = 15;
-	private int commanderPosX = 7, commanderPosY = 1;
 	private JButton[][] buttons = new JButton[15][15];
 
 	public BoardPanel() {
@@ -91,66 +91,15 @@ public class BoardPanel extends JPanel implements ActionListener {
 						bb.setIcon(((Troop)e).getIcon());
 						bb.setBackground(Game.game.getColor());
 					}
+					else if(e != null && e instanceof Commander) {
+						bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
+						bb.setBackground(Game.game.getColor());
+					}
 							
-					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
-				}
-
-				if (j == commanderPosX && i == commanderPosY) {
-					JButton bb = buttons[i][j];
-					//bb.setBackground(Color.RED);
-					bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}
 		}
-	}
-
-	public void changeCommanderPos(int x, int y) {
-		if ((x < 0 || y < 0 || x > numTiles - 1 || y > numTiles - 1) //if out of bounds
-				|| (buttons[x][y]).getBackground() == Color.BLACK) // if "void"
-			return;
-		commanderPosX = x;
-		commanderPosY = y;
-	}
-
-	/**
-	 * @return commander x position
-	 */
-	public int getCommanderX() {
-		return commanderPosX;
-	}
-
-	/**
-	 * @return commander y position
-	 */
-	public int getCommanderY() {
-		return commanderPosY;
-	}
-
-	public void changeMapSize(String size) {
-		switch (size) {
-		case "small":
-			numTiles = 9;
-			break;
-		case "medium":
-			numTiles = 15;
-			break;
-		case "large":
-			numTiles = 21;
-			break;
-		default:
-			numTiles = 9;
-			break;
-		}
-		commanderPosX = numTiles / 2;
-	}
-	
-	public static void main(String[] args) {
-		JFrame f = new JFrame();
-		f.add(new BoardPanel());
-		f.setSize(700, 700);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
