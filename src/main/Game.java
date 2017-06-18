@@ -651,7 +651,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'S':
-					if (phase == 0 && first instanceof Amplifier && myHand.contains(first) 
+					if (phase == 0 && first instanceof Amplifier && myHand.contains(first) && !(((Amplifier) first).getAmpType().equals(AmpEnum.NONE))
 						&& second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
 						for(int i = 0; i < 5; i++) {
 							if(ampPanel[i] == null)
