@@ -28,4 +28,10 @@ public class MovePoint extends Card {
 	{
 		return yPos;
 	}
+	
+	public String toString()
+	{
+		return xPos + ", " + yPos;
+		
+	}
 }
