@@ -161,7 +161,7 @@ public class Technique extends Card
 				
 			case DRAIN:
 				e.modify(-4, 0);
-				Game.game.getCommander().modify(4, 0);
+				Game.game.getCommander().heal(4);
 				break;
 				
 			case CALL:

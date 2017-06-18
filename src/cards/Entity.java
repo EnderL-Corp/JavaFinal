@@ -72,6 +72,14 @@ public abstract class Entity extends Card
 			kill(this);
 	}
 	
+	public void heal(int hp)
+	{
+		if(currentHealth + hp > health)
+			currentHealth = health;
+		else
+			modify(hp, 0);
+	}
+	
 	/**
 	 * <code> dealDamage(defender) </code> is the method that allows one Entity to attack another.
 	 * The method takes in the opposing Entity to be attacked and plays the correct sound
