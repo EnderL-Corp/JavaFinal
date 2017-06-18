@@ -39,10 +39,10 @@ public class Troop extends Entity
 	 */
 	public ImageIcon getIcon() {
 		if(te != null) {
-			return Utilities.combineImages(rootName, name);
+			return Utilities.combineImages(rootName + ".png", name + ".png");
 		}
 		else
-			return new ImageIcon("Sprites/" + rootName);
+			return new ImageIcon("Sprites/" + rootName + ".png");
 	}
 	
 	/**

@@ -82,8 +82,9 @@ public class BoardPanel extends JPanel implements ActionListener {
 					bb.setBackground(Color.WHITE);
 					bb.setIcon(null);
 					Entity e = Game.game.getEntityAt(i, j);
-					if(e != null) {
-						bb.setIcon(new ImageIcon("Sprites/" + e.getName() + ".png"));
+					if(e != null && e instanceof Troop) {
+						bb.setIcon(((Troop)e).getIcon());
+						bb.setBackground(Game.game.getColor());
 						if(!isActive(bb))
 							activeButton.add(bb);
 					}
