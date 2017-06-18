@@ -109,9 +109,7 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
-		for (int i = 0; i < 5; i++) {
-			updateAmpPanel(new Amplifier(AmpEnum.NONE), false);
-		}
+		
 		shuffleDeck(deck.getDeck());
 		drawCard();
 		drawCard();
@@ -393,7 +391,7 @@ public class Game extends GameClient implements Serializable {
 			for (int i = 0; i < ampPanel.length; i++) {
 				if (Game.game.getAmpAt(i).getName() == this.getName() && updated == false) // XXX Replace "this" with "amp"?
 				{
-					ampPanel[i] = new Amplifier(AmpEnum.NONE);
+					ampPanel[i] = null;
 					updated = true;
 				}
 			}
@@ -500,13 +498,16 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'S':
-					if (first instanceof Amplifier && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
-						for (int i = 0; i < 5; i++)
-							if (getAmpAt(i) == second) {
+					if (first instanceof Amplifier && myHand.contains(first) && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
+						for(int i = 0; i < 5; i++)
+						{
+							if(ampPanel[i] == null)
+							{
 								updateAmpPanel((Amplifier) first, false);
 								CommandLog.publish("[Game] You are using placing the Amplifier " + first.getName() + ".");
 								boardChanged = true;
 							}
+						}
 					break;
 			}
 		}
