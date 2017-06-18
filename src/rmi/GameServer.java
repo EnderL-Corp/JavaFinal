@@ -26,6 +26,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private Entity[][] board = new Entity[15][15];
 	private int turnTag = 0;
 	private ClientInfo winner = null;
+	private String recentClientActionDescription = "";
 
 	/**
 	 * Required no-args constructor for RMI.
@@ -147,5 +148,14 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return clients.get(1);
 		else
 			return clients.get(0);
+	}
+
+	public void setRecentClientActionDescription(String s) {
+		recentClientActionDescription = s;
+	}
+
+	@Override
+	public String getRecentClientActionDescription() {
+		return recentClientActionDescription;
 	}
 }

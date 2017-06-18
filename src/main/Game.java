@@ -59,6 +59,7 @@ public class Game extends GameClient implements Serializable {
 	private boolean myTurn;
 	private boolean boardChanged = false;
 	private int phase;
+	private String recentClientDescription = "";
 	
 	/**
 	 * Required no-args constructor for RMI.
@@ -170,8 +171,16 @@ public class Game extends GameClient implements Serializable {
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
-				if(otherClientWaiter == 2)		//Wait two seconds for the other client to update its info in the server
+				if(otherClientWaiter > 2) {		//Wait two seconds for the other client to update its info in the server
 					System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
+					if(!myTurn) {
+						String tempDesc = remoteServer.getRecentClientActionDescription();
+						if(!recentClientDescription.equals(tempDesc)) {
+							recentClientDescription = tempDesc;
+							CommandLog.publish(recentClientDescription);
+						}
+					}
+				}
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -495,6 +504,8 @@ public class Game extends GameClient implements Serializable {
 					if (phase == 1 && first instanceof Entity && second instanceof MovePoint) {
 						ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
 						CommandLog.publish("[Game] You are moving " + first.getName() + " to position " + ((MovePoint)second) + ".");
+						remoteServer.setRecentClientActionDescription(
+								"[Game] Opponent moved Entity" + first.getName() + " to position " + ((MovePoint)second) + ".");
 						boardChanged = true;
 					}
 					break;
@@ -504,40 +515,42 @@ public class Game extends GameClient implements Serializable {
 						if (!(((Entity) first).hasAbility(3) && second instanceof Commander)) {
 							((Entity) first).attack((Entity) second);
 							CommandLog.publish("[Game] You, Entity " + first.getName() + ", are attacking Entity " + second.getName() + ".");
+							remoteServer.setRecentClientActionDescription(
+									"[Game] Opponent, Entity " + first.getName() + ", attacked Entity " + second.getName() + ".");
 							boardChanged = true;
 						}
 					break;
 	
 				case 'T':
-					if (phase == 1 && first instanceof Technique)
-						CommandLog.publish("cnan");
+					if (phase == 1 && first instanceof Technique) { 
 						if (((Technique) first).canCast(tp)) {
-							
 							if(queuedPlayerActions.size() > 1) {
-								CommandLog.publish("Lmao");
-								for (int i = 1; i < queuedPlayerActions.size(); i++){
+								for (int i = 1; i < queuedPlayerActions.size(); i++)
 									if (queuedPlayerActions.get(i) instanceof Troop) {
 										((Technique) first).cast((Troop)queuedPlayerActions.get(i));
-										CommandLog.publish("[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
-										boardChanged = true;
+										if (queuedPlayerActions.get(i) instanceof Troop) {
+											CommandLog.publish(
+													"[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
+											boardChanged = true;
+											remoteServer.setRecentClientActionDescription(
+													"[Game] Opponent used technique " + first.getName() + " on Troop " + second.getName() + ".");
+										}
 									}
-								}
 							}
-							else {
-								CommandLog.publish("Lmaow");
+							else
 								((Technique) first).cast(null);
-								
 							}
 							addToGraveyard(first);
 							myHand.remove(first);
 						}
-							
-					break;
+						break;
 	
 				case 'G':
 					if (phase == 0 && first instanceof Gear && second instanceof Troop) {
 						((Gear)first).effect((Troop)second);//XXX
 						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
+						remoteServer.setRecentClientActionDescription(
+								"[Game] Opponent used the Gear " + first.getName() + " on Troop " + second.getName() + ".");
 						boardChanged = true;
 					}
 					break;
@@ -546,15 +559,19 @@ public class Game extends GameClient implements Serializable {
 					if (phase == 0 && first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint)second);
-						if(cp > ((Troop)first).getCpCost())
+						if(cp > ((Troop)first).getCpCost()) {
 							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
-						cp = Troop.placeOnBoard((Troop)first, cp);
+							remoteServer.setRecentClientActionDescription(
+									"[Game] Opponent placed the Troop " + first.getName() + " at Position " + ((MovePoint)second) + ".");
+							cp = Troop.placeOnBoard((Troop)first, cp);
+						}
 						boardChanged = true;
 					}
 					break;
 	
 				case 'S':
-					if (phase == 0 && first instanceof Amplifier && myHand.contains(first) && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
+					if (phase == 0 && first instanceof Amplifier && myHand.contains(first) 
+						&& second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
 						for(int i = 0; i < 5; i++) {
 							if(ampPanel[i] == null)
 							{
@@ -562,6 +579,7 @@ public class Game extends GameClient implements Serializable {
 								addToGraveyard(first);
 								myHand.remove(first);
 								CommandLog.publish("[Game] You are using placing the Amplifier " + first.getName() + ".");
+								remoteServer.setRecentClientActionDescription("[Game] Opponent used the Amplifier " + first.getName() + ".");
 								boardChanged = true;
 								break;
 							}

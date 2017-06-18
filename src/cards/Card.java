@@ -13,7 +13,7 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 {
 	private static final long serialVersionUID = 1L;
 	protected Color teamColor;
-	protected String name, description;
+	protected String name, description, formattedName;
 	
 	protected Audio fx;
 	
@@ -58,5 +58,9 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 	public Color getTeamColor()
 	{
 		return teamColor;
+	}
+	
+	public String getFormattedName() {
+		return formattedName;
 	}
 }

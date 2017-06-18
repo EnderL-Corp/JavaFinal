@@ -101,7 +101,7 @@ public class HandPanel extends JPanel {
 			}
 			else
 			{
-				buttons[i].setText(Game.game.getHand().get(i).getFormatedName());
+				buttons[i].setText(Game.game.getHand().get(i).getFormattedName());
 				Game.game.getHand().get(i).updateDescription();
 			}
 		}
