@@ -23,7 +23,7 @@ import main.Game;
 /**
  * Panel representing the most recent version of the board. A player whose turn it is can also 
  * interact with this board to change contents of board in game.
- * @author Srihari Subramanian
+ * @author Srihari Subramanian, Andre
  *
  */
 public class BoardPanel extends JPanel implements ActionListener {

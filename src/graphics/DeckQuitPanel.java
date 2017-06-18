@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main.Audio;
 import main.Game;
 
 public class DeckQuitPanel extends JPanel implements ActionListener {
@@ -33,6 +34,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Game.game.getGameMainMenu().getFrame().setVisible(true);
 		Game.game.disconnect();
+		new Audio("MainMenu");
 		Game.game.getGameMenu().getFrame().setVisible(false);
 		Game.game.getGameMenu().getFrame().dispose();
 	}
