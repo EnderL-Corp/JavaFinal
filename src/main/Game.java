@@ -247,7 +247,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			gs = new GameServer(serverIP, 1099);
 			gs.createMyRegistry();
-			game = new Game(0, serverIP, 1099, Color.BLUE);
+			game = new Game(0, serverIP, 1099, Color.CYAN);
 			game.myTurn = true;
 			game.isHost = true;
 			game.init(DeckEnum.DJ);
@@ -643,6 +643,7 @@ public class Game extends GameClient implements Serializable {
 							} catch (RemoteException e) {
 								e.printStackTrace();
 							}
+							first.setTeamColor(getColor());
 							cp = Troop.placeOnBoard((Troop)first, cp);
 						}
 						boardChanged = true;

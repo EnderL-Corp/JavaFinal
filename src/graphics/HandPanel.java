@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import cards.Card;
 import cards.Cyborg;
 import cards.Troop;
 import cards.TroopEnum;
@@ -23,6 +24,7 @@ public class HandPanel extends JPanel {
 		buttons[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Game.game.getHand().get(0) != null) {
+					Card c = Game.game.getHand().get(0);
 					Game.game.addToPlayerActionQueue(Game.game.getHand().get(0));
 					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(0));
 				}	

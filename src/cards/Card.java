@@ -59,6 +59,10 @@ public abstract class Card implements Serializable
 	{
 		return teamColor;
 	}
+	public void setTeamColor(Color color)
+	{
+		teamColor = color;
+	}
 	
 	public String getFormattedName() {
 		if(getName() == "ELECTROMAGNET")
