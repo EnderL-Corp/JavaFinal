@@ -104,7 +104,10 @@ public class GameMenu {
 		nxtPhase.setBounds(1079, 652, 157, 127);
 		nxtPhase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Game.game.changePhase();
+				if(Game.game.getPhase() != -1)
+					Game.game.changePhase();
+				else
+					CommandLog.publish("[Game] It's not your turn!");
 			}
 		});
 		frame.getContentPane().add(nxtPhase);

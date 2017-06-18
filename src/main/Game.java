@@ -59,7 +59,7 @@ public class Game extends GameClient implements Serializable {
 	
 	private int numPings = 0, otherClientWaiter = 0;
 	
-	private boolean myTurn, isHost;
+	private boolean myTurn, previousTurnCheck = false, isHost;
 	private boolean boardChanged = false;
 	private int phase;
 	private String recentClientDescription = "";
@@ -170,7 +170,10 @@ public class Game extends GameClient implements Serializable {
 		}
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
-			if (connected && myTurn)
+			if(myTurn && !previousTurnCheck) {
+				changePhase();
+			}
+			if(connected && myTurn)
 				if (boardChanged) {
 					sendRecentChanges();		//If it's your turn and the board was changed, update the server board info
 					boardChanged = false;
@@ -263,7 +266,6 @@ public class Game extends GameClient implements Serializable {
 	
 	public void changePhase() {
 		phase = ++phase > 2 ? -1 : phase;
-		String s = "";
 		switch(phase) {
 		case -1:
 			CommandLog.publish("[Game] Currently opponent's turn.");
@@ -275,7 +277,7 @@ public class Game extends GameClient implements Serializable {
 			CommandLog.publish("[Game] You are now in phase 2. You can:\n\tMove troops.\n\tUse techniques.");
 			break;
 		case 2:
-			game.endTurn();
+			endTurn();
 			break;
 		}
 	}
@@ -299,6 +301,10 @@ public class Game extends GameClient implements Serializable {
 
 	public int getTP() {
 		return tp;
+	}
+	
+	public int getPhase() {
+		return phase;
 	}
 
 	public Commander getCommander() {
@@ -386,6 +392,7 @@ public class Game extends GameClient implements Serializable {
 	public void updateServerInformation() {
 		try {
 			recentBoard = remoteServer.getBoard();
+			previousTurnCheck = myTurn;
 			myTurn = remoteServer.getTurnTag() == getTag();
 			otherClientInfo = remoteServer.getOtherClient(clientInfo);
 			if (remoteServer.getWinner() != null && remoteServer.getWinner().getTag() == getTag()) {
