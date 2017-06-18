@@ -12,6 +12,7 @@ import cards.Cyborg;
 import cards.Troop;
 import cards.TroopEnum;
 import main.Game;
+
 /**
  * 
  * 
@@ -20,12 +21,13 @@ import main.Game;
  */
 public class HandPanel extends JPanel {
 	private JButton[] buttons = new JButton[6];
-/**
- * 
- * makes buttons that when pushed remove the card(if any)
- * from the hand array and the use it if a keystroke was pressed otherwise
- * it send info the infopanel
- */
+
+	/**
+	 * 
+	 * makes buttons that when pushed remove the card(if any) from the hand
+	 * array and the use it if a keystroke was pressed otherwise it send info
+	 * the infopanel
+	 */
 	public HandPanel() {
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
@@ -37,7 +39,7 @@ public class HandPanel extends JPanel {
 					Card c = Game.game.getHand().get(0);
 					Game.game.addToPlayerActionQueue(Game.game.getHand().get(0));
 					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(0));
-				}	
+				}
 			}
 		});
 		buttons[0].setBounds(82, 11, 122, 177);
@@ -103,19 +105,16 @@ public class HandPanel extends JPanel {
 		buttons[5].setBounds(742, 11, 122, 177);
 		add(buttons[5]);
 	}
-/**
- * makes sure cards shown are always accurate
- */
+
+	/**
+	 * makes sure cards shown are always accurate
+	 */
 	public void refresh() {
-		for(int i = 0; i < 5; i++)
-		{
-			try
-			{
+		for (int i = 0; i < 5; i++) {
+			try {
 				buttons[i].setText(Game.game.getHand().get(i).getFormattedName());
 				Game.game.getHand().get(i).updateDescription();
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				buttons[i].setText("Open Slot");
 			}
 		}
