@@ -17,7 +17,7 @@ import java.awt.Font;
 public class NewGameMenu {
 
 	private JFrame frame;
-	private BoardPanel board;
+	//private BoardPanel board;
 	private HandPanel hand;
 	private StatsPanel stats;
 	private DeckQuitPanel deck;
@@ -67,11 +67,11 @@ public class NewGameMenu {
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		/*
 		board = new BoardPanel();
 		board.setBounds(341, 68, 480, 480);
 		frame.getContentPane().add(board);
-		board.repaint();
+		board.repaint();*/
 		
 		hand = new HandPanel();
 		hand.setBounds(147, 579, 922, 200);
@@ -95,7 +95,7 @@ public class NewGameMenu {
 		frame.getContentPane().add(log);
 		
 		info = new InfoPanel();
-		info.setBounds(1076, 259, 157, 271);
+		info.setBounds(966, 391, 267, 139);
 		frame.getContentPane().add(info);
 		
 		nxtPhase = new JButton("Next Phase");
