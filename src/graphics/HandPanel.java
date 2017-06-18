@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import cards.Cyborg;
 import cards.Troop;
+import cards.TroopEnum;
 import main.Game;
 
 public class HandPanel extends JPanel implements ActionListener {
@@ -18,6 +20,7 @@ public class HandPanel extends JPanel implements ActionListener {
 		JButton cardSlot1 = new JButton("Open Slot");
 		cardSlot1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Game.game.getGameMenu().getInfo().newDisplay(new Cyborg(0, 0, 4, TroopEnum.RANGER));
 			}
 		});
 		cardSlot1.setBounds(82, 11, 122, 177);
@@ -67,6 +70,6 @@ public class HandPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		Game.game.getGameMenu().getInfo().newDisplay(new Troop(0));
+		
 	}
 }

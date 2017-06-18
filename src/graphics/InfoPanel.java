@@ -17,6 +17,7 @@ public class InfoPanel extends JPanel {
 	public InfoPanel() {
 		stats = new JTextPane();
 		stats.setEditable(false);
+		add(stats);
 	}
 
 	public void newDisplay(Card c) {

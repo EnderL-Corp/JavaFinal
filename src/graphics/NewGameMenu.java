@@ -25,6 +25,7 @@ public class NewGameMenu {
 	private CommandLog log;
 	private InfoPanel info;
 	private JButton nxtPhase;
+	private JPanel background;
 	
 
 	/**
@@ -101,12 +102,13 @@ public class NewGameMenu {
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
 		nxtPhase.setBounds(1079, 730, 157, 49);
 		frame.getContentPane().add(nxtPhase);
-		/*panel = new JPanel();
-		panel.setBounds(0, 0, 1280, 1024);
+		
+		background = new JPanel();
+		background.setBounds(0, 0, 1280, 1024);
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
-		panel.add(wallpaper);
-		frame.getContentPane().add(panel);
-		 */
+		background.add(wallpaper);
+		frame.getContentPane().add(background);
+		 
 		
 	}
 	
