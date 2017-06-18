@@ -21,6 +21,8 @@ public class Audio extends Thread
 	private String threadName;
 	private String effect;
 	private static boolean onMenu;
+	File[] songs;
+	int trackNum;
 	   
 	public static void main(String[] args)
 	{
@@ -86,6 +88,11 @@ public class Audio extends Thread
 		t = null;
 		
 	}
+	
+	public synchronized String getCurrentlyPlayingTrack()
+	{
+		return ("Currently playing: " + songs[trackNum--].getName().substring(0, songs[trackNum--].getName().indexOf('.')));
+	}
 
 	public synchronized void soundFX(String effect)
 	{
@@ -107,13 +114,13 @@ public class Audio extends Thread
 	/**
 	 * Plays Main Menu Music
 	 */
-	public void mainMenuMusic()
+	public synchronized void mainMenuMusic()
 	{
 		try 
 		{
 			long startTime;
 			Clip clip = AudioSystem.getClip();
-			File[] songs = shuffleMusic("MenuMusic");
+			songs = shuffleMusic("MenuMusic");
 			while(true)
 			{
 				for(int i = 0; i < songs.length; i++)
@@ -147,17 +154,19 @@ public class Audio extends Thread
 	}
 	
 	
-	private void gameMusic()
+	private synchronized void gameMusic()
 	{
 		try
 		{
 			long startTime;
 			Clip clip = AudioSystem.getClip();
-			File[] songs = shuffleMusic("GameMusic");
+			songs = shuffleMusic("GameMusic");
 			while(true)
 			{
+				trackNum = 0;
 				for(int i = 0; i < songs.length; i++)
 				{
+					trackNum++;
 					System.out.println("Currently Playing" + songs[i].getName());
 					File file = new File("Audio/GameMusic/" + songs[i].getName());
 					clip.open(AudioSystem.getAudioInputStream(file));

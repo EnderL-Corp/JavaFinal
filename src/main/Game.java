@@ -446,34 +446,28 @@ public class Game extends GameClient implements Serializable {
 		if (myTurn) {
 			switch (currentPlayerAction) {
 				case 'M':
-					if (first instanceof Entity && second instanceof MovePoint) {
+					if (first instanceof Entity && second instanceof MovePoint)
 					ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
-					boardChanged = true;
-				}
+						boardChanged = true;
 					break;
 	
 				case 'A':
-					if (first instanceof Entity && second instanceof Entity) {
+					if (first instanceof Entity && second instanceof Entity)
 						if (!(((Entity) first).hasAbility(3) && second instanceof Commander)) {
 							((Entity) first).attack((Entity) second);
 							boardChanged = true;
 						}
-					}
 					break;
 	
 				case 'T':
-					if (first instanceof Technique && second instanceof Troop) {
-						if (((Technique) first).canCast(tp)) {
-							for (int i = 1; i < queuedPlayerActions.size(); i++) {
+					if (first instanceof Technique && second instanceof Troop)
+						if (((Technique) first).canCast(tp))
+							for (int i = 1; i < queuedPlayerActions.size(); i++)
 								if (queuedPlayerActions.get(i) instanceof Troop) {
 									((Technique) first).cast((Troop) second);
 									boardChanged = true;
-								} else {
-									break;
 								}
-							}
-						}
-					}
+					break;
 	
 				case 'G':
 					if (first instanceof Gear && second instanceof Troop) {
@@ -493,15 +487,12 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'S':
 					if (first instanceof Amplifier && second instanceof Amplifier
-							&& ((Amplifier) second).getAmpType().equals(AmpEnum.NONE)); 
-					{
-						for (int i = 0; i < 5; i++) {
+							&& ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
+						for (int i = 0; i < 5; i++)
 							if (getAmpAt(i) == second) {
 								updateAmpPanel((Amplifier) first, false);
 								boardChanged = true;
 							}
-						}
-					}
 					break;
 			}
 		}
