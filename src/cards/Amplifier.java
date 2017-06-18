@@ -68,25 +68,25 @@ public class Amplifier extends Structure implements java.io.Serializable
 		{
 			case DRONESDAY_DEVICE:
 			{
-				description = "The dronesday device spawns one drone at a random place on the map per turn"
+				description = "The dronesday device spawns \none drone at a random place on \nthe map per turn"
 						+ " per amplifier";
 				break;
 			}
 			case OVERDRAW:
 			{
-				description = "The overdraw amplifier allows the player to draw 1 extra card per amplifier";
+				description = "The overdraw amplifier allows \nthe player to draw 1 extra card per \namplifier";
 				break;
 			}
 			case HEALING_WAVE:			
 			{
-				description = "The healing wave amplifier heals every troop on your team on the field by one."
-						+ " This amplifier requires 2 of itself to be built to activate its effect";
+				description = "The healing wave amplifier \nheals every troop on your team on the \nfield by one."
+						+ " This amplifier \nrequires 2 of itself to be built to \nactivate its effect";
 				break;
 			}
 			case SHORT_CIRCUIT:		
 			{
-				description = "The short circuit amplifier damages every troop on the other team on the field by one."
-						+ " This amplifier requires 2 of itself to be built to activate its effect";
+				description = "The short circuit amplifier \ndamages every troop on the other team on \nthe field by one."
+						+ " This amplifier \nrequires 2 of itself to be built to \nactivate its effect";
 				break;
 			}
 			default:
