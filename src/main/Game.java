@@ -115,7 +115,13 @@ public class Game extends GameClient implements Serializable {
 		for (int i = 0; i < 5; i++) {
 			updateAmpPanel(new Amplifier(AmpEnum.NONE), false);
 		}
+		drawCard();
+		drawCard();
+		drawCard();
+		drawCard();
 
+		queuedPlayerActions = new ArrayList<Card>();
+		System.out.println(myHand);
 		gameMenu = new GameMenu();
 		gameMenu.getFrame().setVisible(true);
 	}
@@ -133,7 +139,8 @@ public class Game extends GameClient implements Serializable {
 	 * changes in the board to the server when needed.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(this);
+		//System.out.println(this);
+		System.out.println(queuedPlayerActions);
 		try {
 			if (connected)
 				if (boardChanged) {
@@ -169,19 +176,19 @@ public class Game extends GameClient implements Serializable {
 	/**
 	 * Will convert the board to a String.
 	 */
-	public String toString() { // DELETE UNNECESSARY METHOD
-		String string = "";
-		for (int i = 0; i < recentBoard.length; i++) {
-			for (int j = 0; j < recentBoard.length; j++) {
-				if (recentBoard[i][j] != null)
-					string += recentBoard[i][j].getName() + "   ";
-				else
-					string += "null\t";
-			}
-			string += "\n";
-		}
-		return string;
-	}
+//	public String toString() { // DELETE UNNECESSARY METHOD
+//		String string = "";
+//		for (int i = 0; i < recentBoard.length; i++) {
+//			for (int j = 0; j < recentBoard.length; j++) {
+//				if (recentBoard[i][j] != null)
+//					string += recentBoard[i][j].getName() + "   ";
+//				else
+//					string += "null\t";
+//			}
+//			string += "\n";
+//		}
+//		return string;
+//	}
 
 	/**
 	 * Will begin Game.game as the host of the game.

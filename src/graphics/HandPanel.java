@@ -12,94 +12,91 @@ import cards.Troop;
 import cards.TroopEnum;
 import main.Game;
 
-public class HandPanel extends JPanel{
-	JButton cardSlot1;
-	JButton cardSlot2;
-	JButton cardSlot3;
-	JButton cardSlot4;
-	JButton cardSlot5;
-	JButton cardSlot6;
+public class HandPanel extends JPanel {
+	private JButton[] buttons = new JButton[6];
+
 	public HandPanel() {
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
 
-		cardSlot1 = new JButton("Open Slot");
-		cardSlot1.addActionListener(new ActionListener() {
+		buttons[0] = new JButton("Open Slot");
+		buttons[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(0) != null) {
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(0));
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(0));
+				}	
 			}
 		});
-		cardSlot1.setBounds(82, 11, 122, 177);
-		add(cardSlot1);
+		buttons[0].setBounds(82, 11, 122, 177);
+		add(buttons[0]);
 
-		JButton cardSlot2 = new JButton("Open Slot");
-		cardSlot2.addActionListener(new ActionListener() {
+		buttons[1] = new JButton("Open Slot");
+		buttons[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(1) != null) {
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(1));
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(1));
+				}
 			}
 		});
-		cardSlot2.setBounds(214, 11, 122, 177);
-		add(cardSlot2);
+		buttons[1].setBounds(214, 11, 122, 177);
+		add(buttons[1]);
 
-		cardSlot3 = new JButton("Open Slot");
-		cardSlot3.addActionListener(new ActionListener() {
+		buttons[2] = new JButton("Open Slot");
+		buttons[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(2) != null) {
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(2));
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(2));
+				}
 			}
 		});
-		cardSlot3.setBounds(346, 11, 122, 177);
-		add(cardSlot3);
+		buttons[2].setBounds(346, 11, 122, 177);
+		add(buttons[2]);
 
-		cardSlot4 = new JButton("Open Slot");
-		cardSlot4.addActionListener(new ActionListener() {
+		buttons[3] = new JButton("Open Slot");
+		buttons[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(3) != null) {
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(3));
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(3));
+				}
 			}
 		});
-		cardSlot4.setBounds(478, 11, 122, 177);
-		add(cardSlot4);
+		buttons[3].setBounds(478, 11, 122, 177);
+		add(buttons[3]);
 
-		cardSlot5 = new JButton("Open Slot");
-		cardSlot5.addActionListener(new ActionListener() {
+		buttons[4] = new JButton("Open Slot");
+		buttons[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(4) != null) {
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(4));
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(4));
+				}
 			}
 		});
-		cardSlot5.setBounds(610, 11, 122, 177);
-		add(cardSlot5);
+		buttons[4].setBounds(610, 11, 122, 177);
+		add(buttons[4]);
 
-		cardSlot6 = new JButton("Open Slot");
-		cardSlot6.addActionListener(new ActionListener() {
+		buttons[5] = new JButton("Open Slot");
+		buttons[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (Game.game.getHand().get(5) != null) {
+					Game.game.addToPlayerActionQueue(Game.game.getHand().get(5));
+					Game.game.getGameMenu().getInfo().newDisplay(Game.game.getHand().get(5));
+				}
 			}
 		});
-		cardSlot6.setBounds(742, 11, 122, 177);
-		add(cardSlot6);
+		buttons[5].setBounds(742, 11, 122, 177);
+		add(buttons[5]);
 	}
 
-	public void refresh(){
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot1.setText(Game.game.getHand().get(0).getName());
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot2.setText(Game.game.getHand().get(1).getName());
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot3.setText(Game.game.getHand().get(2).getName());
-		cardSlot2.setText(Game.game.getHand().get(1).getName());
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot4.setText(Game.game.getHand().get(3).getName());
-		cardSlot2.setText(Game.game.getHand().get(1).getName());
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot5.setText(Game.game.getHand().get(4).getName());
-		cardSlot5.setText(Game.game.getHand().get(1).getName());
-		if(Game.game.getHand().get(0) == null)
-		    return;
-		else
-		cardSlot5.setText(Game.game.getHand().get(5).getName());
+	public void refresh() {
+		for(int i = 0; i < Game.game.getHand().size(); i++)
+		{
+			buttons[i].setText(Game.game.getHand().get(i).getName());
+		}
 	}
 
 }

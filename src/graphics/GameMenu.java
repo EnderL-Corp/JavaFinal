@@ -119,6 +119,7 @@ public class GameMenu {
 	
 	public void refresh() {
 		board.repaint();
+		hand.refresh();
 	}
 
 	public JFrame getFrame() {
