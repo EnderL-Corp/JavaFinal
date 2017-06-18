@@ -145,7 +145,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if (connected && myTurn)
 				if (boardChanged) {
-					sendRecentChanges();
+					sendRecentChanges();		//If it's your turn and the board was changed, update the server board info
 					boardChanged = false;
 				} else
 					refreshBoard();
