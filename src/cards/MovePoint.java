@@ -37,7 +37,6 @@ public class MovePoint extends Card {
 
 	@Override
 	public void updateDescription() {
-		// TODO Auto-generated method stub
 		
 	}
 }

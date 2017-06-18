@@ -102,7 +102,7 @@ public class Commander extends Entity implements Serializable
 
 	@Override
 	public void updateDescription() {
-		// TODO Auto-generated method stub
-		
+		description = "The commander is the most important unit in the game. If you kill your"
+				+ " opponents commander you win, but if yours dies, you lose!";
 	}
 }

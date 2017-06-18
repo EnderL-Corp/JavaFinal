@@ -188,7 +188,36 @@ public class Technique extends Card
 
 	@Override
 	public void updateDescription() {
-		// TODO Auto-generated method stub
-		
+		switch(techEnum) 
+		{
+			case GRAPE_SHOT:
+			{
+				description = "Deals 1 damage to each enemy troop";
+			}
+			case BOOSTER:
+			{
+				description = "Gives 1 health and one attack to 1 friendly troop";
+			}
+			case CALL:			
+			{
+				description = "Draw 2 cards";
+			}
+			case CANNON:		
+			{
+				description = "Deal 6 damage to one troop";
+			}
+			case CHAIN_SHOT:		
+			{
+				description = "Deal 2 damage to 4 troops";
+			}
+			case DRAIN:		
+			{
+				description = "Deal 4 damage to one troop and heal your commander by 4 health points";
+			}
+			default:
+			{
+				description = null;
+			}
+		}
 	}
 }

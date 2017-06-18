@@ -136,7 +136,7 @@ public class CARD_TESTER_CLASS
 		Game.game.init(DeckEnum.RAVAGER);
 		
 		Entity drone1 = new Drone(2, 5, 1, TroopEnum.X);
-		Entity drone2 = new Drone(3, 5, 2, TroopEnum.X);
+		Entity drone2 = new Drone(3, 5, 2, null);
 		Entity drone3 = new Drone(3, 6, 3, TroopEnum.X);
 		Entity drone4 = new Drone(3, 7, 4, TroopEnum.X);
 		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
@@ -157,7 +157,12 @@ public class CARD_TESTER_CLASS
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
 		
-		//troop2.attack(troop1);
+		troop1.attack(drone2);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		
+		//troop2.attack(drone3);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
