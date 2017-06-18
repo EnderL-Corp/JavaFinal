@@ -185,4 +185,10 @@ public class Technique extends Card
 	{
 		Game.game.addToGraveyard((Card)this);
 	}
+
+	@Override
+	public void updateDescription() {
+		// TODO Auto-generated method stub
+		
+	}
 }

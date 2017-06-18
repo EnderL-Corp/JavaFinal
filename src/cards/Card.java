@@ -53,6 +53,8 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 		return description;
 	}
 	
+	public abstract void updateDescription();
+	
 	public Color getTeamColor()
 	{
 		return teamColor;

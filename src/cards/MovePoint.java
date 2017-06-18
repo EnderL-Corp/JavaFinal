@@ -34,4 +34,10 @@ public class MovePoint extends Card {
 		return xPos + ", " + yPos;
 		
 	}
+
+	@Override
+	public void updateDescription() {
+		// TODO Auto-generated method stub
+		
+	}
 }

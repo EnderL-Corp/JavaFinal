@@ -28,7 +28,7 @@ public class Gear extends Structure
 	 */
 	public Gear(GearEnum gEnum) 
 	{
-		super("" + gEnum, "Santi can do this");
+		super("" + gEnum, "");
 		gearEnum = gEnum;
 	}
 	
@@ -73,5 +73,11 @@ public class Gear extends Structure
 	public GearEnum getGearEnum()
 	{
 		return gearEnum;
+	}
+
+	@Override
+	public void updateDescription() {
+		// TODO Auto-generated method stub
+		
 	}
 }
