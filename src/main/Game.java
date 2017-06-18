@@ -486,7 +486,7 @@ public class Game extends GameClient implements Serializable {
 					if (first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint) second);
-						placeEntity((Entity) first);
+						cp = Troop.placeOnBoard((Troop)first, cp);
 						boardChanged = true;
 					}
 					break;
