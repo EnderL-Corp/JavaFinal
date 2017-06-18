@@ -157,4 +157,11 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public String getRecentClientActionDescription() throws RemoteException{
 		return recentClientActionDescription;
 	}
+	
+	public void disconnect(ClientInfo ci) throws RemoteException {
+		for(int i = 0; i < clients.size(); i++)
+			if(clients.get(i).getTag() == ci.getTag())
+				clients.remove(i);
+		
+	}
 }

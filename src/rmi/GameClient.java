@@ -104,4 +104,16 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public String getIP() {
 		return serverIP;
 	}
+	
+	/**
+	 * Disconnects from the server.
+	 */
+	public void disconnect() {
+		try {
+			remoteServer.disconnect(clientInfo);
+			timer.stop();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -100,4 +100,11 @@ public interface GameServerInterface extends Remote, Serializable{
 	 * @return the summary of the change
 	 */
 	public String getRecentClientActionDescription() throws RemoteException;
+	
+	/**
+	 * Disconnects client from server.
+	 * @param ci the Client represented by ClientInfo to disconnect
+	 * @throws RemoteException
+	 */
+	public void disconnect(ClientInfo ci) throws RemoteException;
 }
