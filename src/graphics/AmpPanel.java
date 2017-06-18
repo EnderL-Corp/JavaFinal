@@ -52,7 +52,23 @@ public class AmpPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
-		if(Game.game.getAmpAt(Integer.parseInt(a)) == null)
+		if(a.equals("Sac"))
+		{
+			int x = 0;
+			for(int i = 0; i < 5; i++)
+			{
+				if(Game.game.getAmpArray()[i] != null)
+				{
+					x++;
+					Game.game.addToGraveyard(Game.game.getAmpArray()[i]);
+				}
+				if(x >= 2)
+				{
+					break;
+				}
+			}
+		}
+		else if(Game.game.getAmpAt(Integer.parseInt(a)) == null)
 		{
 			Game.game.addToPlayerActionQueue(new Amplifier(AmpEnum.NONE));
 		}

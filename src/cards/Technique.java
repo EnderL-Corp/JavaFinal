@@ -193,30 +193,37 @@ public class Technique extends Card
 			case GRAPE_SHOT:
 			{
 				description = "Deals 1 damage to each enemy troop";
+				break;
 			}
 			case BOOSTER:
 			{
 				description = "Gives 1 health and one attack to 1 friendly troop";
+				break;
 			}
 			case CALL:			
 			{
 				description = "Draw 2 cards";
+				break;
 			}
 			case CANNON:		
 			{
 				description = "Deal 6 damage to one troop";
+				break;
 			}
 			case CHAIN_SHOT:		
 			{
 				description = "Deal 2 damage to 4 troops";
+				break;
 			}
 			case DRAIN:		
 			{
 				description = "Deal 4 damage to one troop and heal your commander by 4 health points";
+				break;
 			}
 			default:
 			{
 				description = null;
+				break;
 			}
 		}
 	}

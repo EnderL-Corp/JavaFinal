@@ -25,7 +25,7 @@ import java.awt.event.ActionListener;
 public class GameMenu {
 
 	private ListenerFrame frame;
-	//private BoardPanel board;
+	private BoardPanel board;
 	private HandPanel hand;
 	private StatsPanel stats;
 	private DeckQuitPanel deck;
@@ -69,17 +69,17 @@ public class GameMenu {
 		frame.getContentPane().setLayout(null);
 			
 		
-		/*board = new BoardPanel();
-		board.setBounds(341, 68, 480, 480);
+		board = new BoardPanel();
+		board.setBounds(340, 11, 480, 480);
 		frame.getContentPane().add(board);
-		board.repaint();*/
+		board.repaint();
 		
 		hand = new HandPanel();
-		hand.setBounds(147, 579, 922, 200);
+		hand.setBounds(10, 519, 922, 200);
 		frame.getContentPane().add(hand);
 		
 		stats = new StatsPanel();
-		stats.setBounds(1079, 541, 157, 178);
+		stats.setBounds(942, 463, 294, 178);
 		frame.getContentPane().add(stats);
 		
 		deck = new DeckQuitPanel();
@@ -87,21 +87,21 @@ public class GameMenu {
 		frame.getContentPane().add(deck);
 		
 		amp = new AmpPanel();
-		amp.setBounds(10, 648, 127, 201);
+		amp.setBounds(942, 649, 127, 201);
 		frame.getContentPane().add(amp);
 		
 		log = new CommandLog();
-		log.setBounds(147, 790, 922, 59);
+		log.setBounds(10, 730, 922, 120);
 		log.init();
 		frame.getContentPane().add(log);
 		
 		info = new InfoPanel();
-		info.setBounds(966, 391, 267, 139);
+		info.setBounds(942, 313, 294, 139);
 		frame.getContentPane().add(info);
 		
 		nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
-		nxtPhase.setBounds(1079, 730, 157, 49);
+		nxtPhase.setBounds(1079, 652, 157, 127);
 		nxtPhase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Game.game.changePhase();
