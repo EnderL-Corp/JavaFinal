@@ -22,7 +22,11 @@ public class Technique extends Card
 		BOOSTER,
 		CANNON;
 	}
-	
+	/**
+	 * Creates a technique with specified effect. A technique is a "spell", and
+	 * is played directly from the hand onto the board.
+	 * @param TechEnum - the effect this Technique should have.
+	 */
 	public Technique(TechEnum eff) 
 	{
 		super("" + eff, "Santi has to do this later");
@@ -34,7 +38,7 @@ public class Technique extends Card
 			case GRAPE_SHOT:
 				tpCost = 6;
 				numberOfTargets = -1;
-				remainingTargets = numberOfTargets;
+				remainingTargets = 0;
 				break;
 			case CHAIN_SHOT:
 				tpCost = 8;
@@ -43,7 +47,7 @@ public class Technique extends Card
 				break;
 			case CANNON:
 				tpCost = 4;
-				numberOfTargets = -1;
+				numberOfTargets = 1;
 				remainingTargets = numberOfTargets;
 				break;
 			case BOOSTER:
@@ -64,19 +68,27 @@ public class Technique extends Card
 		}
 	}
 	
+	/**
+	 * <code> canCast(tp) </code> determines if the Player has enough
+	 * Technique points to use a Technique
+	 * @param tp - The amount of Technique points a player has
+	 * @return boolean - Whether or not the Player has enough Technique Points
+	 */
 	public boolean canCast(int tp)
 	{
 		return tp >= tpCost;
 	}
 	
 	/**
-	 * 
+	 * <code> cast(target) </code> casts a technique on a troop. If a technique targets
+	 * 0 troops, then it is cast without targeting a troop. If a technique targets -1
+	 * troops, then it targets every troop on the board.
 	 * @param target - The troop to target
 	 * @return - True if the spell is used up, false otherwise
 	 */
 	public boolean cast(Troop target)
 	{	
-		if(numberOfTargets == -1)
+		if(remainingTargets == 0 && numberOfTargets == -1)
 		{
 			for(Entity[] row : Game.game.getBoard())
 			{
@@ -107,6 +119,12 @@ public class Technique extends Card
 		return true;
 	}
 
+	/**
+	 * <code> effect(e, eff) </code> is what allows a Technique to change the board. The method
+	 * executes the methods effect based off of its techEnum
+	 * @param e - The Target of the Technique
+	 * @param eff - The Type of Technique
+	 */
 	private void effect(Troop e, TechEnum eff) 
 	{
 		switch(eff)
