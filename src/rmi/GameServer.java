@@ -18,7 +18,7 @@ import main.ClientInfo;
  */
 public class GameServer extends UnicastRemoteObject implements GameServerInterface {
 	private static final long serialVersionUID = 1L;
-	private int port, numConnections = 0;
+	private int port;
 	private ArrayList<ClientInfo> clients = new ArrayList<ClientInfo>();
 	protected static Registry myRegistry;
 	protected String myIP = "127.0.0.1";
@@ -94,11 +94,10 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 
 	public synchronized void connect(ClientInfo l) throws RemoteException {
 		clients.add(l);
-		numConnections++;
 	}
 
 	public synchronized int getConnections() {
-		return numConnections;
+		return clients.size();
 	}
 
 	public synchronized Entity[][] getBoard() throws RemoteException {

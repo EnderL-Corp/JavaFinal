@@ -53,6 +53,8 @@ public class Game extends GameClient implements Serializable {
 	private int tp;
 	private int territory;
 	
+	private int numPings = 0, otherClientWaiter = 0;
+	
 	private boolean myTurn;
 	private boolean boardChanged = false;
 
@@ -134,7 +136,10 @@ public class Game extends GameClient implements Serializable {
 	 * changes in the board to the server when needed.
 	 */
 	public void actionPerformed(ActionEvent e) {
-		//System.out.println(this);
+		numPings++;
+		if(numPings == 1) {						//Once connected, will get the most recent server information.
+			updateServerInformation();
+		}
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
 			if (connected && myTurn)
@@ -144,8 +149,11 @@ public class Game extends GameClient implements Serializable {
 				} else
 					refreshBoard();
 			updateServerInformation();
-			if (remoteServer.getConnections() > 1)
-				System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
+			if (remoteServer.getConnections() > 1) {
+				otherClientWaiter++;
+				if(otherClientWaiter == 2)		//Wait two seconds for the other client to update its info in the server
+					System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -190,6 +198,7 @@ public class Game extends GameClient implements Serializable {
 			gs = new GameServer(serverIP, 1099);
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, Color.BLUE);
+			game.myTurn = true;
 			game.init(DeckEnum.RAVAGER);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
@@ -205,9 +214,10 @@ public class Game extends GameClient implements Serializable {
 	public static void createClient(String serverIP) {
 		try {
 			game = new Game(1, serverIP, 1099, Color.RED);
+			game.myTurn = false;
 			game.init(DeckEnum.DJ);
-			game.otherClientInfo = new ClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
-			game.connectToServer(game.otherClientInfo);
+			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
+			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
