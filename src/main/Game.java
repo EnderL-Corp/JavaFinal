@@ -52,9 +52,7 @@ public class Game extends GameClient implements Serializable {
 	private int cp;
 	private int tp;
 	private int territory;
-
-	private int testCounter;
-
+	
 	private boolean myTurn;
 	private boolean boardChanged;
 
@@ -146,13 +144,8 @@ public class Game extends GameClient implements Serializable {
 				} else
 					refreshBoard();
 			updateServerInformation();
-			testCounter++;
 			if (remoteServer.getConnections() > 1)
-				System.out.println(remoteServer.getOtherClient(clientInfo).getTag()); // RMI
-																						// TESTER
-																						// IF
-																						// DELETE
-																						// PLEASE
+				System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
