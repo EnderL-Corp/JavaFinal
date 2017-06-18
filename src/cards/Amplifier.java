@@ -134,7 +134,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 	
 	public void sacrifice()
 	{
-		Game.game.addToGraveyard(this);
+		Game.game.addToGraveyard((Card)this);
 		Game.game.updateAmpPanel(null, true);
 		Game.game.updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
 	}
