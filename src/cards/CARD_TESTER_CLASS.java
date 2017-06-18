@@ -147,16 +147,15 @@ public class CARD_TESTER_CLASS
 		Entity drone5 = new Drone(1, 6, 5, null);
 		Entity troop1 = new Android(4, 4, 6, TroopEnum.DUMMY);
 		Entity troop2 = new Dragon(3, 4, 7, null);
-		/*
+		
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone2);
 		Game.game.placeEntity(drone3);
 		Game.game.placeEntity(drone4);
 		Game.game.placeEntity(drone5);
 		Game.game.placeEntity(troop1);
-		*/
 		Game.game.placeEntity(troop2);
-		/*
+		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
 		//should display Drone, Drone, Drone, Drone, Drone, Android, Dragon
@@ -196,10 +195,10 @@ public class CARD_TESTER_CLASS
 		
 		//Range and Provoke testing
 		
-		*/
+		
 		Troop troop3 = new Android(3, 6, 8, TroopEnum.DUMMY);
 		Entity troop4 = new Cyborg(2, 7, 9, TroopEnum.RANGER);
-		/*
+		
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone4);
 		Game.game.placeEntity(troop3);
@@ -233,7 +232,8 @@ public class CARD_TESTER_CLASS
 		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
 		//should display null, Cyborg, null, null, null, Dragon, because Dragon and Cyborg are the only ones left
 		
-		*/
+		System.out.println("\n");
+		
 		
 		//Deflect and Mirror testing
 		
@@ -245,35 +245,42 @@ public class CARD_TESTER_CLASS
 		Game.game.placeEntity(troop4);
 		Game.game.placeEntity(troop6);
 		
-		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
-		+ "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 4));
-		
 		System.out.println(troop6.getCurrentHealth());
+		//should return 3 as a cyborg has 3 health
 		
 		troop2.attack(troop6);
 		
 		System.out.println(troop6.getCurrentHealth());
+		//should snow return -7 (its dead), since the dragon does 10 damage to its 3 health
 		
 		troop6 = new Cyborg(2, 5, 11, null);
 		Game.game.placeEntity(troop6);
 		troop6.addAbilities(1);
+		//respawned cyborg and gave it deflect
+		
+		System.out.println(troop6.getCurrentHealth());
+		//should return 3 as a cyborg has 3 health
 		
 		troop2.attack(troop6);
 		
 		System.out.println(troop6.getCurrentHealth());
+		//Should return 3 health, because deflect should have negated the first attack
 		
 		troop2.attack(troop6);
 		
 		System.out.println(troop6.getCurrentHealth());
+		//should snow return -7 (its dead), since the dragon does 10 damage to its 3 health, and deflect should only activate once (which it already just did)
 		
 		troop3.addAbilities(4);
 		
 		System.out.println(drone2.getCurrentHealth() + "\t" + troop3.getCurrentHealth() + "\t" + troop2.getCurrentHealth());
+		//should return 1 (health of drone), 7 (health of android), and 10, health of dragon
 		
 		troop2.attack(drone2);
 		
 		System.out.println(drone2.getCurrentHealth() + "\t" + troop3.getCurrentHealth() + "\t" + troop2.getCurrentHealth());
-		
+		//should return -9, 3 (because the dragon's blast attacked both the drone and the android), 5 (because the dragon's health is 10, and its attack is 10 also.
+		//When it attacks android, because android had mirror, the dragon should take half its attack in damage (10 / 2 = 5), so it should take 5 damage, and should have 5 health)
 		
 		//drone attack mirror cyborg, and kill self
 		//Dragon attack mirror drone and kill self, but drone survives
