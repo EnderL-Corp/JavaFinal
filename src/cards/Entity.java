@@ -3,11 +3,28 @@ package cards;
 import main.Audio;
 import main.Game;
 
+/**
+ * @author André, Luke
+ */
 public abstract class Entity extends Card
 {
 	protected int apCost, cpCost, attack, health, currentAttack, currentHealth, xCoordinate, yCoordinate;
 	protected final int TAG;
 	
+	/**
+	 * An Entity is either the commander or a troop. An entity can be placed on the game
+	 * board and thus moved and can attack other units on the game board, only from the 
+	 * game board(Not the hand)
+	 * @param nm - The Entity's name
+	 * @param desc - The Entity's description
+	 * @param ap - The amount of Action points it costs to move this Entity
+	 * @param cp - The amount of Creature points it costs to play this Entity
+	 * @param atk - The Attack value this Entity has
+	 * @param hp - The number of Health Points this Entity has
+	 * @param startPosX - The starting x position on the board for this Entity
+	 * @param startPosY - The starting y position on the board for this Entity
+	 * @param tag - This Entity's Tag
+	 */
 	public Entity(String nm, String desc, int ap, int cp, int atk, int hp, int startPosX, int startPosY, int tag) //for commander
 	{
 		super(nm, desc);
@@ -22,6 +39,10 @@ public abstract class Entity extends Card
 		TAG = tag;
 	}
 
+	/**
+	 * Special constructor for Troop
+	 * @param tag - This Entity's Tag
+	 */
 	public Entity(int tag) // for troop
 	{
 		super();
@@ -38,12 +59,24 @@ public abstract class Entity extends Card
 	
 	public abstract void kill(Entity killed);
 
+	/**
+	 * Change an Entity's Health Points and Attack Value
+	 * @param hp - The amount to change the Entity's current Health points by
+	 * @param atk - The amount to change the Entity's current Attack value by
+	 */
 	public void modify(int hp, int atk)
 	{
 		currentHealth += hp;
 		currentAttack += atk;
 	}
 	
+	/**
+	 * <code> dealDamage(defender) </code> is the method that allows one Entity to attack another.
+	 * The method takes in the opposing Entity to be attacked and plays the correct sound
+	 * corresponding to the attack, checks if the defender has deflect or mirror and handles
+	 * that accordingly, and, if possible, deals damage.
+	 * @param defender - The Entity to attack
+	 */
 	public void dealDamage(Entity defender)
 	{
 		if(this instanceof Troop)
@@ -122,10 +155,20 @@ public abstract class Entity extends Card
 		return yCoordinate;
 	}
 
+	/**
+	 * <code> move() </code> is the method used to move an Entity. The methods checks to see if a move is valid
+	 * by first making sure the player has enough Action Points and then making sure the move is only one tile
+	 * in any direction
+	 * @param placed - The Entity to move
+	 * @param ap - The Action Points possessed by the Player
+	 * @param posX - The x position to move the Entity to
+	 * @param posY - The x position to move the Entity to
+	 * @return int - The remaining amount of Action Points possed by the Player
+	 */
 	public static int move(Entity placed, int ap, int posX, int posY) 
 	{
-		if(ap >= placed.getApCost() && Math.abs(posX - placed.getPosX()) <= 1 && Math.abs(posY - placed.getPosY()) <= 1 && Game.game.getBoard()[posX][posY] == null)
-		{
+		if (ap >= placed.getApCost() && Math.abs(posX - placed.getPosX()) <= 1 && Math.abs(posY - placed.getPosY()) <= 1
+				&& Game.game.getBoard()[posX][posY] == null) {
 			Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = null;
 			Game.game.getBoard()[posX][posY] = placed;
 			return ap - placed.getApCost();
