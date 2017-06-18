@@ -31,7 +31,7 @@ public class Cyborg extends Troop
 			yCoordinate = posY;
 			abilities[3] = true;
 			name = "CyborgRange";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		else if(enumName == TroopEnum.DEFLECTOR)
 		{
@@ -45,7 +45,7 @@ public class Cyborg extends Troop
 			yCoordinate = posY;
 			abilities[1] =true;
 			name = "CyborgDeflect";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		else if(enumName == TroopEnum.BLASTER)
 		{
@@ -59,7 +59,7 @@ public class Cyborg extends Troop
 			yCoordinate = posY;
 			abilities[0] = true;
 			name = "CyborgBlast";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		else
 		{
@@ -72,7 +72,7 @@ public class Cyborg extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			name = "Cyborg";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		te = enumName;
 		if(abilities[1] == true)

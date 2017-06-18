@@ -28,7 +28,7 @@ public class Drone extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			name = "Drone";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		else
 		{
@@ -41,7 +41,7 @@ public class Drone extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			name = "Drone";
-			description = "Santi has to do this later";
+			description = "";
 		}
 		te = enumName;
 	}
