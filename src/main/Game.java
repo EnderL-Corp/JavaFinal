@@ -197,7 +197,8 @@ public class Game extends GameClient implements Serializable {
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.init(DeckEnum.RAVAGER);
-			game.connectToServer(new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp));
+			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
+			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -211,8 +212,8 @@ public class Game extends GameClient implements Serializable {
 		try {
 			game = new Game(1, serverIP, 1099, Color.RED);
 			game.init(DeckEnum.DJ);
-			game.connectToServer(new ClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap,
-					game.tp));
+			game.otherClientInfo = new ClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
+			game.connectToServer(game.otherClientInfo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
