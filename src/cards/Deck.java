@@ -17,7 +17,8 @@ public class Deck implements Serializable{
 	private ArrayList<Card> deck; 
 	
 	private int cp, ap, tp, territory;
-	public DeckEnum classType;
+	private DeckEnum classType;
+	private String classTypeString;
 	
 	public enum DeckEnum {
 		RAVAGER,
@@ -33,6 +34,8 @@ public class Deck implements Serializable{
 		classType = deckEnum;
 		switch(deckEnum) {
 		case RAVAGER:
+			classTypeString = "Ravager";
+			
 			deck = new ArrayList<Card>();
 			deck.add(new Dragon(0,0,0,null));
 			deck.add(new Dragon(0,0,0,null));
@@ -64,6 +67,8 @@ public class Deck implements Serializable{
 			
 			break;
 		case DJ:
+			classTypeString = "DJ";
+			
 			deck = new ArrayList<Card>();
 			deck.add(new Human(0,0,0,null));
 			deck.add(new Human(0,0,0,null));
@@ -96,7 +101,9 @@ public class Deck implements Serializable{
 			territory = 2;
 		
 			break;
-		case SWARM:			
+		case SWARM:
+			classTypeString = "Swarm";
+			
 			deck = new ArrayList<Card>();
 			deck.add(new Drone(0,0,0,null));
 			deck.add(new Drone(0,0,0,null));
@@ -151,5 +158,8 @@ public class Deck implements Serializable{
 	}
 	public DeckEnum getClassType() {
 		return classType;
+	}
+	public String getClassTypeAsString() {
+		return classTypeString;
 	}
 }

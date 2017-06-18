@@ -43,6 +43,7 @@ public class Game extends GameClient implements Serializable {
 	private Deck deck;
 	private Color playerColor;
 	private GameMenu gameMenu;
+	private String typeAsString;
 
 	private char currentPlayerAction;
 	private List<Card> queuedPlayerActions;
@@ -102,6 +103,17 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void init(DeckEnum deckEnum) {
 		deck = new Deck(deckEnum);
+		switch(deckEnum) {
+		case DJ:
+			typeAsString = "DJ";
+			break;
+		case RAVAGER:
+			typeAsString = "Ravager";
+			break;
+		case SWARM:
+			typeAsString = "Swarm";
+			break;
+		}
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
 		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);
@@ -177,23 +189,10 @@ public class Game extends GameClient implements Serializable {
 	public int getDeckSize() {
 		return myCards.size();
 	}
-
-	/**
-	 * Will convert the board to a String.
-	 */
-//	public String toString() { // DELETE UNNECESSARY METHOD
-//		String string = "";
-//		for (int i = 0; i < recentBoard.length; i++) {
-//			for (int j = 0; j < recentBoard.length; j++) {
-//				if (recentBoard[i][j] != null)
-//					string += recentBoard[i][j].getName() + "   ";
-//				else
-//					string += "null\t";
-//			}
-//			string += "\n";
-//		}
-//		return string;
-//	}
+	
+	public String getTypeAsString() {
+		return typeAsString;
+	}
 
 	/**
 	 * Will begin Game.game as the host of the game.
@@ -508,7 +507,7 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'G':
 					if (phase == 0 && first instanceof Gear && second instanceof Troop) {
-						((Gear)first).effect((Troop)second);
+						((Gear)first).effect((Troop)second);//XXX
 						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
 						boardChanged = true;
 					}

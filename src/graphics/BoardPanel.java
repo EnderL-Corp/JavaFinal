@@ -98,12 +98,11 @@ public class BoardPanel extends JPanel implements ActionListener {
 				if (j == commanderPosX && i == commanderPosY) {
 					JButton bb = buttons[i][j];
 					//bb.setBackground(Color.RED);
-					bb.setIcon(new ImageIcon("Sprites/DJ.png"));
+					bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}
 		}
-
 	}
 
 	public void changeCommanderPos(int x, int y) {
