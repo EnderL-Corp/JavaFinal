@@ -1,166 +1,230 @@
-package graphics;
+package cards;
 
-import java.awt.EventQueue;
-import java.rmi.RemoteException;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import cards.Deck.DeckEnum;
-import main.Audio;
 import main.Game;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
- * For interfacing with the player while the game is in progress.
- * @author Santiago Callegari, Srihari Subramanian
- *
+ * @author Luke Letourneau, André Artaud
  */
-public class GameMenu {
+public class Technique extends Card
+{
+	protected TechEnum techEnum;
+	protected int tpCost;
+	private int numberOfTargets, remainingTargets; /* 0 if doesn't target anything i.e. draw two cards; -1 if targets all enemy troops*/
 
-	private ListenerFrame frame;
-	private BoardPanel board;
-	private HandPanel hand;
-	private StatsPanel stats;
-	private DeckQuitPanel deck;
-	private AmpPanel amp;
-	private CommandLog log;
-	private InfoPanel info;
-	private JButton nxtPhase;
-	private JPanel background;
+	public enum TechEnum
+	{
+		GRAPE_SHOT,
+		CALL,
+		CHAIN_SHOT,
+		DRAIN,
+		BOOSTER,
+		CANNON;
+	}
 	
-
 	/**
-	 * Launch the application.
+	 * Creates a technique with specified effect. A technique is a "spell", and
+	 * is played directly from the hand onto the board.
+	 * @param TechEnum - the effect this Technique should have.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameMenu window = new GameMenu();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+	public Technique(TechEnum eff) 
+	{
+		super("" + eff, "Santi has to do this later");
+		
+		techEnum = eff;
+		
+		switch(eff)
+		{
+			case GRAPE_SHOT:
+				tpCost = 6;
+				numberOfTargets = -1;
+				remainingTargets = 0;
+				break;
+			case CHAIN_SHOT:
+				tpCost = 8;
+				numberOfTargets = 4;
+				remainingTargets = numberOfTargets;
+				break;
+			case CANNON:
+				tpCost = 4;
+				numberOfTargets = 1;
+				remainingTargets = numberOfTargets;
+				break;
+			case BOOSTER:
+				tpCost = 3;
+				numberOfTargets = 1;
+				remainingTargets = numberOfTargets;
+				break;
+			case DRAIN:
+				tpCost = 7;
+				numberOfTargets = 1;
+				remainingTargets = numberOfTargets;
+				break;
+			case CALL:
+				tpCost = 4;
+				numberOfTargets = 0;
+				remainingTargets = numberOfTargets;
+				break;
+		}
+	}
+	
+	/**
+	 * <code> canCast(tp) </code> determines if the Player has enough
+	 * Technique points to use a Technique
+	 * @param tp - The amount of Technique points a player has
+	 * @return boolean - Whether or not the Player has enough Technique Points
+	 */
+	public boolean canCast(int tp)
+	{
+		return tp >= tpCost;
+	}
+	
+	/**
+	 * <code> cast(target) </code> casts a technique on a troop. If a technique targets
+	 * 0 troops, then it is cast without targeting a troop. If a technique targets -1
+	 * troops, then it targets every troop on the board.
+	 * @param target - The troop to target
+	 * @return - True if the spell is used up, false otherwise
+	 */
+	public boolean cast(Troop target)
+	{	
+		if(remainingTargets == 0 && numberOfTargets == -1)
+		{
+			for(Entity[] row : Game.game.getBoard())
+			{
+				for(Entity e : row)
+				{
+					if(e instanceof Troop)
+					{
+						effect((Troop)e, techEnum);
+					}
 				}
 			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public GameMenu() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new ListenerFrame();
-		frame.setBounds(0, 0, 1280, 1024);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-			
-		
-		board = new BoardPanel();
-		board.setBounds(340, 11, 480, 480);
-		frame.getContentPane().add(board);
-		board.repaint();
-		
-		hand = new HandPanel();
-		hand.setBounds(10, 519, 922, 200);
-		frame.getContentPane().add(hand);
-		
-		stats = new StatsPanel();
-		stats.setBounds(942, 463, 294, 178);
-		frame.getContentPane().add(stats);
-		
-		deck = new DeckQuitPanel();
-		deck.setBounds(1079, 790, 157, 59);
-		frame.getContentPane().add(deck);
-		
-		amp = new AmpPanel();
-		amp.setBounds(942, 649, 127, 201);
-		frame.getContentPane().add(amp);
-		
-		log = new CommandLog();
-		log.setBounds(10, 730, 922, 120);
-		log.init();
-		frame.getContentPane().add(log);
-		
-		info = new InfoPanel();
-		info.setBounds(942, 313, 294, 139);
-		frame.getContentPane().add(info);
-		
-		nxtPhase = new JButton("Next Phase");
-		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
-		nxtPhase.setBounds(1079, 652, 157, 127);
-		nxtPhase.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Game.game.changePhase();
+			return true;
+		}
+		else if(numberOfTargets == 0)
+		{
+			effect(target, techEnum);
+			return true;
+		}
+		else
+		{
+			if(remainingTargets > 0)
+			{
+				effect(target, techEnum);
+				remainingTargets--;
+				return false;
 			}
-		});
-		frame.getContentPane().add(nxtPhase);
-		
-		background = new JPanel();
-		background.setBounds(0, 0, 1280, 1024);
-		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
-		background.add(wallpaper);
-		frame.getContentPane().add(background);
-		
-		new Audio("InGame");
+		}
+		return true;
+	}
+
+	/**
+	 * <code> effect(e, eff) </code> is what allows a Technique to change the board. The method
+	 * executes the methods effect based off of its techEnum
+	 * @param e - The Target of the Technique
+	 * @param eff - The Type of Technique
+	 */
+	private void effect(Troop e, TechEnum eff) 
+	{
+		switch(eff)
+		{
+			case GRAPE_SHOT:
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-1, 0);
+				}
+				break;
+				
+			case CHAIN_SHOT:
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-2, 0);
+					remainingTargets--;
+				}
+				break;
+				
+			case CANNON:
+				if(e.teamColor != Game.game.getColor())
+				{
+					e.modify(-6, 0);
+					remainingTargets--;
+				}
+				break;
+				
+			case BOOSTER:
+				if(e.teamColor == Game.game.getColor())
+				{
+					e.modify(1, 1);
+					remainingTargets--;
+				}
+				break;
+				
+			case DRAIN:
+				e.modify(-4, 0);
+				Game.game.getCommander().modify(4, 0);
+				break;
+				
+			case CALL:
+				Game.game.drawCard();
+				Game.game.drawCard();
+				break;
+		}
 	}
 	
-	public void refresh() {
-		board.repaint();
-		hand.refresh();
-		amp.refresh();
-		stats.statRefresh();
-		frame.requestFocus();
-	}
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public JPanel getBoard() {
-		return board;
-	}
-
-	public HandPanel getHand() {
-		return hand;
-	}
-
-	public StatsPanel getStats() {
-		return stats;
-	}
-
-	public DeckQuitPanel getDeck() {
-		return deck;
-	}
-
-	public AmpPanel getAmp() {
-		return amp;
-	}
-
-	public CommandLog getLog() {
-		return log;
-	}
-
-	public InfoPanel getInfo() {
-		return info;
-	}
-
-	public JButton getNxtPhase() {
-		return nxtPhase;
+	public int getTpCost()
+	{
+		return tpCost;
 	}
 	
+	public int getNumTargets()
+	{
+		return numberOfTargets;
+	}
 	
+	public void sendToGraveyard()
+	{
+		Game.game.addToGraveyard((Card)this);
+	}
+
+	@Override
+	public void updateDescription() {
+		switch(techEnum) 
+		{
+			case GRAPE_SHOT:
+			{
+				description = "Deals 1 damage to each enemy troop";
+				break;
+			}
+			case BOOSTER:
+			{
+				description = "Gives 1 health and one attack to 1 friendly troop";
+				break;
+			}
+			case CALL:			
+			{
+				description = "Draw 2 cards";
+				break;
+			}
+			case CANNON:		
+			{
+				description = "Deal 6 damage to one troop";
+				break;
+			}
+			case CHAIN_SHOT:		
+			{
+				description = "Deal 2 damage to 4 troops";
+				break;
+			}
+			case DRAIN:		
+			{
+				description = "Deal 4 damage to one troop and heal your commander by 4 health points";
+				break;
+			}
+			default:
+			{
+				description = null;
+				break;
+			}
+		}
+	}
 }
