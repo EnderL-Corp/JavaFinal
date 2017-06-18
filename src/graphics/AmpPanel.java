@@ -11,7 +11,10 @@ import cards.Amplifier;
 import cards.MovePoint;
 import cards.Amplifier.AmpEnum;
 import main.Game;
-
+/**
+ * This is the panel where amplifiers are put into play, they do nothing until placed here
+ * @author Santiago Callegari(appearance), Luke
+ */
 public class AmpPanel extends JPanel implements ActionListener {
 
 	private JButton[] buttons = new JButton[5];
@@ -20,7 +23,9 @@ public class AmpPanel extends JPanel implements ActionListener {
 
 	public AmpPanel() {
 		setBackground(new Color(0, 0, 0, 0));
-		// add a phat layout
+		/**
+		 * creates and places the buttons
+		 */
 		buttons[0] = new JButton("Open");
 		buttons[0].setActionCommand("0");
 		buttons[0].addActionListener(this);
