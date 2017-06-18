@@ -109,6 +109,10 @@ public class NewGameMenu {
 		 */
 		
 	}
+	
+	public void refresh() {
+		board.repaint();
+	}
 
 	public JFrame getFrame() {
 		return frame;
