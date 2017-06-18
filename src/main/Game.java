@@ -59,7 +59,7 @@ public class Game extends GameClient implements Serializable {
 	private boolean myTurn;
 	private boolean boardChanged = false;
 	private int phase;
-
+	
 	/**
 	 * Required no-args constructor for RMI.
 	 * @throws RemoteException
