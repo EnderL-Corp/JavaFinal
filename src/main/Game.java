@@ -495,15 +495,22 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void checkPlayerActionQueue() {
 		System.out.println(currentPlayerAction);
-		if(currentPlayerAction == 'E') {
-			clearPlayerActionQueue();
-			currentPlayerAction = '\n';
-		} else if (queuedPlayerActions.size() == 2 && currentPlayerAction != '\n' && currentPlayerAction != 'T') {
-			executePlayerActionQueue();
-		} else if (currentPlayerAction == 'T' && queuedPlayerActions.get(0) instanceof Technique
-				&& queuedPlayerActions.size() == ((Technique) queuedPlayerActions.get(0)).getNumTargets() + 1) {
-			System.out.println("gay lemon");
-			executePlayerActionQueue();
+		try
+		{
+			if(currentPlayerAction == 'E') {
+				clearPlayerActionQueue();
+				currentPlayerAction = '\n';
+			} else if (queuedPlayerActions.size() == 2 && currentPlayerAction != '\n' && currentPlayerAction != 'T') {
+				executePlayerActionQueue();
+			} else if (currentPlayerAction == 'T' && queuedPlayerActions.get(0) instanceof Technique
+					&& queuedPlayerActions.size() == ((Technique) queuedPlayerActions.get(0)).getNumTargets() + 1) {
+				System.out.println("gay lemon");
+				executePlayerActionQueue();
+			}
+		}
+		catch (Exception e)
+		{
+			
 		}
 	}
 
