@@ -21,9 +21,8 @@ public class KBListener implements KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) 
 	{
-		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
 		Game.game.setCurrentPlayerAction(KeyEvent.getKeyText(e.getKeyCode()).toCharArray()[0]);
-		System.out.println("keyPressed="+Game.game.getCurrentPlayerAction());
+		Game.game.checkPlayerActionQueue();
 	}
 
 	@Override
