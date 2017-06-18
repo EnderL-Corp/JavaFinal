@@ -54,7 +54,7 @@ public class Game extends GameClient implements Serializable {
 	private int territory;
 	
 	private boolean myTurn;
-	private boolean boardChanged;
+	private boolean boardChanged = false;
 
 	/**
 	 * Required no-args constructor for RMI.
@@ -137,7 +137,7 @@ public class Game extends GameClient implements Serializable {
 		//System.out.println(this);
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
-			if (connected)
+			if (connected && myTurn)
 				if (boardChanged) {
 					sendRecentChanges();
 					boardChanged = false;
