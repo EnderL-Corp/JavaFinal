@@ -177,6 +177,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 					}
 					else {
 						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
+						Game.game.getGameMenu().getInfo().newDisplay(Game.game.getEntityAt(i, j));
 					}
 				}
 			}
