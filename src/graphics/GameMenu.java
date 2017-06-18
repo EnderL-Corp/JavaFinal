@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cards.Deck.DeckEnum;
+import main.Audio;
 import main.Game;
 
 import javax.swing.ImageIcon;
@@ -113,6 +114,8 @@ public class GameMenu {
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		background.add(wallpaper);
 		frame.getContentPane().add(background);
+		
+		new Audio("InGame");
 	}
 	
 	public void refresh() {
