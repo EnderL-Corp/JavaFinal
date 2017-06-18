@@ -528,6 +528,8 @@ public class Game extends GameClient implements Serializable {
 								((Technique) first).cast(null);
 								
 							}
+							addToGraveyard(first);
+							myHand.remove(first);
 						}
 							
 					break;
