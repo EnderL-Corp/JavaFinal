@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import cards.Amplifier;
@@ -126,6 +128,26 @@ public class Game extends GameClient implements Serializable {
 		ap = deck.getAP();
 		tp = deck.getTP();
 		territory = deck.getTerritory();
+		
+		for (int i = 0; i < recentBoard.length; i++) {
+			for (int j = 0; j < recentBoard.length; j++) {
+
+				// VOID
+				if ((i == 0 || i == recentBoard.length - 1 || j == 0 || j == recentBoard.length - 1)
+						|| ((i == 1 || i == recentBoard.length - 2) && (j == 1 || j == 2 || j == 3 || j == 4 || j == recentBoard.length - 2
+								|| j == recentBoard.length - 3 || j == recentBoard.length - 4 || j == recentBoard.length - 5))
+						|| ((i == 2 || i == recentBoard.length - 3)
+								&& (j == 1 || j == 2 || j == recentBoard.length - 2 || j == recentBoard.length - 3))
+						|| ((i == 3 || i == 4 || i == recentBoard.length - 4 || i == recentBoard.length - 5)
+								&& (j == 1 || j == recentBoard.length - 2))
+						|| ((i == 5 || i == recentBoard.length - 6) && (j == 6 || j == 7 || j == recentBoard.length - 7))
+						|| ((i == 6 || i == 7 || i == recentBoard.length - 7)
+								&& (j == 5 || j == 6 || j == 7 || j == recentBoard.length - 7 || j == recentBoard.length - 6))) {
+					recentBoard[i][j] = new Troop();
+					((Troop) recentBoard[i][j]).addAbilities(5) ;
+				}
+			}
+		}
 		
 		shuffleDeck(deck.getDeck());
 		drawCard();
