@@ -135,37 +135,86 @@ public class CARD_TESTER_CLASS
 		}
 		Game.game.init(DeckEnum.RAVAGER);
 		
-		Entity drone1 = new Drone(2, 5, 1, TroopEnum.X);
+		//Blast and Provoke testing
+		
+		Entity drone1 = new Drone(2, 5, 1, null);
 		Entity drone2 = new Drone(3, 5, 2, null);
 		Entity drone3 = new Drone(3, 6, 3, TroopEnum.X);
 		Entity drone4 = new Drone(3, 7, 4, TroopEnum.X);
-		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
-		Entity troop2 = new Dragon(3, 4, 1, null);
+		Entity drone5 = new Drone(1, 6, 5, null);
+		Entity troop1 = new Android(4, 4, 6, TroopEnum.DUMMY);
+		Entity troop2 = new Dragon(3, 4, 7, null);
 		
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone2);
 		Game.game.placeEntity(drone3);
 		Game.game.placeEntity(drone4);
+		Game.game.placeEntity(drone5);
 		Game.game.placeEntity(troop1);
 		Game.game.placeEntity(troop2);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
-				+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
 		
 		troop2.attack(drone3);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
-		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
 		
-		troop1.attack(drone2);
-		
-		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
-		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
-		
-		//troop2.attack(drone3);
+		troop2.attack(troop1);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
-		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(drone3);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(drone1);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(drone5);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		System.out.println("\n");
+		//Range and Provoke testing
+		
+		Entity troop3 = new Android(3, 6, 1, TroopEnum.DUMMY);
+		Entity troop4 = new Cyborg(2, 7, 2, TroopEnum.RANGER);
+		
+		Game.game.placeEntity(drone1);
+		Game.game.placeEntity(drone4);
+		Game.game.placeEntity(troop3);
+		Game.game.placeEntity(troop4);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop4.attack(drone1);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(troop3);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop4.attack(drone1);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop4.attack(drone5);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
+		
 	}
 	
 	public static void mileStone4()
