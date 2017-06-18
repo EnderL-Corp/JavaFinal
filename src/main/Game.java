@@ -117,7 +117,7 @@ public class Game extends GameClient implements Serializable {
 		}
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
-		commander = new Commander(typeAsString, "He was a good boy", deck.getClassType(), 7, 2);
+		commander = new Commander(typeAsString, "He was a good boy", deck.getClassType(), 1, 7);
 		myCards = deck.getDeck();
 		cp = deck.getCP();
 		ap = deck.getAP();
@@ -133,6 +133,7 @@ public class Game extends GameClient implements Serializable {
 		queuedPlayerActions = new ArrayList<Card>();
 		System.out.println(myHand);
 		gameMenu = new GameMenu();
+		CommandLog.publish("Loading information...");
 		if(myTurn) {
 			phase = 0;
 			CommandLog.publish("[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
@@ -140,10 +141,6 @@ public class Game extends GameClient implements Serializable {
 			phase = -1;
 			CommandLog.publish("[Game] Currently opponent's turn.");
 		}
-		if(!isHost) {
-			commander.setCoords(new MovePoint(7, 13));
-		}
-		placeEntity(commander);
 		gameMenu.getFrame().setVisible(true);
 	}
 
@@ -161,8 +158,12 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		numPings++;
-		if(numPings == 1) {						//Once connected, will get the most recent server information.
+		if(numPings == 1) {						//Once connected, will get the most recent server information and will place its own commander
 			updateServerInformation();
+			if(!isHost) {
+				commander.setCoords(new MovePoint(7, 13));
+			}
+			placeEntity(commander);
 		}
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
