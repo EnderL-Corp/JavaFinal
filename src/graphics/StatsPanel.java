@@ -6,7 +6,6 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import main.Game;
-import main.SpecificClientInfo;
 
 public class StatsPanel extends JPanel {
 	JTextPane stats;
@@ -33,7 +32,7 @@ public class StatsPanel extends JPanel {
 
 	public void statRefresh() {
 		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
-				+ ((SpecificClientInfo) Game.game.getOtherClient()).getCommander().getHealth() + "\nCP :"
+				+ Game.game.getOtherClient().getCommander().getHealth() + "\nCP :"
 				+ Game.game.getCP() + "\nTP :" + Game.game.getTP() + "\nAP :" + Game.game.getAP());
 		repaint();
 	}
