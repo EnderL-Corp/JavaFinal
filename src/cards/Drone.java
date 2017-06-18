@@ -2,6 +2,14 @@ package cards;
 
 public class Drone extends Troop
 {
+	/**
+	 * Creates an drone with correct values based off of starting ability
+	 * 
+	 * @param posX - x Pos to spawn at
+	 * @param posY - y Pos to spawn at
+	 * @param tag - the tag of the Troop
+	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
+	 */
 	public Drone(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
@@ -34,6 +42,9 @@ public class Drone extends Troop
 		}
 	}
 	
+	/**
+	 * @return - The type of troop
+	 */
 	public String getTroopType() {
 		return "Drone";
 	}
