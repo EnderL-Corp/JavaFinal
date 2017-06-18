@@ -29,7 +29,6 @@ public class BoardPanel extends JPanel implements ActionListener {
 	private int numTiles = 15;
 	private int commanderPosX = 7, commanderPosY = 1;
 	private JButton[][] buttons = new JButton[15][15];
-	private ArrayList<JButton> activeButton = new ArrayList<JButton>();
 
 	public BoardPanel() {
 		/*for(int i = 0; i < buttons.length; i++) {
@@ -91,12 +90,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 					if(e != null && e instanceof Troop) {
 						bb.setIcon(((Troop)e).getIcon());
 						bb.setBackground(Game.game.getColor());
-						if(!isActive(bb))
-							activeButton.add(bb);
 					}
-					else
-						if(isActive(bb))
-							activeButton.remove(bb);
 							
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
@@ -150,14 +144,6 @@ public class BoardPanel extends JPanel implements ActionListener {
 			break;
 		}
 		commanderPosX = numTiles / 2;
-	}
-	
-	private boolean isActive(JButton b) {
-		for(JButton jb : activeButton) {
-			if(jb.equals(b))
-				return true;
-		}
-		return false;
 	}
 	
 	public static void main(String[] args) {
