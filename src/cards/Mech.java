@@ -1,5 +1,8 @@
 package cards;
 
+/**
+ * @author André
+ */
 public class Mech extends Troop
 {
 	//abilities in this order: {provoke, deflect, blast, range, mirror, void}

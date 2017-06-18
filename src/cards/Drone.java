@@ -1,5 +1,8 @@
 package cards;
 
+/**
+ * @author André
+ */
 public class Drone extends Troop
 {
 	/**
