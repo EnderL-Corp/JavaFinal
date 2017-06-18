@@ -37,7 +37,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	}
 
 	public void deckRefresh() {
-		deckSize.setText("Deck size : " + 0/*Game.game.getDeck().size()*/ + " / 26");
+		deckSize.setText("Deck size : " + Game.game.getDeck().size() + " / 26");
 		deckSize.setVisible(false);
 		deckSize.setVisible(true);
 	}
