@@ -224,15 +224,6 @@ public class Troop extends Entity
 	}
 	
 	/**
-	 * Sets a troops internal coordinates to a specified point
-	 * @param MovePoint - The point to which the troop should move
-	 */
-	public void setCoords(MovePoint mp) {
-		xCoordinate = mp.getX();
-		yCoordinate = mp.getY();
-	}
-	
-	/**
 	 * ANDRE DO THIS
 	 * @param defender
 	 */
