@@ -23,11 +23,10 @@ public class Commander extends Entity implements Serializable
 	 * @param ct - The class (Ravager, swarm, or DJ)
 	 * @param posX - The x position of the Commander
 	 * @param posY - The y position of the Commander
-	 * @param tag - The tag
 	 */
-	public Commander(String nm, String desc, DeckEnum ct, int posX, int posY, int tag)
+	public Commander(String nm, String desc, DeckEnum ct, int posX, int posY)
 	{
-		super(nm, desc, 2, 0, 1, 25, posX, posY, tag); //Check these values
+		super(nm, desc, 2, 0, 1, 25, posX, posY); //Check these values
 		classType = ct;
 	}
 

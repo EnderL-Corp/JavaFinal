@@ -15,9 +15,8 @@ public class Cyborg extends Troop
 	 * @param tag - the tag of the Troop
 	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
 	 */
-	public Cyborg(int posX, int posY, int tag, TroopEnum enumName)
+	public Cyborg(int posX, int posY, TroopEnum enumName)
 	{
-		super(tag);
 		rootName = "Cyborg";
 		if(enumName == TroopEnum.RANGER)
 		{

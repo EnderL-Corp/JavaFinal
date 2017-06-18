@@ -117,7 +117,7 @@ public class Game extends GameClient implements Serializable {
 		}
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
-		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2, -1);
+		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2);
 		myCards = deck.getDeck();
 		cp = deck.getCP();
 		ap = deck.getAP();

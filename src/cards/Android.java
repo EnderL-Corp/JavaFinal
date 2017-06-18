@@ -15,9 +15,8 @@ public class Android extends Troop
 	 * @param tag - the tag of the Troop
 	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
 	 */
-	public Android(int posX, int posY, int tag, TroopEnum enumName)
+	public Android(int posX, int posY, TroopEnum enumName)
 	{
-		super(tag);
 		rootName = "Android";
 		if(enumName == TroopEnum.BLASTER)
 		{

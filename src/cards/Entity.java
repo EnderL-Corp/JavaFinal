@@ -9,7 +9,6 @@ import main.Game;
 public abstract class Entity extends Card
 {
 	protected int apCost, cpCost, attack, health, currentAttack, currentHealth, xCoordinate, yCoordinate;
-	protected final int TAG;
 	
 	/**
 	 * An Entity is either the commander or a troop. An entity can be placed on the game
@@ -23,9 +22,8 @@ public abstract class Entity extends Card
 	 * @param hp - The number of Health Points this Entity has
 	 * @param startPosX - The starting x position on the board for this Entity
 	 * @param startPosY - The starting y position on the board for this Entity
-	 * @param tag - This Entity's Tag
 	 */
-	public Entity(String nm, String desc, int ap, int cp, int atk, int hp, int startPosX, int startPosY, int tag) //for commander
+	public Entity(String nm, String desc, int ap, int cp, int atk, int hp, int startPosX, int startPosY) //for commander
 	{
 		super(nm, desc);
 		apCost = ap;
@@ -36,17 +34,14 @@ public abstract class Entity extends Card
 		currentHealth = hp;
 		xCoordinate = startPosX;
 		yCoordinate = startPosY;
-		TAG = tag;
 	}
 
 	/**
 	 * Special constructor for Troop
-	 * @param tag - This Entity's Tag
 	 */
-	public Entity(int tag) // for troop
+	public Entity() // for troop
 	{
 		super();
-		TAG = tag;
 	}
 	
 	public abstract boolean[] getAbilities();
@@ -152,11 +147,7 @@ public abstract class Entity extends Card
 	public int getApCost() {
 		return apCost;
 	}
-	
-	public int getTag() {
-		return TAG;
-	}
-	
+
 	public int getPosX() {
 		return xCoordinate;
 	}
