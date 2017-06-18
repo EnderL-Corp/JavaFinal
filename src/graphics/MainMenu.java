@@ -17,6 +17,12 @@ import java.net.UnknownHostException;
 
 import javax.swing.JLabel;
 
+/**
+ * 
+ * 
+ * @author Santiago Callegari, Sri
+ *
+ */
 public class MainMenu implements ActionListener {
 
 	private JFrame frame;

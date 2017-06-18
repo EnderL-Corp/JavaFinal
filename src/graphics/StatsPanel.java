@@ -6,12 +6,19 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import main.Game;
-
+/**
+ * 
+ * @author Santiago Callegari
+ *
+ */
 public class StatsPanel extends JPanel {
 	JTextPane stats;
 
 	public StatsPanel() {
-		// add a phat layout
+		/**
+		 * stats pane changes
+		 * key pane will never change, it only shows which keystrokes do what
+		 */
 		stats = new JTextPane();
 		stats.setEditable(false);
 		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"

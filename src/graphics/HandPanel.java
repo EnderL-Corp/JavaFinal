@@ -12,10 +12,20 @@ import cards.Cyborg;
 import cards.Troop;
 import cards.TroopEnum;
 import main.Game;
-
+/**
+ * 
+ * 
+ * @author Santiago Callegari, Luke
+ *
+ */
 public class HandPanel extends JPanel {
 	private JButton[] buttons = new JButton[6];
-
+/**
+ * 
+ * makes buttons that when pushed remove the card(if any)
+ * from the hand array and the use it if a keystroke was pressed otherwise
+ * it send info the infopanel
+ */
 	public HandPanel() {
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
@@ -93,7 +103,9 @@ public class HandPanel extends JPanel {
 		buttons[5].setBounds(742, 11, 122, 177);
 		add(buttons[5]);
 	}
-
+/**
+ * makes sure cards shown are always accurate
+ */
 	public void refresh() {
 		for(int i = 0; i < 5; i++)
 		{
