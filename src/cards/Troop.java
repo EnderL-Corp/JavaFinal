@@ -127,7 +127,7 @@ public class Troop extends Entity
 	{
 		boolean canAttack = true;
 		
-		if(abilities[3] == false && Math.abs(defender.getPosX() - xCoordinate) == 1 && Math.abs(defender.getPosY() - yCoordinate) == 1)
+		if(abilities[3] == false && Math.abs(defender.getPosX() - xCoordinate) != 1 && Math.abs(defender.getPosY() - yCoordinate) != 1)
 			return; //if not in range, don't attack (also cant attack self)
 		
 		for(int i = xCoordinate - 1; i < xCoordinate + 1; i++)
@@ -289,6 +289,26 @@ public class Troop extends Entity
 				}
 			}
 		}
+	}
+	
+	public String getTroopType()
+	{
+		return null;
+	}
+	
+	public void updateDescription()
+	{
+		description = getTroopType() + " with: ";
+		if(abilities[0])
+			description += "provoke, ";
+		if(abilities[1])
+			description += "deflect, ";
+		if(abilities[2])
+			description += "blast, ";
+		if(abilities[3])
+			description += "range, ";
+		if(abilities[4])
+			description += "mirror, ";
 	}
 }
 
