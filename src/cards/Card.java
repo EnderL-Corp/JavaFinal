@@ -7,7 +7,7 @@ import main.Audio;
 import main.Game;
 
 /** 
- * @author Luke, André
+ * @author Luke, André, Santi(just FormattedName)
  */
 public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABLE. THIS IS NEEDED FOR SENDING OVER NETWORK
 {
