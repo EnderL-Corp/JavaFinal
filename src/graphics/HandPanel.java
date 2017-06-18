@@ -93,7 +93,7 @@ public class HandPanel extends JPanel {
 	}
 
 	public void refresh() {
-		for(int i = 0; i < Game.game.getHand().size(); i++)
+		for(int i = 0; i < 5; i++)
 		{
 			if(Game.game.getHand().get(i) == null)
 			{

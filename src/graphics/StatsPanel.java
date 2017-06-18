@@ -15,7 +15,7 @@ public class StatsPanel extends JPanel {
 		stats = new JTextPane();
 		stats.setEditable(false);
 		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
-				+ "none" + "\nCP :"
+				+ "no" + "\nCP :"
 				+ Game.game.getCP() + "\nTP :" + Game.game.getTP() + "\nAP :" + Game.game.getAP());
 
 		JTextPane key = new JTextPane();
