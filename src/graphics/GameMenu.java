@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cards.Deck.DeckEnum;
+import main.Audio;
 import main.Game;
 
 import javax.swing.ImageIcon;
@@ -60,6 +61,7 @@ public class GameMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		new Audio("InGame");
 		frame = new ListenerFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
