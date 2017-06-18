@@ -286,6 +286,7 @@ public class Troop extends Entity
 	
 	public void updateDescription()
 	{
+		description = getTroopType() + " with: ";
 		if(abilities[0])
 			description += "provoke, ";
 		if(abilities[1])
