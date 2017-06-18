@@ -97,6 +97,12 @@ public class MainMenu implements ActionListener{
 
 		frame.setVisible(true);
 	}
+	
+	public JFrame getFrame()
+	{
+		return frame;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
@@ -104,6 +110,8 @@ public class MainMenu implements ActionListener{
 			System.out.println("game hosting");
 			try {
 				Game.createHost(java.net.InetAddress.getLocalHost().getHostAddress());
+				Game.game.setGameMainMenu(this);
+				frame.setVisible(false);
 			} catch (UnknownHostException e1) {
 				e1.printStackTrace();
 			}
@@ -115,6 +123,8 @@ public class MainMenu implements ActionListener{
 		} else if (a.equals("join")) {
 			System.out.println("searching for host");
 			Game.createClient(writtenIP);
+			Game.game.setGameMainMenu(this);
+			frame.setVisible(false);
 		} else if (a.equals("quit")) {
 			System.out.println("am quiting");
 			System.exit(0);

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JComponent;
+
 import cards.Amplifier;
 import cards.Amplifier.AmpEnum;
 import cards.Card;
@@ -42,6 +44,7 @@ public class Game extends GameClient implements Serializable {
 	private Commander commander;
 	private Deck deck;
 	private Color playerColor;
+	private MainMenu mainMenu;
 	private GameMenu gameMenu;
 	private String typeAsString;
 
@@ -251,6 +254,11 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public static void main(String[] args) {
 		new MainMenu();
+	}
+	
+	public void setGameMainMenu(MainMenu m)
+	{
+		mainMenu = m;
 	}
 	
 	public void changePhase() {
@@ -643,5 +651,9 @@ public class Game extends GameClient implements Serializable {
 	{	
 		Collections.shuffle(deck);
 		return deck;
+	}
+
+	public MainMenu getGameMainMenu() {
+		return mainMenu;
 	}
 }

@@ -95,14 +95,14 @@ public class HandPanel extends JPanel {
 	public void refresh() {
 		for(int i = 0; i < 5; i++)
 		{
-			if(Game.game.getHand().get(i) == null)
-			{
-				buttons[i].setText("Open Slot");
-			}
-			else
+			try
 			{
 				buttons[i].setText(Game.game.getHand().get(i).getFormattedName());
 				Game.game.getHand().get(i).updateDescription();
+			}
+			catch (Exception e)
+			{
+				buttons[i].setText("Open Slot");
 			}
 		}
 	}
