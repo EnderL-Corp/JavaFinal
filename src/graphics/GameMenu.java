@@ -111,6 +111,7 @@ public class GameMenu {
 	public void refresh() {
 		board.repaint();
 		hand.refresh();
+		stats.statRefresh();
 		frame.requestFocus();
 	}
 
