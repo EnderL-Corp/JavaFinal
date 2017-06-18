@@ -38,31 +38,37 @@ public class Technique extends Card
 				tpCost = 6;
 				numberOfTargets = -1;
 				remainingTargets = 0;
+				formattedName = "Grape Shot";
 				break;
 			case CHAIN_SHOT:
 				tpCost = 8;
 				numberOfTargets = 4;
 				remainingTargets = numberOfTargets;
+				formattedName = "Chain Shot";
 				break;
 			case CANNON:
 				tpCost = 4;
 				numberOfTargets = 1;
 				remainingTargets = numberOfTargets;
+				formattedName = "Cannon";
 				break;
 			case BOOSTER:
 				tpCost = 3;
 				numberOfTargets = 1;
 				remainingTargets = numberOfTargets;
+				formattedName = "Booster";
 				break;
 			case DRAIN:
 				tpCost = 7;
 				numberOfTargets = 1;
 				remainingTargets = numberOfTargets;
+				formattedName = "Drain";
 				break;
 			case CALL:
 				tpCost = 4;
 				numberOfTargets = 0;
 				remainingTargets = numberOfTargets;
+				formattedName = "Call";
 				break;
 		}
 	}

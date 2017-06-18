@@ -27,7 +27,7 @@ public class Drone extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Drone";
+			name = formattedName = "Drone";
 			description = "";
 		}
 		else
@@ -40,7 +40,7 @@ public class Drone extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Drone";
+			name = formattedName = "Drone";
 			description = "";
 		}
 	}

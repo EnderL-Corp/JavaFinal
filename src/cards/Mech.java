@@ -30,7 +30,7 @@ public class Mech extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[2] = true; 
-			name = "MechBlaster";
+			name = formattedName = "MechBlaster";
 			description = "";
 		}
 		else if(enumName == TroopEnum.RANGER)
@@ -44,7 +44,7 @@ public class Mech extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[3] = true; 
-			name = "MechRange";
+			name = formattedName = "MechRange";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DUMMY)
@@ -58,7 +58,7 @@ public class Mech extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[0] = true;
-			name = "MechProvoke";
+			name = formattedName = "MechProvoke";
 			description = "";
 		}
 		else
@@ -71,7 +71,7 @@ public class Mech extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Mech";
+			name = formattedName = "Mech";
 			description = "";
 		}
 		te = enumName;

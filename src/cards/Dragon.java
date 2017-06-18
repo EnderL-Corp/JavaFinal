@@ -28,7 +28,7 @@ public class Dragon extends Troop
 		xCoordinate = posX;
 		yCoordinate = posY;
 		abilities[2] = true;
-		name = "Dragon";
+		name = formattedName = "Dragon";
 		description = "";
 		te = enumName;
 	}
