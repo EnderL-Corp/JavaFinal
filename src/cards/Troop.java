@@ -224,7 +224,7 @@ public class Troop extends Entity
 	}
 	
 	/**
-	 * Moves a troop to a specified point
+	 * Sets a troops internal coordinates to a specified point
 	 * @param MovePoint - The point to which the troop should move
 	 */
 	public void setCoords(MovePoint mp) {

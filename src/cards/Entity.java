@@ -154,6 +154,15 @@ public abstract class Entity extends Card
 	public int getPosY() {
 		return yCoordinate;
 	}
+	
+	/**
+	 * Sets a Entity's internal coordinates to a specified point
+	 * @param MovePoint - The point to which the troop should move
+	 */
+	public void setCoords(MovePoint mp) {
+		xCoordinate = mp.getX();
+		yCoordinate = mp.getY();
+	}
 
 	/**
 	 * <code> move() </code> is the method used to move an Entity. The methods checks to see if a move is valid
@@ -163,7 +172,7 @@ public abstract class Entity extends Card
 	 * @param ap - The Action Points possessed by the Player
 	 * @param posX - The x position to move the Entity to
 	 * @param posY - The x position to move the Entity to
-	 * @return int - The remaining amount of Action Points possed by the Player
+	 * @return int - The remaining amount of Action Points possessed by the Player
 	 */
 	public static int move(Entity placed, int ap, int posX, int posY) 
 	{
@@ -171,6 +180,7 @@ public abstract class Entity extends Card
 				&& Game.game.getBoard()[posX][posY] == null) {
 			Game.game.getBoard()[placed.getPosX()][placed.getPosY()] = null;
 			Game.game.getBoard()[posX][posY] = placed;
+			placed.setCoords(new MovePoint(posX, posY));
 			return ap - placed.getApCost();
 		}
 		return ap;
