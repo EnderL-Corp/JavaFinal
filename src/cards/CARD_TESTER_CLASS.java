@@ -152,7 +152,7 @@ public class CARD_TESTER_CLASS
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 				+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
 		
-		//troop2.attack(drone3);
+		troop2.attack(drone3);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));

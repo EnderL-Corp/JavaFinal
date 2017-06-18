@@ -6,7 +6,7 @@ import main.Game;
 
 public class Troop extends Entity
 {
-	protected boolean[] abilities = new boolean[6]; //in this order: {provoke, deflect, blast, range, mirror, void}
+	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void} 
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 	protected static ArrayList<Gear> gearArray = new ArrayList<Gear>(); 
@@ -186,11 +186,11 @@ public class Troop extends Entity
 		{
 			for(int row = xCoordinate; row < 15 && row > -1; row += rowChange)
 			{
-				if(Game.game.getEntityAt(row, yCoordinate)!= null)
+				if(Game.game.getEntityAt(row, yCoordinate)!= null && Game.game.getEntityAt(row, yCoordinate)!= this)
 				{
 					if(Game.game.getEntityAt(row, yCoordinate).hasAbility(5) == false)
 					{
-						dealDamage(defender);
+						dealDamage(Game.game.getEntityAt(row, yCoordinate));
 					}
 					else
 					{
@@ -203,11 +203,11 @@ public class Troop extends Entity
 		{
 			for(int col = yCoordinate; col < 15 && col > -1; col += colChange)
 			{
-				if(Game.game.getEntityAt(xCoordinate, col)!= null)
+				if(Game.game.getEntityAt(xCoordinate, col)!= null && Game.game.getEntityAt(xCoordinate, col)!= this)
 				{
 					if(Game.game.getEntityAt(xCoordinate, col).hasAbility(5) == false)
 					{
-						dealDamage(defender);
+						dealDamage(Game.game.getEntityAt(xCoordinate, col));
 					}
 					else
 					{
