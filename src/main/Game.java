@@ -205,7 +205,7 @@ public class Game extends GameClient implements Serializable {
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.myTurn = true;
-			game.init(DeckEnum.SWARM);
+			game.init(DeckEnum.DJ);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
@@ -456,9 +456,9 @@ public class Game extends GameClient implements Serializable {
 	 * of actions to act upon.
 	 */
 	public void checkPlayerActionQueue() {
-		if (queuedPlayerActions.size() == 2 && (currentPlayerAction != '\n' || currentPlayerAction != 't')) {
+		if (queuedPlayerActions.size() == 2 && (currentPlayerAction != '\n' || currentPlayerAction != 'T')) {
 			executePlayerActionQueue();
-		} else if (currentPlayerAction == 't' && queuedPlayerActions.get(0) instanceof Technique
+		} else if (currentPlayerAction == 'T' && queuedPlayerActions.get(0) instanceof Technique
 				&& queuedPlayerActions.size() == ((Technique) queuedPlayerActions.get(0)).getNumTargets() + 1) {
 			executePlayerActionQueue();
 		}
