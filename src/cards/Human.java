@@ -29,7 +29,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[3] = true;
-			name = "HumanRange";
+			name = formattedName = "HumanRange";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DEFLECTOR)
@@ -43,7 +43,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[1] = true; 
-			name = "HumanDeflect";
+			name = formattedName = "HumanDeflect";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DUMMY)
@@ -57,7 +57,7 @@ public class Human extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[0] = true;
-			name = "HumanProvoke";
+			name = formattedName = "HumanProvoke";
 			description = "";
 		}
 		else
@@ -70,7 +70,7 @@ public class Human extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Human";
+			name = formattedName = "Human";
 			description = "";
 		}
 		te = enumName;

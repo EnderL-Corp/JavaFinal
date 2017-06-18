@@ -29,7 +29,7 @@ public class Android extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[2] = true;
-			name = "AndroidBlaster";
+			name = formattedName = "AndroidBlaster";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DEFLECTOR)
@@ -43,7 +43,7 @@ public class Android extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[1] = true;
-			name = "AndroidDeflect";
+			name = formattedName = "AndroidDeflect";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DUMMY)
@@ -57,7 +57,7 @@ public class Android extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[0] = true;
-			name = "AndroidProvoke";		//Dummy android?
+			name = formattedName = "AndroidProvoke";
 			description = "";
 		}
 		else
@@ -70,7 +70,7 @@ public class Android extends Troop
 			currentHealth = health;
 			xCoordinate = posX;
 			yCoordinate = posY;
-			name = "Android";
+			name = formattedName = "Android";
 			description = "";
 		}
 		te = enumName;
