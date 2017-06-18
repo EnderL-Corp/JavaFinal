@@ -295,6 +295,11 @@ public class CARD_TESTER_CLASS
 		}
 		Game.game.init(DeckEnum.RAVAGER);
 		
+		
+		//Graveyard testing
+		
+		
+		
 		System.out.println(Game.game.getGraveyard());
 		//should display [], since there is not yet anything in the graveyard
 		
@@ -309,6 +314,12 @@ public class CARD_TESTER_CLASS
 		
 		System.out.println(Game.game.getGraveyard());
 		//should display [Human][Technique][Gear][Amplifier]
+		
+		System.out.println(Game.game.emptyGraveyard());
+		//should now display the same as above, because the actual method returns the arrayList it had
+		
+		System.out.println(Game.game.getGraveyard());
+		//now should display [], because the graveyard was just cleared
 		
 	}
 	
