@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import main.Audio;
 import main.Game;
 
 import javax.swing.ImageIcon;
@@ -47,6 +48,7 @@ public class MainMenu implements ActionListener{
 	 */
 	public MainMenu() {
 		initialize();
+		new Audio("MainMenu");
 	}
 
 	/**
