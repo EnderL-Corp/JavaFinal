@@ -604,7 +604,7 @@ public class Game extends GameClient implements Serializable {
 					if (phase == 0 && first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint)second);
-						if(cp > ((Troop)first).getCpCost()) {
+						if(cp >= ((Troop)first).getCpCost()) {
 							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
 							try {
 								remoteServer.setRecentClientActionDescription(
