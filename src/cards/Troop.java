@@ -9,9 +9,7 @@ import main.Game;
 import main.Utilities;
 
 /**
- * 
  * @author André, Luke
- *
  */
 public class Troop extends Entity
 {

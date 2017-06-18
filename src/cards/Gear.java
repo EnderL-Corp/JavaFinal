@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import main.Game;
 
+/**
+ * @author André, Luke
+ */
 public class Gear extends Structure
 {
 	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}

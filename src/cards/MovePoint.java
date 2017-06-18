@@ -1,5 +1,8 @@
 package cards;
 
+/**
+ * @author Luke
+ */
 public class MovePoint extends Card {
 	private int xPos, yPos;
 	

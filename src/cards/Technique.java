@@ -3,9 +3,7 @@ package cards;
 import main.Game;
 
 /**
- * 
  * @author Luke Letourneau, André Artaud
- *
  */
 public class Technique extends Card
 {
@@ -22,6 +20,7 @@ public class Technique extends Card
 		BOOSTER,
 		CANNON;
 	}
+	
 	/**
 	 * Creates a technique with specified effect. A technique is a "spell", and
 	 * is played directly from the hand onto the board.

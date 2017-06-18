@@ -6,10 +6,8 @@ import java.io.Serializable;
 import main.Audio;
 import main.Game;
 
-/**
- * 
+/** 
  * @author Luke, André
- *
  */
 public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABLE. THIS IS NEEDED FOR SENDING OVER NETWORK
 {

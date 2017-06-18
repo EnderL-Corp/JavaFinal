@@ -3,6 +3,9 @@ package cards;
 import cards.Deck.DeckEnum;
 import main.Game;
 
+/**
+ * @author André
+ */
 public class Commander extends Entity
 {
 	private DeckEnum classType;
