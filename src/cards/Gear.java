@@ -94,13 +94,13 @@ public class Gear extends Structure
 			case MIRROR:
 			{
 				description = "Gives a troop mirror. \nMirror does 1/2 the damage \ndone to the defender to the attacker "
-						+ "once per the opponents turn.";
+						+ "\nonce per the opponents turn.";
 				break;
 			}
 			case LAUNCHER:
 			{
 				description = "Gives a troop range. Range \nallows a troop to attack \nanywhere on the board but "
-						+ "it cannot attack the commander.";
+						+ "\nit cannot attack the commander.";
 				break;
 			}
 			case EXPLOSIVES:			
