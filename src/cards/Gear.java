@@ -43,27 +43,39 @@ public class Gear extends Structure
 		{
 			case MIRROR:
 			{
+				Game.game.getHand().remove(this);
+				effected.updateDescription();
 				return effected.addAbilities(4);
 			}
 			case LAUNCHER:
 			{
+				Game.game.getHand().remove(this);
+				effected.updateDescription();
 				return effected.addAbilities(3);
 			}
 			case EXPLOSIVES:			
 			{
+				Game.game.getHand().remove(this);
+				effected.updateDescription();
 				return effected.addAbilities(2);
 			}
 			case ELECTROMAGNET:			
 			{
+				Game.game.getHand().remove(this);
+				effected.updateDescription();
 				return effected.addAbilities(0);
 			}
 			case SHIELD:			
 			{
+				Game.game.getHand().remove(this);
+				effected.updateDescription();
 				return effected.addAbilities(1);
 			}
 			case SPEED_BOOST:			
 			{
+				Game.game.getHand().remove(this);
 				effected.changeApCost(-2);
+				effected.updateDescription();
 				return true;
 			}
 		}

@@ -110,6 +110,7 @@ public class Game extends GameClient implements Serializable {
 		for (int i = 0; i < 5; i++) {
 			updateAmpPanel(new Amplifier(AmpEnum.NONE), false);
 		}
+		shuffleDeck(deck.getDeck());
 		drawCard();
 		drawCard();
 		drawCard();
@@ -225,7 +226,9 @@ public class Game extends GameClient implements Serializable {
 	 * Will remove a card from the deck and add it to your hand.
 	 */
 	public void drawCard() {
-		getHand().add(getDeck().remove(0));
+		Card c = getDeck().remove(0);
+		getHand().add(c);
+		c.updateDescription();
 	}
 
 	public int getCP() {
@@ -469,7 +472,7 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'G':
 					if (first instanceof Gear && second instanceof Troop) {
-						((Gear) first).effect((Troop) second);
+						((Gear)first).effect((Troop)second);
 						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
 						boardChanged = true;
 					}
@@ -478,7 +481,7 @@ public class Game extends GameClient implements Serializable {
 				case 'P':
 					if (first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
-						((Troop) first).setCoords((MovePoint) second);
+						((Troop) first).setCoords((MovePoint)second);
 						if(cp > ((Troop)first).getCpCost())
 							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
 						cp = Troop.placeOnBoard((Troop)first, cp);

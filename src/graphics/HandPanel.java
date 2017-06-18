@@ -95,7 +95,14 @@ public class HandPanel extends JPanel {
 	public void refresh() {
 		for(int i = 0; i < Game.game.getHand().size(); i++)
 		{
-			buttons[i].setText(Game.game.getHand().get(i).getName());
+			if(Game.game.getHand().get(i) == null)
+			{
+				buttons[i].setText("Open");
+			}
+			else
+			{
+				buttons[i].setText(Game.game.getHand().get(i).getName());
+			}
 		}
 	}
 

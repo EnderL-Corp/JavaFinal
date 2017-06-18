@@ -8,6 +8,8 @@ import java.util.List;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import graphics.CommandLog;
+
 /**
  * @author Luke
  * Runs audio, based on the name of the thread. Legal names are 
@@ -21,8 +23,6 @@ public class Audio extends Thread
 	private String threadName;
 	private String effect;
 	private static boolean onMenu;
-	File[] songs;
-	int trackNum;
 	   
 	public static void main(String[] args)
 	{
@@ -38,7 +38,6 @@ public class Audio extends Thread
 	public Audio(String name)
 	{
 		threadName = name;
-		System.out.println("Created an audio process with name " + name + " And with ID: " + ID);
 		ID++;
 		start();
 	}
@@ -46,7 +45,6 @@ public class Audio extends Thread
 	public Audio(String name, String eff)
 	{
 		threadName = name;
-		System.out.println("Created an audio process with name " + name + " And with ID: " + ID);
 		ID++;
 		effect = eff;
 		start();
@@ -54,7 +52,6 @@ public class Audio extends Thread
 
 	public void run() 
 	{
-		System.out.println("Running an audio process...");
 		switch (threadName)
 		{
 			case "MainMenu":
@@ -75,7 +72,6 @@ public class Audio extends Thread
 
 	public void start()
 	{
-		System.out.println("Started an audio process");
 		if (t == null) 
 		{
 	         t = new Thread(this, threadName);
@@ -87,11 +83,6 @@ public class Audio extends Thread
 		}
 		t = null;
 		
-	}
-	
-	public synchronized String getCurrentlyPlayingTrack()
-	{
-		return ("Currently playing: " + songs[trackNum--].getName().substring(0, songs[trackNum--].getName().indexOf('.')));
 	}
 
 	public synchronized void soundFX(String effect)
@@ -120,7 +111,7 @@ public class Audio extends Thread
 		{
 			long startTime;
 			Clip clip = AudioSystem.getClip();
-			songs = shuffleMusic("MenuMusic");
+			File[] songs = shuffleMusic("MenuMusic");
 			while(true)
 			{
 				for(int i = 0; i < songs.length; i++)
@@ -160,13 +151,12 @@ public class Audio extends Thread
 		{
 			long startTime;
 			Clip clip = AudioSystem.getClip();
-			songs = shuffleMusic("GameMusic");
+			File[] songs = shuffleMusic("GameMusic");
 			while(true)
 			{
-				trackNum = 0;
 				for(int i = 0; i < songs.length; i++)
 				{
-					trackNum++;
+					CommandLog.publish("Currently playing: " + songs[i].getName().substring(0, songs[i].getName().indexOf('.')));
 					System.out.println("Currently Playing" + songs[i].getName());
 					File file = new File("Audio/GameMusic/" + songs[i].getName());
 					clip.open(AudioSystem.getAudioInputStream(file));
