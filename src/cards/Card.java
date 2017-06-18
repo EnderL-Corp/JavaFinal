@@ -9,7 +9,7 @@ import main.Game;
 /** 
  * @author Luke, André, Santi(just FormattedName)
  */
-public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABLE. THIS IS NEEDED FOR SENDING OVER NETWORK
+public abstract class Card implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	protected Color teamColor;
