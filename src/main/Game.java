@@ -190,6 +190,7 @@ public class Game extends GameClient implements Serializable {
 			}
 			placeEntity(commander);
 		}
+		System.out.println(playerColor);
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
 			if(myTurn && !previousTurnCheck) {
