@@ -102,6 +102,7 @@ public class HandPanel extends JPanel {
 			else
 			{
 				buttons[i].setText(Game.game.getHand().get(i).getName());
+				Game.game.getHand().get(i).updateDescription();
 			}
 		}
 	}

@@ -95,27 +95,37 @@ public class Gear extends Structure
 			{
 				description = "Gives a troop mirror. Mirror does 1/2 the damage done to the defender to the attacker "
 						+ "once per the opponents turn.";
+				break;
 			}
 			case LAUNCHER:
 			{
 				description = "Gives a troop range. Range allows a troop to attack anywhere on the board but "
 						+ "it cannot attack the commander.";
+				break;
 			}
 			case EXPLOSIVES:			
 			{
 				description = "Gives a troop blast. Range allows a troop to attack a whole row regardless of team, stopping at void.";
+				break;
 			}
 			case ELECTROMAGNET:			
 			{
 				description = "Gives a troop provoke. Provoke forces adjacent entities to attack this troop.";
+				break;
 			}
 			case SHIELD:			
 			{
 				description = "Gives a troop deflect. This troop takes no damage the first time it is attacked per opponent turn.";
+				break;
 			}
 			case SPEED_BOOST:			
 			{
 				description = "Reduces a troop's AP cost by 2.";
+				break;
+			}
+			default:
+			{
+				description = null;
 			}
 		}
 	}
