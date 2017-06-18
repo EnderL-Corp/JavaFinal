@@ -10,7 +10,11 @@ import cards.Entity;
 import cards.Structure;
 import cards.Technique;
 import cards.Troop;
-
+/**
+ * 
+ * @author Santiago Callegari
+ *
+ */
 public class InfoPanel extends JPanel {
 	private JTextPane stats;
 
@@ -19,7 +23,10 @@ public class InfoPanel extends JPanel {
 		stats.setEditable(false);
 		add(stats);
 	}
-
+/**
+ * 
+ * this checks to see what card it takes in and then displays for people to see, descriptions were edited by me to work properly
+ */
 	public void newDisplay(Card c) {
 		if (c instanceof Troop) {
 			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : "
