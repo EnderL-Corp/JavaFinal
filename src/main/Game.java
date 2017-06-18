@@ -176,7 +176,6 @@ public class Game extends GameClient implements Serializable {
 			game.init(DeckEnum.RAVAGER);
 			game.connectToServer();
 			game.clientInfo = new SpecificClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
-			game.placeEntity(new Dragon(7, 11, 3, null));			//there for a second then goes away
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
