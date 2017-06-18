@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
 
 /**
  * For logging what the other client has done in a panel.
- * @author Srihari Subramanian
+ * @author Santiago Callegari, Srihari Subramanian
  *
  */
 public class CommandLog extends JPanel {
