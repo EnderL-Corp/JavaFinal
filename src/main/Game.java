@@ -57,6 +57,7 @@ public class Game extends GameClient implements Serializable {
 	
 	private boolean myTurn;
 	private boolean boardChanged = false;
+	private int phase;
 
 	/**
 	 * Required no-args constructor for RMI.
@@ -117,10 +118,17 @@ public class Game extends GameClient implements Serializable {
 		drawCard();
 		drawCard();
 		drawCard();
-
+		
 		queuedPlayerActions = new ArrayList<Card>();
 		System.out.println(myHand);
 		gameMenu = new GameMenu();
+		if(myTurn) {
+			phase = 0;
+			CommandLog.publish("[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
+		} else {
+			phase = -1;
+			CommandLog.publish("[Game] Currently opponent's turn.");
+		}
 		gameMenu.getFrame().setVisible(true);
 	}
 
@@ -231,6 +239,25 @@ public class Game extends GameClient implements Serializable {
 	public static void main(String[] args) {
 		new MainMenu();
 	}
+	
+	public void changePhase() {
+		phase = ++phase > 2 ? -1 : phase;
+		String s = "";
+		switch(phase) {
+		case -1:
+			CommandLog.publish("[Game] Currently opponent's turn.");
+			break;
+		case 0:
+			CommandLog.publish("[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
+			break;
+		case 1:
+			CommandLog.publish("[Game] You are now in phase 2. You can:\n\tMove troops.\n\tUse techniques.");
+			break;
+		case 2:
+			game.endTurn();
+			break;
+		}
+	}
 
 	/**
 	 * Will remove a card from the deck and add it to your hand.
@@ -293,6 +320,7 @@ public class Game extends GameClient implements Serializable {
 	public void endTurn() {
 		try {
 			remoteServer.endMyTurn();
+			CommandLog.publish("[Game] You have ended your turn.");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -391,7 +419,7 @@ public class Game extends GameClient implements Serializable {
 
 		if (take) {
 			for (int i = 0; i < ampPanel.length; i++) {
-				if (Game.game.getAmpAt(i).getName() == this.getName() && updated == false) // XXX Replace "this" with "amp"?
+				if (game.getAmpAt(i).getName() == this.getName() && updated == false) // XXX Replace "this" with "amp"?
 				{
 					ampPanel[i] = new Amplifier(AmpEnum.NONE);
 					updated = true;
@@ -452,16 +480,16 @@ public class Game extends GameClient implements Serializable {
 		boardChanged = false;
 		if (myTurn) {
 			switch (currentPlayerAction) {
-				case 'M':
-					if (first instanceof Entity && second instanceof MovePoint) {
+				case 'M':	//MOVE
+					if (phase == 1 && first instanceof Entity && second instanceof MovePoint) {
 						ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
 						CommandLog.publish("[Game] You are moving " + first.getName() + " to position " + ((MovePoint)second) + ".");
 						boardChanged = true;
 					}
 					break;
 	
-				case 'A':
-					if (first instanceof Entity && second instanceof Entity)
+				case 'A':	//ATTACK
+					if (phase == 1 && first instanceof Entity && second instanceof Entity)
 						if (!(((Entity) first).hasAbility(3) && second instanceof Commander)) {
 							((Entity) first).attack((Entity) second);
 							CommandLog.publish("[Game] You, Entity " + first.getName() + ", are attacking Entity " + second.getName() + ".");
@@ -470,7 +498,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'T':
-					if (first instanceof Technique && second instanceof Troop)
+					if (phase == 1 && first instanceof Technique && second instanceof Troop)
 						if (((Technique) first).canCast(tp))
 							for (int i = 1; i < queuedPlayerActions.size(); i++)
 								if (queuedPlayerActions.get(i) instanceof Troop) {
@@ -481,7 +509,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'G':
-					if (first instanceof Gear && second instanceof Troop) {
+					if (phase == 0 && first instanceof Gear && second instanceof Troop) {
 						((Gear)first).effect((Troop)second);
 						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
 						boardChanged = true;
@@ -489,7 +517,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'P':
-					if (first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
+					if (phase == 0 && first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint)second);
 						if(cp > ((Troop)first).getCpCost())
@@ -500,7 +528,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'S':
-					if (first instanceof Amplifier && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
+					if (phase == 0 && first instanceof Amplifier && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
 						for (int i = 0; i < 5; i++)
 							if (getAmpAt(i) == second) {
 								updateAmpPanel((Amplifier) first, false);

@@ -8,12 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cards.Deck.DeckEnum;
-import main.Audio;
 import main.Game;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * For interfacing with the player while the game is in progress.
@@ -32,7 +33,6 @@ public class GameMenu {
 	private InfoPanel info;
 	private JButton nxtPhase;
 	private JPanel background;
-	private Audio gameMusic;
 	
 
 	/**
@@ -101,6 +101,11 @@ public class GameMenu {
 		nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
 		nxtPhase.setBounds(1079, 730, 157, 49);
+		nxtPhase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Game.game.changePhase();
+			}
+		});
 		frame.getContentPane().add(nxtPhase);
 		
 		background = new JPanel();
@@ -108,13 +113,6 @@ public class GameMenu {
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		background.add(wallpaper);
 		frame.getContentPane().add(background);
-		
-		gameMusic = new Audio("InGame");
-	}
-	
-	public Audio getGameMusic()
-	{
-		return gameMusic;
 	}
 	
 	public void refresh() {
