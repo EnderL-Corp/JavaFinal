@@ -140,7 +140,7 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		//System.out.println(this);
-		System.out.println(queuedPlayerActions);
+		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
 			if (connected)
 				if (boardChanged) {
@@ -422,7 +422,7 @@ public class Game extends GameClient implements Serializable {
 	}
 
 	public void clearPlayerActionQueue() {
-		queuedPlayerActions.clear();
+		//queuedPlayerActions.clear();
 	}
 
 	/**

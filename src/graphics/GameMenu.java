@@ -21,7 +21,7 @@ import java.awt.Font;
  */
 public class GameMenu {
 
-	private JFrame frame;
+	private ListenerFrame frame;
 	private BoardPanel board;
 	private HandPanel hand;
 	private StatsPanel stats;
@@ -60,18 +60,11 @@ public class GameMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//try {
-		//	Game.game = new Game();
-		//	Game.game.init(DeckEnum.DJ);
-		//} catch (RemoteException e) {
-		//	// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-
 		frame = new ListenerFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+			
 		
 		board = new BoardPanel();
 		board.setBounds(341, 68, 480, 480);
@@ -113,8 +106,6 @@ public class GameMenu {
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		background.add(wallpaper);
 		frame.getContentPane().add(background);
-		 
-		
 	}
 	
 	public void refresh() {
