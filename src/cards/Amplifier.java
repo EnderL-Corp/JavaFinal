@@ -26,7 +26,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 	 */
 	public Amplifier(AmpEnum ampEnum) 
 	{
-		super("" + ampEnum, "Santi has to do this later");
+		super("" + ampEnum, "");
 
 		switch(ampEnum) 
 		{
@@ -65,6 +65,35 @@ public class Amplifier extends Structure implements java.io.Serializable
 		Game.game.updateAmpPanel(this, false);
 	}
 	
+	public String updateDescription() {
+		switch(currentEnum) 
+		{
+			case DRONESDAY_DEVICE:
+			{
+				return "The dronesday device spawns one drone at a random place on the map per turn"
+						+ " per amplifier";
+			}
+			case OVERDRAW:
+			{
+				return "The overdraw amplifier allows the player to draw 1 extra card per amplifier";
+			}
+			case HEALING_WAVE:			
+			{
+				return "The healing wave amplifier heals every troop on your team on the field by one."
+						+ " This amplifier requires 2 of itself to be built to activate its effect";
+			}
+			case SHORT_CIRCUIT:		
+			{
+				return "The short circuit amplifier damages every troop on the other team on the field by one."
+						+ " This amplifier requires 2 of itself to be built to activate its effect";
+			}
+			default:
+			{
+				return null;
+			}
+		}
+	}
+
 	/**
 	 * <code> effectBoard() </code> is how the Amplifier effects the game. When the method is called, it is first checked as to
 	 *  whether the required number of the amplifier exists, since some require 2 to be placed. The method
