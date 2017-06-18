@@ -93,19 +93,19 @@ public class Gear extends Structure
 		{
 			case MIRROR:
 			{
-				description = "Gives a troop mirror. Mirror \ndoes 1/2 the damage done to the \ndefender to the attacker "
+				description = "Gives a troop mirror. \nMirror does 1/2 the damage \ndone to the defender to the attacker "
 						+ "once per the opponents turn.";
 				break;
 			}
 			case LAUNCHER:
 			{
-				description = "Gives a troop range. Range \nallows a troop to attack anywhere on the board \nbut "
+				description = "Gives a troop range. Range \nallows a troop to attack \nanywhere on the board but "
 						+ "it cannot attack the commander.";
 				break;
 			}
 			case EXPLOSIVES:			
 			{
-				description = "Gives a troop blast. Range \nallows a troop to attack a whole row regardless \nof team, stopping at void.";
+				description = "Gives a troop blast. Range \nallows a troop to attack a whole row \nregardless of team, stopping at void.";
 				break;
 			}
 			case ELECTROMAGNET:			
@@ -115,7 +115,7 @@ public class Gear extends Structure
 			}
 			case SHIELD:			
 			{
-				description = "Gives a troop deflect. \nThis troop takes no damage the first time it is attacked per\n opponent turn.";
+				description = "Gives a troop deflect. \nThis troop takes no damage the first time \nit is attacked per opponent turn.";
 				break;
 			}
 			case SPEED_BOOST:			
