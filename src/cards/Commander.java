@@ -9,12 +9,28 @@ public class Commander extends Entity
 	//class order : {Ravager, swarm, DJ}
 	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}
 	
+	/**
+	 * Creates a Commander. The Commander is the MOST important thing in the game. If a Player's Commander dies, they lose
+	 * @param nm - Name
+	 * @param desc - Description
+	 * @param ct - The class (Ravager, swarm, or DJ)
+	 * @param posX - The x position of the Commander
+	 * @param posY - The y position of the Commander
+	 * @param tag - The tag
+	 */
 	public Commander(String nm, String desc, DeckEnum ct, int posX, int posY, int tag)
 	{
 		super(nm, desc, 2, 0, 1, 25, posX, posY, tag); //Check these values
 		classType = ct;
 	}
 
+	/**
+	 * <code>attack(defender)</code> attempts to make the Commander attack the defender. 
+	 * The method checks to see if the defender is at most 1 tile away and if any troop 
+	 * adjacent to the Commander has provoke. If the attack is valid, this method then 
+	 * calls <code>dealDamage(defender)</code>
+	 * @param Entity - The Entity to Attack
+	 */
 	public void attack(Entity defender)
 	{
 		if(Math.abs(defender.getPosX() - xCoordinate) == 1 && Math.abs(defender.getPosY() - yCoordinate) == 1)
@@ -64,6 +80,9 @@ public class Commander extends Entity
 		return false;
 	}
 	
+	/**
+	 * Since the Player's Commander has died, end the game in a loss
+	 */
 	public void kill(Entity killed)
 	{
 		Game.game.endGame(false);
