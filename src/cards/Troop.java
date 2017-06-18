@@ -34,8 +34,36 @@ public class Troop extends Entity
 	 * @return ImageIcon - The path to both this Troop and its overlaying troop type.
 	 */
 	public ImageIcon getIcon() {
+		ImageIcon temp;
 		if(te != null) {
-			return Utilities.combineImages(rootName + ".png", name + ".png");
+			temp = Utilities.combineImages(rootName + ".png", name + ".png");
+			for(int i = 0; i < 6; i++) {
+				if(hasAbility(i)) {
+					switch(i) {
+					case 0:
+						if(name.indexOf("Provoke") == -1)
+							temp = Utilities.combineImages(temp, rootName + "Provoke.png");
+						break;
+					case 1:
+						if(name.indexOf("Deflect") == -1)
+							temp = Utilities.combineImages(temp, rootName + "Deflect.png");
+						break;
+					case 2:
+						if(name.indexOf("Blast") == -1)
+							temp = Utilities.combineImages(temp, rootName + "Blast.png");
+						break;
+					case 3:
+						if(name.indexOf("Range") == -1)
+							temp = Utilities.combineImages(temp, rootName + "Range.png");
+						break;
+					case 4:
+						if(name.indexOf("Mirror") == -1)
+							temp = Utilities.combineImages(temp, rootName + "Mirror.png");
+						break;
+					}
+				}
+			}
+			return temp;
 		}
 		else
 			return new ImageIcon("Sprites/" + rootName + ".png");
@@ -286,7 +314,6 @@ public class Troop extends Entity
 	
 	public void updateDescription()
 	{
-		description = getTroopType() + " with: ";
 		if(abilities[0])
 			description += "provoke, ";
 		if(abilities[1])
