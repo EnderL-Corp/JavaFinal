@@ -53,10 +53,12 @@ public class NewMainMenu implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		ip = new JTextField();
 		ip.setFont(new Font("Tahoma", Font.BOLD, 20));
