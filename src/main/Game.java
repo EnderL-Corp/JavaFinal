@@ -441,4 +441,9 @@ public class Game extends GameClient implements Serializable {
 	{
 		return gameMenu;
 	}
+	
+	public Amplifier[] getAmpArray()
+	{
+		return ampPanel;
+	}
 }
