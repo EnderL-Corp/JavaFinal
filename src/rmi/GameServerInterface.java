@@ -93,11 +93,11 @@ public interface GameServerInterface extends Remote, Serializable{
 	 * Will update the recent moves of a client whose turn it is in the server.
 	 * @param s the description to save
 	 */
-	public void setRecentClientActionDescription(String s);
+	public void setRecentClientActionDescription(String s) throws RemoteException;
 	
 	/**
 	 * Gets the recent description of change that the other client made to board.
 	 * @return the summary of the change
 	 */
-	public String getRecentClientActionDescription();
+	public String getRecentClientActionDescription() throws RemoteException;
 }

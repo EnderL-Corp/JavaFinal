@@ -509,8 +509,12 @@ public class Game extends GameClient implements Serializable {
 					if (phase == 1 && first instanceof Entity && second instanceof MovePoint) {
 						ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
 						CommandLog.publish("[Game] You are moving " + first.getName() + " to position " + ((MovePoint)second) + ".");
-						remoteServer.setRecentClientActionDescription(
-								"[Game] Opponent moved Entity" + first.getName() + " to position " + ((MovePoint)second) + ".");
+						try {
+							remoteServer.setRecentClientActionDescription(
+									"[Game] Opponent moved Entity" + first.getName() + " to position " + ((MovePoint)second) + ".");
+						} catch (RemoteException e) {
+							e.printStackTrace();
+						}
 						boardChanged = true;
 					}
 					break;
@@ -520,8 +524,12 @@ public class Game extends GameClient implements Serializable {
 						if (!(((Entity) first).hasAbility(3) && second instanceof Commander)) {
 							((Entity) first).attack((Entity) second);
 							CommandLog.publish("[Game] You, Entity " + first.getName() + ", are attacking Entity " + second.getName() + ".");
-							remoteServer.setRecentClientActionDescription(
-									"[Game] Opponent, Entity " + first.getName() + ", attacked Entity " + second.getName() + ".");
+							try {
+								remoteServer.setRecentClientActionDescription(
+										"[Game] Opponent, Entity " + first.getName() + ", attacked Entity " + second.getName() + ".");
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
 							boardChanged = true;
 						}
 					break;
@@ -537,8 +545,12 @@ public class Game extends GameClient implements Serializable {
 											CommandLog.publish(
 													"[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
 											boardChanged = true;
-											remoteServer.setRecentClientActionDescription(
-													"[Game] Opponent used technique " + first.getName() + " on Troop " + second.getName() + ".");
+											try {
+												remoteServer.setRecentClientActionDescription(
+														"[Game] Opponent used technique " + first.getName() + " on Troop " + second.getName() + ".");
+											} catch (RemoteException e) {
+												e.printStackTrace();
+											}
 										}
 									}
 							}
@@ -552,10 +564,14 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'G':
 					if (phase == 0 && first instanceof Gear && second instanceof Troop) {
-						((Gear)first).effect((Troop)second);//XXX
+						((Gear)first).effect((Troop)second);
 						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
-						remoteServer.setRecentClientActionDescription(
-								"[Game] Opponent used the Gear " + first.getName() + " on Troop " + second.getName() + ".");
+						try {
+							remoteServer.setRecentClientActionDescription(
+									"[Game] Opponent used the Gear " + first.getName() + " on Troop " + second.getName() + ".");
+						} catch (RemoteException e) {
+							e.printStackTrace();
+						}
 						boardChanged = true;
 					}
 					break;
@@ -566,8 +582,12 @@ public class Game extends GameClient implements Serializable {
 						((Troop) first).setCoords((MovePoint)second);
 						if(cp > ((Troop)first).getCpCost()) {
 							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
-							remoteServer.setRecentClientActionDescription(
-									"[Game] Opponent placed the Troop " + first.getName() + " at Position " + ((MovePoint)second) + ".");
+							try {
+								remoteServer.setRecentClientActionDescription(
+										"[Game] Opponent placed the Troop " + first.getName() + " at Position " + ((MovePoint)second) + ".");
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
 							cp = Troop.placeOnBoard((Troop)first, cp);
 						}
 						boardChanged = true;
@@ -584,7 +604,11 @@ public class Game extends GameClient implements Serializable {
 								addToGraveyard(first);
 								myHand.remove(first);
 								CommandLog.publish("[Game] You are using placing the Amplifier " + first.getName() + ".");
-								remoteServer.setRecentClientActionDescription("[Game] Opponent used the Amplifier " + first.getName() + ".");
+								try {
+									remoteServer.setRecentClientActionDescription("[Game] Opponent used the Amplifier " + first.getName() + ".");
+								} catch (RemoteException e) {
+									e.printStackTrace();
+								}
 								boardChanged = true;
 								break;
 							}

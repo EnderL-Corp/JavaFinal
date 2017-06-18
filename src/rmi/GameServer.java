@@ -150,12 +150,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return clients.get(0);
 	}
 
-	public void setRecentClientActionDescription(String s) {
+	public void setRecentClientActionDescription(String s) throws RemoteException{
 		recentClientActionDescription = s;
 	}
 
 	@Override
-	public String getRecentClientActionDescription() {
+	public String getRecentClientActionDescription() throws RemoteException{
 		return recentClientActionDescription;
 	}
 }
