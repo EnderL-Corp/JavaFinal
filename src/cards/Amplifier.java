@@ -117,7 +117,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 					boolean placed = false;
 					while(placed == false)
 					{
-						placed = Game.game.placeEntity((Entity)(new Drone((int)(Math.random() * 15), (int)(Math.random() * 15), Game.game.getTag(), TroopEnum.X)) );
+						placed = Game.game.placeEntity((Entity)(new Drone((int)(Math.random() * 15), (int)(Math.random() * 15), TroopEnum.X)) );
 					}
 					break;
 				}

@@ -13,9 +13,8 @@ public class Drone extends Troop
 	 * @param tag - the tag of the Troop
 	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
 	 */
-	public Drone(int posX, int posY, int tag, TroopEnum enumName)
+	public Drone(int posX, int posY, TroopEnum enumName)
 	{
-		super(tag);
 		rootName = "Drone";
 		if(enumName == TroopEnum.X)
 		{

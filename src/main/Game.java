@@ -56,7 +56,8 @@ public class Game extends GameClient implements Serializable {
 	
 	private int numPings = 0, otherClientWaiter = 0;
 	
-	private boolean myTurn, isHost, boardChanged = false;
+	private boolean myTurn;
+	private boolean boardChanged = false;
 	private int phase;
 	private String recentClientDescription = "";
 	
@@ -116,7 +117,7 @@ public class Game extends GameClient implements Serializable {
 		}
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
-		commander = new Commander(typeAsString, "He was a good boy", deck.getClassType(), 7, 2, 0);
+		commander = new Commander("Jimmy", "He was a good boy", deck.getClassType(), 7, 2);
 		myCards = deck.getDeck();
 		cp = deck.getCP();
 		ap = deck.getAP();
@@ -139,10 +140,6 @@ public class Game extends GameClient implements Serializable {
 			phase = -1;
 			CommandLog.publish("[Game] Currently opponent's turn.");
 		}
-		if(!isHost) {
-			commander.setCoords(new MovePoint(7, 13));
-		}
-		placeEntity(getCommander());
 		gameMenu.getFrame().setVisible(true);
 	}
 
@@ -217,8 +214,7 @@ public class Game extends GameClient implements Serializable {
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.myTurn = true;
-			game.isHost = true;
-			game.init(DeckEnum.values()[(int)Math.random() * 3]);
+			game.init(DeckEnum.DJ);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
@@ -234,8 +230,7 @@ public class Game extends GameClient implements Serializable {
 		try {
 			game = new Game(1, serverIP, 1099, Color.RED);
 			game.myTurn = false;
-			game.isHost = false;
-			game.init(DeckEnum.values()[(int)Math.random() * 3]);
+			game.init(DeckEnum.DJ);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {

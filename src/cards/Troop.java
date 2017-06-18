@@ -24,9 +24,8 @@ public class Troop extends Entity
 	 * onto the board from the Player's hand
 	 * @param tag - The tag of the Troop
 	 */
-	public Troop(int tag) 
+	public Troop() 
 	{
-		super(tag);
 		abilities = new boolean[6];
 	}
 	

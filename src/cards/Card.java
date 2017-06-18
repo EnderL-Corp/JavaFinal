@@ -61,6 +61,9 @@ public abstract class Card implements Serializable			//DO NOT REMOVE SERIALIZABL
 	}
 	
 	public String getFormattedName() {
-		return formattedName;
+		if(getName().indexOf('_') == -1 )
+			return getName();
+		else
+			return getName().replaceAll("_", "\n");	
 	}
 }
