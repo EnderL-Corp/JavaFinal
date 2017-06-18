@@ -6,6 +6,7 @@ public class Mech extends Troop
 	public Mech(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
+		abilities = new boolean[6];
 		if(enumName == TroopEnum.BLASTER)
 		{
 			apCost = 6;
@@ -61,6 +62,7 @@ public class Mech extends Troop
 			name = "Mech";
 			description = "Santi has to do this later";
 		}
+		te = enumName;
 	}
 }
 

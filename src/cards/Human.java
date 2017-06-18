@@ -6,6 +6,7 @@ public class Human extends Troop
 	public Human(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
+		abilities = new boolean[6];
 		if(enumName == TroopEnum.RANGER)
 		{
 			apCost = 3;
@@ -62,6 +63,10 @@ public class Human extends Troop
 			description = "Santi has to do this later";
 		}
 
+	}
+	
+	public String getTroopType() {
+		return "Human";
 	}
 }
 

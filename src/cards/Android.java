@@ -6,6 +6,7 @@ public class Android extends Troop
 	public Android(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
+		abilities = new boolean[6];
 		if(enumName == TroopEnum.BLASTER)
 		{
 			apCost = 6;
@@ -62,6 +63,10 @@ public class Android extends Troop
 			description = "Santi has to do this later";
 		}
 
+	}
+	
+	public String getTroopType() {
+		return "Android";
 	}
 }
 

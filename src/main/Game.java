@@ -15,10 +15,12 @@ import cards.Deck.DeckEnum;
 import cards.Dragon;
 import cards.Entity;
 import cards.Gear;
+import cards.Mech;
 import cards.MovePoint;
 import cards.Structure;
 import cards.Technique;
 import cards.Troop;
+import cards.TroopEnum;
 import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
@@ -57,6 +59,8 @@ public class Game extends GameClient implements Serializable {
 	private int cp;
 	private int tp;
 	private int territory;
+	
+	private int testCounter;
 	
 	private boolean myTurn;
 	private boolean boardChanged;
@@ -138,6 +142,9 @@ public class Game extends GameClient implements Serializable {
 				else
 					refreshBoard();
 			updateServerInformation();
+			testCounter++;
+			if(testCounter == 10) 
+				placeEntity(new Mech(7,4,1,TroopEnum.BLASTER));
 			if (remoteServer.getConnections() > 1)
 				System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
 		} catch (Exception e1) {

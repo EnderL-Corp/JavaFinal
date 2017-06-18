@@ -6,6 +6,7 @@ public class Cyborg extends Troop
 	public Cyborg(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
+		abilities = new boolean[6];
 		if(enumName == TroopEnum.RANGER)
 		{
 			apCost = 5;
@@ -61,6 +62,10 @@ public class Cyborg extends Troop
 			name = "Cyborg";
 			description = "Santi has to do this later";
 		}
+	}
+	
+	public String getTroopType() {
+		return "Cyborg";
 	}
 }
 

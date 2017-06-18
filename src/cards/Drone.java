@@ -32,5 +32,9 @@ public class Drone extends Troop
 			description = "Santi has to do this later";
 		}
 	}
+	
+	public String getTroopType() {
+		return "Drone";
+	}
 }
 

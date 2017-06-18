@@ -10,6 +10,7 @@ public class Troop extends Entity
 	protected boolean deflectTime, mirrorTime;
 	protected int currentApCost; //for the speed boost gear
 	protected static ArrayList<Gear> gearArray = new ArrayList<Gear>(); 
+	protected TroopEnum te;
 
 	public Troop(int tag) 
 	{
@@ -28,7 +29,8 @@ public class Troop extends Entity
 		currentApCost = apCost;
 	}
 	
-
+	
+	
 	/**
 	 * @param abs - the index of the ability i.e. 1 for deflect, or 5 for void (see above)
 	 * @return boolean - whether or not the ability was added
