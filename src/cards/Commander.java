@@ -1,13 +1,17 @@
 package cards;
 
+import java.io.Serializable;
+
 import cards.Deck.DeckEnum;
 import main.Game;
 
 /**
  * @author André
  */
-public class Commander extends Entity
+public class Commander extends Entity implements Serializable
 {
+	private static final long serialVersionUID = -2645359046089708291L;
+	
 	private DeckEnum classType;
 	//class order : {Ravager, swarm, DJ}
 	//remember Abilities in this order: {provoke, deflect, blast, range, mirror, void}
@@ -94,5 +98,11 @@ public class Commander extends Entity
 	public DeckEnum getClassType()
 	{
 		return classType;			
+	}
+
+	@Override
+	public void updateDescription() {
+		// TODO Auto-generated method stub
+		
 	}
 }
