@@ -109,20 +109,24 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void init(DeckEnum deckEnum) {
 		deck = new Deck(deckEnum);
+		String specificDescription = null;
 		switch(deckEnum) {
 		case DJ:
 			typeAsString = "DJ";
+			specificDescription = "This is the DJ. Let's get this party jumping!";
 			break;
 		case RAVAGER:
 			typeAsString = "Ravager";
+			specificDescription = "I'm the Ravager. Pump that beat!";
 			break;
 		case SWARM:
 			typeAsString = "Swarm";
+			specificDescription = "Join the Swarm. Let's rave!";
 			break;
 		}
 		graveyard = new ArrayList<Card>();
 		myHand = new ArrayList<Card>();
-		commander = new Commander(typeAsString, "He was a good boy", deck.getClassType(), 1, 7);
+		commander = new Commander(typeAsString, specificDescription, deck.getClassType(), 1, 7);
 		myCards = deck.getDeck();
 		cp = deck.getCP();
 		ap = deck.getAP();
@@ -158,7 +162,9 @@ public class Game extends GameClient implements Serializable {
 		queuedPlayerActions = new ArrayList<Card>();
 		System.out.println(myHand);
 		gameMenu = new GameMenu();
+		gameMenu.getFrame().setVisible(true);
 		CommandLog.publish("[Game] Loading information...");
+		CommandLog.publish("You are of class " + typeAsString + ".\n\"" + specificDescription + "\"");
 		if(myTurn) {
 			phase = 0;
 			CommandLog.publish("[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
@@ -169,7 +175,6 @@ public class Game extends GameClient implements Serializable {
 		if(!isHost) {
 			commander.setCoords(new MovePoint(13, 7));
 		}
-		gameMenu.getFrame().setVisible(true);
 	}
 
 	/**
@@ -187,11 +192,11 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e) {
 		numPings++;
 		if(numPings == 1) {						//Once connected, will get the most recent server information and will place its own commander
-			updateServerInformation();
-			if(!isHost) {
-				commander.setCoords(new MovePoint(7, 13));
-			}
+			if(isHost)
+				updateServerInformation();
 			placeEntity(commander);
+			if(!isHost)
+				updateServerInformation();
 		}
 		System.out.println(playerColor);
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
@@ -199,8 +204,8 @@ public class Game extends GameClient implements Serializable {
 			if(myTurn && !previousTurnCheck) {
 				changePhase();
 			}
-			if(connected && myTurn)
-				if (boardChanged) {
+			if(connected)
+				if (myTurn && boardChanged) {
 					sendRecentChanges();		//If it's your turn and the board was changed, update the server board info
 					boardChanged = false;
 				} else
@@ -209,9 +214,10 @@ public class Game extends GameClient implements Serializable {
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
 				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
-					if(otherClientWaiter == 2) {
-						System.out.println("Connected!!Connected!!Connected!!Connected!!Connected!!Connected!!Connected!!");
+					if(isHost && otherClientWaiter == 2) {
+						placeEntity(otherClientInfo.getCommander());
 						CommandLog.publish("Opponent has connected! Fight!");
+						
 					}
 					if(!myTurn) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
@@ -255,7 +261,7 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(0, serverIP, 1099, Color.CYAN);
 			game.myTurn = true;
 			game.isHost = true;
-			game.init(DeckEnum.DJ);
+			game.init(DeckEnum.values()[(int)(Math.random() * 3)]);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
@@ -272,7 +278,7 @@ public class Game extends GameClient implements Serializable {
 			game = new Game(1, serverIP, 1099, Color.RED);
 			game.myTurn = false;
 			game.isHost = false;
-			game.init(DeckEnum.DJ);
+			game.init(DeckEnum.values()[(int)(Math.random() * 3)]);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
@@ -424,6 +430,7 @@ public class Game extends GameClient implements Serializable {
 			previousTurnCheck = myTurn;
 			myTurn = remoteServer.getTurnTag() == getTag();
 			otherClientInfo = remoteServer.getOtherClient(clientInfo);
+			remoteServer.updateInfo(clientInfo);
 			if (remoteServer.getWinner() != null && remoteServer.getWinner().getTag() == getTag()) {
 				endGame(false);
 			}
