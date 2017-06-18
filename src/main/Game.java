@@ -182,8 +182,9 @@ public class Game extends GameClient implements Serializable {
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
-				if(otherClientWaiter > 2) {		//Wait two seconds for the other client to update its info in the server
-					System.out.println(remoteServer.getOtherClient(clientInfo).getTag());
+				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
+					if(otherClientWaiter == 1)
+						CommandLog.publish("Opponent has connected! Fight!");
 					if(!myTurn) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {

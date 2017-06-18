@@ -89,11 +89,11 @@ public class BoardPanel extends JPanel implements ActionListener {
 					Entity e = Game.game.getEntityAt(i, j);
 					if(e != null && e instanceof Troop) {
 						bb.setIcon(((Troop)e).getIcon());
-						bb.setBackground(Game.game.getColor());
+						bb.setBackground(((Card)e).getTeamColor());
 					}
 					else if(e != null && e instanceof Commander) {
 						bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
-						bb.setBackground(Game.game.getColor());
+						bb.setBackground(((Card)e).getTeamColor());
 					}
 							
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
