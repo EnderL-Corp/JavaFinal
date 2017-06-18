@@ -197,7 +197,7 @@ public class Technique extends Card
 			}
 			case BOOSTER:
 			{
-				description = "Gives 1 health and one attack to 1 friendly troop";
+				description = "Gives 1 health and one attack \nto 1 friendly troop";
 				break;
 			}
 			case CALL:			
@@ -217,7 +217,7 @@ public class Technique extends Card
 			}
 			case DRAIN:		
 			{
-				description = "Deal 4 damage to one troop and heal your commander by 4 health points";
+				description = "Deal 4 damage to one troop and heal \nyour commander by 4 health points";
 				break;
 			}
 			default:
