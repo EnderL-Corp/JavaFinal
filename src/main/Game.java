@@ -53,7 +53,7 @@ public class Game extends GameClient implements Serializable {
 
 	private char currentPlayerAction;
 	private List<Card> queuedPlayerActions;
-	public Amplifier[] ampPanel = new Amplifier[5];
+	private Amplifier[] ampPanel = new Amplifier[5];
 	
 	private int ap;
 	private int cp;
@@ -183,7 +183,6 @@ public class Game extends GameClient implements Serializable {
 			game.init(DeckEnum.RAVAGER);
 			game.connectToServer();
 			game.clientInfo = new SpecificClientInfo(game.getName(), game.commander, game.getTag(), game.cp, game.ap, game.tp);
-			game.placeEntity(new Dragon(7, 11, 3, null));			//there for a second then goes away
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -448,5 +447,10 @@ public class Game extends GameClient implements Serializable {
 	public NewGameMenu getGameMenu()
 	{
 		return gameMenu;
+	}
+	
+	public Amplifier[] getAmpArray()
+	{
+		return ampPanel;
 	}
 }

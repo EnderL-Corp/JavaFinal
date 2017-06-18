@@ -16,7 +16,7 @@ public class CARD_TESTER_CLASS
 	public static int tp;																			
 	public static int territory; 																
 	
-	CARD_TESTER_CLASS()
+	public CARD_TESTER_CLASS()
 	{
 		commander =  new Commander("Jimmy", "He was a good boy", DeckEnum.RAVAGER, 7, 2, -1);    
 		deck = new Deck(commander.getClassType());
@@ -157,7 +157,7 @@ public class CARD_TESTER_CLASS
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
 		
-		troop2.attack(troop1);
+		//troop2.attack(troop1);
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));

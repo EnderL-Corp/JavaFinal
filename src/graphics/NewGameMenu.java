@@ -95,7 +95,7 @@ public class NewGameMenu {
 		frame.getContentPane().add(log);
 		
 		info = new InfoPanel();
-		info.setBounds(1076, 259, 157, 271);
+		info.setBounds(966, 391, 267, 139);
 		frame.getContentPane().add(info);
 		
 		nxtPhase = new JButton("Next Phase");
