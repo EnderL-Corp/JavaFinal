@@ -25,7 +25,7 @@ import java.awt.event.ActionListener;
 public class GameMenu {
 
 	private ListenerFrame frame;
-	private BoardPanel board;
+	//private BoardPanel board;
 	private HandPanel hand;
 	private StatsPanel stats;
 	private DeckQuitPanel deck;
@@ -69,10 +69,10 @@ public class GameMenu {
 		frame.getContentPane().setLayout(null);
 			
 		
-		board = new BoardPanel();
+		/*board = new BoardPanel();
 		board.setBounds(341, 68, 480, 480);
 		frame.getContentPane().add(board);
-		board.repaint();
+		board.repaint();*/
 		
 		hand = new HandPanel();
 		hand.setBounds(147, 579, 922, 200);
