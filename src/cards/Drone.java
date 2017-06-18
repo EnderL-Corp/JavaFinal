@@ -43,6 +43,7 @@ public class Drone extends Troop
 			name = "Drone";
 			description = "Santi has to do this later";
 		}
+		te = enumName;
 	}
 	
 	/**

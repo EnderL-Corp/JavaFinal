@@ -28,15 +28,6 @@ public class Troop extends Entity
 	{
 		super(tag);
 		abilities = new boolean[6];
-		if(abilities[1] == true)
-			deflectTime = true;
-		else
-			deflectTime = false;
-		
-		if(abilities[4] == true)
-			mirrorTime = true;
-		else
-			mirrorTime = false;
 	}
 	
 	/**
