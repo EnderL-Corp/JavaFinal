@@ -30,6 +30,7 @@ public class Dragon extends Troop
 		abilities[2] = true;
 		name = "Dragon";
 		description = "Santi has to do this later";
+		te = enumName;
 	}
 	
 	/**

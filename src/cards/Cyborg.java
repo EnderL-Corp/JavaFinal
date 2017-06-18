@@ -74,6 +74,16 @@ public class Cyborg extends Troop
 			name = "Cyborg";
 			description = "Santi has to do this later";
 		}
+		te = enumName;
+		if(abilities[1] == true)
+			deflectTime = true;
+		else
+			deflectTime = false;
+		
+		if(abilities[4] == true)
+			mirrorTime = true;
+		else
+			mirrorTime = false;
 	}
 	
 	/**
