@@ -84,6 +84,7 @@ public class Troop extends Entity
 			if((abilities[2] == true || abilities[3] == true) && (abs == 2 || abs == 3)) // makes sure you dont have blast and range
 				return false;
 			abilities[abs] = true;
+			updateDescription();
 			return true;
 		}
 		return false;

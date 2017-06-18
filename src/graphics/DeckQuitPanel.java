@@ -32,6 +32,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Game.game.getGameMainMenu().getFrame().setVisible(true);
+		Game.game.disconnect();
 		Game.game.getGameMenu().getFrame().setVisible(false);
 		Game.game.getGameMenu().getFrame().dispose();
 	}
