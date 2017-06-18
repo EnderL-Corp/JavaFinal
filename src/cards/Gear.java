@@ -30,26 +30,7 @@ public class Gear extends Structure
 	{
 		super("" + gEnum, "");
 		gearEnum = gEnum;
-		switch(gEnum) {
-		case ELECTROMAGNET:
-			formattedName = "Electromagnet";
-			break;
-		case EXPLOSIVES:
-			formattedName = "Explosives";
-			break;
-		case LAUNCHER:
-			formattedName = "Launcher";
-			break;
-		case MIRROR:
-			formattedName = "Mirror";
-			break;
-		case SHIELD:
-			formattedName = "Shield";
-			break;
-		case SPEED_BOOST:
-			formattedName = "Speed Boost";
-			break;
-		}
+		
 	}
 	
 	/**

@@ -124,6 +124,7 @@ public class GameMenu {
 		amp.refresh();
 		stats.statRefresh();
 		frame.requestFocus();
+		deck.deckRefresh();
 	}
 
 	public JFrame getFrame() {
