@@ -61,8 +61,6 @@ public class Amplifier extends Structure implements java.io.Serializable
 				break;
 			}
 		}
-		
-		Game.game.updateAmpPanel(this, false);
 	}
 	
 	public void updateDescription() {
