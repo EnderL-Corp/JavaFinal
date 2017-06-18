@@ -1,8 +1,5 @@
 package graphics;
 
-
-
-
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
@@ -14,30 +11,29 @@ import cards.Structure;
 import cards.Technique;
 import cards.Troop;
 
-
-public class InfoPanel  extends JPanel {
+public class InfoPanel extends JPanel {
 	private JTextPane stats;
 
-
-	public InfoPanel(){
+	public InfoPanel() {
 		stats = new JTextPane();
 		stats.setEditable(false);
 	}
-	public void newDisplay(Card c){
-		if(c instanceof Troop){
-			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + ((Troop) c).getCurrentApCost() + "\n Health : " + 
-		((Entity) c).getCurrentHealth() + "\n Attack : " + ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());
-		}
-		else if(c instanceof Commander){
-			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : " + 
-					((Entity) c).getCurrentHealth() + "\n Attack : " + ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());			
-		}
-		else if(c instanceof Technique){
-			stats.setText("Name : " + c.getName() + "\n TP : " + ((Technique) c).getTpCost() + "\n Description : " + c.getDescription());
-	    }
-		else if(c instanceof Structure){
-			stats.setText("Name : " + c.getName() + "\n Description : " + c.getDescription());
-	    }
 
-}
+	public void newDisplay(Card c) {
+		if (c instanceof Troop) {
+			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : "
+					+ ((Troop) c).getCurrentApCost() + "\n Health : " + ((Entity) c).getCurrentHealth() + "\n Attack : "
+					+ ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());
+		} else if (c instanceof Commander) {
+			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : "
+					+ ((Entity) c).getCurrentHealth() + "\n Attack : " + ((Entity) c).getCurrentAttack()
+					+ "\n Description : " + c.getDescription());
+		} else if (c instanceof Technique) {
+			stats.setText("Name : " + c.getName() + "\n TP : " + ((Technique) c).getTpCost() + "\n Description : "
+					+ c.getDescription());
+		} else if (c instanceof Structure) {
+			stats.setText("Name : " + c.getName() + "\n Description : " + c.getDescription());
+		}
+
+	}
 }

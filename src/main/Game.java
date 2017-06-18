@@ -22,6 +22,8 @@ import cards.Troop;
 import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
+import graphics.NewGameMenu;
+import graphics.NewMainMenu;
 import rmi.ClientInfo;
 import rmi.GameClient;
 import rmi.GameServer;
@@ -45,7 +47,7 @@ public class Game extends GameClient implements Serializable {
 	private Commander commander;
 	private Deck deck;
 	private Color playerColor;
-	private GameMenu gameMenu;
+	private NewGameMenu gameMenu;
 
 	private char currentPlayerAction;
 	private List<Card> queuedPlayerActions;
@@ -117,7 +119,7 @@ public class Game extends GameClient implements Serializable {
 			updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
 		}
 		
-		gameMenu = new GameMenu();
+		gameMenu = new NewGameMenu();
 		gameMenu.getFrame().setVisible(true);
 	}
 	
@@ -192,7 +194,7 @@ public class Game extends GameClient implements Serializable {
 	}
 	
 	public static void main(String[] args) {
-		new MainMenu();
+		new NewMainMenu();
 	}
 	
 	public void drawCard()
@@ -434,5 +436,10 @@ public class Game extends GameClient implements Serializable {
 		}
 		currentPlayerAction = '\n';
 		clearPlayerActionQueue();
+	}
+	
+	public NewGameMenu getGameMenu()
+	{
+		return gameMenu;
 	}
 }

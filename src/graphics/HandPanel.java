@@ -1,17 +1,20 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Color;
+import javax.swing.JPanel;
 
-public class HandPanel extends JPanel implements ActionListener{
+import cards.Troop;
+import main.Game;
+
+public class HandPanel extends JPanel implements ActionListener {
 	public HandPanel() {
 		setBackground(Color.BLACK);
 		setLayout(null);
-		
+
 		JButton cardSlot1 = new JButton("Open Slot");
 		cardSlot1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -19,7 +22,7 @@ public class HandPanel extends JPanel implements ActionListener{
 		});
 		cardSlot1.setBounds(82, 11, 122, 177);
 		add(cardSlot1);
-		
+
 		JButton cardSlot2 = new JButton("Open Slot");
 		cardSlot2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -27,7 +30,7 @@ public class HandPanel extends JPanel implements ActionListener{
 		});
 		cardSlot2.setBounds(214, 11, 122, 177);
 		add(cardSlot2);
-		
+
 		JButton cardSlot3 = new JButton("Open Slot");
 		cardSlot3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -35,7 +38,7 @@ public class HandPanel extends JPanel implements ActionListener{
 		});
 		cardSlot3.setBounds(346, 11, 122, 177);
 		add(cardSlot3);
-		
+
 		JButton cardSlot4 = new JButton("Open Slot");
 		cardSlot4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -43,7 +46,7 @@ public class HandPanel extends JPanel implements ActionListener{
 		});
 		cardSlot4.setBounds(478, 11, 122, 177);
 		add(cardSlot4);
-		
+
 		JButton cardSlot5 = new JButton("Open Slot");
 		cardSlot5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -51,7 +54,7 @@ public class HandPanel extends JPanel implements ActionListener{
 		});
 		cardSlot5.setBounds(610, 11, 122, 177);
 		add(cardSlot5);
-		
+
 		JButton cardSlot6 = new JButton("Open Slot");
 		cardSlot6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,8 +65,8 @@ public class HandPanel extends JPanel implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) 
+	{
+		Game.game.getGameMenu().getInfo().newDisplay(new Troop(0));
 	}
 }

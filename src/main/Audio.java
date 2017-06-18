@@ -104,6 +104,9 @@ public class Audio extends Thread
 		} 
 	}
 	
+	/**
+	 * Plays Main Menu Music
+	 */
 	public void mainMenuMusic()
 	{
 		try 

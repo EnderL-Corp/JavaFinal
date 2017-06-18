@@ -17,6 +17,15 @@ import java.awt.Font;
 public class NewGameMenu {
 
 	private JFrame frame;
+	private JPanel board;
+	private HandPanel hand;
+	private StatsPanel stats;
+	private DeckQuitPanel deck;
+	private AmpPanel amp;
+	private CommandLog log;
+	private InfoPanel info;
+	private JButton nxtPhase;
+	
 
 	/**
 	 * Launch the application.
@@ -45,50 +54,50 @@ public class NewGameMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		try {
-			Game.game = new Game();
-			Game.game.init(DeckEnum.DJ);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		//try {
+		//	Game.game = new Game();
+		//	Game.game.init(DeckEnum.DJ);
+		//} catch (RemoteException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+
 		frame = new ListenerFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel board = new JPanel();
+		board = new JPanel();
 		board.setBounds(341, 68, 480, 480);
 		frame.getContentPane().add(board);
 		board.repaint();
 		
-		HandPanel hand = new HandPanel();
+		hand = new HandPanel();
 		hand.setBounds(147, 579, 922, 200);
 		frame.getContentPane().add(hand);
 		
-		StatsPanel stats = new StatsPanel();
+		stats = new StatsPanel();
 		stats.setBounds(1079, 541, 157, 178);
 		frame.getContentPane().add(stats);
 		
-		DeckQuitPanel deck = new DeckQuitPanel();
+		deck = new DeckQuitPanel();
 		deck.setBounds(1079, 790, 157, 59);
 		frame.getContentPane().add(deck);
 		
-		AmpPanel amp = new AmpPanel();
+		amp = new AmpPanel();
 		amp.setBounds(10, 648, 127, 201);
 		frame.getContentPane().add(amp);
 		
-		CommandLog log = new CommandLog();
+		log = new CommandLog();
 		log.setBounds(147, 790, 922, 59);
 		log.init();
 		frame.getContentPane().add(log);
 		
-		JPanel info = new JPanel();
+		info = new InfoPanel();
 		info.setBounds(1076, 259, 157, 271);
 		frame.getContentPane().add(info);
 		
-		JButton nxtPhase = new JButton("Next Phase");
+		nxtPhase = new JButton("Next Phase");
 		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
 		nxtPhase.setBounds(1079, 730, 157, 49);
 		frame.getContentPane().add(nxtPhase);
@@ -100,4 +109,42 @@ public class NewGameMenu {
 		 */
 		
 	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public JPanel getBoard() {
+		return board;
+	}
+
+	public HandPanel getHand() {
+		return hand;
+	}
+
+	public StatsPanel getStats() {
+		return stats;
+	}
+
+	public DeckQuitPanel getDeck() {
+		return deck;
+	}
+
+	public AmpPanel getAmp() {
+		return amp;
+	}
+
+	public CommandLog getLog() {
+		return log;
+	}
+
+	public InfoPanel getInfo() {
+		return info;
+	}
+
+	public JButton getNxtPhase() {
+		return nxtPhase;
+	}
+	
+	
 }
