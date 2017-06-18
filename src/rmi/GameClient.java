@@ -18,23 +18,14 @@ import javax.swing.Timer;
  *
  */
 public abstract class GameClient implements Serializable, ActionListener {
-	
 	private static final long serialVersionUID = -6238246696085178736L;
-
 	protected boolean connected = false;
-	
 	private int tag = 2, serverPort = 1099;
-	
 	protected GameServerInterface remoteServer;
-	
 	private String name, serverIP, serverName;
-	
 	protected static Registry serverRegistry;
-	
 	protected Timer timer;
-	
 	protected ClientInfo clientInfo, otherClientInfo;
-	
 	public GameClient() throws RemoteException {
 		
 	}

@@ -10,6 +10,10 @@ public class ClientInfo implements java.io.Serializable {
 		this.tag = tag;
 	}
 
+	/**
+	 * Method to get the tag of the client from which it is from.
+	 * @return the tag
+	 */
 	public int getTag() {
 		return tag;
 	}	

@@ -17,19 +17,13 @@ import cards.Entity;
  */
 public class GameServer extends UnicastRemoteObject implements GameServerInterface{
 	private static final long serialVersionUID = 1L;
-	
 	private int port, numConnections = 0;
 	private ArrayList<ClientInfo> clients = new ArrayList<ClientInfo>();
-	
 	protected static Registry myRegistry;
-	
 	protected String myIP = "127.0.0.1";
-	
 	protected String name = "", otherIP, otherName, recentClientName = "";
-	
 	private Entity[][] board = new Entity[15][15];
 	private int turnTag = 0;
-	
 	private ClientInfo winner = null;
 	
 	public GameServer() throws RemoteException {

@@ -9,6 +9,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class Utilities {
+	/**
+	 * Static method for image overlay. Images must be in JavaFinal/Sprites/.
+	 * @author Srihari Subramanian
+	 * @param imageA the underlying image
+	 * @param imageB the image to overlay
+	 * @return An ImageIcon representing the image.
+	 */
 	public static ImageIcon combineImages(String imageA, String imageB) {
 		BufferedImage image = null;
 		BufferedImage overlay = null;
