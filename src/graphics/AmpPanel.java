@@ -11,8 +11,11 @@ import cards.Amplifier;
 import cards.MovePoint;
 import cards.Amplifier.AmpEnum;
 import main.Game;
+
 /**
- * This is the panel where amplifiers are put into play, they do nothing until placed here
+ * This is the panel where amplifiers are put into play, they do nothing until
+ * placed here
+ * 
  * @author Santiago Callegari(appearance), Luke
  */
 public class AmpPanel extends JPanel implements ActionListener {
@@ -60,54 +63,39 @@ public class AmpPanel extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
-		if(a.equals("Sac"))
-		{
+		if (a.equals("Sac")) {
 			int x = 0;
-			for(int i = 0; i < 5; i++)
-			{
-				if(Game.game.getAmpArray()[i] != null)
-				{
+			for (int i = 0; i < 5; i++) {
+				if (Game.game.getAmpArray()[i] != null) {
 					x++;
 					Game.game.addToGraveyard(Game.game.getAmpArray()[i]);
 				}
-				if(x >= 2)
-				{
+				if (x >= 2) {
 					break;
 				}
 			}
-		}
-		else if(Game.game.getAmpAt(Integer.parseInt(a)) == null)
-		{
+		} else if (Game.game.getAmpAt(Integer.parseInt(a)) == null) {
 			Game.game.addToPlayerActionQueue(new Amplifier(AmpEnum.NONE));
-		}
-		else
-		{
-			((JButton)e.getSource()).setText(Game.game.getAmpAt(Integer.parseInt(a)).getName());
+		} else {
+			((JButton) e.getSource()).setText(Game.game.getAmpAt(Integer.parseInt(a)).getName());
 			Game.game.addToPlayerActionQueue(Game.game.getAmpAt(Integer.parseInt(a)));
 			Game.game.getGameMenu().getInfo().newDisplay(Game.game.getAmpAt(Integer.parseInt(a)));
 		}
 	}
-	
+
 	public void refresh() {
-		for(int i = 0; i < 5; i++)
-		{
-			if(Game.game.getAmpArray()[i] == null)
-			{
+		for (int i = 0; i < 5; i++) {
+			if (Game.game.getAmpArray()[i] == null) {
 				buttons[i].setText("Open");
-			}
-			else
-			{
+			} else {
 				buttons[i].setText(Game.game.getAmpArray()[i].getName());
 			}
 		}
-		if(Game.game.getAmpArray()[0] != null && Game.game.getAmpArray()[1] != null && Game.game.getAmpArray()[2] != null 
-				&& Game.game.getAmpArray()[3] != null && Game.game.getAmpArray()[4] != null 
-				&& Game.game.getAmpArray()[5] != null)
-		{
+		if (Game.game.getAmpArray()[0] != null && Game.game.getAmpArray()[1] != null
+				&& Game.game.getAmpArray()[2] != null && Game.game.getAmpArray()[3] != null
+				&& Game.game.getAmpArray()[4] != null && Game.game.getAmpArray()[5] != null) {
 			sac.setEnabled(true);
-		}
-		else
-		{
+		} else {
 			sac.setEnabled(false);
 		}
 	}

@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 
 /**
  * For logging what the other client has done in a panel.
+ * 
  * @author Santiago Callegari, Srihari Subramanian
  *
  */
@@ -20,11 +21,10 @@ public class CommandLog extends JPanel {
 
 	public CommandLog() {
 		log = new JTextArea();
-		scroll = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		setLayout(new BorderLayout());
 	}
-	
+
 	public void init() {
 		log.setEditable(false);
 		scroll.setBounds(super.getBounds());
@@ -37,7 +37,7 @@ public class CommandLog extends JPanel {
 		log.append("\nRefreshing...");
 		repaint();
 	}
-	
+
 	public static void publish(String toLog) {
 		CommandLog.log.append("\n" + toLog);
 	}

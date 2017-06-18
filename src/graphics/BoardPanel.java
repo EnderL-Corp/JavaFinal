@@ -21,8 +21,9 @@ import cards.Troop;
 import main.Game;
 
 /**
- * Panel representing the most recent version of the board. A player whose turn it is can also 
- * interact with this board to change contents of board in game.
+ * Panel representing the most recent version of the board. A player whose turn
+ * it is can also interact with this board to change contents of board in game.
+ * 
  * @author Srihari Subramanian, Andre
  *
  */
@@ -31,11 +32,10 @@ public class BoardPanel extends JPanel implements ActionListener {
 	private JButton[][] buttons = new JButton[15][15];
 
 	public BoardPanel() {
-		/*for(int i = 0; i < buttons.length; i++) {
-			for(int j = 0; j < buttons[0].length; j++) {
-				buttons[i][j] = new BoardButton();
-			}
-		}*/
+		/*
+		 * for(int i = 0; i < buttons.length; i++) { for(int j = 0; j <
+		 * buttons[0].length; j++) { buttons[i][j] = new BoardButton(); } }
+		 */
 		setLayout(new GridLayout());
 		init();
 	}
@@ -87,29 +87,27 @@ public class BoardPanel extends JPanel implements ActionListener {
 					bb.setBackground(Color.WHITE);
 					bb.setIcon(null);
 					Entity e = Game.game.getEntityAt(i, j);
-					if(e != null && e instanceof Troop) {
-						bb.setIcon(((Troop)e).getIcon());
-						bb.setBackground(((Card)e).getTeamColor());
-					}
-					else if(e != null && e instanceof Commander) {
+					if (e != null && e instanceof Troop) {
+						bb.setIcon(((Troop) e).getIcon());
+						bb.setBackground(((Card) e).getTeamColor());
+					} else if (e != null && e instanceof Commander) {
 						bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
-						bb.setBackground(((Card)e).getTeamColor());
+						bb.setBackground(((Card) e).getTeamColor());
 					}
-							
+
 					bb.setBounds(i * tileWidth, j * tileHeight, tileWidth, tileHeight);
 				}
 			}
 		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
-		for(int i = 0; i < buttons.length; i++) {
-			for(int j = 0; j < buttons[0].length; j++) {
-				if(e.getSource() == buttons[i][j]) {
-					if(Game.game.getEntityAt(i, j) == null) {
+		for (int i = 0; i < buttons.length; i++) {
+			for (int j = 0; j < buttons[0].length; j++) {
+				if (e.getSource() == buttons[i][j]) {
+					if (Game.game.getEntityAt(i, j) == null) {
 						Game.game.addToPlayerActionQueue(new MovePoint(i, j));
-					}
-					else {
+					} else {
 						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
 						Game.game.getGameMenu().getInfo().newDisplay(Game.game.getEntityAt(i, j));
 					}

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 
 import main.Audio;
 import main.Game;
+
 /**
  * 
  * @author Santiago Callegari
@@ -42,9 +43,10 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 		Game.game.getGameMenu().getFrame().setVisible(false);
 		Game.game.getGameMenu().getFrame().dispose();
 	}
-/**
- * this is used to make the current card count accurate
- */
+
+	/**
+	 * this is used to make the current card count accurate
+	 */
 	public void deckRefresh() {
 		deckSize.setText("Deck size : " + Game.game.getDeck().size() + " / 26");
 		deckSize.setVisible(false);
