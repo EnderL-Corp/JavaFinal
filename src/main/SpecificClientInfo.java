@@ -4,16 +4,16 @@ import cards.Commander;
 import rmi.ClientInfo;
 
 /**
- * Class that provides some more specificity to ClientInfo by including player cp, ap, tp, commander and name
+ * Class that provides some more specificity to ClientInfo by including player
+ * cp, ap, tp, commander and name
  * @author Srihari Subramanian
- *
  */
 public class SpecificClientInfo extends ClientInfo {
 	private static final long serialVersionUID = -3083097241395170738L;
 	private int tag, cp, ap, tp;
 	private Commander commander;
 	private String name;
-	
+
 	/**
 	 * Construct a SpecificClientInfo
 	 * @param clientName Name of this client.
@@ -32,25 +32,20 @@ public class SpecificClientInfo extends ClientInfo {
 		ap = a;
 		tp = t;
 	}
-	
+
 	public int getCP() {
 		return cp;
 	}
-
 	public int getAP() {
 		return ap;
 	}
-
 	public int getTP() {
 		return tp;
 	}
-	
 	public Commander getCommander() {
 		return commander;
 	}
-	
 	public String getName() {
 		return name;
 	}
-
 }

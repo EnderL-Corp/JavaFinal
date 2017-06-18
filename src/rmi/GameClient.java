@@ -15,7 +15,6 @@ import javax.swing.Timer;
 /**
  * Abstract class representing any GameClient to a GameServer.
  * @author Srihari Subramanian
- *
  */
 public abstract class GameClient implements Serializable, ActionListener {
 	private static final long serialVersionUID = -6238246696085178736L;
@@ -26,12 +25,14 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected static Registry serverRegistry;
 	protected Timer timer;
 	protected ClientInfo clientInfo, otherClientInfo;
+
 	public GameClient() throws RemoteException {
-		
+
 	}
-	
+
 	/**
 	 * Use this constructor for multiple computer connection
+	 * 
 	 * @param tag Tag of this client
 	 * @param serverIP IP of other client
 	 * @param otherPort Port of other client
@@ -42,11 +43,11 @@ public abstract class GameClient implements Serializable, ActionListener {
 		this.tag = tag;
 		this.serverIP = serverIP;
 		serverName = "Server @" + serverIP;
-		//myClient = new ClientInfo(tag, serverIP, serverPort, serverName);
+		// myClient = new ClientInfo(tag, serverIP, serverPort, serverName);
 	}
-	
+
 	/**
-	 * Method used to connect this GameClient to a host GameServer.  
+	 * Method used to connect this GameClient to a host GameServer.
 	 * @return whether there was a successful connection or not.
 	 */
 	public boolean connectToServer() {
@@ -59,18 +60,17 @@ public abstract class GameClient implements Serializable, ActionListener {
 			remoteServer.connect(clientInfo);
 			System.out.println("Connected to server.");
 			connected = true;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-
-		if(connected) {
+		if (connected) {
 			timer = new Timer(1000, this);
 			timer.start();
 		}
 		return connected;
 	}
-	
+
 	/**
 	 * Get the tag of this client.
 	 * @return tag of this client
@@ -78,7 +78,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public int getTag() {
 		return tag;
 	}
-	
+
 	/**
 	 * Get connectivity status
 	 * @return connectivity
@@ -86,17 +86,15 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public boolean isConnected() {
 		return connected;
 	}
-	
+
 	/**
-	 * 
 	 * @return the name of this client
 	 */
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
-	 * 
 	 * @return the IP of this client
 	 */
 	public String getIP() {
