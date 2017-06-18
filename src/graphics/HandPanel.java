@@ -97,11 +97,11 @@ public class HandPanel extends JPanel {
 		{
 			if(Game.game.getHand().get(i) == null)
 			{
-				buttons[i].setText("Open");
+				buttons[i].setText("Open Slot");
 			}
 			else
 			{
-				buttons[i].setText(Game.game.getHand().get(i).getName());
+				buttons[i].setText(Game.game.getHand().get(i).getFormatedName());
 				Game.game.getHand().get(i).updateDescription();
 			}
 		}

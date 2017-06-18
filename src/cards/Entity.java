@@ -37,7 +37,6 @@ public abstract class Entity extends Card
 		xCoordinate = startPosX;
 		yCoordinate = startPosY;
 		TAG = tag;
-		formattedName = nm;
 	}
 
 	/**
@@ -69,6 +68,16 @@ public abstract class Entity extends Card
 	{
 		currentHealth += hp;
 		currentAttack += atk;
+		if(currentHealth <= 0)
+			kill(this);
+	}
+	
+	public void heal(int hp)
+	{
+		if(currentHealth + hp > health)
+			currentHealth = health;
+		else
+			modify(hp, 0);
 	}
 	
 	/**

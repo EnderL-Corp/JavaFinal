@@ -21,7 +21,8 @@ public class StatsPanel extends JPanel {
 		JTextPane key = new JTextPane();
 		key.setEditable(false);
 		key.setText("A : Toggles attack mode" + "\nM : Toggles move mode" + "\nP : Toggles play mode for troops"
-		+ "\nG : Toggles play mode for gear" + "\nT : Toggles play mode for techniques" + "\nS : Toggles play mode for structures");
+		+ "\nG : Toggles play mode for gear" + "\nT : Toggles play mode for techniques" + "\nS : Toggles play mode for structures" + 
+		" \nE : Cancel command and \nclear selection");
 
 
 		add(stats);

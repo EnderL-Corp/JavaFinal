@@ -465,10 +465,15 @@ public class Game extends GameClient implements Serializable {
 	 * of actions to act upon.
 	 */
 	public void checkPlayerActionQueue() {
-		if (queuedPlayerActions.size() == 2 && (currentPlayerAction != '\n' || currentPlayerAction != 'T')) {
+		System.out.println(currentPlayerAction);
+		if(currentPlayerAction == 'E') {
+			clearPlayerActionQueue();
+			currentPlayerAction = '\n';
+		} else if (queuedPlayerActions.size() == 2 && currentPlayerAction != '\n' && currentPlayerAction != 'T') {
 			executePlayerActionQueue();
 		} else if (currentPlayerAction == 'T' && queuedPlayerActions.get(0) instanceof Technique
 				&& queuedPlayerActions.size() == ((Technique) queuedPlayerActions.get(0)).getNumTargets() + 1) {
+			System.out.println("gay lemon");
 			executePlayerActionQueue();
 		}
 	}
@@ -482,7 +487,16 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void executePlayerActionQueue() {
 		Card first = queuedPlayerActions.get(0);
-		Card second = queuedPlayerActions.get(1);
+		Card second;
+		try
+		{
+			second = queuedPlayerActions.get(1);
+		}
+		catch (Exception e)
+		{
+			second = null;
+		}
+		
 		boardChanged = false;
 		if (myTurn) {
 			switch (currentPlayerAction) {
@@ -508,16 +522,24 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'T':
-					if (phase == 1 && first instanceof Technique && second instanceof Troop)
+					if (phase == 1 && first instanceof Technique)
 						if (((Technique) first).canCast(tp))
-							for (int i = 1; i < queuedPlayerActions.size(); i++)
-								if (queuedPlayerActions.get(i) instanceof Troop) {
-									((Technique) first).cast((Troop) second);
-									CommandLog.publish("[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
-									remoteServer.setRecentClientActionDescription(
-											"[Game] Opponent used technique " + first.getName() + " on Troop " + second.getName() + ".");
-									boardChanged = true;
-								}
+							if(queuedPlayerActions.size() > 1) {
+								for (int i = 1; i < queuedPlayerActions.size(); i++)
+									if (queuedPlayerActions.get(i) instanceof Troop) {
+										((Technique) first).cast((Troop)queuedPlayerActions.get(i));
+										if (queuedPlayerActions.get(i) instanceof Troop) {
+											CommandLog.publish(
+													"[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
+											boardChanged = true;
+											remoteServer.setRecentClientActionDescription(
+													"[Game] Opponent used technique " + first.getName() + " on Troop " + second.getName() + ".");
+										}
+									}
+							}
+							else
+								((Technique) first).cast(null);
+							
 					break;
 	
 				case 'G':

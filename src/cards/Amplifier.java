@@ -134,7 +134,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 						{
 							if(e.getTeamColor() == Game.game.getColor() && !(e instanceof Commander))
 							{
-								e.modify(1, 0);
+								e.heal(1);
 							}
 						}
 					}
