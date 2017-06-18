@@ -384,6 +384,23 @@ public class Game extends GameClient implements Serializable {
 		try {
 			remoteServer.endMyTurn();
 			CommandLog.publish("[Game] You have ended your turn.");
+			List<Amplifier> found = new ArrayList<Amplifier>();
+			for(int i = 0; i < 5; i++)
+			{
+				if(found.contains(ampPanel[i]) && (ampPanel[i].getAmpType() == AmpEnum.HEALING_WAVE || ampPanel[i].getAmpType() == AmpEnum.SHORT_CIRCUIT))
+				{
+					
+				}
+				else
+				{
+					ampPanel[i].effectBoard();
+					found.add(ampPanel[i]);
+				}
+			}
+			drawCard();
+			cp = deck.getCP();
+			ap = deck.getAP();
+			tp = deck.getTP();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
