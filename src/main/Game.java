@@ -24,8 +24,6 @@ import cards.TroopEnum;
 import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
-import graphics.NewGameMenu;
-import graphics.NewMainMenu;
 import rmi.ClientInfo;
 import rmi.GameClient;
 import rmi.GameServer;
@@ -48,7 +46,7 @@ public class Game extends GameClient implements Serializable {
 	private Commander commander;
 	private Deck deck;
 	private Color playerColor;
-	private NewGameMenu gameMenu;
+	private GameMenu gameMenu;
 
 	private char currentPlayerAction;
 	private List<Card> queuedPlayerActions;
@@ -120,7 +118,7 @@ public class Game extends GameClient implements Serializable {
 			updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
 		}
 		
-		gameMenu = new NewGameMenu();
+		gameMenu = new GameMenu();
 		gameMenu.getFrame().setVisible(true);
 	}
 	
@@ -221,7 +219,7 @@ public class Game extends GameClient implements Serializable {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new NewMainMenu();
+		new MainMenu();
 	}
 	
 	/**
@@ -298,10 +296,10 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if(winOrLose) {
 				remoteServer.gameOver(clientInfo);
-				GameMenu.log.publish("Congratulations, you won!");
+				gameMenu.getLog().publish("Congratulations, you won!");
 			}
 			else
-				GameMenu.log.publish("Sorry, you lost!");
+				gameMenu.getLog().publish("Sorry, you lost!");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -522,7 +520,7 @@ public class Game extends GameClient implements Serializable {
 		clearPlayerActionQueue();
 	}
 	
-	public NewGameMenu getGameMenu()
+	public GameMenu getGameMenu()
 	{
 		return gameMenu;
 	}

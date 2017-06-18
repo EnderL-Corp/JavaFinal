@@ -1,27 +1,31 @@
 package graphics;
 
-
 import java.awt.EventQueue;
+import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import cards.Deck.DeckEnum;
+import main.Game;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.awt.Font;
 
-/**
- * 
- * @author Santiago Callegari, Srihari Subramanian
- *
- */
-public class GameMenu implements java.io.Serializable{
-	private static final long serialVersionUID = -203776595464586989L;
-	
+public class GameMenu {
+
 	private JFrame frame;
-	public static CommandLog log;
 	private BoardPanel board;
-	private AmpPanel amps;
-	private JPanel panel;
+	private HandPanel hand;
+	private StatsPanel stats;
+	private DeckQuitPanel deck;
+	private AmpPanel amp;
+	private CommandLog log;
+	private InfoPanel info;
+	private JButton nxtPhase;
+	private JPanel background;
 	
 
 	/**
@@ -51,37 +55,102 @@ public class GameMenu implements java.io.Serializable{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//try {
+		//	Game.game = new Game();
+		//	Game.game.init(DeckEnum.DJ);
+		//} catch (RemoteException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+
 		frame = new ListenerFrame();
-		frame.setBounds(5, 5, 1280, 900);
+		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setResizable(false);
+		
+		board = new BoardPanel();
+		board.setBounds(341, 68, 480, 480);
+		frame.getContentPane().add(board);
+		board.repaint();
+		
+		hand = new HandPanel();
+		hand.setBounds(147, 579, 922, 200);
+		frame.getContentPane().add(hand);
+		
+		stats = new StatsPanel();
+		stats.setBounds(1079, 541, 157, 178);
+		frame.getContentPane().add(stats);
+		
+		deck = new DeckQuitPanel();
+		deck.setBounds(1079, 790, 157, 59);
+		frame.getContentPane().add(deck);
+		
+		amp = new AmpPanel();
+		amp.setBounds(10, 648, 127, 201);
+		frame.getContentPane().add(amp);
 		
 		log = new CommandLog();
+		log.setBounds(147, 790, 922, 59);
 		log.init();
 		frame.getContentPane().add(log);
 		
-		board = new BoardPanel();
-		board.setBounds(400, 25, 480, 480);
-		frame.getContentPane().add(board);
+		info = new InfoPanel();
+		info.setBounds(966, 391, 267, 139);
+		frame.getContentPane().add(info);
 		
-		amps = new AmpPanel();
-		amps.setBounds(25, 760, 400, 66);
-		frame.getContentPane().add(amps);
+		nxtPhase = new JButton("Next Phase");
+		nxtPhase.setFont(new Font("Tahoma", Font.BOLD, 20));
+		nxtPhase.setBounds(1079, 730, 157, 49);
+		frame.getContentPane().add(nxtPhase);
 		
-		panel = new JPanel();
-		panel.setBounds(0, 0, 1280, 850);
+		background = new JPanel();
+		background.setBounds(0, 0, 1280, 1024);
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
-		panel.add(wallpaper);
-		frame.getContentPane().add(panel);
+		background.add(wallpaper);
+		frame.getContentPane().add(background);
+		 
+		
 	}
 	
 	public void refresh() {
 		board.repaint();
 	}
-	
-	public JFrame getFrame()
-	{
+
+	public JFrame getFrame() {
 		return frame;
 	}
+
+	public JPanel getBoard() {
+		return board;
+	}
+
+	public HandPanel getHand() {
+		return hand;
+	}
+
+	public StatsPanel getStats() {
+		return stats;
+	}
+
+	public DeckQuitPanel getDeck() {
+		return deck;
+	}
+
+	public AmpPanel getAmp() {
+		return amp;
+	}
+
+	public CommandLog getLog() {
+		return log;
+	}
+
+	public InfoPanel getInfo() {
+		return info;
+	}
+
+	public JButton getNxtPhase() {
+		return nxtPhase;
+	}
+	
+	
 }

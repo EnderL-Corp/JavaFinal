@@ -1,22 +1,24 @@
 package graphics;
 
-import java.awt.FlowLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import main.Game;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 
-import main.Game;
+public class MainMenu implements ActionListener{
 
-public class MainMenu extends JFrame implements ActionListener {
-
-	private static final long serialVersionUID = 1L;
+	private JFrame frame;
 	JTextField ip;
 	JButton host;
 	JButton join;
@@ -24,42 +26,75 @@ public class MainMenu extends JFrame implements ActionListener {
 	
 	String writtenIP = "";
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-		new MainMenu();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainMenu window = new MainMenu();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
+	/**
+	 * Create the application.
+	 */
 	public MainMenu() {
-		super("Main Menu");
+		initialize();
+	}
 
-		setSize(1280, 1024);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
-		setLayout(new FlowLayout());
-
-		ip = new JTextField("Enter IP", 30);
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		
+		frame = new JFrame();
+		frame.setBounds(0, 0, 1280, 1024);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		ip = new JTextField();
+		ip.setFont(new Font("Tahoma", Font.BOLD, 20));
+		ip.setBounds(10, 174, 180, 52);
+		frame.getContentPane().add(ip);
+		ip.setColumns(10);
 		ip.setActionCommand("ip");
 		ip.addActionListener(this);
+		
 		host = new JButton("Host Game");
+		host.setFont(new Font("Tahoma", Font.BOLD, 20));
+		host.setBounds(10, 66, 180, 97);
+		frame.getContentPane().add(host);
 		host.setActionCommand("host");
 		host.addActionListener(this);
+		
 		join = new JButton("Join Game");
+		join.setFont(new Font("Tahoma", Font.BOLD, 20));
+		join.setBounds(10, 236, 180, 97);
+		frame.getContentPane().add(join);
 		join.setActionCommand("join");
 		join.addActionListener(this);
 		join.setEnabled(false);
+		
 		quit = new JButton("Quit Game");
+		quit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		quit.setBounds(10, 344, 180, 97);
+		frame.getContentPane().add(quit);
 		quit.setActionCommand("quit");
 		quit.addActionListener(this);
-
-		add(host);
-		add(join);
-		add(ip);
-		add(quit);
 		
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
-		add(wallpaper);
-		this.setVisible(true);
-	}
+		wallpaper.setBounds(0, 0, 1264, 985);
+		frame.getContentPane().add(wallpaper);
 
+		frame.setVisible(true);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
@@ -82,7 +117,4 @@ public class MainMenu extends JFrame implements ActionListener {
 			System.out.println("am quiting");
 			System.exit(0);
 		}
-
-	}
-
-}
+}}
