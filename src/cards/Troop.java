@@ -225,7 +225,12 @@ public class Troop extends Entity
 	}
 	
 	/**
-	 * ANDRE DO THIS
+	 *  <code> blastAttack(defender) </code> performs a "blast attack". First, it looks for where the defender 
+	 *  is in relation to itself. If the defender is at a diagonal, it can't blast attack diagonally, and so will
+	 *  either attack normally if defender is in range, or not attack at all if its not. For the actual blast
+	 *  attack, it looks at whether the defender is in a different row or a different column as the attacker. Then,
+	 *  It does damage to everything in that row/column (including those which are on the attackers side) starting 
+	 *  from the attacker (but not including it), and going until it hits the end of the array or a void troop.
 	 * @param defender
 	 */
 	public void blastAttack(Entity defender)
@@ -242,8 +247,13 @@ public class Troop extends Entity
 			colChange = -1;
 		//checking to see where in relation the defender is too attacker (direction wise)
 		
-		if(rowChange != 0 && colChange != 0)
-			return; //this means that the defender is diagonal, and you cant attack diagonal, so dont attack
+		if(rowChange != 0 && colChange != 0) //this means that the defender is diagonal, and you cant blastAttack diagonal, so perform a regular attack
+		{
+			if(Math.abs(defender.getPosX() - xCoordinate) == 1 && Math.abs(defender.getPosY() - yCoordinate) == 1)
+				dealDamage(defender); //if its in melee range, attack normally
+			else
+				return; //otherwise do nothing
+		}
 		
 		if(rowChange == 1 || rowChange == -1)
 		{
