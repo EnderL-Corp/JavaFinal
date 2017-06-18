@@ -18,7 +18,7 @@ import main.Game;
 public class AmpPanel extends JPanel implements ActionListener {
 
 	private JButton[] buttons = new JButton[5];
-	private JButton Sac;
+	private JButton sac;
 	private boolean sacActive = false;
 
 	public AmpPanel() {
@@ -41,19 +41,22 @@ public class AmpPanel extends JPanel implements ActionListener {
 		buttons[4] = new JButton("Open");
 		buttons[4].setActionCommand("4");
 		buttons[4].addActionListener(this);
-		Sac = new JButton("Sacrifice");
-		Sac.setActionCommand("Sac");
-		Sac.addActionListener(this);
+		sac = new JButton("Sacrifice");
+		sac.setActionCommand("Sac");
+		sac.addActionListener(this);
 
 		add(buttons[0]);
 		add(buttons[1]);
 		add(buttons[2]);
 		add(buttons[3]);
 		add(buttons[4]);
-		add(Sac);
+		add(sac);
 		setVisible(true);
 	}
 
+	/**
+	 * The action
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
@@ -96,6 +99,16 @@ public class AmpPanel extends JPanel implements ActionListener {
 			{
 				buttons[i].setText(Game.game.getAmpArray()[i].getName());
 			}
+		}
+		if(Game.game.getAmpArray()[0] != null && Game.game.getAmpArray()[1] != null && Game.game.getAmpArray()[2] != null 
+				&& Game.game.getAmpArray()[3] != null && Game.game.getAmpArray()[4] != null 
+				&& Game.game.getAmpArray()[5] != null)
+		{
+			sac.setEnabled(true);
+		}
+		else
+		{
+			sac.setEnabled(false);
 		}
 	}
 }
