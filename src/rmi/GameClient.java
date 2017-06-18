@@ -27,6 +27,10 @@ public abstract class GameClient implements Serializable, ActionListener {
 	protected Timer timer;
 	protected ClientInfo clientInfo, otherClientInfo;
 
+	/**
+	 * Required no-args constructor for RMI.
+	 * @throws RemoteException
+	 */
 	public GameClient() throws RemoteException {
 
 	}

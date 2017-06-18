@@ -27,6 +27,10 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private int turnTag = 0;
 	private ClientInfo winner = null;
 
+	/**
+	 * Required no-args constructor for RMI.
+	 * @throws RemoteException
+	 */
 	public GameServer() throws RemoteException {
 		super();
 	}

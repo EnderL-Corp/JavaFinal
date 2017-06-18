@@ -19,6 +19,7 @@ import cards.Gear;
 import cards.MovePoint;
 import cards.Technique;
 import cards.Troop;
+import graphics.CommandLog;
 import graphics.GameMenu;
 import graphics.MainMenu;
 import rmi.GameClient;
@@ -307,9 +308,9 @@ public class Game extends GameClient implements Serializable {
 		try {
 			if (winOrLose) {
 				remoteServer.gameOver(clientInfo);
-				gameMenu.getLog().publish("Congratulations, you won!");
+				CommandLog.publish("Congratulations, you won!");
 			} else
-				gameMenu.getLog().publish("Sorry, you lost!");
+				CommandLog.publish("Sorry, you lost!");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -446,15 +447,18 @@ public class Game extends GameClient implements Serializable {
 		if (myTurn) {
 			switch (currentPlayerAction) {
 				case 'M':
-					if (first instanceof Entity && second instanceof MovePoint)
-					ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
+					if (first instanceof Entity && second instanceof MovePoint) {
+						ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
+						CommandLog.publish("[Game] You are moving " + first.getName() + " to position " + ((MovePoint)second) + ".");
 						boardChanged = true;
+					}
 					break;
 	
 				case 'A':
 					if (first instanceof Entity && second instanceof Entity)
 						if (!(((Entity) first).hasAbility(3) && second instanceof Commander)) {
 							((Entity) first).attack((Entity) second);
+							CommandLog.publish("[Game] You, Entity " + first.getName() + ", are attacking Entity " + second.getName() + ".");
 							boardChanged = true;
 						}
 					break;
@@ -465,6 +469,7 @@ public class Game extends GameClient implements Serializable {
 							for (int i = 1; i < queuedPlayerActions.size(); i++)
 								if (queuedPlayerActions.get(i) instanceof Troop) {
 									((Technique) first).cast((Troop) second);
+									CommandLog.publish("[Game] You are using technique " + first.getName() + " on Troop " + second.getName() + ".");
 									boardChanged = true;
 								}
 					break;
@@ -472,6 +477,7 @@ public class Game extends GameClient implements Serializable {
 				case 'G':
 					if (first instanceof Gear && second instanceof Troop) {
 						((Gear) first).effect((Troop) second);
+						CommandLog.publish("[Game] You are using the Gear " + first.getName() + " on Troop " + second.getName() + ".");
 						boardChanged = true;
 					}
 					break;
@@ -480,17 +486,19 @@ public class Game extends GameClient implements Serializable {
 					if (first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
 						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint) second);
+						if(cp > ((Troop)first).getCpCost())
+							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
 						cp = Troop.placeOnBoard((Troop)first, cp);
 						boardChanged = true;
 					}
 					break;
 	
 				case 'S':
-					if (first instanceof Amplifier && second instanceof Amplifier
-							&& ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
+					if (first instanceof Amplifier && second instanceof Amplifier && ((Amplifier) second).getAmpType().equals(AmpEnum.NONE));
 						for (int i = 0; i < 5; i++)
 							if (getAmpAt(i) == second) {
 								updateAmpPanel((Amplifier) first, false);
+								CommandLog.publish("[Game] You are using placing the Amplifier " + first.getName() + ".");
 								boardChanged = true;
 							}
 					break;

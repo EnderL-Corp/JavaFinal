@@ -15,8 +15,8 @@ import javax.swing.JTextArea;
  */
 public class CommandLog extends JPanel {
 	private static final long serialVersionUID = -8782011634375723048L;
-	JTextArea log;
-	JScrollPane scroll;
+	private static JTextArea log;
+	private JScrollPane scroll;
 
 	public CommandLog() {
 		log = new JTextArea();
@@ -38,7 +38,7 @@ public class CommandLog extends JPanel {
 		repaint();
 	}
 	
-	public void publish(String toLog) {
-		log.append("\n" + toLog);
+	public static void publish(String toLog) {
+		CommandLog.log.append("\n" + toLog);
 	}
 }
