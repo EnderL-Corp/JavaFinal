@@ -1,13 +1,14 @@
 package main;
 
 import cards.Commander;
+import java.io.Serializable;
 
 /**
  * Class that provides some more specificity to ClientInfo by including player
  * cp, ap, tp, commander and name
  * @author Srihari Subramanian
  */
-public class ClientInfo {
+public class ClientInfo implements Serializable {
 	private static final long serialVersionUID = -3083097241395170738L;
 	private int tag, cp, ap, tp;
 	private Commander commander;
