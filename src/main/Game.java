@@ -5,23 +5,20 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cards.Amplifier;
+import cards.Amplifier.AmpEnum;
 import cards.Card;
 import cards.Commander;
 import cards.Deck;
 import cards.Deck.DeckEnum;
-import cards.Dragon;
 import cards.Entity;
 import cards.Gear;
-import cards.Mech;
 import cards.MovePoint;
-import cards.Structure;
 import cards.Technique;
 import cards.Troop;
-import cards.TroopEnum;
-import cards.Amplifier.AmpEnum;
 import graphics.GameMenu;
 import graphics.MainMenu;
 import rmi.GameClient;
@@ -517,5 +514,11 @@ public class Game extends GameClient implements Serializable {
 
 	public Amplifier[] getAmpArray() {
 		return ampPanel;
+	}
+	
+	public ArrayList<Card> shuffleDeck(ArrayList<Card> deck)
+	{	
+		Collections.shuffle(deck);
+		return deck;
 	}
 }
