@@ -493,15 +493,15 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'S':
 					if (first instanceof Amplifier && second instanceof Amplifier
-							&& ((Amplifier) second).getAmpType().equals(AmpEnum.NONE))
-						; {
-					for (int i = 0; i < 5; i++) {
-						if (getAmpAt(i) == second) {
-							updateAmpPanel((Amplifier) first, false);
-							boardChanged = true;
+							&& ((Amplifier) second).getAmpType().equals(AmpEnum.NONE)); 
+					{
+						for (int i = 0; i < 5; i++) {
+							if (getAmpAt(i) == second) {
+								updateAmpPanel((Amplifier) first, false);
+								boardChanged = true;
+							}
 						}
 					}
-				}
 					break;
 			}
 		}
