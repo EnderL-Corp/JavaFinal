@@ -172,13 +172,11 @@ public class BoardPanel extends JPanel implements ActionListener {
 		for(int i = 0; i < buttons.length; i++) {
 			for(int j = 0; j < buttons[0].length; j++) {
 				if(e.getSource() == buttons[i][j]) {
-					try
-					{
-						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
-					}
-					catch(NullPointerException ex)
-					{
+					if(Game.game.getEntityAt(i, j) == null) {
 						Game.game.addToPlayerActionQueue(new MovePoint(i, j));
+					}
+					else {
+						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
 					}
 				}
 			}
