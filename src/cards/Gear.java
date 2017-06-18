@@ -19,12 +19,21 @@ public class Gear extends Structure
 		SPEED_BOOST;
 	}
 	
+	/**
+	 * Gear is a boost placed on a troop to enhance it.
+	 * @param gEnum - The type of gear to create
+	 */
 	public Gear(GearEnum gEnum) 
 	{
 		super("" + gEnum, "Santi can do this");
 		gearEnum = gEnum;
 	}
 	
+	/**
+	 * <code>effect(effected)</code> adds the specified effect onto the effected Troop. 
+	 * @param Troop - The troop on which to place the gear
+	 * @return boolean - Whether or not the ability was added
+	 */
 	public boolean effect(Troop effected)
 	{
 		switch(gearEnum) 
