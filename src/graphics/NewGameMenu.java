@@ -17,7 +17,7 @@ import java.awt.Font;
 public class NewGameMenu {
 
 	private JFrame frame;
-	private JPanel board;
+	private BoardPanel board;
 	private HandPanel hand;
 	private StatsPanel stats;
 	private DeckQuitPanel deck;
@@ -67,7 +67,7 @@ public class NewGameMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		board = new JPanel();
+		board = new BoardPanel();
 		board.setBounds(341, 68, 480, 480);
 		frame.getContentPane().add(board);
 		board.repaint();
