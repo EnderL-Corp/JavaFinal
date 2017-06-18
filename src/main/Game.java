@@ -206,7 +206,7 @@ public class Game extends GameClient implements Serializable {
 			gs.createMyRegistry();
 			game = new Game(0, serverIP, 1099, Color.BLUE);
 			game.myTurn = true;
-			game.init(DeckEnum.RAVAGER);
+			game.init(DeckEnum.SWARM);
 			game.clientInfo = new ClientInfo(game.getName(), game.getCommander(), game.getTag(), game.cp, game.ap, game.tp);
 			game.connectToServer(game.clientInfo);
 		} catch (RemoteException e) {
@@ -531,8 +531,11 @@ public class Game extends GameClient implements Serializable {
 							if(ampPanel[i] == null)
 							{
 								updateAmpPanel((Amplifier) first, false);
+								addToGraveyard(first);
+								myHand.remove(first);
 								CommandLog.publish("[Game] You are using placing the Amplifier " + first.getName() + ".");
 								boardChanged = true;
+								break;
 							}
 						}
 					break;
