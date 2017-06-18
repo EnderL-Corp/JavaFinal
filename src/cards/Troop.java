@@ -127,14 +127,14 @@ public class Troop extends Entity
 	{
 		boolean canAttack = true;
 		
-		if(abilities[3] == false && Math.abs(defender.getPosX() - xCoordinate) != 1 && Math.abs(defender.getPosY() - yCoordinate) != 1)
+		if((abilities[3] == false && abilities[2] == false) && (Math.abs(defender.getPosX() - xCoordinate) > 1 || Math.abs(defender.getPosY() - yCoordinate) > 1))
 			return; //if not in range, don't attack (also cant attack self)
 		
-		for(int i = xCoordinate - 1; i < xCoordinate + 1; i++)
+		for(int i = xCoordinate - 1; i <= xCoordinate + 1; i++)
 		{
-			for(int j = yCoordinate - 1; j < yCoordinate + 1; j++)
+			for(int j = yCoordinate - 1; j <= yCoordinate + 1; j++)
 			{
-				if((i != xCoordinate && j != yCoordinate) && Game.game.getEntityAt(i,j)!= null && Game.game.getEntityAt(i,j).hasAbility(0) == true)
+				if(Game.game.getEntityAt(i,j) != null && Game.game.getEntityAt(i,j) != this && Game.game.getEntityAt(i,j).hasAbility(0))
 				{				
 					canAttack = false; //checks to see if there is any provoke troops adjacent to attacker
 				}
@@ -182,8 +182,8 @@ public class Troop extends Entity
 		{
 			if(gearArray.get(i) != null)
 			{
-			Game.game.addToGraveyard((Card)(new Gear(gearArray.get(i).getGearEnum())));
-			gearArray.remove(i);
+				Game.game.addToGraveyard((Card)(new Gear(gearArray.get(i).getGearEnum())));
+				gearArray.remove(i);
 			}
 		}
 	}
