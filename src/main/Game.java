@@ -166,6 +166,9 @@ public class Game extends GameClient implements Serializable {
 			phase = -1;
 			CommandLog.publish("[Game] Currently opponent's turn.");
 		}
+		if(!isHost) {
+			commander.setCoords(new MovePoint(13, 7));
+		}
 		gameMenu.getFrame().setVisible(true);
 	}
 
@@ -206,8 +209,10 @@ public class Game extends GameClient implements Serializable {
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
 				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
-					if(otherClientWaiter == 1)
+					if(otherClientWaiter == 2) {
+						System.out.println("Connected!!Connected!!Connected!!Connected!!Connected!!Connected!!Connected!!");
 						CommandLog.publish("Opponent has connected! Fight!");
+					}
 					if(!myTurn) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {

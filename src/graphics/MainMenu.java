@@ -17,14 +17,14 @@ import java.net.UnknownHostException;
 
 import javax.swing.JLabel;
 
-public class MainMenu implements ActionListener{
+public class MainMenu implements ActionListener {
 
 	private JFrame frame;
 	JTextField ip;
 	JButton host;
 	JButton join;
 	JButton quit;
-	
+
 	String writtenIP = "";
 
 	/**
@@ -55,12 +55,12 @@ public class MainMenu implements ActionListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		ip = new JTextField();
 		ip.setFont(new Font("Tahoma", Font.BOLD, 20));
 		ip.setBounds(10, 174, 180, 52);
@@ -68,14 +68,14 @@ public class MainMenu implements ActionListener{
 		ip.setColumns(10);
 		ip.setActionCommand("ip");
 		ip.addActionListener(this);
-		
+
 		host = new JButton("Host Game");
 		host.setFont(new Font("Tahoma", Font.BOLD, 20));
 		host.setBounds(10, 66, 180, 97);
 		frame.getContentPane().add(host);
 		host.setActionCommand("host");
 		host.addActionListener(this);
-		
+
 		join = new JButton("Join Game");
 		join.setFont(new Font("Tahoma", Font.BOLD, 20));
 		join.setBounds(10, 236, 180, 97);
@@ -83,26 +83,25 @@ public class MainMenu implements ActionListener{
 		join.setActionCommand("join");
 		join.addActionListener(this);
 		join.setEnabled(false);
-		
+
 		quit = new JButton("Quit Game");
 		quit.setFont(new Font("Tahoma", Font.BOLD, 20));
 		quit.setBounds(10, 344, 180, 97);
 		frame.getContentPane().add(quit);
 		quit.setActionCommand("quit");
 		quit.addActionListener(this);
-		
+
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
 		wallpaper.setBounds(0, 0, 1264, 985);
 		frame.getContentPane().add(wallpaper);
 
 		frame.setVisible(true);
 	}
-	
-	public JFrame getFrame()
-	{
+
+	public JFrame getFrame() {
 		return frame;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
@@ -129,4 +128,5 @@ public class MainMenu implements ActionListener{
 			System.out.println("am quiting");
 			System.exit(0);
 		}
-}}
+	}
+}
