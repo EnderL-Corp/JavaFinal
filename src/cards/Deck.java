@@ -26,6 +26,10 @@ public class Deck implements Serializable{
 		DJ;
 	}
 	
+	/**
+	 * Creats a deck based on the selected DeckEnum
+	 * @param deckEnum - The type of Deck to create
+	 */
 	public Deck(DeckEnum deckEnum) {
 		classType = deckEnum;
 		switch(deckEnum) {
