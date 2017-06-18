@@ -32,6 +32,7 @@ public class GameMenu {
 	private InfoPanel info;
 	private JButton nxtPhase;
 	private JPanel background;
+	private Audio gameMusic;
 	
 
 	/**
@@ -61,7 +62,7 @@ public class GameMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		new Audio("InGame");
+		gameMusic = new Audio("InGame");
 		frame = new ListenerFrame();
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,6 +109,11 @@ public class GameMenu {
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/JustEffects.png"));
 		background.add(wallpaper);
 		frame.getContentPane().add(background);
+	}
+	
+	public Audio getGameMusic()
+	{
+		return gameMusic;
 	}
 	
 	public void refresh() {
