@@ -65,31 +65,31 @@ public class Amplifier extends Structure implements java.io.Serializable
 		Game.game.updateAmpPanel(this, false);
 	}
 	
-	public String updateDescription() {
+	public void updateDescription() {
 		switch(currentEnum) 
 		{
 			case DRONESDAY_DEVICE:
 			{
-				return "The dronesday device spawns one drone at a random place on the map per turn"
+				description = "The dronesday device spawns one drone at a random place on the map per turn"
 						+ " per amplifier";
 			}
 			case OVERDRAW:
 			{
-				return "The overdraw amplifier allows the player to draw 1 extra card per amplifier";
+				description = "The overdraw amplifier allows the player to draw 1 extra card per amplifier";
 			}
 			case HEALING_WAVE:			
 			{
-				return "The healing wave amplifier heals every troop on your team on the field by one."
+				description = "The healing wave amplifier heals every troop on your team on the field by one."
 						+ " This amplifier requires 2 of itself to be built to activate its effect";
 			}
 			case SHORT_CIRCUIT:		
 			{
-				return "The short circuit amplifier damages every troop on the other team on the field by one."
+				description = "The short circuit amplifier damages every troop on the other team on the field by one."
 						+ " This amplifier requires 2 of itself to be built to activate its effect";
 			}
 			default:
 			{
-				return null;
+				description = null;
 			}
 		}
 	}
