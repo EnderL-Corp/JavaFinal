@@ -15,7 +15,6 @@ public class Troop extends Entity
 {
 	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void} 
 	protected boolean deflectTime, mirrorTime;
-	protected int currentApCost; //for the speed boost gear
 	protected static ArrayList<Gear> gearArray = new ArrayList<Gear>(); 
 	protected TroopEnum te;
 	protected String rootName;
@@ -38,8 +37,6 @@ public class Troop extends Entity
 			mirrorTime = true;
 		else
 			mirrorTime = false;
-		
-		currentApCost = apCost;
 	}
 	
 	/**
@@ -188,12 +185,12 @@ public class Troop extends Entity
 		}
 	}
 	
-	public int getCurrentApCost() {
-		return currentApCost;
+	public int getApCost() {
+		return apCost;
 	}
 
 	public void changeApCost(int ap) {
-		currentApCost += ap;
+		apCost += ap;
 	}
 	
 	public boolean[] getAbilities() {

@@ -23,7 +23,7 @@ public class InfoPanel extends JPanel {
 	public void newDisplay(Card c) {
 		if (c instanceof Troop) {
 			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : "
-					+ ((Troop) c).getCurrentApCost() + "\n Health : " + ((Entity) c).getCurrentHealth() + "\n Attack : "
+					+ ((Troop) c).getApCost() + "\n Health : " + ((Entity) c).getCurrentHealth() + "\n Attack : "
 					+ ((Entity) c).getCurrentAttack() + "\n Description : " + c.getDescription());
 		} else if (c instanceof Commander) {
 			stats.setText("Name : " + c.getName() + "\n CP : " + ((Entity) c).getCpCost() + "\n AP : "
