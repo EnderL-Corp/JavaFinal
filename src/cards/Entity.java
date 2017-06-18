@@ -68,6 +68,8 @@ public abstract class Entity extends Card
 	{
 		currentHealth += hp;
 		currentAttack += atk;
+		if(currentHealth <= 0)
+			kill(this);
 	}
 	
 	/**
