@@ -2,6 +2,9 @@ package cards;
 
 import main.Game;
 
+/**
+ * @author André
+ */
 public class Amplifier extends Structure implements java.io.Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +20,10 @@ public class Amplifier extends Structure implements java.io.Serializable
 		NONE;
 	}
 	
+	/**
+	 * An Amplifier gives a boost to your team in various different ways. These ways are determined AmpEnum
+	 * @param ampEnum - ampEnum determines the type of the amplifier from the ampEnum list.
+	 */
 	public Amplifier(AmpEnum ampEnum) 
 	{
 		super("" + ampEnum, "Santi has to do this later");
@@ -58,6 +65,11 @@ public class Amplifier extends Structure implements java.io.Serializable
 		Game.game.updateAmpPanel(this, false);
 	}
 	
+	/**
+	 * <code> effectBoard() </code> is how the Amplifier effects the game. When the method is called, it is first checked as to
+	 *  whether the required number of the amplifier exists, since some require 2 to be placed. The method
+	 *  then loops through the different AmpEnums and does the appropriate action
+	 */
 	public void effectBoard()
 	{
 		if(reqMet())
@@ -69,7 +81,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 					boolean placed = false;
 					while(placed == false)
 					{
-						placed = Game.game.placeEntity( (Entity)(new Drone((int)(Math.random() * 15), (int)(Math.random() * 15), Game.game.getTag(), TroopEnum.X)) );
+						placed = Game.game.placeEntity((Entity)(new Drone((int)(Math.random() * 15), (int)(Math.random() * 15), Game.game.getTag(), TroopEnum.X)) );
 					}
 					break;
 				}
@@ -106,10 +118,19 @@ public class Amplifier extends Structure implements java.io.Serializable
 					}					
 					break;
 				}
+				default:
+				{
+					break;
+				}
 			}
 		}
 	}
 
+	/**
+	 * <code> reqMet() </code> Determines whether or not the amplifier has the correct amount of it required
+	 * to run
+	 * @return True or False - The Amplifier has the correct number to run
+	 */
 	public boolean reqMet()
 	{
 		int numberFound = 0;
@@ -117,7 +138,7 @@ public class Amplifier extends Structure implements java.io.Serializable
 			return true;
 		else
 		{
-			for(int i = 0; i < 4; i++)
+			for(int i = 0; i < 5; i++)
 			{
 				if(Game.game.getAmpAt(i).getName() == this.getName())
 				{
@@ -132,6 +153,10 @@ public class Amplifier extends Structure implements java.io.Serializable
 		return false;
 	}
 	
+	/**
+	 * <code> sacrifice() </code> moves the selected amplifier to the Graveyard and then updates the Amplifier Panel
+	 * to hold an empty Amplifier (For selection purposes)
+	 */
 	public void sacrifice()
 	{
 		Game.game.addToGraveyard((Card)this);
@@ -139,6 +164,9 @@ public class Amplifier extends Structure implements java.io.Serializable
 		Game.game.updateAmpPanel(new Amplifier(AmpEnum.NONE),  false);
 	}
 	
+	/** 
+	 * @return AmpEnum - The type of Amplifer
+	 */
 	public AmpEnum getAmpType()
 	{
 		return currentEnum;
