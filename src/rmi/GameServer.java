@@ -88,11 +88,17 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 	
+	/*
+	 * The following are RMI methods that are documented in GameServerInterface
+	 */
+	
+	@Override
 	public synchronized void connect(ClientInfo l) throws RemoteException {
 		clients.add(l);
 		numConnections++;
 	}
 	
+	@Override
 	public synchronized int getConnections() {
 		return numConnections;
 	}

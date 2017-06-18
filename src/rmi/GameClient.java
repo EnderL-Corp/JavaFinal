@@ -25,22 +25,13 @@ public abstract class GameClient implements Serializable, ActionListener {
 	
 	private int tag = 2, serverPort = 1099;
 	
-	/**
-	 * Please do not change the value of remoteServer or  
-	 * set to null. It is protected for ease of access.
-	 */
 	protected GameServerInterface remoteServer;
 	
 	private String name, serverIP, serverName;
 	
-	/**
-	 * Please do not change the value of serverRegistry or  
-	 * set to null. It is protected for ease of access.
-	 */
 	protected static Registry serverRegistry;
 	
 	protected Timer timer;
-	//protected ClientInfo myClient;
 	
 	protected ClientInfo clientInfo, otherClientInfo;
 	
