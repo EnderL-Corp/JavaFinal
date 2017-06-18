@@ -104,7 +104,7 @@ public abstract class Entity extends Card
 			if(defender.canMirror())
 			{
 				fx = new Audio("FX", "Mirror");
-				currentHealth -= defender.getCurrentAttack() / 2;
+				currentHealth -= currentAttack / 2;
 			}
 			if(defender.canDeflect())
 			{

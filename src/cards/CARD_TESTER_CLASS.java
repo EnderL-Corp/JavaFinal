@@ -3,6 +3,7 @@ package cards;
 import java.rmi.RemoteException;
 
 import cards.Deck.DeckEnum;
+import cards.Gear.GearEnum;
 import cards.Technique.TechEnum;
 import main.Game;
 
@@ -126,7 +127,6 @@ public class CARD_TESTER_CLASS
 	
 	public static void mileStone3()
 	{
-		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
 		try {
 			Game.game = new Game();
 		} catch (RemoteException e) { 
@@ -135,7 +135,10 @@ public class CARD_TESTER_CLASS
 		}
 		Game.game.init(DeckEnum.RAVAGER);
 		
+		
+		
 		//Blast and Provoke testing
+		
 		
 		Entity drone1 = new Drone(2, 5, 1, null);
 		Entity drone2 = new Drone(3, 5, 2, null);
@@ -144,15 +147,16 @@ public class CARD_TESTER_CLASS
 		Entity drone5 = new Drone(1, 6, 5, null);
 		Entity troop1 = new Android(4, 4, 6, TroopEnum.DUMMY);
 		Entity troop2 = new Dragon(3, 4, 7, null);
-		
+		/*
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone2);
 		Game.game.placeEntity(drone3);
 		Game.game.placeEntity(drone4);
 		Game.game.placeEntity(drone5);
 		Game.game.placeEntity(troop1);
+		*/
 		Game.game.placeEntity(troop2);
-		
+		/*
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(4, 4) + "\t" + Game.game.getEntityAt(3, 4));
 		//should display Drone, Drone, Drone, Drone, Drone, Android, Dragon
@@ -188,11 +192,14 @@ public class CARD_TESTER_CLASS
 		//should be the same as above, because the dragon cant attack diagonally if out of range
 		
 		System.out.println("\n");
+		
+		
 		//Range and Provoke testing
 		
-		Entity troop3 = new Android(3, 6, 1, TroopEnum.DUMMY);
-		Entity troop4 = new Cyborg(2, 7, 2, TroopEnum.RANGER);
-		
+		*/
+		Troop troop3 = new Android(3, 6, 8, TroopEnum.DUMMY);
+		Entity troop4 = new Cyborg(2, 7, 9, TroopEnum.RANGER);
+		/*
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone4);
 		Game.game.placeEntity(troop3);
@@ -224,12 +231,58 @@ public class CARD_TESTER_CLASS
 		
 		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
 		+ "\t" + Game.game.getEntityAt(3, 7) + "\t" + Game.game.getEntityAt(1, 6) + "\t" + Game.game.getEntityAt(3, 4));
-		//should display null, Cyborg, null, null, null, Dragon, because Dragon and Cyborg are the only onees left
+		//should display null, Cyborg, null, null, null, Dragon, because Dragon and Cyborg are the only ones left
+		
+		*/
+		
+		//Deflect and Mirror testing
+		
+		
+		Troop troop6 = new Cyborg(2, 5, 11, null);
+		
+		Game.game.placeEntity(drone2);
+		Game.game.placeEntity(troop3);
+		Game.game.placeEntity(troop4);
+		Game.game.placeEntity(troop6);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(2, 7) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 4));
+		
+		System.out.println(troop6.getCurrentHealth());
+		
+		troop2.attack(troop6);
+		
+		System.out.println(troop6.getCurrentHealth());
+		
+		troop6 = new Cyborg(2, 5, 11, null);
+		Game.game.placeEntity(troop6);
+		troop6.addAbilities(1);
+		
+		troop2.attack(troop6);
+		
+		System.out.println(troop6.getCurrentHealth());
+		
+		troop2.attack(troop6);
+		
+		System.out.println(troop6.getCurrentHealth());
+		
+		troop3.addAbilities(4);
+		
+		System.out.println(drone2.getCurrentHealth() + "\t" + troop3.getCurrentHealth() + "\t" + troop2.getCurrentHealth());
+		
+		troop2.attack(drone2);
+		
+		System.out.println(drone2.getCurrentHealth() + "\t" + troop3.getCurrentHealth() + "\t" + troop2.getCurrentHealth());
+		
+		
+		//drone attack mirror cyborg, and kill self
+		//Dragon attack mirror drone and kill self, but drone survives
+		//dragon attack deflect cyborg, and take no damage
+		
 	}
 	
 	public static void mileStone4()
 	{
-		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
 		try {
 			Game.game = new Game();
 		} catch (RemoteException e) { 
