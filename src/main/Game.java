@@ -411,6 +411,7 @@ public class Game extends GameClient implements Serializable {
 	 */
 	public void addToPlayerActionQueue(Card c) {
 		queuedPlayerActions.add(c);
+		checkPlayerActionQueue();
 	}
 
 	public void clearPlayerActionQueue() {
@@ -431,7 +432,11 @@ public class Game extends GameClient implements Serializable {
 	}
 
 	/**
-	 * TODO add javadoc to this.
+	 * <code>executePlayerActionQueue()</code> is responsible for the movement, attacking, and placing of
+	 * Entities, as well as the placement of Gear, Amplifiers, and Techniques. The method gets the action
+	 * the player wants to execute from <code>currentPlayerAction</code> and then checks to see if the
+	 * selections made for that actions are appropriate. If they are, the correct method is run to do the
+	 * action of the Card.
 	 */
 	public void executePlayerActionQueue() {
 		Card first = queuedPlayerActions.get(0);
