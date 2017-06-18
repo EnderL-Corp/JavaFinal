@@ -81,7 +81,7 @@ public class Mech extends Troop
 	 * @return - The type of troop
 	 */
 	public String getTroopType() {
-		return "Human";
+		return "Mech";
 	}
 }
 
