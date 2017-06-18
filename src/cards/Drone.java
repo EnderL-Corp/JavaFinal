@@ -5,6 +5,7 @@ public class Drone extends Troop
 	public Drone(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
+		rootName = "Drone";
 		if(enumName == TroopEnum.X)
 		{
 			apCost = 1;

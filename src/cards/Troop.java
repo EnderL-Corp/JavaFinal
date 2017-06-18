@@ -1,8 +1,12 @@
 package cards;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import main.Game;
+import main.Utilities;
 
 public class Troop extends Entity
 {
@@ -11,11 +15,12 @@ public class Troop extends Entity
 	protected int currentApCost; //for the speed boost gear
 	protected static ArrayList<Gear> gearArray = new ArrayList<Gear>(); 
 	protected TroopEnum te;
+	protected String rootName;
 
 	public Troop(int tag) 
 	{
 		super(tag);
-		
+		abilities = new boolean[6];
 		if(abilities[1] == true)
 			deflectTime = true;
 		else
@@ -29,7 +34,16 @@ public class Troop extends Entity
 		currentApCost = apCost;
 	}
 	
-	
+	/**
+	 * @return the path to both this Troop and its overlaying troop type.
+	 */
+	public ImageIcon getIcon() {
+		if(te != null) {
+			return Utilities.combineImages(rootName, name);
+		}
+		else
+			return new ImageIcon("Sprites/" + rootName);
+	}
 	
 	/**
 	 * @param abs - the index of the ability i.e. 1 for deflect, or 5 for void (see above)

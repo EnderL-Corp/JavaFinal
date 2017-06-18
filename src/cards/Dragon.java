@@ -6,7 +6,7 @@ public class Dragon extends Troop
 	public Dragon(int posX, int posY, int tag, TroopEnum enumName)
 	{
 		super(tag);
-		abilities = new boolean[6];
+		rootName = "Dragon";
 		apCost = 10;
 		cpCost = 15;
 		attack = 10;
