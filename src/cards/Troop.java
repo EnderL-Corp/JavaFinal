@@ -8,6 +8,11 @@ import javax.swing.ImageIcon;
 import main.Game;
 import main.Utilities;
 
+/**
+ * 
+ * @author André, Luke
+ *
+ */
 public class Troop extends Entity
 {
 	protected boolean[] abilities; //in this order: {provoke, deflect, blast, range, mirror, void} 
@@ -17,6 +22,11 @@ public class Troop extends Entity
 	protected TroopEnum te;
 	protected String rootName;
 
+	/**
+	 * Creates a troop, the most common unit in the game, placed
+	 * onto the board from the Player's hand
+	 * @param tag - The tag of the Troop
+	 */
 	public Troop(int tag) 
 	{
 		super(tag);
@@ -35,7 +45,7 @@ public class Troop extends Entity
 	}
 	
 	/**
-	 * @return the path to both this Troop and its overlaying troop type.
+	 * @return ImageIcon - The path to both this Troop and its overlaying troop type.
 	 */
 	public ImageIcon getIcon() {
 		if(te != null) {
@@ -46,8 +56,8 @@ public class Troop extends Entity
 	}
 	
 	/**
-	 * @param abs - the index of the ability i.e. 1 for deflect, or 5 for void (see above)
-	 * @return boolean - whether or not the ability was added
+	 * @param abs - The index of the ability (i.e. 1 for deflect, or 5 for void [see above])
+	 * @return boolean - Whether or not the ability was added
 	 */
 	public boolean addAbilities(int abs)
 	{
@@ -66,6 +76,12 @@ public class Troop extends Entity
 		return false;
 	}
 
+	/**
+	 * <code>canDeflect()</code> determines whether or not a Troop can deflect an attack.
+	 * A troop can only deflect once per turn, so if the troop can deflect, it will,
+	 * and its ability to deflect is set to false until next turn
+	 * @return boolean - Whether or not the troop can deflect at the moment
+	 */
 	public boolean canDeflect()
 	{
 		if(deflectTime == true)
@@ -76,6 +92,12 @@ public class Troop extends Entity
 		return false;
 	}
 	
+	/**
+	 * <code>canMirror()</code> determines whether or not a Troop can mirror an attack.
+	 * A troop can only mirror once per turn, so if the troop can mirror, it will,
+	 * and its ability to mirror is set to false until next turn
+	 * @return boolean - Whether or not the troop can mirror at the moment
+	 */
 	public boolean canMirror()
 	{
 		if(mirrorTime == true)
@@ -86,11 +108,23 @@ public class Troop extends Entity
 		return false;
 	}
 	
+	/**
+	 * @param int - the ability to check for (i.e. 1 for deflect, or 5 for void [see above])
+	 * @return boolean - Whether or not the troop has the specified ability
+	 */
 	public boolean hasAbility(int num)
 	{
 		return abilities[num];
 	}
 	
+	/**
+	 * <code>attack(defender)</code> attempts to make the Troop attack the defender. 
+	 * The method checks to see if the defender is at most 1 tile away (unless the
+	 * attacker has range) and if any troop adjacent to the attacker has provoke.
+	 * If the attack is valid, this method then calls <code>dealDamage(defender)</code>
+	 * or <code>blastAttack(defender)</code> if the attacker has blast.
+	 * @param Entity - The Entity to Attack
+	 */
 	public void attack(Entity defender)
 	{
 		boolean canAttack = true;
@@ -136,6 +170,11 @@ public class Troop extends Entity
 		}
 	}
 
+	/**
+	 * <code> kill(killed) </code> moves a specified "dead" entity to the graveyard.
+	 * The code then moves any gear that troop possessed to the graveyard as well.
+	 * @param Entity - The killed Entity
+	 */
 	public void kill(Entity killed) 
 	{
 		Game.game.addToGraveyard((Card)killed);
@@ -163,6 +202,12 @@ public class Troop extends Entity
 		return abilities;
 	}
 	
+	/**
+	 * Places a Troop on the board at its position
+	 * @param Troop - The Troop to place
+	 * @param int - The amount of Creature Points the Player has
+	 * @return int - The amount of Creature Points the Player has left
+	 */
 	public static int placeOnBoard(Troop placed, int cp)
 	{
 		if(cp < placed.getCpCost() || Game.game.getEntityAt(placed.getPosX(), placed.getPosY()) != null)
@@ -171,16 +216,28 @@ public class Troop extends Entity
 		return cp - placed.getCpCost();
 	}
 	
+	/**
+	 * Adds gear onto a troop
+	 * @param gear - The gear to add
+	 */
 	public static void equipGear(Gear gear)
 	{
 		gearArray.add(gear);
 	}
 	
+	/**
+	 * Moves a troop to a specified point
+	 * @param MovePoint - The point to which the troop should move
+	 */
 	public void setCoords(MovePoint mp) {
 		xCoordinate = mp.getX();
 		yCoordinate = mp.getY();
 	}
 	
+	/**
+	 * ANDRE DO THIS
+	 * @param defender
+	 */
 	public void blastAttack(Entity defender)
 	{
 		int rowChange = 0;
