@@ -182,19 +182,35 @@ public class Troop extends Entity
 		if(rowChange != 0 && colChange != 0)
 			return; //this means that the defender is diagonal, and you cant attack diagonal, so dont attack
 		
-		for(int row = xCoordinate; row < 15 && row > -1; row += rowChange)
+		if(rowChange == 1 || rowChange == -1)
 		{
-			for(int col = yCoordinate; col < 15 && col > -1; col += colChange)
+			for(int row = xCoordinate; row < 15 && row > -1; row += rowChange)
 			{
-				if(Game.game.getEntityAt(row,col)!= null)
+				if(Game.game.getEntityAt(row, yCoordinate)!= null)
 				{
-					if(Game.game.getEntityAt(row,col).hasAbility(5) == false)
+					if(Game.game.getEntityAt(row, yCoordinate).hasAbility(5) == false)
 					{
 						dealDamage(defender);
 					}
 					else
 					{
 						row = 15;
+					}
+				}
+			}
+		}
+		else if(colChange == 1 || colChange == -1)
+		{
+			for(int col = yCoordinate; col < 15 && col > -1; col += colChange)
+			{
+				if(Game.game.getEntityAt(xCoordinate, col)!= null)
+				{
+					if(Game.game.getEntityAt(xCoordinate, col).hasAbility(5) == false)
+					{
+						dealDamage(defender);
+					}
+					else
+					{
 						col = 15;
 					}
 				}
