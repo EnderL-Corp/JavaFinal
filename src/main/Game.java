@@ -522,8 +522,8 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'T':
-					if (phase == 1 && first instanceof Technique)
-						if (((Technique) first).canCast(tp))
+					if (phase == 1 && first instanceof Technique) { 
+						if (((Technique) first).canCast(tp)) {
 							if(queuedPlayerActions.size() > 1) {
 								for (int i = 1; i < queuedPlayerActions.size(); i++)
 									if (queuedPlayerActions.get(i) instanceof Troop) {
@@ -539,8 +539,11 @@ public class Game extends GameClient implements Serializable {
 							}
 							else
 								((Technique) first).cast(null);
-							
-					break;
+							}
+							addToGraveyard(first);
+							myHand.remove(first);
+						}
+						break;
 	
 				case 'G':
 					if (phase == 0 && first instanceof Gear && second instanceof Troop) {
