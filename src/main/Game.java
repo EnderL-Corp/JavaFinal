@@ -133,7 +133,7 @@ public class Game extends GameClient implements Serializable {
 		queuedPlayerActions = new ArrayList<Card>();
 		System.out.println(myHand);
 		gameMenu = new GameMenu();
-		CommandLog.publish("Loading information...");
+		CommandLog.publish("[Game] Loading information...");
 		if(myTurn) {
 			phase = 0;
 			CommandLog.publish("[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
@@ -311,8 +311,9 @@ public class Game extends GameClient implements Serializable {
 	
 	public ArrayList<Card> emptyGraveyard() 
     {
+		ArrayList<Card> tempGraveyard = graveyard;
         graveyard = new ArrayList<Card>();
-        return graveyard;
+        return tempGraveyard;
     }
 
 	/**
@@ -623,6 +624,8 @@ public class Game extends GameClient implements Serializable {
 						}
 					break;
 			}
+		} else {
+			CommandLog.publish("[Game] It is currently not your turn.");
 		}
 		currentPlayerAction = '\n';
 		clearPlayerActionQueue();
