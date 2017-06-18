@@ -11,7 +11,7 @@ import javax.sound.sampled.Clip;
 /**
  * @author Luke
  * Runs audio, based on the name of the thread. Legal names are 
- * "MenuMusic", "Game Music", "FX"
+ * "MenuMusic", "InGame", "FX"
  * If running FX, a second String is required, legal arguments are "Blast", "Deflect", "Melee", "Mirror", "Range"
  */
 public class Audio extends Thread
