@@ -58,7 +58,6 @@ public class NewMainMenu implements ActionListener{
 		frame.setBounds(0, 0, 1280, 1024);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
 		
 		ip = new JTextField();
 		ip.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -93,6 +92,8 @@ public class NewMainMenu implements ActionListener{
 		JLabel wallpaper = new JLabel(new ImageIcon("Sprites/unknown.png"));
 		wallpaper.setBounds(0, 0, 1264, 985);
 		frame.getContentPane().add(wallpaper);
+
+		frame.setVisible(true);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
