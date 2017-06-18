@@ -37,6 +37,7 @@ public abstract class Entity extends Card
 		xCoordinate = startPosX;
 		yCoordinate = startPosY;
 		TAG = tag;
+		formattedName = nm;
 	}
 
 	/**

@@ -34,30 +34,35 @@ public class Amplifier extends Structure implements java.io.Serializable
 			{
 				numberNeededForReq = 1;
 				currentEnum = ampEnum;
+				formattedName = "Dronesday Device";
 				break;
 			}
 			case OVERDRAW:
 			{
 				numberNeededForReq = 1;
 				currentEnum = ampEnum;
+				formattedName = "Overdraw";
 				break;
 			}
 			case HEALING_WAVE:			
 			{
 				numberNeededForReq = 2;
 				currentEnum = ampEnum;
+				formattedName = "Healing Wave";
 				break;
 			}
 			case SHORT_CIRCUIT:		
 			{
 				numberNeededForReq = 2;
 				currentEnum = ampEnum;
+				formattedName = "Short Circuit";
 				break;
 			}
 			case NONE:
 			{
 				numberNeededForReq = 0;
 				currentEnum = ampEnum;
+				formattedName = "None";
 				break;
 			}
 		}
