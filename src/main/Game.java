@@ -452,8 +452,7 @@ public class Game extends GameClient implements Serializable {
 		if (myTurn) {
 			switch (currentPlayerAction) {
 				case 'M':
-					if (first instanceof Entity && second instanceof MovePoint)
-						; {
+					if (first instanceof Entity && second instanceof MovePoint) {
 					ap = Entity.move(((Entity) first), ap, ((MovePoint) second).getX(), ((MovePoint) second).getY());
 					boardChanged = true;
 				}
