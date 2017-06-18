@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import cards.Card;
 import cards.Entity;
+import main.ClientInfo;
 
 /**
  * An RMI Server that allows for a connection between multiple GameClients.

@@ -9,6 +9,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 import cards.Card;
+import main.ClientInfo;
 
 import javax.swing.Timer;
 
@@ -50,13 +51,12 @@ public abstract class GameClient implements Serializable, ActionListener {
 	 * Method used to connect this GameClient to a host GameServer.
 	 * @return whether there was a successful connection or not.
 	 */
-	public boolean connectToServer() {
+	public boolean connectToServer(ClientInfo clientInfo) {
 		try {
 			System.out.println("Server: " + serverName);
 			serverRegistry = LocateRegistry.getRegistry(serverIP, serverPort);
 			System.out.println("Looking for " + serverName);
 			remoteServer = (GameServerInterface) serverRegistry.lookup(serverName);
-			clientInfo = new ClientInfo(tag);
 			remoteServer.connect(clientInfo);
 			System.out.println("Connected to server.");
 			connected = true;

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import cards.Card;
 import cards.Entity;
+import main.ClientInfo;
 
 /**
  * Interface so that the client can "interface" with the running server.
