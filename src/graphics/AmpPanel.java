@@ -1,5 +1,6 @@
 package graphics;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ public class AmpPanel extends JPanel implements ActionListener {
 	private boolean sacActive = false;
 
 	public AmpPanel() {
+		setBackground(new Color(0, 0, 0, 0));
 		// add a phat layout
 		Amp1 = new JButton("open");
 		Amp1.setActionCommand("Amp1");
@@ -90,18 +92,15 @@ public class AmpPanel extends JPanel implements ActionListener {
 			Amp5.setText("open");
 			sacActive = false;
 		} else if (a.equals("Sac")) {
+			if ((Amp1.getText() != "Amp1") && (Amp2.getText() != "Amp2") && (Amp3.getText() != "Amp3")
+					&& (Amp5.getText() != "Amp5") && (Amp4.getText() != "Amp4")) {
+				Amp1.setEnabled(true);
+				Amp2.setEnabled(true);
+				Amp3.setEnabled(true);
+				Amp4.setEnabled(true);
+				Amp5.setEnabled(true);
+				sacActive = true;
+			}
 		}
-		if ((Amp1.getText() != "Amp1") && (Amp2.getText() != "Amp2") && (Amp3.getText() != "Amp3")
-				&& (Amp5.getText() != "Amp5") && (Amp4.getText() != "Amp4")) {
-			Amp1.setEnabled(true);
-			Amp2.setEnabled(true);
-			Amp3.setEnabled(true);
-			Amp4.setEnabled(true);
-			Amp5.setEnabled(true);
-			sacActive = true;
-
-		}
-
 	}
-
 }

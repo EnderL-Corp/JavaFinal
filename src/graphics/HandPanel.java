@@ -14,7 +14,7 @@ import main.Game;
 
 public class HandPanel extends JPanel implements ActionListener {
 	public HandPanel() {
-		setBackground(Color.BLACK);
+		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
 
 		JButton cardSlot1 = new JButton("Open Slot");

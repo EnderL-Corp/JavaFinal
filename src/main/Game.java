@@ -51,7 +51,7 @@ public class Game extends GameClient implements Serializable {
 
 	private char currentPlayerAction;
 	private List<Card> queuedPlayerActions;
-	public Amplifier[] ampPanel = new Amplifier[5];
+	private Amplifier[] ampPanel = new Amplifier[5];
 	
 	private int ap;
 	private int cp;
