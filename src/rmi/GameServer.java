@@ -154,7 +154,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 
 	@Override
 	public ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException {
-		if(clients.get(0).getTag() == thisClient.getTag())
+		if(clients.get(0).getTag() == thisClient.getTag() && clients.size() > 1)
 			return clients.get(1);
 		else
 			return clients.get(0);
