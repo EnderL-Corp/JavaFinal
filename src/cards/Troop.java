@@ -122,14 +122,14 @@ public class Troop extends Entity
 
 	public void kill(Entity killed) 
 	{
-		Game.game.addToGraveyard(killed);
+		Game.game.addToGraveyard((Card)killed);
 		Game.game.getBoard()[killed.xCoordinate][killed.yCoordinate] = null;
 		
 		for(int i = gearArray.size(); i > 0; i --)
 		{
 			if(gearArray.get(i) != null)
 			{
-			Game.game.addToGraveyard(new Gear(gearArray.get(i).getGearEnum()));
+			Game.game.addToGraveyard((Card)(new Gear(gearArray.get(i).getGearEnum())));
 			gearArray.remove(i);
 			}
 		}

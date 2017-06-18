@@ -163,4 +163,9 @@ public class Technique extends Card
 	{
 		return numberOfTargets;
 	}
+	
+	public void sendToGraveyard()
+	{
+		Game.game.addToGraveyard((Card)this);
+	}
 }

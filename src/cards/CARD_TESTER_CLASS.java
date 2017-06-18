@@ -28,10 +28,10 @@ public class CARD_TESTER_CLASS
 	
 	public static void main(String[] args)
 	{
-		mileStone1();
-		mileStone2();
+		//mileStone1();
+		//mileStone2();
 		mileStone3();
-		mileStone4();
+		//mileStone4();
 	}
 
 	public static void mileStone1()
@@ -126,11 +126,54 @@ public class CARD_TESTER_CLASS
 	
 	public static void mileStone3()
 	{
+		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
+		try {
+			Game.game = new Game();
+		} catch (RemoteException e) { 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Game.game.init(DeckEnum.RAVAGER);
 		
+		Entity drone1 = new Drone(2, 5, 1, TroopEnum.X);
+		Entity drone2 = new Drone(3, 5, 2, TroopEnum.X);
+		Entity drone3 = new Drone(3, 6, 3, TroopEnum.X);
+		Entity drone4 = new Drone(3, 7, 4, TroopEnum.X);
+		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
+		Entity troop2 = new Dragon(3, 4, 1, null);
+		
+		Game.game.placeEntity(drone1);
+		Game.game.placeEntity(drone2);
+		Game.game.placeEntity(drone3);
+		Game.game.placeEntity(drone4);
+		Game.game.placeEntity(troop1);
+		Game.game.placeEntity(troop2);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+				+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(drone3);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
+		
+		troop2.attack(troop1);
+		
+		System.out.println(Game.game.getEntityAt(2, 5) + "\t" + Game.game.getEntityAt(3, 5) + "\t" + Game.game.getEntityAt(3, 6)
+		+ "\t" + Game.game.getEntityAt(3, 7)+ "\t" + Game.game.getEntityAt(4, 4)+ "\t" + Game.game.getEntityAt(3, 4));
 	}
 	
 	public static void mileStone4()
 	{
+		CARD_TESTER_CLASS cardTesterClass = new CARD_TESTER_CLASS();
+		try {
+			Game.game = new Game();
+		} catch (RemoteException e) { 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 	
