@@ -1,7 +1,9 @@
 package cards;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
+import cards.Amplifier.AmpEnum;
 import cards.Deck.DeckEnum;
 import cards.Gear.GearEnum;
 import cards.Technique.TechEnum;
@@ -19,7 +21,7 @@ public class CARD_TESTER_CLASS
 	
 	public CARD_TESTER_CLASS()
 	{
-		commander =  new Commander("Jimmy", "He was a good boy", DeckEnum.RAVAGER, 7, 2, -1);    
+		commander =  new Commander("Jimmy", "He was a good boy", DeckEnum.RAVAGER, 7, 2);    
 		deck = new Deck(commander.getClassType());
 		ap = 12;
 		cp = 12;
@@ -31,13 +33,13 @@ public class CARD_TESTER_CLASS
 	{
 		//mileStone1();
 		//mileStone2();
-		mileStone3();
-		//mileStone4();
+		//mileStone3();
+		mileStone4();
 	}
 
 	public static void mileStone1()
 	{
-		Entity troop2 = new Dragon(3, 4, 1, null);
+		Entity troop2 = new Dragon(3, 4, null);
 		
 		System.out.println("" + troop2.getCurrentHealth() + " " + troop2.getCurrentAttack());
 		//should return 10 10, as a dragon has 10 health and 10 attack
@@ -65,8 +67,8 @@ public class CARD_TESTER_CLASS
 
 		//CP Testing
 
-		Entity troop1 = new Android(4, 4, 0, TroopEnum.DUMMY);
-		Entity troop2 = new Dragon(3, 4, 1, null);
+		Entity troop1 = new Android(4, 4, TroopEnum.DUMMY);
+		Entity troop2 = new Dragon(3, 4, null);
 		
 		System.out.println(cardTesterClass.getCp());
 		//the cp that the player has should be 12 to start out
@@ -140,13 +142,13 @@ public class CARD_TESTER_CLASS
 		//Blast and Provoke testing
 		
 		
-		Entity drone1 = new Drone(2, 5, 1, null);
-		Entity drone2 = new Drone(3, 5, 2, null);
-		Entity drone3 = new Drone(3, 6, 3, TroopEnum.X);
-		Entity drone4 = new Drone(3, 7, 4, TroopEnum.X);
-		Entity drone5 = new Drone(1, 6, 5, null);
-		Entity troop1 = new Android(4, 4, 6, TroopEnum.DUMMY);
-		Entity troop2 = new Dragon(3, 4, 7, null);
+		Entity drone1 = new Drone(2, 5, null);
+		Entity drone2 = new Drone(3, 5, null);
+		Entity drone3 = new Drone(3, 6, TroopEnum.X);
+		Entity drone4 = new Drone(3, 7, TroopEnum.X);
+		Entity drone5 = new Drone(1, 6, null);
+		Entity troop1 = new Android(4, 4, TroopEnum.DUMMY);
+		Entity troop2 = new Dragon(3, 4, null);
 		
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone2);
@@ -196,8 +198,8 @@ public class CARD_TESTER_CLASS
 		//Range and Provoke testing
 		
 		
-		Troop troop3 = new Android(3, 6, 8, TroopEnum.DUMMY);
-		Entity troop4 = new Cyborg(2, 7, 9, TroopEnum.RANGER);
+		Troop troop3 = new Android(3, 6, TroopEnum.DUMMY);
+		Entity troop4 = new Cyborg(2, 7, TroopEnum.RANGER);
 		
 		Game.game.placeEntity(drone1);
 		Game.game.placeEntity(drone4);
@@ -238,7 +240,7 @@ public class CARD_TESTER_CLASS
 		//Deflect and Mirror testing
 		
 		
-		Troop troop6 = new Cyborg(2, 5, 11, null);
+		Troop troop6 = new Cyborg(2, 5, null);
 		
 		Game.game.placeEntity(drone2);
 		Game.game.placeEntity(troop3);
@@ -253,7 +255,7 @@ public class CARD_TESTER_CLASS
 		System.out.println(troop6.getCurrentHealth());
 		//should snow return -7 (its dead), since the dragon does 10 damage to its 3 health
 		
-		troop6 = new Cyborg(2, 5, 11, null);
+		troop6 = new Cyborg(2, 5, null);
 		Game.game.placeEntity(troop6);
 		troop6.addAbilities(1);
 		//respawned cyborg and gave it deflect
@@ -281,11 +283,6 @@ public class CARD_TESTER_CLASS
 		System.out.println(drone2.getCurrentHealth() + "\t" + troop3.getCurrentHealth() + "\t" + troop2.getCurrentHealth());
 		//should return -9, 3 (because the dragon's blast attacked both the drone and the android), 5 (because the dragon's health is 10, and its attack is 10 also.
 		//When it attacks android, because android had mirror, the dragon should take half its attack in damage (10 / 2 = 5), so it should take 5 damage, and should have 5 health)
-		
-		//drone attack mirror cyborg, and kill self
-		//Dragon attack mirror drone and kill self, but drone survives
-		//dragon attack deflect cyborg, and take no damage
-		
 	}
 	
 	public static void mileStone4()
@@ -296,8 +293,22 @@ public class CARD_TESTER_CLASS
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Game.game.init(DeckEnum.RAVAGER);
 		
+		System.out.println(Game.game.getGraveyard());
+		//should display [], since there is not yet anything in the graveyard
 		
+		Game.game.addToGraveyard(new Human(0,0,null));
+		//adding a troop
+		Game.game.addToGraveyard(new Technique(TechEnum.CHAIN_SHOT));
+		//adding a technique
+		Game.game.addToGraveyard(new Gear(GearEnum.EXPLOSIVES));
+		//adding a gear
+		Game.game.addToGraveyard(new Amplifier(AmpEnum.HEALING_WAVE));
+		//adding an amplifier
+		
+		System.out.println(Game.game.getGraveyard());
+		//should display [Human][Technique][Gear][Amplifier]
 		
 	}
 	
