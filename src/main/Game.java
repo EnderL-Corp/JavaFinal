@@ -667,7 +667,7 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'P':
 					if (phase == 0 && first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
-						if((getColor() == Color.CYAN && ((MovePoint)second).getX() <= territory) || (getColor() == Color.RED && ((MovePoint)second).getX() >= recentBoard.length - territory))
+						if((getColor() == Color.CYAN && ((MovePoint)second).getX() <= territory) || (getColor() == Color.RED && ((MovePoint)second).getX() >= recentBoard.length - territory - 1))
 						{
 							System.out.println("Placing Troop");
 							((Troop) first).setCoords((MovePoint)second);
