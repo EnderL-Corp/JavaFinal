@@ -9,25 +9,28 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * Static methods for image overlay. Images must be in JavaFinal/Sprites/.
+ * 
+ * @author Srihari Subramanian
+ * 
+ */
 public class Utilities {
+	
 	/**
-	 * Static method for image overlay. Images must be in JavaFinal/Sprites/.
-	 * 
-	 * @author Srihari Subramanian
-	 * @param imageA
-	 *            the underlying image
-	 * @param imageB
-	 *            the image to overlay
-	 * @return An ImageIcon representing the image.
+	 * Will return an ImageIcon of an overlay of Sprites/(imageA) and Sprites/(imageB)
+	 * @param imageA the String representing the image to overlay upon
+	 * @param imageB the String representing the image to overlay
+	 * @return the final image
 	 */
 	public static ImageIcon combineImages(String imageA, String imageB) {
 		BufferedImage image = null;
 		BufferedImage overlay = null;
+		
 		try {
 			image = ImageIO.read(new File("Sprites/" + imageA));
 			overlay = ImageIO.read(new File("Sprites/" + imageB));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -35,7 +38,6 @@ public class Utilities {
 		int h = Math.max(image.getHeight(), overlay.getHeight());
 		BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
-		// paint both images, preserving the alpha channels
 		Graphics g = combined.getGraphics();
 		g.drawImage(image, 0, 0, null);
 		g.drawImage(overlay, 0, 0, null);
@@ -43,15 +45,21 @@ public class Utilities {
 		return new ImageIcon(combined);
 	}
 
+	/**
+	 * Will return an ImageIcon of an overlay of imageA and Sprites/(imageB)
+	 * @param imageA the ImageIcon representing the image to overlay upon
+	 * @param imageB the String representing the image to overlay
+	 * @return the final image
+	 */
 	public static ImageIcon combineImages(ImageIcon imageA, String imageB) {
 		BufferedImage image = null;
 		BufferedImage overlay = null;
+		
 		try {
 			Image img = imageA.getImage();
 			image = (BufferedImage) image;
 			overlay = ImageIO.read(new File("Sprites/" + imageB));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
