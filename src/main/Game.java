@@ -204,6 +204,7 @@ public class Game extends GameClient implements Serializable {
 	 * changes in the board to the server when needed.
 	 */
 	public void actionPerformed(ActionEvent e) {
+		refreshBoard();
 		numPings++;
 		if (numPings == 1) { // Once connected, will get the most recent server
 								// information and will place its own commander
@@ -220,18 +221,13 @@ public class Game extends GameClient implements Serializable {
 			}
 			if (connected)
 				if (myTurn && boardChanged) {
-					sendRecentChanges(); // If it's your turn and the board was
-											// changed, update the server board
-											// info
+					sendRecentChanges();
 					boardChanged = false;
-				} else
-					refreshBoard();
+				}
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
-				if (otherClientWaiter > 1) { // Wait one seconds for the other
-												// client to update its info in
-												// the server
+				if (otherClientWaiter > 1) { 
 					if (!isHost) {
 						clientInfo.setCommander(commander);
 						remoteServer.updateInfo(clientInfo);

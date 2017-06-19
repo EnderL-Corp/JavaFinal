@@ -36,9 +36,15 @@ public class StatsPanel extends JPanel {
 	}
 
 	public void statRefresh() {
-		stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
-				+ Game.game.getOtherClient().getCommander().getHealth() + "\nCP :" + Game.game.getCP() + "\nTP :"
-				+ Game.game.getTP() + "\nAP :" + Game.game.getAP());
+		try {
+			stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
+					+ Game.game.getOtherClient().getCommander().getHealth() + "\nCP :" + Game.game.getCP() + "\nTP :"
+					+ Game.game.getTP() + "\nAP :" + Game.game.getAP());
+		} catch(Exception e) {
+			stats.setText("Your HP :" + Game.game.getCommander().getHealth() + "\nFoe's HP :"
+					+ "no" + "\nCP :" + Game.game.getCP() + "\nTP :"
+					+ Game.game.getTP() + "\nAP :" + Game.game.getAP());
+		}
 		repaint();
 	}
 
