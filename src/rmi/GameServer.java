@@ -27,7 +27,6 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private int turnTag = 0;
 	private ClientInfo winner = null;
 	private String recentClientActionDescription = "";
-	private int recentClientTag;
 
 	/**
 	 * Required no-args constructor for RMI.
@@ -136,7 +135,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		return winner;
 	}
 
-	public synchronized void updateInfo(ClientInfo newInfo) throws RemoteException {
+	public void updateInfo(ClientInfo newInfo) throws RemoteException {
 		for (int i = 0; i < clients.size(); i++) {
 			if (clients.get(i).getTag() == newInfo.getTag()) {
 				clients.set(i, newInfo);
@@ -151,23 +150,18 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return clients.get(0);
 	}
 
-	public synchronized void setRecentClientActionDescription(String s) throws RemoteException {
-		recentClientTag = turnTag;
+	public void setRecentClientActionDescription(String s) throws RemoteException{
 		recentClientActionDescription = s;
 	}
 
-	public synchronized String getRecentClientActionDescription() throws RemoteException {
+	public String getRecentClientActionDescription() throws RemoteException{
 		return recentClientActionDescription;
 	}
 	
-	public synchronized void disconnect(ClientInfo ci) throws RemoteException {
+	public void disconnect(ClientInfo ci) throws RemoteException {
 		for(int i = 0; i < clients.size(); i++)
 			if(clients.get(i).getTag() == ci.getTag())
 				clients.remove(i);
 		
-	}
-
-	public synchronized int getRecentClientTag() throws RemoteException {
-		return recentClientTag;
 	}
 }
