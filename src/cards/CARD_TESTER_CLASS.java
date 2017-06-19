@@ -1,7 +1,6 @@
 package cards;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import cards.Amplifier.AmpEnum;
 import cards.Deck.DeckEnum;

@@ -2,7 +2,6 @@ package graphics;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.JLabel;
 
 import cards.Card;
 import cards.Commander;

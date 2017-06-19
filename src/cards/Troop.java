@@ -1,6 +1,5 @@
 package cards;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;

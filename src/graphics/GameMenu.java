@@ -1,13 +1,11 @@
 package graphics;
 
 import java.awt.EventQueue;
-import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cards.Deck.DeckEnum;
 import main.Audio;
 import main.Game;
 

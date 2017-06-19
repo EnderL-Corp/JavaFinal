@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-
 import cards.Amplifier;
 import cards.Amplifier.AmpEnum;
 import cards.Card;

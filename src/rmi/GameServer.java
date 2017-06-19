@@ -7,7 +7,6 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import cards.Card;
 import cards.Entity;
 import main.ClientInfo;
 

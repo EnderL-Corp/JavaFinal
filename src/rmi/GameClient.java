@@ -2,13 +2,10 @@ package rmi;
 
 import java.awt.event.ActionListener;
 import java.io.Serializable;
-import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 
-import cards.Card;
 import main.ClientInfo;
 
 import javax.swing.Timer;

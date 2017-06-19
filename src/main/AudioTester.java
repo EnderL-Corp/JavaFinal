@@ -1,8 +1,3 @@
-/**
- * @author Luke
- * The tester for Milestone "Make audio play off events" - COMPLETED
- */
-
 package main;
 
 import java.awt.FlowLayout;
@@ -13,6 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+/**
+ * @author Luke
+ * The tester for Milestone "Make audio play off events" - COMPLETED
+ */
 public class AudioTester extends JFrame implements ActionListener {
 
 	Audio au = null;

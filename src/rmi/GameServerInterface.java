@@ -3,9 +3,7 @@ package rmi;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
-import cards.Card;
 import cards.Entity;
 import main.ClientInfo;
 

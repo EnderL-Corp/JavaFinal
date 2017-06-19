@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cards.Amplifier;
-import cards.MovePoint;
 import cards.Amplifier.AmpEnum;
 import main.Game;
 

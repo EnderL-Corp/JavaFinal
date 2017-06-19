@@ -8,9 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import cards.Card;
-import cards.Cyborg;
-import cards.Troop;
-import cards.TroopEnum;
 import main.Game;
 
 /**
