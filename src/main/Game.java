@@ -304,6 +304,9 @@ public class Game extends GameClient implements Serializable {
 		mainMenu = m;
 	}
 	
+	/**
+	 * Changes phase. -1 is opponents turn, 1 and 2 are the Player's turn and 2 ends the turn
+	 */
 	public void changePhase() {
 		phase = ++phase > 2 ? -1 : phase;
 		switch(phase) {
@@ -397,14 +400,12 @@ public class Game extends GameClient implements Serializable {
 			myTurn = false;
 			CommandLog.publish("[Game] You have ended your turn.");
 			List<Amplifier> found = new ArrayList<Amplifier>();
-			for(int i = 0; i < 5; i++)
-			{
-				if(found.contains(ampPanel[i]) && (ampPanel[i].getAmpType() == AmpEnum.HEALING_WAVE || ampPanel[i].getAmpType() == AmpEnum.SHORT_CIRCUIT))
-				{
+			for(int i = 0; i < 5; i++) {
+				if(ampPanel[i] == null) {
 					
-				}
-				else
-				{
+				} else if(found.contains(ampPanel[i]) && (ampPanel[i].getAmpType() == AmpEnum.HEALING_WAVE || ampPanel[i].getAmpType() == AmpEnum.SHORT_CIRCUIT)) {
+					
+				} else {
 					ampPanel[i].effectBoard();
 					found.add(ampPanel[i]);
 				}
