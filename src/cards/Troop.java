@@ -26,7 +26,6 @@ public class Troop extends Entity
 	 */
 	public Troop() 
 	{
-		super();
 		abilities = new boolean[6];
 	}
 	
