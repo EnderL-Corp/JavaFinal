@@ -112,7 +112,7 @@ public class MainMenu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String a = e.getActionCommand();
 		if (a.equals("host")) {
-			System.out.println("game hosting");
+			System.out.println("Hosting game...");
 			try {
 				Game.createHost(java.net.InetAddress.getLocalHost().getHostAddress());
 				Game.game.setGameMainMenu(this);
@@ -121,17 +121,17 @@ public class MainMenu implements ActionListener {
 				e1.printStackTrace();
 			}
 		} else if (a.equals("ip")) {
-			System.out.println("typing ip");
+			System.out.println("Typing ip...");
 			join.setEnabled(true);
 			writtenIP = ip.getText();
 			System.out.println(writtenIP);
 		} else if (a.equals("join")) {
-			System.out.println("searching for host");
+			System.out.println("Searching for host...");
 			Game.createClient(writtenIP);
 			Game.game.setGameMainMenu(this);
 			frame.setVisible(false);
 		} else if (a.equals("quit")) {
-			System.out.println("am quiting");
+			System.out.println("Shutting down...");
 			System.exit(0);
 		}
 	}
