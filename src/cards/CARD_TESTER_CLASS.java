@@ -33,8 +33,8 @@ public class CARD_TESTER_CLASS
 	{
 		//mileStone1();
 		//mileStone2();
-		//mileStone3();
-		mileStone4();
+		mileStone3();
+		//mileStone4();
 	}
 
 	public static void mileStone1()

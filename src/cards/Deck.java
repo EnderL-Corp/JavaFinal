@@ -50,6 +50,8 @@ public class Deck implements Serializable{
 			deck.add(new Android(0,0,TroopEnum.DUMMY));
 			deck.add(new Android(0,0,TroopEnum.DUMMY));
 			deck.add(new Android(0,0,TroopEnum.BLASTER));
+			deck.add(new Cyborg(0,0,TroopEnum.RANGER));
+			deck.add(new Cyborg(0,0,TroopEnum.RANGER));
 			deck.add(new Gear(GearEnum.SPEED_BOOST));
 			deck.add(new Gear(GearEnum.LAUNCHER));
 			deck.add(new Gear(GearEnum.LAUNCHER));
@@ -117,8 +119,6 @@ public class Deck implements Serializable{
 			deck.add(new Cyborg(0,0,null));
 			deck.add(new Cyborg(0,0,TroopEnum.DEFLECTOR));
 			deck.add(new Cyborg(0,0,TroopEnum.DEFLECTOR));
-			deck.add(new Cyborg(0,0,TroopEnum.RANGER));
-			deck.add(new Cyborg(0,0,TroopEnum.RANGER));
 			deck.add(new Cyborg(0,0,TroopEnum.BLASTER));
 			deck.add(new Gear(GearEnum.LAUNCHER));
 			deck.add(new Gear(GearEnum.LAUNCHER));

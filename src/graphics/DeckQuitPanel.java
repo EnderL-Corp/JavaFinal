@@ -25,7 +25,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 
 		setLayout(new FlowLayout());
 
-		deckSize = new JLabel("Deck size : " + Game.game.getDeck().size() + " / 26");
+		deckSize = new JLabel("Deck size : " + Game.game.getDeck().size() + " / 24");
 		add(deckSize);
 
 		quit = new JButton("Quit Game");
@@ -48,7 +48,7 @@ public class DeckQuitPanel extends JPanel implements ActionListener {
 	 * this is used to make the current card count accurate
 	 */
 	public void deckRefresh() {
-		deckSize.setText("Deck size : " + Game.game.getDeck().size() + " / 26");
+		deckSize.setText("Deck size : " + Game.game.getDeck().size() + " / 24");
 		deckSize.setVisible(false);
 		deckSize.setVisible(true);
 	}
