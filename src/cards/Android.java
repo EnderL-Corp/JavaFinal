@@ -29,7 +29,7 @@ public class Android extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[2] = true;
-			name = formattedName = "AndroidBlast";
+			name = formattedName = "AndroidBlaster";
 			description = "";
 		}
 		else if(enumName == TroopEnum.DEFLECTOR)
