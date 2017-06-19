@@ -304,6 +304,9 @@ public class Game extends GameClient implements Serializable {
 		mainMenu = m;
 	}
 	
+	/**
+	 * Changes phase. -1 is opponents turn, 1 and 2 are the Player's turn and 2 ends the turn
+	 */
 	public void changePhase() {
 		phase = ++phase > 2 ? -1 : phase;
 		switch(phase) {
