@@ -399,14 +399,12 @@ public class Game extends GameClient implements Serializable {
 			remoteServer.endMyTurn();
 			CommandLog.publish("[Game] You have ended your turn.");
 			List<Amplifier> found = new ArrayList<Amplifier>();
-			for(int i = 0; i < 5; i++)
-			{
-				if(found.contains(ampPanel[i]) && (ampPanel[i].getAmpType() == AmpEnum.HEALING_WAVE || ampPanel[i].getAmpType() == AmpEnum.SHORT_CIRCUIT))
-				{
+			for(int i = 0; i < 5; i++) {
+				if(ampPanel[i] == null) {
 					
-				}
-				else
-				{
+				} else if(found.contains(ampPanel[i]) && (ampPanel[i].getAmpType() == AmpEnum.HEALING_WAVE || ampPanel[i].getAmpType() == AmpEnum.SHORT_CIRCUIT)) {
+					
+				} else {
 					ampPanel[i].effectBoard();
 					found.add(ampPanel[i]);
 				}
