@@ -172,6 +172,9 @@ public class Game extends GameClient implements Serializable {
 			phase = -1;
 			CommandLog.publish("[Game] Currently opponent's turn.");
 		}
+		if(!isHost) {
+			commander.setCoords(new MovePoint(13, 7));
+		}
 	}
 
 	/**
@@ -189,12 +192,12 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e) {
 		numPings++;
 		if(numPings == 1) {						//Once connected, will get the most recent server information and will place its own commander
-			updateServerInformation();
-			if(!isHost) {
-				commander.setCoords(new MovePoint(13, 7));
-			}
+			if(isHost)
+				updateServerInformation();
 			placeEntity(commander);
 			boardChanged = true;
+			if(!isHost)
+				updateServerInformation();
 		}
 		System.out.println(playerColor);
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
@@ -203,7 +206,7 @@ public class Game extends GameClient implements Serializable {
 				changePhase();
 			}
 			if(connected)
-				if (boardChanged) {
+				if (myTurn && boardChanged) {
 					sendRecentChanges();		//If it's your turn and the board was changed, update the server board info
 					boardChanged = false;
 				} else
@@ -212,6 +215,15 @@ public class Game extends GameClient implements Serializable {
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
 				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
+					if(!isHost) {
+						clientInfo.setCommander(commander);
+						remoteServer.updateInfo(clientInfo);
+					}
+					if(isHost && otherClientWaiter == 3) {
+						otherClientInfo = remoteServer.getOtherClient(clientInfo);
+						placeEntity(otherClientInfo.getCommander());
+						CommandLog.publish("Opponent has connected! Fight!");
+					}
 					if(!myTurn) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {
@@ -612,7 +624,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'T':
-					if (phase == 1 && first instanceof Technique) { 
+					if (first instanceof Technique) { 
 						if (((Technique) first).canCast(tp)) {
 							if(queuedPlayerActions.size() > 1) {
 								for (int i = 1; i < queuedPlayerActions.size(); i++)
