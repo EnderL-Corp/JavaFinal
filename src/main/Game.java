@@ -334,11 +334,8 @@ public class Game extends GameClient implements Serializable {
 	 * ends the turn
 	 */
 	public void changePhase() {
-		phase = ++phase > 2 ? -1 : phase;
+		phase = ++phase > 2 ? 0 : phase;
 		switch (phase) {
-		case -1:
-			CommandLog.publish("[Game] Currently opponent's turn.");
-			break;
 		case 0:
 			CommandLog.publish(
 					"[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
