@@ -394,6 +394,7 @@ public class Game extends GameClient implements Serializable {
 	public void endTurn() {
 		try {
 			remoteServer.endMyTurn();
+			myTurn = false;
 			CommandLog.publish("[Game] You have ended your turn.");
 			List<Amplifier> found = new ArrayList<Amplifier>();
 			for(int i = 0; i < 5; i++)
