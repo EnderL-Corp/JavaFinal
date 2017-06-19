@@ -3,21 +3,23 @@ package cards;
 /**
  * @author André
  */
-public class Drone extends Troop
-{
+public class Drone extends Troop {
 	/**
 	 * Creates an drone with correct values based off of starting ability
 	 * 
-	 * @param posX - x Pos to spawn at
-	 * @param posY - y Pos to spawn at
-	 * @param tag - the tag of the Troop
-	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
+	 * @param posX
+	 *            - x Pos to spawn at
+	 * @param posY
+	 *            - y Pos to spawn at
+	 * @param tag
+	 *            - the tag of the Troop
+	 * @param enumName
+	 *            - the ability to give this troop on spawn. See
+	 *            <code> TroopEnum.java </code>
 	 */
-	public Drone(int posX, int posY, TroopEnum enumName)
-	{
+	public Drone(int posX, int posY, TroopEnum enumName) {
 		rootName = "Drone";
-		if(enumName == TroopEnum.X)
-		{
+		if (enumName == TroopEnum.X) {
 			apCost = 1;
 			cpCost = 1;
 			attack = 1;
@@ -28,9 +30,7 @@ public class Drone extends Troop
 			yCoordinate = posY;
 			name = formattedName = "Drone";
 			description = "";
-		}
-		else
-		{
+		} else {
 			apCost = 1;
 			cpCost = 1;
 			attack = 1;
@@ -43,7 +43,7 @@ public class Drone extends Troop
 			description = "";
 		}
 	}
-	
+
 	/**
 	 * @return - The type of troop
 	 */
@@ -51,4 +51,3 @@ public class Drone extends Troop
 		return "Drone";
 	}
 }
-

@@ -13,6 +13,7 @@ import main.ClientInfo;
 
 /**
  * An RMI Server that allows for a connection between multiple GameClients.
+ * 
  * @author Srihari Subramanian
  *
  */
@@ -30,6 +31,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 
 	/**
 	 * Required no-args constructor for RMI.
+	 * 
 	 * @throws RemoteException
 	 */
 	public GameServer() throws RemoteException {
@@ -39,9 +41,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	/**
 	 * Common constructor for any GameServer.
 	 * 
-	 * @param serverName The name of this server
-	 * @param port The port that this GameServer is running at
-	 * @param ip The ip of the computer at which this server is running.
+	 * @param serverName
+	 *            The name of this server
+	 * @param port
+	 *            The port that this GameServer is running at
+	 * @param ip
+	 *            The ip of the computer at which this server is running.
 	 * @throws RemoteException
 	 */
 	public GameServer(String ip, int port) throws RemoteException {
@@ -144,7 +149,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	public synchronized ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException {
-		if(clients.size() > 1 && clients.get(0).getTag() == thisClient.getTag())
+		if (clients.size() > 1 && clients.get(0).getTag() == thisClient.getTag())
 			return clients.get(1);
 		else
 			return clients.get(0);
@@ -158,14 +163,14 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	public String getRecentClientActionDescription() throws RemoteException {
 		return recentClientActionDescription;
 	}
-	
+
 	public void disconnect(ClientInfo ci) throws RemoteException {
-		for(int i = 0; i < clients.size(); i++)
-			if(clients.get(i).getTag() == ci.getTag())
+		for (int i = 0; i < clients.size(); i++)
+			if (clients.get(i).getTag() == ci.getTag())
 				clients.remove(i);
-		
+
 	}
-	
+
 	public int getRecentClientTag() throws RemoteException {
 		return recentClientTag;
 	}

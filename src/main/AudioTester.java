@@ -13,11 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class AudioTester extends JFrame implements ActionListener 
-{
+public class AudioTester extends JFrame implements ActionListener {
 
 	Audio au = null;
-	
+
 	private static final long serialVersionUID = 1L;
 	JButton range;
 	JButton blast;
@@ -68,11 +67,11 @@ public class AudioTester extends JFrame implements ActionListener
 		add(mirror);
 		add(mm);
 		add(gm);
-}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		String a = e.getActionCommand();
 		if (a.equals("r")) {
 			new Audio("FX", "Range");
@@ -80,15 +79,15 @@ public class AudioTester extends JFrame implements ActionListener
 			new Audio("MainMenu");
 		} else if (a.equals("m")) {
 			new Audio("FX", "Melee");
-		} else if (a.equals("gm")){
+		} else if (a.equals("gm")) {
 			new Audio("InGame");
-		} else if (a.equals("b")){
+		} else if (a.equals("b")) {
 			new Audio("FX", "Blast");
-		} else if (a.equals("d")){
+		} else if (a.equals("d")) {
 			new Audio("FX", "Deflect");
-		} else if (a.equals("mi")){
+		} else if (a.equals("mi")) {
 			new Audio("FX", "Mirror");
-		} 
+		}
 
 	}
 

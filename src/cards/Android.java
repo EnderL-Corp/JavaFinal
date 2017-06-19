@@ -3,23 +3,25 @@ package cards;
 /**
  * @author André
  */
-public class Android extends Troop
-{
-	//abilities in this order: {provoke, deflect, blast, range, mirror, void}
-	
+public class Android extends Troop {
+	// abilities in this order: {provoke, deflect, blast, range, mirror, void}
+
 	/**
 	 * Creates an android with correct values based off of starting ability
 	 * 
-	 * @param posX - x Pos to spawn at
-	 * @param posY - y Pos to spawn at
-	 * @param tag - the tag of the Troop
-	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
+	 * @param posX
+	 *            - x Pos to spawn at
+	 * @param posY
+	 *            - y Pos to spawn at
+	 * @param tag
+	 *            - the tag of the Troop
+	 * @param enumName
+	 *            - the ability to give this troop on spawn. See
+	 *            <code> TroopEnum.java </code>
 	 */
-	public Android(int posX, int posY, TroopEnum enumName)
-	{
+	public Android(int posX, int posY, TroopEnum enumName) {
 		rootName = "Android";
-		if(enumName == TroopEnum.BLASTER)
-		{
+		if (enumName == TroopEnum.BLASTER) {
 			apCost = 6;
 			cpCost = 6;
 			attack = 3;
@@ -31,9 +33,7 @@ public class Android extends Troop
 			abilities[2] = true;
 			name = formattedName = "AndroidBlast";
 			description = "";
-		}
-		else if(enumName == TroopEnum.DEFLECTOR)
-		{
+		} else if (enumName == TroopEnum.DEFLECTOR) {
 			apCost = 6;
 			cpCost = 5;
 			attack = 5;
@@ -45,9 +45,7 @@ public class Android extends Troop
 			abilities[1] = true;
 			name = formattedName = "AndroidDeflect";
 			description = "";
-		}
-		else if(enumName == TroopEnum.DUMMY)
-		{
+		} else if (enumName == TroopEnum.DUMMY) {
 			apCost = 7;
 			cpCost = 5;
 			attack = 1;
@@ -59,9 +57,7 @@ public class Android extends Troop
 			abilities[0] = true;
 			name = formattedName = "AndroidProvoke";
 			description = "";
-		}
-		else
-		{
+		} else {
 			apCost = 5;
 			cpCost = 4;
 			attack = 4;
@@ -74,17 +70,17 @@ public class Android extends Troop
 			description = "";
 		}
 		te = enumName;
-		if(abilities[1] == true)
+		if (abilities[1] == true)
 			deflectTime = true;
 		else
 			deflectTime = false;
-		
-		if(abilities[4] == true)
+
+		if (abilities[4] == true)
 			mirrorTime = true;
 		else
 			mirrorTime = false;
 	}
-	
+
 	/**
 	 * @return - The type of troop
 	 */
@@ -92,4 +88,3 @@ public class Android extends Troop
 		return "Android";
 	}
 }
-

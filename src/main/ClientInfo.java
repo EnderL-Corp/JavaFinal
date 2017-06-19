@@ -6,6 +6,7 @@ import java.io.Serializable;
 /**
  * Class that provides some more specificity to ClientInfo by including player
  * cp, ap, tp, commander and name
+ * 
  * @author Srihari Subramanian
  */
 public class ClientInfo implements Serializable {
@@ -16,12 +17,19 @@ public class ClientInfo implements Serializable {
 
 	/**
 	 * Construct a SpecificClientInfo
-	 * @param clientName Name of this client.
-	 * @param clientCommander this client's commander
-	 * @param ta tag of this client
-	 * @param c cp of this client
-	 * @param a ap of this client
-	 * @param t tp of this client.
+	 * 
+	 * @param clientName
+	 *            Name of this client.
+	 * @param clientCommander
+	 *            this client's commander
+	 * @param ta
+	 *            tag of this client
+	 * @param c
+	 *            cp of this client
+	 * @param a
+	 *            ap of this client
+	 * @param t
+	 *            tp of this client.
 	 */
 	public ClientInfo(String clientName, Commander clientCommander, int ta, int c, int a, int t) {
 		tag = ta;
@@ -36,21 +44,27 @@ public class ClientInfo implements Serializable {
 	public int getTag() {
 		return tag;
 	}
+
 	public int getCP() {
 		return cp;
 	}
+
 	public int getAP() {
 		return ap;
 	}
+
 	public int getTP() {
 		return tp;
 	}
+
 	public Commander getCommander() {
 		return commander;
 	}
+
 	public void setCommander(Commander c) {
 		commander = c;
 	}
+
 	public String getName() {
 		return name;
 	}

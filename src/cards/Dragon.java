@@ -3,20 +3,23 @@ package cards;
 /**
  * @author André
  */
-public class Dragon extends Troop
-{
-	//abilities in this order: {provoke, deflect, blast, range, mirror, void}
-	
+public class Dragon extends Troop {
+	// abilities in this order: {provoke, deflect, blast, range, mirror, void}
+
 	/**
 	 * Creates an dragon with correct values based off of starting ability
 	 * 
-	 * @param posX - x Pos to spawn at
-	 * @param posY - y Pos to spawn at
-	 * @param tag - the tag of the Troop
-	 * @param enumName - the ability to give this troop on spawn. See <code> TroopEnum.java </code>
+	 * @param posX
+	 *            - x Pos to spawn at
+	 * @param posY
+	 *            - y Pos to spawn at
+	 * @param tag
+	 *            - the tag of the Troop
+	 * @param enumName
+	 *            - the ability to give this troop on spawn. See
+	 *            <code> TroopEnum.java </code>
 	 */
-	public Dragon(int posX, int posY, TroopEnum enumName)
-	{
+	public Dragon(int posX, int posY, TroopEnum enumName) {
 		rootName = "Dragon";
 		apCost = 10;
 		cpCost = 15;
@@ -31,7 +34,7 @@ public class Dragon extends Troop
 		description = "";
 		te = enumName;
 	}
-	
+
 	/**
 	 * @return - The type of troop
 	 */
@@ -39,4 +42,3 @@ public class Dragon extends Troop
 		return "Dragon";
 	}
 }
-

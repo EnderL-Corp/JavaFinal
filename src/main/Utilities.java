@@ -12,9 +12,12 @@ import javax.swing.ImageIcon;
 public class Utilities {
 	/**
 	 * Static method for image overlay. Images must be in JavaFinal/Sprites/.
+	 * 
 	 * @author Srihari Subramanian
-	 * @param imageA the underlying image
-	 * @param imageB the image to overlay
+	 * @param imageA
+	 *            the underlying image
+	 * @param imageB
+	 *            the image to overlay
 	 * @return An ImageIcon representing the image.
 	 */
 	public static ImageIcon combineImages(String imageA, String imageB) {
@@ -27,7 +30,7 @@ public class Utilities {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		int w = Math.max(image.getWidth(), overlay.getWidth());
 		int h = Math.max(image.getHeight(), overlay.getHeight());
 		BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -39,7 +42,7 @@ public class Utilities {
 
 		return new ImageIcon(combined);
 	}
-	
+
 	public static ImageIcon combineImages(ImageIcon imageA, String imageB) {
 		BufferedImage image = null;
 		BufferedImage overlay = null;
@@ -51,7 +54,7 @@ public class Utilities {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		int w = Math.max(imageA.getIconWidth(), overlay.getWidth());
 		int h = Math.max(imageA.getIconHeight(), overlay.getHeight());
 		BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);

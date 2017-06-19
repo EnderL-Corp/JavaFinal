@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 /**
  * Abstract class representing any GameClient to a GameServer.
+ * 
  * @author Srihari Subramanian
  */
 public abstract class GameClient implements Serializable, ActionListener {
@@ -29,6 +30,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 
 	/**
 	 * Required no-args constructor for RMI.
+	 * 
 	 * @throws RemoteException
 	 */
 	public GameClient() throws RemoteException {
@@ -38,9 +40,12 @@ public abstract class GameClient implements Serializable, ActionListener {
 	/**
 	 * Use this constructor for multiple computer connection
 	 * 
-	 * @param tag Tag of this client
-	 * @param serverIP IP of other client
-	 * @param otherPort Port of other client
+	 * @param tag
+	 *            Tag of this client
+	 * @param serverIP
+	 *            IP of other client
+	 * @param otherPort
+	 *            Port of other client
 	 * @throws RemoteException
 	 */
 	public GameClient(int tag, String serverIP, int serverPort) throws RemoteException {
@@ -53,6 +58,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 
 	/**
 	 * Method used to connect this GameClient to a host GameServer.
+	 * 
 	 * @return whether there was a successful connection or not.
 	 */
 	public boolean connectToServer(ClientInfo clientInfo) {
@@ -77,6 +83,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 
 	/**
 	 * Get the tag of this client.
+	 * 
 	 * @return tag of this client
 	 */
 	public int getTag() {
@@ -85,6 +92,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 
 	/**
 	 * Get connectivity status
+	 * 
 	 * @return connectivity
 	 */
 	public boolean isConnected() {
@@ -104,7 +112,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 	public String getIP() {
 		return serverIP;
 	}
-	
+
 	/**
 	 * Disconnects from the server.
 	 */
