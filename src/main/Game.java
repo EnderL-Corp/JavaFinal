@@ -227,7 +227,7 @@ public class Game extends GameClient implements Serializable {
 			updateServerInformation();
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
-				if (otherClientWaiter > 1) { 
+				if (otherClientWaiter > 1) {
 					if (!isHost) {
 						clientInfo.setCommander(commander);
 						remoteServer.updateInfo(clientInfo);
@@ -669,7 +669,7 @@ public class Game extends GameClient implements Serializable {
 									((Technique) first).cast((Troop) queuedPlayerActions.get(i));
 									if (queuedPlayerActions.get(i) instanceof Troop) {
 										CommandLog.publish("[Game] You are using technique " + first.getName()
-												+ " on Troop " + second.getName() + ".");
+												+ " on Troop " + queuedPlayerActions.get(i).getName() + ".");
 										boardChanged = true;
 										try {
 											remoteServer

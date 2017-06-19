@@ -33,7 +33,7 @@ public class Technique extends Card {
 		switch (eff) {
 		case GRAPE_SHOT:
 			tpCost = 6;
-			numberOfTargets = -1;
+			numberOfTargets = 0;
 			remainingTargets = 0;
 			formattedName = "Grape Shot";
 			break;
@@ -64,7 +64,7 @@ public class Technique extends Card {
 		case CALL:
 			tpCost = 4;
 			numberOfTargets = 0;
-			remainingTargets = numberOfTargets;
+			remainingTargets = -1;
 			formattedName = "Call";
 			break;
 		}
@@ -92,7 +92,7 @@ public class Technique extends Card {
 	 * @return - True if the spell is used up, false otherwise
 	 */
 	public boolean cast(Troop target) {
-		if (remainingTargets == 0 && numberOfTargets == -1) {
+		if (remainingTargets == 0 && numberOfTargets == 0) {
 			for (Entity[] row : Game.game.getBoard()) {
 				for (Entity e : row) {
 					if (e instanceof Troop) {

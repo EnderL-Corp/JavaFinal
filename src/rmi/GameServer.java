@@ -120,12 +120,11 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 
 	public synchronized void endMyTurn() throws RemoteException {
 		if (clients.size() > 1) {
-			if(clients.get(0).getTag() == turnTag)
+			if (clients.get(0).getTag() == turnTag)
 				turnTag = clients.get(1).getTag();
 			else
 				turnTag = clients.get(0).getTag();
-		}
-		else
+		} else
 			turnTag = -1;
 	}
 
