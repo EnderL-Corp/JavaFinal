@@ -172,9 +172,6 @@ public class Game extends GameClient implements Serializable {
 			phase = -1;
 			CommandLog.publish("[Game] Currently opponent's turn.");
 		}
-		if(!isHost) {
-			commander.setCoords(new MovePoint(13, 7));
-		}
 	}
 
 	/**
@@ -193,6 +190,9 @@ public class Game extends GameClient implements Serializable {
 		numPings++;
 		if(numPings == 1) {						//Once connected, will get the most recent server information and will place its own commander
 			updateServerInformation();
+			if(!isHost) {
+				commander.setCoords(new MovePoint(13, 7));
+			}
 			placeEntity(commander);
 			boardChanged = true;
 		}
