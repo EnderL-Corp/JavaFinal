@@ -48,6 +48,9 @@ public class ClientInfo implements Serializable {
 	public Commander getCommander() {
 		return commander;
 	}
+	public void setCommander(Commander c) {
+		commander = c;
+	}
 	public String getName() {
 		return name;
 	}

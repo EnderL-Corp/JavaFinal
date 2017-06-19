@@ -145,13 +145,10 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	}
 
 	public synchronized ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException {
-		if(clients.size() > 1) {
-			if(clients.get(0).getTag() == thisClient.getTag())
-				return clients.get(1);
-			else
-				return clients.get(0);
-		}
-		return null;
+		if(clients.size() > 1 && clients.get(0).getTag() == thisClient.getTag())
+			return clients.get(1);
+		else
+			return clients.get(0);
 	}
 
 	public synchronized void setRecentClientActionDescription(String s) throws RemoteException {

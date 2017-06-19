@@ -192,11 +192,9 @@ public class Game extends GameClient implements Serializable {
 	public void actionPerformed(ActionEvent e) {
 		numPings++;
 		if(numPings == 1) {						//Once connected, will get the most recent server information and will place its own commander
-			if(isHost)
-				updateServerInformation();
+			updateServerInformation();
 			placeEntity(commander);
-			if(!isHost)
-				updateServerInformation();
+			boardChanged = true;
 		}
 		System.out.println(playerColor);
 		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
@@ -205,7 +203,7 @@ public class Game extends GameClient implements Serializable {
 				changePhase();
 			}
 			if(connected)
-				if (myTurn && boardChanged) {
+				if (boardChanged) {
 					sendRecentChanges();		//If it's your turn and the board was changed, update the server board info
 					boardChanged = false;
 				} else
@@ -214,11 +212,6 @@ public class Game extends GameClient implements Serializable {
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
 				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
-					if(isHost && otherClientWaiter == 3 && remoteServer.getOtherClient(clientInfo) != null) {
-						otherClientInfo = remoteServer.getOtherClient(clientInfo);
-						placeEntity(otherClientInfo.getCommander());
-						CommandLog.publish("Opponent has connected! Fight!");
-					}
 					if(!myTurn && remoteServer.getRecentClientTag() != getTag()) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {
