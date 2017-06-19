@@ -29,7 +29,7 @@ public class Mech extends Troop
 			xCoordinate = posX;
 			yCoordinate = posY;
 			abilities[2] = true; 
-			name = formattedName = "MechBlaster";
+			name = formattedName = "MechBlast";
 			description = "";
 		}
 		else if(enumName == TroopEnum.RANGER)

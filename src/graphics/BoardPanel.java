@@ -108,7 +108,24 @@ public class BoardPanel extends JPanel implements ActionListener {
 		for (int i = 0; i < buttons.length; i++) {
 			for (int j = 0; j < buttons[0].length; j++) {
 				if (e.getSource() == buttons[i][j]) {
-					if (Game.game.getEntityAt(i, j) == null) {
+					if ((i == 0 || i == Game.game.getBoard().length - 1 || j == 0 || j == Game.game.getBoard().length - 1)
+							|| ((i == 1 || i == Game.game.getBoard().length - 2) && (j == 1 || j == 2 || j == 3 || j == 4 || j == Game.game.getBoard().length - 2
+							|| j == Game.game.getBoard().length - 3 || j == Game.game.getBoard().length - 4 || j == Game.game.getBoard().length - 5))
+							|| ((i == 2 || i == Game.game.getBoard().length - 3)
+							&& (j == 1 || j == 2 || j == Game.game.getBoard().length - 2 || j == Game.game.getBoard().length - 3))
+							|| ((i == 3 || i == 4 || i == Game.game.getBoard().length - 4 || i == Game.game.getBoard().length - 5)
+							&& (j == 1 || j == Game.game.getBoard().length - 2))
+							|| ((i == 5 || i == Game.game.getBoard().length - 6) && (j == 6 || j == 7 || j == Game.game.getBoard().length - 7))
+							|| ((i == 6 || i == 7 || i == Game.game.getBoard().length - 7)
+							&& (j == 5 || j == 6 || j == 7 || j == Game.game.getBoard().length - 7 || j == Game.game.getBoard().length - 6))) {
+						Game.game.addToPlayerActionQueue(new Card("Void", "This is the map border"){
+																public void updateDescription()
+																{
+																	return;
+																}
+						});
+					}
+					else if (Game.game.getEntityAt(i, j) == null) {
 						Game.game.addToPlayerActionQueue(new MovePoint(i, j));
 					} else {
 						Game.game.addToPlayerActionQueue(Game.game.getEntityAt(i, j));
