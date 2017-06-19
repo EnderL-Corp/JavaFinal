@@ -91,10 +91,7 @@ public class BoardPanel extends JPanel implements ActionListener {
 						bb.setIcon(((Troop) e).getIcon());
 						bb.setBackground(((Card) e).getTeamColor());
 					} else if (e != null && e instanceof Commander) {
-						if(e.getTeamColor() != Game.game.getColor())
-							bb.setIcon(new ImageIcon("Sprites/" + Game.game.getOtherClient().getCommander().getName() + ".png"));
-						else
-							bb.setIcon(new ImageIcon("Sprites/" + Game.game.getCommander().getName() + ".png"));
+						bb.setIcon(new ImageIcon("Sprites/" + Game.game.getTypeAsString() + ".png"));
 						bb.setBackground(((Card) e).getTeamColor());
 					}
 
