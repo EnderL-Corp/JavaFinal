@@ -99,7 +99,6 @@ public class Audio extends Thread {
 			File[] songs = shuffleMusic("MenuMusic");
 			while (true) {
 				for (int i = 0; i < songs.length; i++) {
-					System.out.println("Currently Playing " + songs[i].getName());
 					File file = new File("Audio/MenuMusic/" + songs[i].getName());
 					clip.open(AudioSystem.getAudioInputStream(file));
 					clip.start();
@@ -131,7 +130,6 @@ public class Audio extends Thread {
 				for (int i = 0; i < songs.length; i++) {
 					CommandLog.publish(
 							"Currently playing: " + songs[i].getName().substring(0, songs[i].getName().indexOf('.')));
-					System.out.println("Currently Playing" + songs[i].getName());
 					File file = new File("Audio/GameMusic/" + songs[i].getName());
 					clip.open(AudioSystem.getAudioInputStream(file));
 					clip.start();

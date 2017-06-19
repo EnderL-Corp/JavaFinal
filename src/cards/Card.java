@@ -32,7 +32,7 @@ public abstract class Card implements Serializable {
 		try {
 			teamColor = Game.game.getColor();
 		} catch (NullPointerException npe) {
-			System.out.println(npe);
+			npe.printStackTrace();
 		}
 	}
 

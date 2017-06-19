@@ -174,7 +174,6 @@ public class Game extends GameClient implements Serializable {
 		drawCard();
 
 		queuedPlayerActions = new ArrayList<Card>();
-		System.out.println(myHand);
 		gameMenu = new GameMenu();
 		gameMenu.getFrame().setVisible(true);
 		CommandLog.publish("[Game] Loading information...");
@@ -215,8 +214,6 @@ public class Game extends GameClient implements Serializable {
 			if (!isHost)
 				updateServerInformation();
 		}
-		System.out.println(playerColor);
-		System.out.println(queuedPlayerActions + " " + currentPlayerAction);
 		try {
 			if (myTurn && !previousTurnCheck) {
 				changePhase();
@@ -337,11 +334,8 @@ public class Game extends GameClient implements Serializable {
 	 * ends the turn
 	 */
 	public void changePhase() {
-		phase = ++phase > 2 ? -1 : phase;
+		phase = ++phase > 2 ? 0 : phase;
 		switch (phase) {
-		case -1:
-			CommandLog.publish("[Game] Currently opponent's turn.");
-			break;
 		case 0:
 			CommandLog.publish(
 					"[Game] You are now in phase 1. You can:\n\tPlay troops.\n\tUse structures such as Gear and Amplifiers.");
@@ -604,7 +598,6 @@ public class Game extends GameClient implements Serializable {
 	 * of actions to act upon.
 	 */
 	public void checkPlayerActionQueue() {
-		System.out.println(currentPlayerAction);
 		try {
 			if (currentPlayerAction == 'E') {
 				clearPlayerActionQueue();
@@ -613,7 +606,6 @@ public class Game extends GameClient implements Serializable {
 				executePlayerActionQueue();
 			} else if (currentPlayerAction == 'T' && queuedPlayerActions.get(0) instanceof Technique
 					&& queuedPlayerActions.size() == ((Technique) queuedPlayerActions.get(0)).getNumTargets() + 1) {
-				System.out.println("gay lemon");
 				executePlayerActionQueue();
 			}
 		} catch (Exception e) {
@@ -720,7 +712,6 @@ public class Game extends GameClient implements Serializable {
 					if ((getColor() == Color.CYAN && ((MovePoint) second).getX() <= territory)
 							|| (getColor() == Color.RED
 									&& ((MovePoint) second).getX() >= recentBoard.length - territory - 1)) {
-						System.out.println("Placing Troop");
 						((Troop) first).setCoords((MovePoint) second);
 						if (cp >= ((Troop) first).getCpCost()) {
 							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position "
