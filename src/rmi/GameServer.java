@@ -27,6 +27,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	private int turnTag = 0;
 	private ClientInfo winner = null;
 	private String recentClientActionDescription = "";
+	private int recentClientTag;
 
 	/**
 	 * Required no-args constructor for RMI.
@@ -135,7 +136,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		return winner;
 	}
 
-	public void updateInfo(ClientInfo newInfo) throws RemoteException {
+	public synchronized void updateInfo(ClientInfo newInfo) throws RemoteException {
 		for (int i = 0; i < clients.size(); i++) {
 			if (clients.get(i).getTag() == newInfo.getTag()) {
 				clients.set(i, newInfo);
@@ -143,25 +144,33 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 		}
 	}
 
-	public ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException {
-		if (clients.get(0).getTag() == thisClient.getTag() && clients.size() > 1)
-			return clients.get(1);
-		else
-			return clients.get(0);
+	public synchronized ClientInfo getOtherClient(ClientInfo thisClient) throws RemoteException {
+		if(clients.size() > 1) {
+			if(clients.get(0).getTag() == thisClient.getTag())
+				return clients.get(1);
+			else
+				return clients.get(0);
+		}
+		return null;
 	}
 
-	public void setRecentClientActionDescription(String s) throws RemoteException{
+	public synchronized void setRecentClientActionDescription(String s) throws RemoteException {
+		recentClientTag = turnTag;
 		recentClientActionDescription = s;
 	}
 
-	public String getRecentClientActionDescription() throws RemoteException{
+	public synchronized String getRecentClientActionDescription() throws RemoteException {
 		return recentClientActionDescription;
 	}
 	
-	public void disconnect(ClientInfo ci) throws RemoteException {
+	public synchronized void disconnect(ClientInfo ci) throws RemoteException {
 		for(int i = 0; i < clients.size(); i++)
 			if(clients.get(i).getTag() == ci.getTag())
 				clients.remove(i);
 		
+	}
+
+	public synchronized int getRecentClientTag() throws RemoteException {
+		return recentClientTag;
 	}
 }

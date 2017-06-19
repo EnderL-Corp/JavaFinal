@@ -214,12 +214,12 @@ public class Game extends GameClient implements Serializable {
 			if (remoteServer.getConnections() > 1) {
 				otherClientWaiter++;
 				if(otherClientWaiter > 1) {		//Wait one seconds for the other client to update its info in the server
-					if(isHost && otherClientWaiter == 2) {
+					if(isHost && otherClientWaiter == 3 && remoteServer.getOtherClient(clientInfo) != null) {
+						otherClientInfo = remoteServer.getOtherClient(clientInfo);
 						placeEntity(otherClientInfo.getCommander());
 						CommandLog.publish("Opponent has connected! Fight!");
-						
 					}
-					if(!myTurn) {
+					if(!myTurn && remoteServer.getRecentClientTag() != getTag()) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {
 							recentClientDescription = tempDesc;
@@ -619,7 +619,7 @@ public class Game extends GameClient implements Serializable {
 					break;
 	
 				case 'T':
-					if (phase == 1 && first instanceof Technique) { 
+					if (first instanceof Technique) { 
 						if (((Technique) first).canCast(tp)) {
 							if(queuedPlayerActions.size() > 1) {
 								for (int i = 1; i < queuedPlayerActions.size(); i++)
