@@ -667,20 +667,23 @@ public class Game extends GameClient implements Serializable {
 	
 				case 'P':
 					if (phase == 0 && first instanceof Troop && myHand.contains(first) && second instanceof MovePoint) {
-						System.out.println("Placing Troop");
-						((Troop) first).setCoords((MovePoint)second);
-						if(cp >= ((Troop)first).getCpCost()) {
-							CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
-							try {
-								remoteServer.setRecentClientActionDescription(
-										"[Game] Opponent placed the Troop " + first.getName() + " at Position " + ((MovePoint)second) + ".");
-							} catch (RemoteException e) {
-								e.printStackTrace();
+						if((getColor() == Color.CYAN && ((MovePoint)second).getX() <= territory) || (getColor() == Color.RED && ((MovePoint)second).getX() >= recentBoard.length - territory - 1))
+						{
+							System.out.println("Placing Troop");
+							((Troop) first).setCoords((MovePoint)second);
+							if(cp >= ((Troop)first).getCpCost()) {
+								CommandLog.publish("[Game] You are placing the Troop " + first.getName() + " on Position " + ((MovePoint)second) + ".");
+								try {
+									remoteServer.setRecentClientActionDescription(
+											"[Game] Opponent placed the Troop " + first.getName() + " at Position " + ((MovePoint)second) + ".");
+								} catch (RemoteException e) {
+									e.printStackTrace();
+								}
+								first.setTeamColor(getColor());
+								cp = Troop.placeOnBoard((Troop)first, cp);
 							}
-							first.setTeamColor(getColor());
-							cp = Troop.placeOnBoard((Troop)first, cp);
+							boardChanged = true;
 						}
-						boardChanged = true;
 					}
 					break;
 	
