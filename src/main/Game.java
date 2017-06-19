@@ -224,7 +224,7 @@ public class Game extends GameClient implements Serializable {
 						placeEntity(otherClientInfo.getCommander());
 						CommandLog.publish("Opponent has connected! Fight!");
 					}
-					if(!myTurn) {
+					if(!myTurn && remoteServer.getRecentClientTag() != this.getTag()) {
 						String tempDesc = remoteServer.getRecentClientActionDescription();
 						if(!recentClientDescription.equals(tempDesc)) {
 							recentClientDescription = tempDesc;

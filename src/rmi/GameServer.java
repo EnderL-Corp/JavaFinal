@@ -24,7 +24,7 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 	protected String myIP = "127.0.0.1";
 	protected String name = "", otherIP, otherName, recentClientName = "";
 	private Entity[][] board = new Entity[15][15];
-	private int turnTag = 0;
+	private int turnTag = 0, recentClientTag;
 	private ClientInfo winner = null;
 	private String recentClientActionDescription = "";
 
@@ -150,11 +150,12 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			return clients.get(0);
 	}
 
-	public void setRecentClientActionDescription(String s) throws RemoteException{
+	public void setRecentClientActionDescription(String s) throws RemoteException {
+		recentClientTag = turnTag;
 		recentClientActionDescription = s;
 	}
 
-	public String getRecentClientActionDescription() throws RemoteException{
+	public String getRecentClientActionDescription() throws RemoteException {
 		return recentClientActionDescription;
 	}
 	
@@ -163,5 +164,9 @@ public class GameServer extends UnicastRemoteObject implements GameServerInterfa
 			if(clients.get(i).getTag() == ci.getTag())
 				clients.remove(i);
 		
+	}
+	
+	public int getRecentClientTag() throws RemoteException {
+		return recentClientTag;
 	}
 }
