@@ -72,7 +72,7 @@ public abstract class GameClient implements Serializable, ActionListener {
 			return false;
 		}
 		if (connected) {
-			timer = new Timer(1000, this);
+			timer = new Timer(75, this);
 			timer.start();
 		}
 		return connected;

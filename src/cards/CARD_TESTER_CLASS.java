@@ -27,10 +27,10 @@ public class CARD_TESTER_CLASS {
 	}
 
 	public static void main(String[] args) {
-		// mileStone1();
-		// mileStone2();
+		mileStone1();
+		mileStone2();
 		mileStone3();
-		// mileStone4();
+		mileStone4();
 	}
 
 	public static void mileStone1() {
